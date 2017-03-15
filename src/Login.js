@@ -1,4 +1,7 @@
 import React, {Component} from 'react';
+import axios from 'axios'
+
+const BASE_URL = 'http://localhost:3001'
 
 export class LoginForm extends Component {
 
@@ -17,8 +20,17 @@ export class LoginForm extends Component {
     console.log(this.state);
   }
 
-  handleSubmit() {
-    return null
+  handleSubmit(event) {
+    let config = {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    }
+    event.preventDefault();
+    return axios.post(`${BASE_URL}/api/users/auth`, this.state, config).then(response => {
+      console.log(response)
+    })
   }
 
   render() {

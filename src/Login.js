@@ -17,7 +17,6 @@ export class LoginForm extends Component {
     this.setState({
       [e.target.name]: e.target.value
     });
-    console.log(this.state);
   }
 
   handleSubmit(event) {
@@ -29,7 +28,11 @@ export class LoginForm extends Component {
     }
     event.preventDefault();
     return axios.post(`${BASE_URL}/api/users/auth`, this.state, config).then(response => {
-      console.log(response)
+        console.log(response.data.token)
+        localStorage.setItem('token', response.data.token)
+        localStorage.removeItem('token')
+        var item = localStorage.getItem('token')
+        console.log(item)
     })
   }
 

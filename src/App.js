@@ -10,7 +10,7 @@ class App extends Component {
           <h2>Welcome to CAMS!</h2>
         </div>
         <p className="App-intro">
-          C-an A-nyone M-assage S-andwhiches?
+          CAMS
         </p>
         <LoginForm/>
       </div>

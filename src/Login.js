@@ -1,5 +1,10 @@
-import React, {Component} from 'react';
-import axios from 'axios'
+import React, {PropTypes, Component} from 'react';
+import axios from 'axios';
+import {
+    BrowserRouter as Router,
+    Route,
+    Link
+} from 'react-router-dom'
 
 const BASE_URL = 'http://localhost:3001'
 
@@ -11,6 +16,17 @@ export class LoginForm extends Component {
       email: "",
       password: ""
     }
+  }
+
+    static contextTypes = {
+        router: PropTypes.object
+    }
+
+  login(config, thisArg) {
+      axios.post(`${BASE_URL}/api/users/auth`, thisArg.state, config).then(response => {
+          localStorage.setItem('token', response.data.token)
+          thisArg.context.router.history.push('/dashboard')
+      })
   }
 
   handleChange(e) {
@@ -27,13 +43,7 @@ export class LoginForm extends Component {
       }
     }
     event.preventDefault();
-    return axios.post(`${BASE_URL}/api/users/auth`, this.state, config).then(response => {
-        console.log(response.data.token)
-        localStorage.setItem('token', response.data.token)
-        localStorage.removeItem('token')
-        var item = localStorage.getItem('token')
-        console.log(item)
-    })
+    this.login(config, this)
   }
 
   render() {

@@ -18,7 +18,7 @@ export class LoginForm extends Component {
     }
   }
 
-    static contextTypes = {
+  static contextTypes = {
         router: PropTypes.object
     }
 
@@ -42,7 +42,7 @@ export class LoginForm extends Component {
         'Content-Type': 'application/json'
       }
     }
-    event.preventDefault();
+    event.preventDefault()
     this.login(config, this)
   }
 

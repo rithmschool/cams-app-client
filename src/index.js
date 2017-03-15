@@ -12,8 +12,8 @@ import {
 ReactDOM.render(
     <Router>
         <div>
-        <App />
-        <Route path="/dashboard" component={Dashboard}/>
+            <App/>
+            <Route path="/dashboard" component={Dashboard}/>
         </div>
     </Router>,
   document.getElementById('root')

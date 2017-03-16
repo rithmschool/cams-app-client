@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import './index.css';
 import './App.css';
 import Dashboard from './Dashboard'
-import {LoginForm} from './Login';
+import LoginForm from './Login';
 import Home from './Home';
 import Nav from './Nav';
 import {

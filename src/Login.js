@@ -1,9 +1,9 @@
 import React, {PropTypes, Component} from 'react';
 import axios from 'axios';
 
-const BASE_URL = 'http://localhost:3001'
+const BASE_URL = process.env.REACT_APP_SERVER_URL || 'http://localhost:3001'
 
-export class LoginForm extends Component {
+class LoginForm extends Component {
 
   constructor(props) {
     super(props)
@@ -52,3 +52,5 @@ export class LoginForm extends Component {
   }
 
 }
+
+export default LoginForm;

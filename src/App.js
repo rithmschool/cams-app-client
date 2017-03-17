@@ -12,7 +12,7 @@ import {
   Redirect
 } from 'react-router-dom'
 
-const PrivateRoute = ({ component, ...rest }) => (
+const PrivateRouteDashboard = ({ component, ...rest }) => (
   <Route {...rest} render={props => (
     localStorage.getItem('token') ? (
       React.createElement(component, props)
@@ -22,6 +22,19 @@ const PrivateRoute = ({ component, ...rest }) => (
         state: { from: props.location }
       }}/>
     )
+  )}/>
+)
+
+const PrivateRouteLogIn = ({ component, ...rest }) => (
+  <Route {...rest} render={props => (
+    localStorage.getItem('token') ? (
+        <Redirect to={{
+          pathname: '/dashboard',
+          state: { from: props.location }
+        }}/>
+      ) : (
+        React.createElement(component, props)
+      )
   )}/>
 )
 
@@ -45,8 +58,8 @@ class App extends Component {
         <Switch>
             <Route exact path="/" component={Home} />
             <Route exact path="/patient/home" component={PatientHome} />
-            <Route exact path="/login" component={LoginForm} />
-            <PrivateRoute path="/dashboard" component={Dashboard} />
+            <PrivateRouteLogIn exact path="/login" component={LoginForm} />
+            <PrivateRouteDashboard path="/dashboard" component={Dashboard} />
         </Switch>
       </div>
     );

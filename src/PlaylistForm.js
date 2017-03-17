@@ -1,10 +1,6 @@
 import React, {PropTypes, Component} from 'react';
+import {BASE_URL} from './helpers.js';
 import axios from 'axios';
-
-const BASE_URL = process.env.REACT_APP_SERVER_URL || 'http://localhost:5000'
-if (localStorage.getItem('token')){
-  var userId = JSON.parse(atob(localStorage.getItem('token').split('.')[1])).id
-}
 
 class PlaylistForm extends Component {
 
@@ -20,6 +16,7 @@ class PlaylistForm extends Component {
   }
 
   addPlaylist(config, thisArg) {
+    let userId = JSON.parse(atob(localStorage.getItem('token').split('.')[1])).id
     axios.post(`${BASE_URL}/api/users/${userId}/playlists`,
     thisArg.state, config).then(response =>{
       let playlistId = response.data.id

@@ -61,7 +61,7 @@ class App extends Component {
           <Route exact path="/patient/home" component={PatientHome} />
           <EnsureLoggedOut exact path="/login" component={LoginForm} />
           <PrivateRoute path="/dashboard" component={Dashboard} />
-          <PrivateRoute path="/playlists/new" component={PLaylistWrapper}/>
+          <PrivateRoute path="/playlists/new" component={PlaylistWrapper}/>
         </Switch>
       </div>
     );

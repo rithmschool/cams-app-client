@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import './index.css';
 import './App.css';
-import PlaylistForm from './PlaylistForm'
+import PlaylistWrapper from './PlaylistWrapper'
 import Dashboard from './Dashboard'
 import LoginForm from './Login';
 import Home from './Home';

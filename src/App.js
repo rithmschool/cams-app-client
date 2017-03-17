@@ -12,7 +12,7 @@ import {
   Redirect
 } from 'react-router-dom'
 
-const PrivateRouteDashboard = ({ component, ...rest }) => (
+const PrivateRoute = ({ component, ...rest }) => (
   <Route {...rest} render={props => (
     localStorage.getItem('token') ? (
       React.createElement(component, props)
@@ -25,7 +25,7 @@ const PrivateRouteDashboard = ({ component, ...rest }) => (
   )}/>
 )
 
-const PrivateRouteLogIn = ({ component, ...rest }) => (
+const EnsureLoggedOut = ({ component, ...rest }) => (
   <Route {...rest} render={props => (
     localStorage.getItem('token') ? (
         <Redirect to={{
@@ -58,8 +58,8 @@ class App extends Component {
         <Switch>
             <Route exact path="/" component={Home} />
             <Route exact path="/patient/home" component={PatientHome} />
-            <PrivateRouteLogIn exact path="/login" component={LoginForm} />
-            <PrivateRouteDashboard path="/dashboard" component={Dashboard} />
+            <EnsureLoggedOut exact path="/login" component={LoginForm} />
+            <PrivateRoute path="/dashboard" component={Dashboard} />
         </Switch>
       </div>
     );

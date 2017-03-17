@@ -12,7 +12,6 @@ class PatientHome extends Component {
   }
 
   handleSpaceBar(event) {
-
     if (event.keyCode === 32) {
       event.preventDefault()
       if (this.state.messageIndex < 2) {

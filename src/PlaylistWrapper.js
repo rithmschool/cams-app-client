@@ -18,9 +18,12 @@ class PlaylistWrapper extends Component {
   render(){
     return(
       <div>
-        {this.state.playlistId ? <VideoWrapper playlistId={this.state.playlistId}/> : <PlaylistForm addPlaylistId={this.addPlaylistId.bind(this)}/>}
+        {
+          this.state.playlistId ?
+          <VideoWrapper playlistId={this.state.playlistId}/> :
+          <PlaylistForm addPlaylistId={this.addPlaylistId.bind(this)}/>
+        }
       </div>
-
     )
   }
 }

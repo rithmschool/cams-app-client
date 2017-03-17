@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import './index.css';
 import './App.css';
+import PlaylistForm from './PlaylistForm'
 import Dashboard from './Dashboard'
 import LoginForm from './Login';
 import Home from './Home';
@@ -42,6 +43,7 @@ class App extends Component {
       <div className="App">
         <Nav isLoggedIn={!!this.state.token}/>
         <Switch>
+          <Route exact path="/playlist" component={PlaylistForm}/>
           <Route exact path="/" component={Home} />
           <Route exact path="/login" component={LoginForm} />
           <PrivateRoute path="/dashboard" component={Dashboard} />

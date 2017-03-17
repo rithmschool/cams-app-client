@@ -1,7 +1,6 @@
 import React, {PropTypes, Component} from 'react';
+import {BASE_URL} from './helpers.js';
 import axios from 'axios';
-
-const BASE_URL = process.env.REACT_APP_SERVER_URL || 'http://localhost:5000'
 
 class LoginForm extends Component {
 

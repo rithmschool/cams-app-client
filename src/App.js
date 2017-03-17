@@ -5,6 +5,7 @@ import Dashboard from './Dashboard'
 import LoginForm from './Login';
 import Home from './Home';
 import Nav from './Nav';
+import PatientHome from './Patient';
 import {
   Route,
   Switch,
@@ -42,9 +43,10 @@ class App extends Component {
       <div className="App">
         <Nav isLoggedIn={!!this.state.token}/>
         <Switch>
-          <Route exact path="/" component={Home} />
-          <Route exact path="/login" component={LoginForm} />
-          <PrivateRoute path="/dashboard" component={Dashboard} />
+            <Route exact path="/" component={Home} />
+            <Route exact path="/patient/home" component={PatientHome} />
+            <Route exact path="/login" component={LoginForm} />
+            <PrivateRoute path="/dashboard" component={Dashboard} />
         </Switch>
       </div>
     );

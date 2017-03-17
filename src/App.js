@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import './index.css';
 import './App.css';
+import PlaylistForm from './PlaylistForm'
 import Dashboard from './Dashboard'
 import LoginForm from './Login';
 import Home from './Home';
@@ -28,13 +29,13 @@ const PrivateRoute = ({ component, ...rest }) => (
 const EnsureLoggedOut = ({ component, ...rest }) => (
   <Route {...rest} render={props => (
     localStorage.getItem('token') ? (
-        <Redirect to={{
-          pathname: '/dashboard',
-          state: { from: props.location }
-        }}/>
-      ) : (
-        React.createElement(component, props)
-      )
+      <Redirect to={{
+        pathname: '/dashboard',
+        state: { from: props.location }
+      }}/>
+    ) : (
+      React.createElement(component, props)
+    )
   )}/>
 )
 
@@ -56,15 +57,15 @@ class App extends Component {
       <div className="App">
         <Nav isLoggedIn={!!this.state.token}/>
         <Switch>
-            <Route exact path="/" component={Home} />
-            <Route exact path="/patient/home" component={PatientHome} />
-            <EnsureLoggedOut exact path="/login" component={LoginForm} />
-            <PrivateRoute path="/dashboard" component={Dashboard} />
+          <Route exact path="/" component={Home} />
+          <Route exact path="/patient/home" component={PatientHome} />
+          <EnsureLoggedOut exact path="/login" component={LoginForm} />
+          <PrivateRoute path="/dashboard" component={Dashboard} />
+          <PrivateRoute path="/playlists/new" component={PLaylistWrapper}/>
         </Switch>
       </div>
     );
   }
-
 }
 
 export default App;

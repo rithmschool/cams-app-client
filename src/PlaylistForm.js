@@ -20,14 +20,17 @@ class PlaylistForm extends Component {
   }
 
   addPlaylist(config, thisArg) {
-    axios.post(`${BASE_URL}/api/users/${userId}/playlists`, thisArg.state, config).then(response => {console.log()})
+    axios.post(`${BASE_URL}/api/users/${userId}/playlists`,
+    thisArg.state, config).then(response =>{
+      let playlistId = response.data.id
+      thisArg.props.addPlaylistId(playlistId)
+    })
   }
 
   handleChange(e){
     this.setState({
       [e.target.name]: e.target.value
     });
-    console.log(this.state.name)
   }
 
   handleSubmit(event){
@@ -40,13 +43,13 @@ class PlaylistForm extends Component {
     }
     event.preventDefault()
     this.addPlaylist(config, this)
-    console.log(this)
   }
 
   render(){
     return(
       <form onSubmit={this.handleSubmit.bind(this)}>
-        <input type="string" onChange={this.handleChange.bind(this)} name="name" placeholder="Playlist Name"/>
+        <input type="string" onChange={this.handleChange.bind(this)}
+          name="name" placeholder="Playlist Name"/>
         <button type="submit" value="Submit">Submit</button>
       </form>
     )

@@ -44,9 +44,12 @@ class VideoWrapper extends Component {
   }
 
   addDone(url){
-    this.addVideo(url).then(function(response) {
-      this.context.router.history.push('/dashboard')
-    }.bind(this))
+    if(url){
+      this.addVideo(url).then(function(response) {
+        this.context.router.history.push('/dashboard')
+      }.bind(this))
+    }
+    this.context.router.history.push('/dashboard')
   }
 
   render(){

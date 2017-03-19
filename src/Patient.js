@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
+import VideoPlayer from './VideoPlayer'
 
 class PatientHome extends Component {
 
   constructor(props) {
     super(props)
     this.state = {
-      message: ['this is the first instructional message Press Space Bar to Continue', 'this is the second instructional message Press Space Bar to Continue'],
-      messageIndex: 0
+      idx: 0
     }
     this.handleSpaceBar = this.handleSpaceBar.bind(this)
   }
@@ -14,12 +14,7 @@ class PatientHome extends Component {
   handleSpaceBar(event) {
     if (event.keyCode === 32) {
       event.preventDefault()
-      if (this.state.messageIndex < 2) {
-        this.setState({
-          messageIndex: ++this.state.messageIndex
-        })
-        console.log(this.state)
-      }
+      this.setState({idx: ++this.state.idx});
     }
   }
 
@@ -28,7 +23,7 @@ class PatientHome extends Component {
     return (
       <div>
         <h1>Welcome Patient</h1>
-        <div>{this.state.message[this.state.messageIndex]}</div>
+        <div>{this.props.children[this.state.idx]}</div>
       </div>
     )
   }

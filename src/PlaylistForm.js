@@ -27,6 +27,7 @@ class PlaylistForm extends Component {
         'Authorization': 'bearer ' + localStorage.getItem('token')
       }
     }
+<<<<<<< HEAD
     e.preventDefault()
     this.setState({name: ""})
     this.props.addPlaylist(config, this)

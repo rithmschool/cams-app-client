@@ -1,7 +1,6 @@
 import React, {PropTypes, Component} from 'react';
+import {BASE_URL} from './helpers.js';
 import axios from 'axios';
-
-const BASE_URL = process.env.REACT_APP_SERVER_URL || 'http://localhost:5000'
 
 class LoginForm extends Component {
 
@@ -14,8 +13,8 @@ class LoginForm extends Component {
   }
 
   static contextTypes = {
-        router: PropTypes.object
-    }
+    router: PropTypes.object
+  }
 
   login(config, thisArg) {
       axios.post(`${BASE_URL}/api/users/auth`, thisArg.state, config).then(response => {

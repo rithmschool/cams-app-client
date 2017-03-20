@@ -23,7 +23,7 @@ class VideoWrapper extends Component {
       headers: {
         'Accept':'application/json',
         'ContentType':'application/json',
-        'Authorization': 'bearer ' + localStorage.getItem('token')
+        'Authorization':'bearer ' + localStorage.getItem('token')
       }
     }
     return axios.post(`${BASE_URL}/api/videos`,

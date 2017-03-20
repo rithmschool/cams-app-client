@@ -8,7 +8,8 @@ export class Dashboard extends Component {
     super(props)
     this.state = {
       email: "",
-      playlist: ""
+      playlist: "",
+      user_playlists: []
     }
   }
 
@@ -26,8 +27,7 @@ export class Dashboard extends Component {
     });
   }
 
-  handleSubmit(event) {
-
+  handleSubmit(e) {
     let config = {
       headers: {
         'Accept': 'application/json',
@@ -35,7 +35,7 @@ export class Dashboard extends Component {
         'Authorization': 'bearer ' + localStorage.getItem('token')
       }
     }
-    event.preventDefault()
+    e.preventDefault()
     this.sendMail(config, this)
   }
 

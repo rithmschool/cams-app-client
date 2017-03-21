@@ -19,8 +19,6 @@ class Nav extends Component {
       <i className="fa fa-2x nav-sign fa-sign-out" aria-hidden="true"></i>
     </Link>
 
-    console.log(logo)
-
     return (
       <div className="nav">
           <Link to="/">

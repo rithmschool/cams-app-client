@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import VideoPlayer from './VideoPlayer'
 
 class PatientHome extends Component {
 

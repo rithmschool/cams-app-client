@@ -4,6 +4,7 @@ import YouTube from 'react-youtube';
 class VideoPlayer extends Component {
   constructor(props) {
     super(props)
+
   }
 
   _onReady(event) {
@@ -12,6 +13,7 @@ class VideoPlayer extends Component {
   }
 
   render() {
+    console.log(this.props.video.url)
     const opts = {
       height: '390',
       width: '640',
@@ -21,7 +23,7 @@ class VideoPlayer extends Component {
     };
     return (
       <YouTube
-        videoId="RuOwsy4GbLc"
+        videoId= {this.props.video.url}
         opts={opts}
         onReady={this._onReady}
       />

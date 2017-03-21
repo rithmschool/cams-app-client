@@ -8,7 +8,7 @@ export class Dashboard extends Component {
     super(props)
     this.state = {
       email: "",
-      playlist: ""
+      playlist: "1"
     }
   }
 
@@ -17,7 +17,17 @@ export class Dashboard extends Component {
   }
 
   sendMail(config, thisArg) {
-    axios.post(`${BASE_URL}/api/users/mail`, thisArg.state, config).then(response => {})
+    axios.post(`${BASE_URL}/api/users`, {
+      email: thisArg.state.email
+    }, config)
+      .then(response => axios.post(`${BASE_URL}/api/assessments`, {
+        patient_id: response.data.id,
+        playlist_id: thisArg.state.playlist
+      }, config))
+      .then(response => axios.post(`${BASE_URL}/api/users/mail`, {
+        assessment_id: response.data.id,
+        patient_id: response.data.patient_id
+      }, config))
   }
 
   handleChange(e) {

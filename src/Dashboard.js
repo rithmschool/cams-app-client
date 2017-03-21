@@ -45,7 +45,7 @@ export class Dashboard extends Component {
         <h1>Dashboard</h1>
         <form onSubmit={this.handleSubmit.bind(this)}>
           <input type="email" name="email" placeholder="email" required onChange={this.handleChange.bind(this)}/>
-          <button type="submit" value="Submit">Submit</button>
+          <button className="button button-hover" type="submit" value="Submit">Submit</button>
         </form>
       </div>
     )

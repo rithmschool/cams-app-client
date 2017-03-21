@@ -1,24 +1,109 @@
-.App {
+body {
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    color:#4d4d4d;
+}
+
+/* NAV */
+.nav{
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+  background:white;
+}
+.nav-sign{
+  color:#00c5cc;
+  display:flex;
+  align-items: flex-end;
+}
+.logo{
+  margin:0.5rem;
+  max-width:45px;
+  justify-content: flex-start;
+  align-content: flex-start;
+  border: 3px solid white;
+  border-radius: 3px;
+  box-shadow: 0px 1px 3px rgba(128, 128, 128, 0.13);
+}
+.button{
+  background:white;
+  border: 3px solid white;
+  border-radius: 3px;
+  padding:0.7rem;
+  box-shadow: 0px 1px 3px rgba(128, 128, 128, 0.13);
+  color:#00c5cc;
+}
+.button:hover{
+  text-decoration: none;
+}
+
+.button{
+  text-decoration: none;
+}
+a {
+  color:#00c5cc;
+}
+/*BANNER*/
+
+.banner{
+  width: 100vw;
+  z-index:-1;
+  position:fixed;
+}
+.banner-text{
+  padding:0 1rem 0 1rem;
+  color:white;
+}
+
+/* CONTENT */
+.content{
+  margin-top: 10vmax;
+  text-align: center;
+  padding:2rem;
+  z-index:1;
+  position:relative;
+  background:white;
+}
+
+/* FORMS */
+form{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
   text-align: center;
 }
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+form * {
+  margin-bottom:10px;
+  width:30vmax;
+  border-radius: 4px;
+  border:none;
+  background:#f8f8f8;
+  padding:0.5rem 0 0.5rem 0;
+}
+input::placeholder {
+  color:grey;
+}
+input {
+  color:grey;
+  padding-left:0.5rem;
 }
 
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
+/*LINK*/
+.link{
+  color:#00c5cc;
+}
+/* KEYFRAMES */
+.button-hover {
+    display: inline-block;
+    vertical-align: middle;
+    transform: perspective(1px) translateZ(0);
+    transition-duration: 0.3s;
+    transition-property: transform;
+    transition-timing-function: ease-out;
 }
 
-.App-intro {
-  font-size: large;
-}
-
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.button-hover:hover,
+.button-hover:focus,
+.button-hover:active {
+    transform: translateY(3px);
 }

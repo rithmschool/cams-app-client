@@ -9,8 +9,8 @@ class PatientWrapper extends Component {
     super(props)
 
     this.state = {
-      videoId: '',
-      videoCount: 0
+      videoIds: '',
+      videoIdx: 0
     }
 
   }
@@ -18,7 +18,7 @@ class PatientWrapper extends Component {
   componentWillMount(){
     var self = this;
     axios.get(`${BASE_URL}/api/assessments/13`).then(function (response) {
-      self.setState({videoId: response.data.screens});
+      self.setState({videoIds: response.data.screens});
     })
   }
 
@@ -28,7 +28,7 @@ class PatientWrapper extends Component {
         <p>this is the first instructional message Press Space Bar to Continue</p>
         <p>this is the second instructional message Press Space Bar to Continue</p>
         <p>Instructions</p>
-        <VideoPlayer video={this.state.videoId[this.state.videoCount]} />
+        <VideoPlayer video={this.state.videoIds[this.state.videoIdx]} />
         <p>Instructions</p>
         <p>Test</p>
         <p>Bye!</p>

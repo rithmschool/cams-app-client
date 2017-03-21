@@ -39,7 +39,7 @@ class PlaylistForm extends Component {
       <form onSubmit={this.handleSubmit.bind(this)}>
         <input type="string" onChange={this.handleChange.bind(this)}
           name="name" placeholder="Playlist Name"/>
-        <button type="submit" value="Submit">Submit</button>
+        <button className="button button-hover" type="submit" value="Submit">Submit</button>
         {error}
       </form>
     )

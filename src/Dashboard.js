@@ -2,7 +2,7 @@ import React, {PropTypes, Component} from 'react';
 import {BASE_URL} from './helpers.js';
 import axios from 'axios';
 
-export class Dashboard extends Component {
+class Dashboard extends Component {
 
 	constructor(props) {
 		super(props)
@@ -27,7 +27,7 @@ export class Dashboard extends Component {
 		.then(response => axios.post(`${BASE_URL}/api/users/mail`, {
 			assessment_id: response.data.id,
 			patient_id: response.data.patient_id
-		}, config))
+			}, config))
 	}
 
 	handleChange(e) {
@@ -37,7 +37,6 @@ export class Dashboard extends Component {
 	}
 
 	handleSubmit(event) {
-
 		let config = {
 			headers: {
 				'Accept': 'application/json',
@@ -60,7 +59,7 @@ export class Dashboard extends Component {
 			</div>
 		)
 	}
-
 }
 
 export default Dashboard;
+

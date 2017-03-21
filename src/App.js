@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import banner from './banner.png'
 import './index.css';
 import './App.css';
 import PlaylistWrapper from './PlaylistWrapper'
@@ -54,15 +55,23 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
+      <div>
         <Nav isLoggedIn={!!this.state.token}/>
-        <Switch>
-          <Route exact path="/" component={Home} />
-          <Route exact path="/patient/home" component={PatientWrapper} />
-          <EnsureLoggedOut exact path="/login" component={LoginForm} />
-          <PrivateRoute path="/dashboard" component={Dashboard} />
-          <PrivateRoute path="/playlists/new" component={PlaylistWrapper}/>
-        </Switch>
+        <div>
+          <img className="banner" src={banner}/>
+        </div>
+        <div className="banner-text">
+          <h1>Welcome to Not Free Cams</h1>
+        </div>
+        <div className="content">
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route exact path="/patient/home" component={PatientWrapper} />
+            <EnsureLoggedOut exact path="/login" component={LoginForm} />
+            <PrivateRoute path="/dashboard" component={Dashboard} />
+            <PrivateRoute path="/playlists/new" component={PlaylistWrapper}/>
+          </Switch>
+        </div>
       </div>
     );
   }

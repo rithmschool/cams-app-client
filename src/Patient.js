@@ -21,8 +21,14 @@ class PatientHome extends Component {
     document.addEventListener("keydown", this.handleSpaceBar)
     return (
       <div>
-        <h1>Welcome Patient</h1>
-        <div>{this.props.children[this.state.idx]}</div>
+        <div className="banner-text">
+          <h1 className="banner-bold">Patient</h1>
+        </div>
+        <div className="content">
+          <div>
+            <div>{this.props.children[this.state.idx]}</div>
+          </div>
+        </div>
       </div>
     )
   }

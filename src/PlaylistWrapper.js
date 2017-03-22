@@ -36,12 +36,19 @@ class PlaylistWrapper extends Component {
   render(){
     return(
       <div>
+        <div className="banner-text">
+          <h1 className="banner-bold">New Playlist</h1>
+        </div>
+        <div className="content">
+      <div>
         {
           this.state.playlistId ?
           <VideoWrapper playlistId={this.state.playlistId}/> :
           <PlaylistForm addPlaylist={this.addPlaylist} error={this.state.error}/>
         }
       </div>
+    </div>
+  </div>
     )
   }
 }

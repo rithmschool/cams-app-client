@@ -8,7 +8,7 @@ class Dashboard extends Component {
 		super(props)
 		this.state = {
 			email: "",
-			playlist: "",
+			playlist: null,
       user_playlists: []
 		}
 	}
@@ -37,7 +37,7 @@ class Dashboard extends Component {
 		});
 	}
 
-	handleSubmit(event) {
+	handleSubmit(e) {
 		let config = {
 			headers: {
 				'Accept': 'application/json',
@@ -45,8 +45,12 @@ class Dashboard extends Component {
 				'Authorization': 'bearer ' + localStorage.getItem('token')
 			}
 		}
-		event.preventDefault()
+		e.preventDefault()
 		this.sendMail(config, this)
+	}
+
+	choosePlaylist(playlist_id){
+		this.setState({playlist: playlist_id})
 	}
 
   componentWillMount(){
@@ -61,7 +65,6 @@ class Dashboard extends Component {
         }
       }
     ).then(response => {
-      console.log(response.data)
       this.setState({user_playlists: response.data})
     })
   }
@@ -69,29 +72,27 @@ class Dashboard extends Component {
   render() {
     let playlists = this.state.user_playlists.map((playlist, i) => {
 			return(
-				<ul key={i}>
+				<ul key={i} onClick={this.choosePlaylist.bind(this, playlist.id)}>
 					{playlist.name}
 					{playlist.videos.map((video, idx) => {
-							return(
-								<li key={idx}>
-									{video.title}
-								</li>
-							)
-						})
-					}
-				</ul>
+						return(
+							<li key={idx} >
+								{video.title}
+							</li>
+						)
+					})
+				}
+			</ul>
 			)
 		})
 		return (
 			<div>
 				<h1>Dashboard</h1>
 				<form onSubmit={this.handleSubmit.bind(this)}>
+					{playlists}
 					<input type="email" name="email" placeholder="email" required onChange={this.handleChange.bind(this)}/>
 					<button type="submit" value="Submit">Submit</button>
 				</form>
-				<div>
-					{playlists}
-				</div>
 			</div>
 		)
 	}

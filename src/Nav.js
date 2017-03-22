@@ -22,7 +22,7 @@ class Nav extends Component {
     return (
       <div className="nav">
           <Link to="/">
-            <img className="logo button-hover" src={logo}/>
+            <img className="logo button-hover" src={logo} alt="CAMS logo"/>
           </Link>
 
           <button className="nav-sign button button-hover">

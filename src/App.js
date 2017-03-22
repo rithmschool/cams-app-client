@@ -58,7 +58,7 @@ class App extends Component {
       <div>
         <Nav isLoggedIn={!!this.state.token}/>
         <div>
-          <img className="banner" src={banner}/>
+          <img className="banner" src={banner} alt="patient and clinician smiling"/>
         </div>
         <div className="banner-text">
           <h1>Welcome to Not Free Cams</h1>

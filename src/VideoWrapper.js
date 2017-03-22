@@ -2,6 +2,7 @@ import React, {PropTypes, Component} from 'react';
 import VideoForm from './VideoForm';
 import {BASE_URL} from './helpers.js';
 import axios from 'axios';
+import getYouTubeID from 'get-youtube-id';
 
 class VideoWrapper extends Component {
 
@@ -26,8 +27,9 @@ class VideoWrapper extends Component {
         'Authorization':'bearer ' + localStorage.getItem('token')
       }
     }
+    let youtube_id = getYouTubeID(url)
     return axios.post(`${BASE_URL}/api/videos`,
-    {url}, config)
+    {url, youtube_id}, config)
     .then(function(response) {
       return axios.post(`${BASE_URL}/api/screens`, {
         video_id: response.data.id,

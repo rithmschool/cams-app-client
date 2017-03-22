@@ -8,7 +8,8 @@ class Dashboard extends Component {
 		super(props)
 		this.state = {
 			email: "",
-			playlist: "1"
+			playlist: "",
+      user_playlists: []
 		}
 	}
 
@@ -48,7 +49,39 @@ class Dashboard extends Component {
 		this.sendMail(config, this)
 	}
 
-	render() {
+  componentWillMount(){
+    let userId = JSON.parse(atob(localStorage.getItem('token').split('.')[1])).id
+    axios.get(
+      `${BASE_URL}/api/users/${userId}/playlists`,
+      {
+        headers: {
+          'Accept':'application/json',
+          'ContentType':'application/json',
+          'Authorization':'bearer ' + localStorage.getItem('token')
+        }
+      }
+    ).then(response => {
+      console.log(response.data)
+      this.setState({user_playlists: response.data})
+    })
+  }
+
+  render() {
+    let playlists = this.state.user_playlists.map((playlist, i) => {
+			return(
+				<ul key={i}>
+					{playlist.name}
+					{playlist.videos.map((video, idx) => {
+							return(
+								<li key={idx}>
+									{video.title}
+								</li>
+							)
+						})
+					}
+				</ul>
+			)
+		})
 		return (
 			<div>
 				<h1>Dashboard</h1>
@@ -56,6 +89,9 @@ class Dashboard extends Component {
 					<input type="email" name="email" placeholder="email" required onChange={this.handleChange.bind(this)}/>
 					<button type="submit" value="Submit">Submit</button>
 				</form>
+				<div>
+					{playlists}
+				</div>
 			</div>
 		)
 	}

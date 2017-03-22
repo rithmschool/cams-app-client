@@ -2,9 +2,9 @@ import React, {Component} from 'react';
 import YouTube from 'react-youtube';
 
 class VideoPlayer extends Component {
-  constructor(props) {
-    super(props)
-  }
+  // constructor(props) {
+  //   super(props)
+  // }
 
   _onReady(event) {
       // access to player in all event handlers via event.target
@@ -21,7 +21,7 @@ class VideoPlayer extends Component {
     };
     return (
       <YouTube
-        videoId= {this.props.video.url}
+        videoId={this.props.video.url}
         opts={opts}
         onReady={this._onReady}
       />

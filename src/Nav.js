@@ -18,8 +18,9 @@ class Nav extends Component {
     </Link>
 
     let logout =
-    <Link to="/login" onClick={this.handleLogOut}>
-      Logout
+    <Link to="/login"
+      onClick={this.handleLogOut}>
+        Logout
     </Link>
 
     let home =
@@ -39,14 +40,19 @@ class Nav extends Component {
         </div>
         <Dropdown className="account-dropdown" ref="dropdown">
           <DropdownTrigger>
-            <button data-toggle="dropdown" className=" user button button-hover">
-              <i className="fa fa-2x  fa-user-circle-o" aria-hidden="true"></i>
+            <button
+              data-toggle="dropdown"
+              className=" user button button-hover">
+                <i className="fa fa-2x fa-user-circle-o"
+                  aria-hidden="true">
+                </i>
             </button>
           </DropdownTrigger>
-
           <DropdownContent>
             <div>
-              <button className="sign button dropdown-content button-hover">{this.props.isLoggedIn ? logout : login}</button>
+              <button
+                className="sign button dropdown-content button-hover">
+                  {this.props.isLoggedIn ? logout : login}</button>
             </div>
           </DropdownContent>
         </Dropdown>

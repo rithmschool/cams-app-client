@@ -56,24 +56,24 @@ class App extends Component {
 
   render() {
     return (
+      <div>
+        <Nav isLoggedIn={!!this.state.token}/>
         <div>
-          <Nav isLoggedIn={!!this.state.token}/>
-          <div>
-            <img className="banner" src={banner}/>
-          </div>
-          <Switch>
-            <Route exact path="/" component={Home} />
-            <Route exact path="/patient/home" component={PatientWrapper} />
-            <EnsureLoggedOut exact path="/login" component={LoginForm} />
-            <PrivateRoute path="/dashboard" component={Dashboard} />
-            <PrivateRoute path="/playlists/new" component={PlaylistWrapper}/>
-          </Switch>
-          <div className="footer">
-              <p className="bold-shadow center">CAMS Corp</p>
-              401 Parnassus Avenue
-              San Francisco, CA 94143
-          </div>
+          <img className="banner" src={banner}/>
         </div>
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route exact path="/patient/home" component={PatientWrapper} />
+          <EnsureLoggedOut exact path="/login" component={LoginForm} />
+          <PrivateRoute path="/dashboard" component={Dashboard} />
+          <PrivateRoute path="/playlists/new" component={PlaylistWrapper}/>
+        </Switch>
+        <div className="footer">
+          <p className="bold-shadow center">CAMS Corp</p>
+          401 Parnassus Avenue
+          San Francisco, CA 94143
+        </div>
+      </div>
     );
   }
 }

@@ -48,17 +48,33 @@ export class Dashboard extends Component {
         </div>
         <div className="content">
           <div className="dash-nav">
-              <Link to="/playlists/new"><button className="button button-hover big-nav" type="submit" value="Submit">New Playlist</button></Link>
+            <Link to="/playlists/new">
+              <button
+                className="button button-hover big-nav"
+                type="submit"
+                value="Submit">
+                  New Playlist
+              </button>
+            </Link>
           </div>
           <form onSubmit={this.handleSubmit.bind(this)}>
-            <input type="email" name="email" placeholder="email" required onChange={this.handleChange.bind(this)}/>
-            <button className="button button-hover" type="submit" value="Submit">Submit</button>
+            <input
+              type="email"
+              name="email"
+              placeholder="email"
+              required onChange={this.handleChange.bind(this)}
+            />
+            <button
+              className="button button-hover"
+              type="submit"
+              value="Submit">
+                Submit
+            </button>
           </form>
         </div>
       </div>
     )
   }
-
 }
 
 export default Dashboard;

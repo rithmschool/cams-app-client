@@ -31,12 +31,16 @@ class VideoForm extends Component {
       <div>
         <div className="">Add Videos</div>
         <div className="content">
-            <form onSubmit={this.handleAdd.bind(this)}>
-              <input type="url" onChange={this.handleChange.bind(this)}
-                name="url" placeholder="Video Url" value={this.state.url}/>
-                  <button type="submit" className="button" value="Add">+</button>
-                  <button className="button" onClick={this.handleSubmit.bind(this)} value="Submit">Submit</button>
-            </form>
+          <form onSubmit={this.handleAdd.bind(this)}>
+            <input type="url"
+              onChange={this.handleChange.bind(this)}
+              name="url"
+              placeholder="Video Url"
+              value={this.state.url}
+            />
+            <button type="submit" className="button" value="Add">+</button>
+            <button className="button" onClick={this.handleSubmit.bind(this)} value="Submit">Submit</button>
+          </form>
         </div>
       </div>
     )

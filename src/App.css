@@ -1,6 +1,6 @@
 body {
-    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-    color:#4d4d4d;
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  color:#4d4d4d;
 }
 a {
   color:#00c5cc;
@@ -127,7 +127,7 @@ p{
   margin-bottom: 10rem;
 }
 .headerDivider {
-     height:4rem;
+  height:4rem;
 }
 
 /* FORMS */
@@ -149,13 +149,7 @@ form * {
 input::placeholder {
   color:grey;
 }
-input {
-  color:grey;
-  padding-left:0.5rem;
-}
 
-.addSubmit{
-}
 /*LINK*/
 .link{
   color:#00c5cc;
@@ -163,17 +157,17 @@ input {
 
 /* KEYFRAMES */
 .button-hover {
-    display: inline-block;
-    vertical-align: middle;
-    transform: perspective(1px) translateZ(0);
-    transition-duration: 0.3s;
-    transition-property: transform;
-    transition-timing-function: ease-out;
+  display: inline-block;
+  vertical-align: middle;
+  transform: perspective(1px) translateZ(0);
+  transition-duration: 0.3s;
+  transition-property: transform;
+  transition-timing-function: ease-out;
 }
 .button-hover:hover,
 .button-hover:focus,
 .button-hover:active {
-    transform: translateY(3px);
+  transform: translateY(3px);
 }
 
 /*DROPDOWN*/

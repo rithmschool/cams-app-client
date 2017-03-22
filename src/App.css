@@ -144,7 +144,7 @@ form * {
   border-radius: 4px;
   border:none;
   background:#f8f8f8;
-  padding:0.5rem 0 0.5rem 0;
+  padding:0.7rem;
 }
 input::placeholder {
   color:grey;
@@ -157,6 +157,7 @@ input::placeholder {
 
 /* KEYFRAMES */
 .button-hover {
+  cursor: pointer;
   display: inline-block;
   vertical-align: middle;
   transform: perspective(1px) translateZ(0);

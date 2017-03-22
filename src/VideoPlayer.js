@@ -21,7 +21,7 @@ class VideoPlayer extends Component {
     };
     return (
       <YouTube
-        videoId="RuOwsy4GbLc"
+        videoId= {this.props.video.url}
         opts={opts}
         onReady={this._onReady}
       />

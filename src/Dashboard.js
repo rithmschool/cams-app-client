@@ -5,13 +5,14 @@ import {Link} from 'react-router-dom'
 
 class Dashboard extends Component{
 
-  constructor(props) {
-  	super(props)
-  	this.state = {
-  		email: "",
-  		playlist: "1"
-  	}
-  }
+	constructor(props) {
+		super(props)
+		this.state = {
+			email: "",
+			playlist: null,
+      user_playlists: []
+		}
+	}
 
 	static contextTypes = {
 		router: PropTypes.object
@@ -37,7 +38,7 @@ class Dashboard extends Component{
 		});
 	}
 
-	handleSubmit(event) {
+	handleSubmit(e) {
 		let config = {
 			headers: {
 				'Accept': 'application/json',
@@ -45,11 +46,46 @@ class Dashboard extends Component{
 				'Authorization': 'bearer ' + localStorage.getItem('token')
 			}
 		}
-		event.preventDefault()
+		e.preventDefault()
 		this.sendMail(config, this)
 	}
 
-	render() {
+	choosePlaylist(playlist_id){
+		this.setState({playlist: playlist_id})
+	}
+
+  componentWillMount(){
+    let userId = JSON.parse(atob(localStorage.getItem('token').split('.')[1])).id
+    axios.get(
+      `${BASE_URL}/api/users/${userId}/playlists`,
+      {
+        headers: {
+          'Accept':'application/json',
+          'ContentType':'application/json',
+          'Authorization':'bearer ' + localStorage.getItem('token')
+        }
+      }
+    ).then(response => {
+      this.setState({user_playlists: response.data})
+    })
+  }
+
+  render() {
+    let playlists = this.state.user_playlists.map((playlist, i) => {
+			return(
+				<ul key={i} onClick={this.choosePlaylist.bind(this, playlist.id)}>
+					{playlist.name}
+					{playlist.videos.map((video, idx) => {
+						return(
+							<li key={idx} >
+								{video.title}
+							</li>
+						)
+					})
+				}
+			</ul>
+			)
+		})
 		return (
 			<div>
         <div className="banner-text">
@@ -67,6 +103,7 @@ class Dashboard extends Component{
             </Link>
           </div>
           <form onSubmit={this.handleSubmit.bind(this)}>
+						{playlists}
             <input
               type="email"
               name="email"

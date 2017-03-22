@@ -3,13 +3,15 @@ import {BASE_URL} from './helpers.js';
 import axios from 'axios';
 import {Link} from 'react-router-dom'
 
-	constructor(props) {
-		super(props)
-		this.state = {
-			email: "",
-			playlist: "1"
-		}
-	}
+class Dashboard extends Component{
+
+  constructor(props) {
+  	super(props)
+  	this.state = {
+  		email: "",
+  		playlist: "1"
+  	}
+  }
 
 	static contextTypes = {
 		router: PropTypes.object

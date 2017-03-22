@@ -1,8 +1,7 @@
 import React, {PropTypes, Component} from 'react';
 import {BASE_URL} from './helpers.js';
 import axios from 'axios';
-
-class Dashboard extends Component {
+import {Link} from 'react-router-dom'
 
 	constructor(props) {
 		super(props)
@@ -51,15 +50,38 @@ class Dashboard extends Component {
 	render() {
 		return (
 			<div>
-				<h1>Dashboard</h1>
-				<form onSubmit={this.handleSubmit.bind(this)}>
-					<input type="email" name="email" placeholder="email" required onChange={this.handleChange.bind(this)}/>
-					<button type="submit" value="Submit">Submit</button>
-				</form>
-			</div>
+        <div className="banner-text">
+          <h1 className="banner-bold">Dashboard</h1>
+        </div>
+        <div className="content">
+          <div className="dash-nav">
+            <Link to="/playlists/new">
+              <button
+                className="button button-hover big-nav"
+                type="submit"
+                value="Submit">
+                  New Playlist
+              </button>
+            </Link>
+          </div>
+          <form onSubmit={this.handleSubmit.bind(this)}>
+            <input
+              type="email"
+              name="email"
+              placeholder="email"
+              required onChange={this.handleChange.bind(this)}
+            />
+            <button
+              className="button button-hover"
+              type="submit"
+              value="Submit">
+                Submit
+            </button>
+          </form>
+        </div>
+      </div>
 		)
 	}
 }
 
 export default Dashboard;
-

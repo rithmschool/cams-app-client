@@ -2,6 +2,8 @@ import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
 import logo from './logo.png';
 import './App.css';
+import Dropdown, { DropdownTrigger, DropdownContent } from 'react-simple-dropdown';
+
 
 class Nav extends Component {
 
@@ -12,24 +14,48 @@ class Nav extends Component {
   render() {
     let login =
     <Link to="/login">
-      <i className="fa fa-2x nav-sign fa-sign-in" aria-hidden="true"></i>
+      Login
     </Link>
+
     let logout =
-    <Link to="/login" onClick={this.handleLogOut}>
-      <i className="fa fa-2x nav-sign fa-sign-out" aria-hidden="true"></i>
+    <Link to="/login"
+      onClick={this.handleLogOut}>
+        Logout
+    </Link>
+
+    let home =
+    <Link to="/">
+      <img className="logo button-hover" src={logo}/>
+    </Link>
+
+    let dashboard =
+    <Link to="/dashboard">
+      <img className="logo button-hover" src={logo}/>
     </Link>
 
     return (
       <div className="nav">
-          <Link to="/">
-            <img className="logo button-hover" src={logo}/>
-          </Link>
-
-          <button className="nav-sign button button-hover">
-            <a href="https://youtu.be/MSENH3FE2As?t=33s"><i className="fa fa-2x fa-plus" aria-hidden="true"></i></a>
-          </button>
-
-          <button className="nav-sign button button-hover">{this.props.isLoggedIn ? logout : login}</button>
+        <div>
+          {this.props.isLoggedIn ? dashboard : home}
+        </div>
+        <Dropdown className="account-dropdown" ref="dropdown">
+          <DropdownTrigger>
+            <button
+              data-toggle="dropdown"
+              className=" user button button-hover">
+                <i className="fa fa-2x fa-user-circle-o"
+                  aria-hidden="true">
+                </i>
+            </button>
+          </DropdownTrigger>
+          <DropdownContent>
+            <div>
+              <button
+                className="sign button dropdown-content button-hover">
+                  {this.props.isLoggedIn ? logout : login}</button>
+            </div>
+          </DropdownContent>
+        </Dropdown>
       </div>
     )
   }

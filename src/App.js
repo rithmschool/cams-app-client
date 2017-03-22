@@ -1,7 +1,5 @@
 import React, {Component} from 'react';
 import banner from './banner.png'
-import './index.css';
-import './App.css';
 import PlaylistWrapper from './PlaylistWrapper'
 import Dashboard from './Dashboard'
 import LoginForm from './Login';
@@ -13,6 +11,9 @@ import {
   Switch,
   Redirect
 } from 'react-router-dom'
+import './index.css';
+import './App.css';
+
 
 const PrivateRoute = ({ component, ...rest }) => (
   <Route {...rest} render={props => (
@@ -55,15 +56,11 @@ class App extends Component {
 
   render() {
     return (
-      <div>
-        <Nav isLoggedIn={!!this.state.token}/>
         <div>
-          <img className="banner" src={banner}/>
-        </div>
-        <div className="banner-text">
-          <h1>Welcome to Not Free Cams</h1>
-        </div>
-        <div className="content">
+          <Nav isLoggedIn={!!this.state.token}/>
+          <div>
+            <img className="banner" src={banner}/>
+          </div>
           <Switch>
             <Route exact path="/" component={Home} />
             <Route exact path="/patient/home" component={PatientWrapper} />
@@ -71,8 +68,12 @@ class App extends Component {
             <PrivateRoute path="/dashboard" component={Dashboard} />
             <PrivateRoute path="/playlists/new" component={PlaylistWrapper}/>
           </Switch>
+          <div className="footer">
+              <p className="bold-shadow center">CAMS Corp</p>
+              401 Parnassus Avenue
+              San Francisco, CA 94143
+          </div>
         </div>
-      </div>
     );
   }
 }

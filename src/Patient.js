@@ -82,9 +82,13 @@ class PatientHome extends Component {
 		}
 	}
 
+	componentDidMount(){
+		window.focus()
+		document.addEventListener("keydown", this.handleSpaceBar)
+	}
+
   render() {
-    document.addEventListener("keydown", this.handleSpaceBar)
-    return (
+	  return (
       <div>
         <div className="banner-text">
           <h1 className="banner-bold">Patient</h1>

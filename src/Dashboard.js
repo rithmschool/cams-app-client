@@ -52,6 +52,7 @@ class Dashboard extends Component{
 
 	choosePlaylist(playlist_id){
 		this.setState({playlist: playlist_id})
+		console.log(this.state.playlist)
 	}
 
   componentWillMount(){
@@ -60,7 +61,7 @@ class Dashboard extends Component{
       `${BASE_URL}/api/users/${userId}/playlists`,
       {
         headers: {
-          'Accept':'application/json',
+        	'Accept':'application/json',
           'ContentType':'application/json',
           'Authorization':'bearer ' + localStorage.getItem('token')
         }
@@ -73,17 +74,17 @@ class Dashboard extends Component{
   render() {
     let playlists = this.state.user_playlists.map((playlist, i) => {
 			return(
-				<ul key={i} onClick={this.choosePlaylist.bind(this, playlist.id)}>
+				<div key={i} onClick={this.choosePlaylist.bind(this, playlist.id)}>
 					{playlist.name}
 					{playlist.videos.map((video, idx) => {
 						return(
-							<li key={idx} >
+							<p key={idx} >
 								{video.title}
-							</li>
+							</p>
 						)
 					})
 				}
-			</ul>
+			</div>
 			)
 		})
 		return (
@@ -102,8 +103,10 @@ class Dashboard extends Component{
               </button>
             </Link>
           </div>
-          <form onSubmit={this.handleSubmit.bind(this)}>
+					<div>
 						{playlists}
+					</div>
+          <form onSubmit={this.handleSubmit.bind(this)}>
             <input
               type="email"
               name="email"

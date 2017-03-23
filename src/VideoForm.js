@@ -18,7 +18,7 @@ class VideoForm extends Component {
   handleAdd(e){
     e.preventDefault()
     this.setState({url: ""})
-    this.props.addContinue(this.state.url)
+    this.props.addVideo(this.state.url)
   }
 
   handleSubmit(e){

@@ -152,10 +152,9 @@ h1.banner-bold{
 .diagonalbottom{
   background:white;
   width:110vw;
-  height: 6rem;
-  margin-top:-1rem;
-  transform: rotate(1deg);
-  margin-bottom: 10rem;
+  height: 10rem;
+  margin-top:-5rem;
+  transform: rotate(3deg);
 }
 
 /* FORMS

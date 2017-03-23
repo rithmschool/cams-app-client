@@ -53,7 +53,7 @@ class Dashboard extends Component{
 		this.sendMail(config, this)
 	}
 	handleBlur() {
-		this.setState({playlist:null})
+		this.setState({playlist:null,active:'hidden'})
 	}
 
 	choosePlaylist(playlist_id,playlist_name){

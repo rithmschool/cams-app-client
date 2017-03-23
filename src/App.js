@@ -68,6 +68,7 @@ class App extends Component {
           <PrivateRoute path="/dashboard" component={Dashboard} />
           <PrivateRoute path="/playlists/new" component={PlaylistWrapper}/>
         </Switch>
+        <div className="diagonalbottom"></div>
         <div className="footer">
           <p className="bold-shadow center">CAMS Corp</p>
           401 Parnassus Avenue

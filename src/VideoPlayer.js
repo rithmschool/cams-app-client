@@ -60,7 +60,7 @@ class VideoPlayer extends Component {
 	}
 
 	componentDidMount(){
-		this.startRecord()
+		//this.startRecord()
 	}
 
 	render() {
@@ -73,7 +73,7 @@ class VideoPlayer extends Component {
 		};
 		return (
 			<YouTube
-				videoId={this.props.video.url}
+				videoId={this.props.video.youtube_id}
 				opts={opts}
 				onReady={this._onReady}
 			/>

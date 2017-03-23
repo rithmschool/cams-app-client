@@ -8,10 +8,11 @@ class VideoPlayer extends Component {
 
   _onReady(event) {
       // access to player in all event handlers via event.target
-      event.target.pauseVideo();
+      event.target.playVideo();
   }
 
   render() {
+
     const opts = {
       height: '390',
       width: '640',
@@ -21,10 +22,11 @@ class VideoPlayer extends Component {
     };
     return (
       <YouTube
-        videoId= {this.props.video.url}
+        videoId='2J5GzHoKl1Q'
         opts={opts}
         onReady={this._onReady}
       />
+
     )
   }
 }

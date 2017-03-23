@@ -4,6 +4,7 @@ import './index.css';
 import './App.css';
 import PlaylistWrapper from './PlaylistWrapper'
 import Dashboard from './Dashboard'
+import Edit from './Edit'
 import LoginForm from './Login';
 import Home from './Home';
 import Nav from './Nav';
@@ -70,6 +71,7 @@ class App extends Component {
             <EnsureLoggedOut exact path="/login" component={LoginForm} />
             <PrivateRoute path="/dashboard" component={Dashboard} />
             <PrivateRoute path="/playlists/new" component={PlaylistWrapper}/>
+            <PrivateRoute path="/<int:user_id>" component={Edit}/>
           </Switch>
         </div>
       </div>

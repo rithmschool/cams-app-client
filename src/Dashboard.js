@@ -1,6 +1,7 @@
 import React, {PropTypes, Component} from 'react';
 import {BASE_URL} from './helpers.js';
 import axios from 'axios';
+import Edit from './Edit.js'
 
 class Dashboard extends Component {
 
@@ -62,4 +63,3 @@ class Dashboard extends Component {
 }
 
 export default Dashboard;
-

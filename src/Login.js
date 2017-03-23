@@ -43,12 +43,17 @@ class LoginForm extends Component {
   render() {
     return (
       <div>
+        <div className="banner-text">
+          <h1 className="banner-bold">Dashboard</h1>
+        </div>
+        <div className="content">
         <form onSubmit={this.handleSubmit.bind(this)}>
           <input type="email" name="email" placeholder="email" required onChange={this.handleChange.bind(this)}/>
           <input type="password" name="password" placeholder="password" required onChange={this.handleChange.bind(this)}/>
           <button className="button button-hover" type="submit" value="Submit">Submit</button>
         </form>
       </div>
+    </div>
     )
   }
 

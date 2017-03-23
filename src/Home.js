@@ -17,7 +17,6 @@ class Home extends Component {
           <img className="content-image" alt="UCSF" src={ucsf}/>
           <p className="content-logo body-bold serif">CAMS was developed by UCSF as a way to dynamically create personalized baseline mental health exams. For a more rapid diagnosis and a far exeptional treatment.</p>
         </div>
-        <div className="diagonalbottom"></div>
       </div>
     )
   }

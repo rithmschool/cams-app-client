@@ -29,7 +29,6 @@ class VideoForm extends Component {
   render(){
     return(
       <div>
-        <div className="">Add Videos</div>
         <div className="content">
           <form onSubmit={this.handleAdd.bind(this)}>
             <input type="url"

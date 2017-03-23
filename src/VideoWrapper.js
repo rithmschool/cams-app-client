@@ -62,6 +62,7 @@ class VideoWrapper extends Component {
     }
     return(
       <div>
+        <h3 className="">Add Videos</h3>
         {formComponents}
         <VideoForm addVideo={this.addVideo} addDone={this.addDone}/>
       </div>

@@ -25,12 +25,12 @@ class Nav extends Component {
 
     let home =
     <Link to="/">
-      <img className="logo button-hover" src={logo}/>
+      <img className="logo button-hover" alt="Home" src={logo}/>
     </Link>
 
     let dashboard =
     <Link to="/dashboard">
-      <img className="logo button-hover" src={logo}/>
+      <img className="logo button-hover" alt="Dashboard" src={logo}/>
     </Link>
 
     return (

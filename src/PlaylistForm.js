@@ -41,15 +41,18 @@ class PlaylistForm extends Component {
       <p>Playlist name already taken. Please choose a different one.</p> :
       null;
     return(
-      <form onSubmit={this.handleSubmit.bind(this)}>
-        <input
-          ref={(input) => { this.nameInput = input; }}
-          type="string" onChange={this.handleChange.bind(this)}
-          name="name" placeholder="Playlist Name" value={this.state.name}
-        />
-        <button type="submit" value="Submit">Submit</button>
-        {error}
-      </form>
+      <div>
+        <h3 className="">Add Playlist</h3>
+        <form onSubmit={this.handleSubmit.bind(this)}>
+          <input
+            ref={(input) => { this.nameInput = input; }}
+            type="string" onChange={this.handleChange.bind(this)}
+            name="name" placeholder="Playlist Name" value={this.state.name}
+          />
+          <button className="button button-hover" type="submit" value="Submit">Submit</button>
+          {error}
+        </form>
+      </div>
     )
   }
 }

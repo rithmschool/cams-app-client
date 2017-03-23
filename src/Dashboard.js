@@ -10,8 +10,11 @@ class Dashboard extends Component{
 		this.state = {
 			email: "",
 			playlist: null,
-      user_playlists: []
+			playlist_name:null,
+      user_playlists: [],
+			active:'hidden'
 		}
+		this.handleBlur = this.handleBlur.bind(this)
 	}
 
 	static contextTypes = {
@@ -49,9 +52,17 @@ class Dashboard extends Component{
 		e.preventDefault()
 		this.sendMail(config, this)
 	}
+	handleBlur() {
+		this.setState({playlist:null})
+	}
 
-	choosePlaylist(playlist_id){
-		this.setState({playlist: playlist_id})
+	choosePlaylist(playlist_id,playlist_name){
+		if (this.state.playlist === null || playlist_id !== this.state.playlist){
+			this.setState({playlist: playlist_id, active:"",playlist_name:playlist_name})
+		}
+		else if(this.state.playlist !== null){
+			this.setState({playlist: null, active:"hidden", playlist_name:null})
+		}
 	}
 
   componentWillMount(){
@@ -72,18 +83,34 @@ class Dashboard extends Component{
 
   render() {
     let playlists = this.state.user_playlists.map((playlist, i) => {
+			let className =
+				this.state.playlist === playlist.id ?
+					'selected' :
+					'playlist-card'
+			let deletePlaylist =
+				this.state.playlist === playlist.id ?
+					'none' : 'hidden'
 			return(
-				<ul key={i} onClick={this.choosePlaylist.bind(this, playlist.id)}>
-					{playlist.name}
+				<div
+					key={i}
+					tabIndex="0"
+					className={`${className} button-hover`}
+					onClick={this.choosePlaylist.bind(this, playlist.id, playlist.name)}
+					onBlur={this.handleBlur}
+				>
+					<h5 className="playlist-name-title">{playlist.name}</h5>
 					{playlist.videos.map((video, idx) => {
 						return(
-							<li key={idx} >
+							<p className="song-title" key={idx} >
 								{video.title}
-							</li>
+							</p>
 						)
 					})
 				}
-			</ul>
+				<div className={deletePlaylist}>
+					<i className="fa delete fa-times-circle" aria-hidden="true"></i>
+				</div>
+			</div>
 			)
 		})
 		return (
@@ -101,22 +128,33 @@ class Dashboard extends Component{
                   New Playlist
               </button>
             </Link>
+						<Link to="/playlists/new">
+							<button
+								className="button button-hover big-nav"
+								type="submit"
+								value="Submit">
+									Assessments
+							</button>
+						</Link>
           </div>
-          <form onSubmit={this.handleSubmit.bind(this)}>
+					<div className="playlist-card">
 						{playlists}
-            <input
-              type="email"
-              name="email"
-              placeholder="email"
-              required onChange={this.handleChange.bind(this)}
-            />
-            <button
-              className="button button-hover"
-              type="submit"
-              value="Submit">
-                Submit
-            </button>
-          </form>
+					</div>
+						<form className={this.state.active} onSubmit={this.handleSubmit.bind(this)}>
+							<h5>Send {this.state.playlist_name} to:</h5>
+							<input
+								type="email"
+								name="email"
+								placeholder="email"
+								required onChange={this.handleChange.bind(this)}
+							/>
+							<button
+								className="button button-hover"
+								type="submit"
+								value="Submit">
+								Submit
+							</button>
+						</form>
         </div>
       </div>
 		)

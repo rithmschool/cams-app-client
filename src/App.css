@@ -104,6 +104,8 @@ h1.banner-bold{
 }
 .welcome *{
   margin:1rem;
+  text-align: left;
+  width: 20rem;
 }
 .big-nav{
   font-size: 1.5rem;
@@ -113,7 +115,6 @@ h1.banner-bold{
   display: flex;
   justify-content: flex-end;
 }
-
 /*PLAYLIST
 *********/
 .playlist-card{
@@ -148,24 +149,13 @@ h1.banner-bold{
 
 /*SLANTDIVSTUFF
 *********/
-.diagonaltop{
-  background:white;
-  width:110vw;
-  height: 4rem;
-  margin-top: 2rem;
-  margin-bottom: -4rem;
-  transform: rotate(0deg);
-}
 .diagonalbottom{
   background:white;
   width:110vw;
   height: 6rem;
   margin-top:-1rem;
-  transform: rotate(1.2deg);
+  transform: rotate(1deg);
   margin-bottom: 10rem;
-}
-.headerDivider {
-  height:4rem;
 }
 
 /* FORMS

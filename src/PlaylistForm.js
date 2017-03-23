@@ -19,7 +19,7 @@ class PlaylistForm extends Component {
     });
   }
 
-  handleSubmit(event){
+  handleSubmit(e){
     let config = {
       headers: {
         'Accept':'application/json',
@@ -27,21 +27,32 @@ class PlaylistForm extends Component {
         'Authorization': 'bearer ' + localStorage.getItem('token')
       }
     }
-    event.preventDefault()
+    e.preventDefault()
+    this.setState({name: ""})
     this.props.addPlaylist(config, this)
+  }
+
+  componentDidUpdate() {
+   this.nameInput.focus();
   }
 
   render(){
     let error = (this.props.error) ?
-      <p>Playlist name already taken.</p> :
+      <p>Playlist name already taken. Please choose a different one.</p> :
       null;
     return(
-      <form onSubmit={this.handleSubmit.bind(this)}>
-        <input type="string" onChange={this.handleChange.bind(this)}
-          name="name" placeholder="Playlist Name"/>
-        <button className="button button-hover" type="submit" value="Submit">Submit</button>
-        {error}
-      </form>
+      <div>
+        <h3 className="">Add Playlist</h3>
+        <form onSubmit={this.handleSubmit.bind(this)}>
+          <input
+            ref={(input) => { this.nameInput = input; }}
+            type="string" onChange={this.handleChange.bind(this)}
+            name="name" placeholder="Playlist Name" value={this.state.name}
+          />
+          <button className="button button-hover" type="submit" value="Submit">Submit</button>
+          {error}
+        </form>
+      </div>
     )
   }
 }

@@ -59,7 +59,7 @@ class App extends Component {
       <div>
         <Nav isLoggedIn={!!this.state.token}/>
         <div>
-          <img className="banner" src={banner}/>
+          <img className="banner" src={banner} alt="patient and clinician smiling"/>
         </div>
         <Switch>
           <Route exact path="/" component={Home} />

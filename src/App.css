@@ -9,6 +9,9 @@ a {
 .serif{
   font-family: Georgia, serif
 }
+.white{
+  color:white;
+}
 .bold-shadow{
   text-shadow: -2px 2px 0px rgb(0, 158, 184), -3px 3px 0px #00aea7;
   color: rgb(255, 255, 255);
@@ -17,8 +20,16 @@ a {
   text-align: center;
   margin:auto;
 }
+button{
+  cursor: pointer;
+}
 
-/* NAV */
+.playlist-card *:focus{
+  outline-width: 0px;
+}
+
+/* NAV
+*********/
 .nav{
   display:flex;
   justify-content: space-between;
@@ -47,13 +58,11 @@ a {
 .button:hover{
   text-decoration: none;
 }
-.button{
-  text-decoration: none;
-}
 
-/*BANNER*/
+/*BANNER
+*********/
 .banner{
-  width: 100vw;
+  width:120vw;
   z-index:-1;
   position:fixed;
   margin-top:-5rem;
@@ -70,7 +79,8 @@ h1.banner-bold{
   max-width: 60vw;
 }
 
-/* CONTENT */
+/* CONTENT
+*********/
 .content{
   margin-top: 1rem;
   text-align: center;
@@ -95,12 +105,6 @@ h1.banner-bold{
 .welcome *{
   margin:1rem;
 }
-p{
-  padding-top:1rem;
-  color:grey;
-  text-align: left;
-  max-width: 25rem;
-}
 .big-nav{
   font-size: 1.5rem;
   margin-bottom: 2rem;
@@ -110,6 +114,40 @@ p{
   justify-content: flex-end;
 }
 
+/*PLAYLIST
+*********/
+.playlist-card{
+  display:flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+.playlist-card *{
+  background:#f8f8f8;
+  border-radius: 0.2rem;
+  margin:0.4rem;
+  padding:0.5rem;
+}
+.selected {
+  border:0.2px solid rgb(51, 207, 164);
+}
+.hidden{
+  display:none;
+}
+.song-title{
+  padding:0.5rem;
+  color:grey;
+  text-align: left;
+  max-width: 15rem;
+  font-size:12px;
+}
+.delete{
+  color:rgb(51, 207, 164);
+  padding:0px;
+}
+
+/*SLANTDIVSTUFF
+*********/
 .diagonaltop{
   background:white;
   width:110vw;
@@ -130,7 +168,8 @@ p{
   height:4rem;
 }
 
-/* FORMS */
+/* FORMS
+*********/
 form{
   display:flex;
   justify-content: center;
@@ -149,13 +188,18 @@ form * {
 input::placeholder {
   color:grey;
 }
+form h5{
+  background:none
+}
 
-/*LINK*/
+/*LINK
+*********/
 .link{
   color:#00c5cc;
 }
 
-/* KEYFRAMES */
+/* KEYFRAMES
+*********/
 .button-hover {
   cursor: pointer;
   display: inline-block;
@@ -171,7 +215,8 @@ input::placeholder {
   transform: translateY(3px);
 }
 
-/*DROPDOWN*/
+/*DROPDOWN
+*********/
 .dropdown {
   display: inline-block;
 }
@@ -192,6 +237,8 @@ button.button.dropdown-content {
   margin: 0.5rem 0;
 }
 
+/*FOOTER
+*********/
 .footer{
   color: white;
   margin:auto;

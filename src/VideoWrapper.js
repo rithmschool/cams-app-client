@@ -2,15 +2,16 @@ import React, {PropTypes, Component} from 'react';
 import VideoForm from './VideoForm';
 import {BASE_URL} from './helpers.js';
 import axios from 'axios';
+import getYouTubeID from 'get-youtube-id';
 
 class VideoWrapper extends Component {
 
   constructor(props){
     super(props)
     this.state = {
-      urls: []
+      videoTitles: []
     }
-    this.addContinue = this.addContinue.bind(this)
+    this.addVideo = this.addVideo.bind(this)
     this.addDone = this.addDone.bind(this)
   }
 
@@ -23,23 +24,21 @@ class VideoWrapper extends Component {
       headers: {
         'Accept':'application/json',
         'ContentType':'application/json',
-        'Authorization': 'bearer ' + localStorage.getItem('token')
-      }
+        'Authorization':'bearer ' + localStorage.getItem('token')
+      },
     }
+    let youtube_id = getYouTubeID(url)
     return axios.post(`${BASE_URL}/api/videos`,
-    {url}, config)
+    {url, youtube_id}, config)
     .then(function(response) {
-      return axios.post(`${BASE_URL}/api/screens`, {
+      axios.post(`${BASE_URL}/api/screens`, {
         video_id: response.data.id,
         playlist_id: this.props.playlistId,
-        order: this.state.urls.length+1
+        order: this.state.videoTitles.length+1
       }, config)
-    }.bind(this))
-  }
-
-  addContinue(url) {
-    this.addVideo(url).then(function(response) {
-      this.setState({urls: this.state.urls.concat(url)})
+      this.setState({
+        videoTitles: this.state.videoTitles.concat(response.data.title)
+      })
     }.bind(this))
   }
 
@@ -54,17 +53,18 @@ class VideoWrapper extends Component {
 
   render(){
     var formComponents = []
-    for(var i=0; i<this.state.urls.length; i++){
+    for(var i=0; i<this.state.videoTitles.length; i++){
       formComponents.push(
         <div key={i}>
-          {this.state.urls[i]}
+          {this.state.videoTitles[i]}
         </div>
       )
     }
     return(
       <div>
+        <h3 className="">Add Videos</h3>
         {formComponents}
-        <VideoForm addContinue={this.addContinue} addDone={this.addDone}/>
+        <VideoForm addVideo={this.addVideo} addDone={this.addDone}/>
       </div>
     )
   }

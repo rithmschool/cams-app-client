@@ -25,7 +25,7 @@ class VideoWrapper extends Component {
         'Accept':'application/json',
         'ContentType':'application/json',
         'Authorization':'bearer ' + localStorage.getItem('token')
-      },
+      }
     }
     let youtube_id = getYouTubeID(url)
     return axios.post(`${BASE_URL}/api/videos`,

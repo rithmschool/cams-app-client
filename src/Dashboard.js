@@ -52,7 +52,6 @@ class Dashboard extends Component{
 		e.preventDefault()
 		this.sendMail(config, this)
 	}
-
 	handleBlur() {
 		this.setState({playlist:null})
 	}
@@ -156,7 +155,6 @@ class Dashboard extends Component{
 								Submit
 							</button>
 						</form>
-
         </div>
       </div>
 		)

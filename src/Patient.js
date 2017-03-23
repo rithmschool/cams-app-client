@@ -57,10 +57,6 @@ class PatientHome extends Component {
 		});
 	}
 
-	componentDidMount(){
-		//this.startRecord()
-  }
-
   handleSpaceBar(event) {
     if (event.keyCode === 32) {
       event.preventDefault()

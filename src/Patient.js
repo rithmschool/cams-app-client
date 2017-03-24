@@ -95,7 +95,7 @@ class PatientHome extends Component {
         </div>
         <div className="content">
           <div>
-            <div>{this.props.children[this.state.idx]}</div>
+            <div> {React.cloneElement(this.props.children[this.state.idx], { videoIdx: this.state.videoIdx - 1})}</div>
           </div>
         </div>
       </div>

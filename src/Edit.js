@@ -6,7 +6,10 @@ class Edit extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      email: ''
+      email: '',
+      current_password: '',
+      new_password: '',
+      confirm_new_password: ''
     }
   }
 
@@ -17,7 +20,10 @@ class Edit extends Component {
   editUser(config, thisArg) {
     let userId = JSON.parse(atob(localStorage.getItem('token').split('.')[1])).id;
     axios.patch(`${BASE_URL}/api/users/${userId}`, {
-			email: thisArg.state.email
+			email: thisArg.state.email,
+      current_password: this.state.current_password,
+      new_password: this.state.new_password,
+      confirm_new_password: this.state.confirm_new_password
 		}, config)
     .then(response => console.log(response.data))
   }
@@ -39,6 +45,9 @@ class Edit extends Component {
     event.preventDefault()
     this.editUser(config, this)
     this.refs.edit.value = ''
+    this.refs.current_password.value = ''
+    this.refs.new_password.value = ''
+    this.refs.confirm_new_password.value = ''
   }
 
   render () {
@@ -46,7 +55,14 @@ class Edit extends Component {
       <div>
         <h1>Edit</h1>
         <form onSubmit={this.handleSubmit.bind(this)}>
-          <input type="email" name="email" ref="edit" placeholder="email" required onChange={this.handleChange.bind(this)}/>
+          <input type="email" name="email" ref="edit" placeholder="new email" onChange={this.handleChange.bind(this)}/>
+
+          <input type="password" name="current_password" ref="current_password" placeholder="current password" onChange={this.handleChange.bind(this)}/>
+
+          <input type="password" name="new_password" ref="new_password" placeholder="new password" onChange={this.handleChange.bind(this)}/>
+
+          <input type="password" name="confirm_new_password" ref="confirm_new_password" placeholder="confirm new password" onChange={this.handleChange.bind(this)}/>
+
           <button type="submit" value="Submit">Submit</button>
         </form>
       </div>

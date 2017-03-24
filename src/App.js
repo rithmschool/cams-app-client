@@ -71,7 +71,7 @@ class App extends Component {
             <EnsureLoggedOut exact path="/login" component={LoginForm} />
             <PrivateRoute path="/dashboard" component={Dashboard} />
             <PrivateRoute path="/playlists/new" component={PlaylistWrapper}/>
-            <PrivateRoute path="/<int:user_id>" component={Edit}/>
+            <PrivateRoute path="/users/:userId/edit" component={Edit}/>
           </Switch>
         </div>
       </div>

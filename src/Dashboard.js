@@ -1,7 +1,6 @@
 import React, {PropTypes, Component} from 'react';
 import {BASE_URL} from './helpers.js';
 import axios from 'axios';
-import Edit from './Edit.js'
 
 class Dashboard extends Component {
 
@@ -31,6 +30,17 @@ class Dashboard extends Component {
 			}, config))
 	}
 
+	static contextTypes = {
+    router: PropTypes.object
+  }
+
+	edit(e) {
+		e.preventDefault();
+		let userId = JSON.parse(atob(localStorage.getItem('token').split('.')[1])).id
+		this.context.router.history.push(`/users/${userId}/edit`)
+		console.log(userId);
+	}
+
 	handleChange(e) {
 		this.setState({
 			[e.target.name]: e.target.value
@@ -57,6 +67,8 @@ class Dashboard extends Component {
 					<input type="email" name="email" placeholder="email" required onChange={this.handleChange.bind(this)}/>
 					<button type="submit" value="Submit">Submit</button>
 				</form>
+
+				<a href="#" onClick={this.edit.bind(this)}>Edit</a>
 			</div>
 		)
 	}

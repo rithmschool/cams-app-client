@@ -63,9 +63,9 @@ class Dashboard extends Component{
 	}
 
   componentWillMount(){
-    let userId = JSON.parse(atob(localStorage.getItem('token').split('.')[1])).id
+    let userID = JSON.parse(atob(localStorage.getItem('token').split('.')[1])).id
     axios.get(
-      `${BASE_URL}/api/users/${userId}/playlists`,
+      `${BASE_URL}/api/users/${userID}/playlists`,
       {
         headers: {
         	'Accept':'application/json',

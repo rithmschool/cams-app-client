@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
-import banner from './banner.png'
-import PlaylistWrapper from './PlaylistWrapper'
-import Dashboard from './Dashboard'
+import banner from './banner.png';
+import PlaylistWrapper from './PlaylistWrapper';
+import Dashboard from './Dashboard';
+import AssessmentsDashboard from './AssessmentsDashboard';
 import LoginForm from './Login';
 import Home from './Home';
 import Nav from './Nav';
@@ -66,6 +67,7 @@ class App extends Component {
           <Route exact path="/patient/home" component={PatientWrapper} />
           <EnsureLoggedOut exact path="/login" component={LoginForm} />
           <PrivateRoute path="/dashboard" component={Dashboard} />
+          <PrivateRoute path="/assessments" component={AssessmentsDashboard}/>
           <PrivateRoute path="/playlists/new" component={PlaylistWrapper}/>
         </Switch>
         <div className="diagonalbottom"></div>

@@ -9,13 +9,24 @@ class Edit extends Component {
       email: '',
       current_password: '',
       new_password: '',
-      confirm_new_password: ''
+      confirm_new_password: '',
+      error: false
     }
   }
 
   static contextTypes = {
 		router: PropTypes.object
 	}
+
+  componentWillMount(){
+    let userId = JSON.parse(atob(localStorage.getItem('token').split('.')[1])).id
+    axios.get(`${BASE_URL}/api/users/${userId}`)
+    .then(response => {
+      this.setState({email: response.data.email})
+      console.log(response.data.email)
+    })
+  }
+
 
   editUser(config, thisArg) {
     let userId = JSON.parse(atob(localStorage.getItem('token').split('.')[1])).id;
@@ -25,7 +36,11 @@ class Edit extends Component {
       new_password: this.state.new_password,
       confirm_new_password: this.state.confirm_new_password
 		}, config)
-    .then(response => console.log(response.data))
+    .then(response => {
+      this.setState({error: false})
+    }).catch(error => {
+      this.setState({error: true})
+    })
   }
 
   handleChange(e) {
@@ -51,6 +66,8 @@ class Edit extends Component {
   }
 
   render () {
+    let error = (this.state.error) ?
+      <p>Please renter the correct current password and check to see if the new and confirm password fields are the same</p> : null;
     return (
       <div>
         <h1>Edit</h1>
@@ -66,7 +83,7 @@ class Edit extends Component {
             type="password"
             name="current_password"
             ref="current_password"
-            laceholder="current password" onChange={this.handleChange.bind(this)}
+            placeholder="current password" onChange={this.handleChange.bind(this)}
           />
           <input
             type="password"
@@ -81,7 +98,8 @@ class Edit extends Component {
             ref="confirm_new_password"
             placeholder="confirm new password" onChange={this.handleChange.bind(this)}
           />
-          <button>type="submit" value="Submit">Submit</button>
+          <button type="submit" value="Submit">Submit</button>
+          {error}
         </form>
       </div>
     )

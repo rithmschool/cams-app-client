@@ -52,7 +52,12 @@ class Nav extends Component {
             <div>
               <button
                 className="sign button dropdown-content button-hover">
-                  {this.props.isLoggedIn ? logout : login}</button>
+                edit
+              </button>
+              <button
+                className="sign button dropdown-content button-hover">
+                  {this.props.isLoggedIn ? logout : login}
+              </button>
             </div>
           </DropdownContent>
         </Dropdown>

@@ -12,7 +12,8 @@ class Dashboard extends Component{
 			playlist: null,
 			playlist_name:null,
       user_playlists: [],
-			active:'hidden'
+			active:'hidden',
+			isEmpty:null
 		}
 		this.handleBlur = this.handleBlur.bind(this)
 	}
@@ -90,14 +91,20 @@ class Dashboard extends Component{
 			let deletePlaylist =
 				this.state.playlist === playlist.id ?
 					'none' : 'hidden'
+			let playlistLength = function(){
+				if (!this.state.user_playlists.length){
+					return (<p>"Oh looks like you haven't made any playlists just yet"</p>)
+				}
+			}
 			return(
 				<div
 					key={i}
 					tabIndex="0"
-					className={`${className} button-hover`}
+					className={`${className} button-hover playlist-card-contents`}
 					onClick={this.choosePlaylist.bind(this, playlist.id, playlist.name)}
 					onBlur={this.handleBlur}
 				>
+					{playlistLength}
 					<h5 className="playlist-name-title">{playlist.name}</h5>
 					{playlist.videos.map((video, idx) => {
 						return(
@@ -136,27 +143,29 @@ class Dashboard extends Component{
 									Assessments
 							</button>
 						</Link>
-          </div>
-					<div className="playlist-card">
-						{playlists}
-					</div>
-						<form className={this.state.active} onSubmit={this.handleSubmit.bind(this)}>
-							<h5>Send {this.state.playlist_name} to:</h5>
-							<input
-								type="email"
-								name="email"
-								placeholder="email"
-								required onChange={this.handleChange.bind(this)}
-							/>
-							<button
-								className="button button-hover"
-								type="submit"
-								value="Submit">
-								Submit
-							</button>
-						</form>
-        </div>
-      </div>
+		      </div>
+						<div className="email-form">
+							<form className={this.state.active} onSubmit={this.handleSubmit.bind(this)}>
+								<h5>Send {this.state.playlist_name} to:</h5>
+								<input
+									type="email"
+									name="email"
+									placeholder="email"
+									required onChange={this.handleChange.bind(this)}
+								/>
+								<button
+									className="button button-hover"
+									type="submit"
+									value="Submit">
+									Submit
+								</button>
+							</form>
+						</div>
+						<div className="playlist-container">
+							{playlists}
+						</div>
+		      </div>
+		    </div>
 		)
 	}
 }

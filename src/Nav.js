@@ -26,7 +26,7 @@ class Nav extends Component {
       <button
         className="sign button dropdown-content button-hover">
         <Link to="/login">
-          Log in
+          Login
         </Link>
       </button>
     </div>
@@ -39,7 +39,7 @@ class Nav extends Component {
       <button
         className="sign button dropdown-content button-hover">
         <Link to="/login" onClick={this.handleLogOut}>
-          Log out
+          Logout
         </Link>
       </button>
     </div>

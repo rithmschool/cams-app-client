@@ -53,7 +53,12 @@ class Edit extends Component {
   render () {
     return (
       <div>
-        <h1>Edit</h1>
+      <div className="banner-text">
+        <h1 className="banner-bold">Update</h1>
+      </div>
+
+      <div className="content">
+        <h1>Profile</h1>
         <form onSubmit={this.handleSubmit.bind(this)}>
           <input type="email" name="email" ref="edit" placeholder="new email" onChange={this.handleChange.bind(this)}/>
 
@@ -63,9 +68,10 @@ class Edit extends Component {
 
           <input type="password" name="confirm_new_password" ref="confirm_new_password" placeholder="confirm new password" onChange={this.handleChange.bind(this)}/>
 
-          <button type="submit" value="Submit">Submit</button>
+          <button className="button button-hover" type="submit" value="Submit">Update</button>
         </form>
       </div>
+    </div>
     )
   }
 }

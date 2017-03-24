@@ -2,17 +2,12 @@ import React, {Component} from 'react';
 import YouTube from 'react-youtube';
 
 class VideoPlayer extends Component {
-	constructor(props) {
-		super(props)
-		this.state = {
-
-		}
-	}
 
 	_onReady(event) {
 		// access to player in all event handlers via event.target
 		event.target.playVideo();
 	}
+	
 	render() {
 		const opts = {
 			height: '390',

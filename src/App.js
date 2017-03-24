@@ -91,11 +91,11 @@ class App extends Component {
         <div className="diagonalbottom"></div>
         <div className="footer">
           <div>
-            <p className="me">
+            <div className="me">
               <p>CAMS Corp</p>
               401 Parnassus Avenue
               San Francisco, CA 94143
-            </p>
+            </div>
           </div>
           <div>
             <p>

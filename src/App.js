@@ -72,9 +72,18 @@ class App extends Component {
         </Switch>
         <div className="diagonalbottom"></div>
         <div className="footer">
-          <p className="bold-shadow center">CAMS Corp</p>
-          401 Parnassus Avenue
-          San Francisco, CA 94143
+          <div>
+            <p className="me">
+              <p>CAMS Corp</p>
+              401 Parnassus Avenue
+              San Francisco, CA 94143
+            </p>
+          </div>
+          <div>
+            <p>
+
+            </p>
+          </div>
         </div>
       </div>
     );

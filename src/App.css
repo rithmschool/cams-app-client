@@ -156,7 +156,7 @@ h1.banner-bold {
 p.profile-title{
   margin-top:-1rem;
   max-width: 15rem;
-  margin:-1.5rem auto;
+  margin:1rem auto;
   color:grey;
 }
 .quote{
@@ -171,8 +171,7 @@ p.profile-title{
   border-radius: 1rem;
   margin-top: 2rem;
   flex-wrap: wrap;
-  padding-top:2rem;
-  padding-bottom:4rem;
+  padding:2rem;
 }
 .big-nav {
     font-size: 1.5rem;
@@ -183,9 +182,9 @@ p.profile-title{
     justify-content: flex-end;
 }
 .box{
-  padding:2rem;
   margin-top: 2rem;
   max-width: 15rem;
+  box-shadow: 0px 1px 2px rgba(128, 128, 128, 0.23);
 }
 
 

@@ -28,15 +28,15 @@ class Home extends Component {
 
           <div className="left">
             <div>
-              <img className="profiles" src={tim}></img>
+              <img className="profiles button-hover" src={tim}></img>
                 <p className="profile-title">Tim Campellone, PhD</p>
             </div>
             <div>
-              <img className="profiles" src={va}></img>
+              <img className="profiles button-hover" src={va}></img>
                 <p className="profile-title">San Francisco VA Health Care System</p>
             </div>
             <div>
-              <img className="profiles" src={josh}></img>
+              <img className="profiles button-hover" src={josh}></img>
                 <p className="profile-title">Josh Woolley, MD, PhD</p>
             </div>
           </div>
@@ -49,10 +49,10 @@ class Home extends Component {
             </p>
           </div>
           <div className="left">
-            <div><img className="box" src={create}/> <p className="profile-title">Create a Video Playlist</p></div>
-            <div><img className="box" src={user}/> <p className="profile-title">Patients Reactions to Playlist and Prompts are Recorderd</p></div>
-            <div><img className="box" src={assess}/> <p className="profile-title">Clinician Reviews and Assess Returned Video</p></div>
-            <div><img className="box" src={happy}/> <p className="profile-title">Reduce Patient Visits and Clinician Time</p></div>
+            <div><img className="box button-hover" src={create}/> <p className="profile-title ">Create a Video Playlist</p></div>
+            <div><img className="box button-hover" src={user}/> <p className="profile-title ">Patients Reactions to Playlist and Prompts are Recorderd</p></div>
+            <div><img className="box button-hover" src={assess}/> <p className="profile-title ">Clinician Reviews and Assess Returned Video</p></div>
+            <div><img className="box button-hover" src={happy}/> <p className="profile-title ">Reduce Patient Visits and Clinician Time</p></div>
           </div>
         </div>
       </div>

@@ -1,4 +1,4 @@
-import React, {PropTypes, Component} from 'react';
+import React, {Component} from 'react';
 import {BASE_URL} from './helpers.js';
 import axios from 'axios';
 import {Link} from 'react-router-dom'
@@ -14,10 +14,6 @@ class Dashboard extends Component{
       userPlaylists: [],
 		}
 		this.closeSelection = this.closeSelection.bind(this)
-	}
-
-	static contextTypes = {
-		router: PropTypes.object
 	}
 
 	sendMail(config, thisArg) {

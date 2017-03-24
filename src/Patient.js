@@ -47,6 +47,7 @@ class PatientHome extends Component {
 		recordRTC.stopRecording(function () {
 			let fd = new FormData();
 			recordedBlob = recordRTC.getBlob();
+			fd.append('assessment_id', 21)
 			fd.append('fname', 'video_' + Date.now() + '.webm');
 			fd.append('file', recordedBlob)
 			axios.post(`${BASE_URL}/api/recording`, fd).then(response => {
@@ -82,21 +83,25 @@ class PatientHome extends Component {
 		}
 	}
 
-  render() {
-    document.addEventListener("keydown", this.handleSpaceBar)
-    return (
-      <div>
-        <div className="banner-text">
-          <h1 className="banner-bold">Patient</h1>
-        </div>
-        <div className="content">
-          <div>
-            <div>{this.props.children[this.state.idx]}</div>
-          </div>
-        </div>
-      </div>
-    )
-  }
+	componentDidMount() {
+		window.focus()
+		document.addEventListener("keydown", this.handleSpaceBar)
+	}
+
+	render() {
+		return (
+			<div>
+				<div className="banner-text">
+					<h1 className="banner-bold">Patient</h1>
+				</div>
+				<div className="content">
+					<div>
+						<div>{React.cloneElement(this.props.children[this.state.idx], {videoIdx: this.state.videoIdx - 1})}</div>
+					</div>
+				</div>
+			</div>
+		)
+	}
 }
 
 export default PatientHome;

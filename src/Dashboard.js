@@ -54,7 +54,6 @@ class Dashboard extends Component{
 
 	closeSelection() {
 		this.setState({playlistID: null, playlistName: null})
-	}
 
 	choosePlaylist(playlist_id, playlistName){
 		if (this.state.playlistID === null || playlist_id !== this.state.playlistID){

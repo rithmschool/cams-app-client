@@ -14,32 +14,32 @@ class Edit extends Component {
   }
 
   static contextTypes = {
-		router: PropTypes.object
-	}
+    router: PropTypes.object
+  }
 
   editUser(config, thisArg) {
     let userId = JSON.parse(atob(localStorage.getItem('token').split('.')[1])).id;
     axios.patch(`${BASE_URL}/api/users/${userId}`, {
-			email: thisArg.state.email,
+      email: thisArg.state.email,
       current_password: this.state.current_password,
       new_password: this.state.new_password,
       confirm_new_password: this.state.confirm_new_password
-		}, config)
+    }, config)
     .then(response => console.log(response.data))
   }
 
   handleChange(e) {
-		this.setState({
-			[e.target.name]: e.target.value
-		});
-	}
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+  }
 
   handleSubmit(event) {
     let config = {
       headers: {
-				'Accept': 'application/json',
-				'Content-Type': 'application/json',
-				'Authorization': 'bearer ' + localStorage.getItem('token')
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': 'bearer ' + localStorage.getItem('token')
       }
     }
     event.preventDefault()

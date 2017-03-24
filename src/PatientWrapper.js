@@ -17,20 +17,20 @@ class PatientWrapper extends Component {
 
   componentWillMount(){
     var self = this;
-    axios.get(`${BASE_URL}/api/assessments/1`).then(function (response) {
+    axios.get(`${BASE_URL}/api/assessments/19`).then(function (response) {
       self.setState({videoIds: response.data.screens});
     })
   }
 
   render() {
     return(
-      <PatientHome>
+      <PatientHome videosLength={this.state.videoIds.length}>
         <p>this is the first instructional message Press Space Bar to Continue</p>
         <p>this is the second instructional message Press Space Bar to Continue</p>
-        <p>Instructions</p>
+        <p>Please Watch the Video</p>
         <VideoPlayer video={this.state.videoIds[this.state.videoIdx]} />
-        <p>Instructions</p>
-        <p>Test</p>
+        <p>Answer the Question</p>
+        <p>Timer</p>
         <p>Bye!</p>
       </PatientHome>
     )

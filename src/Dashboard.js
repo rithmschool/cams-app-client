@@ -123,7 +123,6 @@ class Dashboard extends Component{
 						)
 					})
 				}
-
 				{showForm}
 			</div>
 			)

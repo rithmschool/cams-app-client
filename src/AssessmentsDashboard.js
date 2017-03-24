@@ -1,6 +1,4 @@
 import React, {Component} from 'react';
-// import {BASE_URL} from './helpers.js';
-// import axios from 'axios';
 import {Link} from 'react-router-dom';
 
 class Assessment extends Component {
@@ -31,7 +29,6 @@ class Assessment extends Component {
             </Link>
           </div>
           <div className="playlist-card">
-
             <button
               className="button button-hover"
               value="info">

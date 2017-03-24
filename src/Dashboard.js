@@ -113,7 +113,6 @@ class Dashboard extends Component{
 					className={`${className} button-hover playlist-card-contents`}
 					onClick={this.choosePlaylist.bind(this, playlist.id, playlist.name)}
 				>
-					{playlistLength}
 					<h5 className="playlist-name-title">{playlist.name}</h5>
 					{playlist.videos.map((video, idx) => {
 						return(

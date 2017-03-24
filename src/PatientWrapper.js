@@ -24,7 +24,7 @@ class PatientWrapper extends Component {
 
   render() {
     return(
-      <PatientHome videosLength ={this.state.videoIds.length}>
+      <PatientHome videosLength={this.state.videoIds.length}>
         <p>this is the first instructional message Press Space Bar to Continue</p>
         <p>this is the second instructional message Press Space Bar to Continue</p>
         <p>Please Watch the Video</p>

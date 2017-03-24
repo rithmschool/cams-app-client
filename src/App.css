@@ -1,6 +1,8 @@
 body {
   font-family: -apple-system, BlinkMacSystemFont, sans-serif;
   color:#4d4d4d;
+  background:linear-gradient(135deg, rgba(0,216,255,1) 0%,rgba(125,185,232,1) 100%);
+  background-size: cover;
 }
 a {
   color:#00c5cc;
@@ -24,8 +26,20 @@ button{
   cursor: pointer;
 }
 
-.playlist-card *:focus{
-  outline-width: 0px;
+.xs{
+  font-size: .4rem;
+}
+.sm{
+  font-size: .6rem;
+}
+.me{
+  font-size: 1rem;
+}
+.lg{
+  font-size: 1.5rem;
+}
+.xl{
+  font-size: 2.5rem;
 }
 
 /* NAV
@@ -39,7 +53,6 @@ button{
 }
 .logo{
   margin:0.5rem;
-  max-width:45px;
   justify-content: flex-start;
   align-content: flex-start;
   border: 3px solid white;
@@ -65,7 +78,7 @@ button{
   width:120vw;
   z-index:-1;
   position:fixed;
-  margin-top:-5rem;
+  margin-top:-7rem;
 }
 .banner-text{
   padding:0 1rem 0 1rem;
@@ -86,7 +99,7 @@ h1.banner-bold{
   text-align: center;
   padding:2rem;
   background:white;
-  padding-bottom: 30rem;
+  padding-bottom: 10rem;
 }
 .content-image{
   display:flex;
@@ -115,19 +128,30 @@ h1.banner-bold{
   display: flex;
   justify-content: flex-end;
 }
+
 /*PLAYLIST
 *********/
-.playlist-card{
+.playlist-container{
   display:flex;
   justify-content: flex-start;
   align-items: flex-start;
   flex-wrap: wrap;
-}
-.playlist-card *{
   background:#f8f8f8;
+  padding:1rem;
+  border-radius: 2px;
+}
+.playlist-card-contents{
+  background:white;
   border-radius: 0.2rem;
   margin:0.4rem;
   padding:0.5rem;
+  box-shadow: 0px 1px 2px rgba(128, 128, 128, 0.23);
+}
+.playlist-card-contents:focus{
+  outline: 0px;
+}
+.email-form{
+  align-self: center;
 }
 .selected {
   border:0.2px solid rgb(51, 207, 164);
@@ -143,18 +167,21 @@ h1.banner-bold{
   font-size:12px;
 }
 .delete{
-  color:rgb(51, 207, 164);
-  padding:0px;
+  color:rgb(218, 218, 218);
+}
+.delete:hover{
+  color:red;
 }
 
 /*SLANTDIVSTUFF
 *********/
 .diagonalbottom{
   background:white;
-  width:110vw;
   height: 10rem;
-  margin-top:-5rem;
-  transform: rotate(3deg);
+  margin:-5rem 0 -1rem 0;
+  width:102vw;
+  transform: skew(-2deg,4deg);
+  box-shadow: 0px 0.5rem 0px rgba(51, 207, 164,0.5);
 }
 
 /* FORMS
@@ -214,11 +241,13 @@ form h5{
   position: absolute;
 }
 .dropdown--active .dropdown__content {
-  display: block;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
 }
 .dropdown-content{
   border-radius: 2px;
-  padding-right: 1rem;
+  padding-right: 4rem;
   box-shadow: 0 2px rgba(0,0,0,0.05);
   /*background: rgba(255,255,255,0.9);*/
 }
@@ -229,17 +258,21 @@ button.button.dropdown-content {
 /*FOOTER
 *********/
 .footer{
+  display:flex;
+  justify-content: flex-start;
+  align-items: center;
   color: white;
-  margin:auto;
-  text-align: center;
-  padding:3rem;
+  padding:2rem;
   max-width:10rem;
 }
 
 /*MEDIA QUERIES*/
 @media (max-width: 600px) {
+  .logo{
+    width:3rem;
+  }
   .banner{
-    width: 250vw;
+    width: 200vw;
   }
   h1{
     font-size: 2rem;
@@ -257,20 +290,68 @@ button.button.dropdown-content {
   }
   .content-image{
     max-width: 15rem;
-    margin: auto;
-  }
-  button.button.sign{
-    font-size: 1.5rem;
-    margin:0.5rem -46px;
+    padding:1rem;
   }
 }
-@media (min-width: 600px) {
+@media (max-width: 800px) and (min-width: 600px) {
+  .banner{
+    width: 250vw;
+  }
+  .logo{
+    width:3rem;
+  }
+  h1{
+    font-size: 2rem;
+  }
+  h2.body-bold{
+    padding-top:0.5rem;
+    font-size: 1.5rem;
+  }
+  body{
+    font-size: 1.5rem;
+  }
+  .content{
+    padding-top: 1rem;
+    margin-top: 1vmax;
+  }
+  .content-image{
+    max-width: 12rem;
+    margin: auto;
+  }
+}
+@media (max-width: 1200px) and (min-width: 800px) {
+  .banner{
+    width: 250vw;
+  }
   body{
     font-size: 20px;
   }
+  .logo{
+    max-width:3.5rem;
+  }
+  .button{
+    font-size: 1rem;
+  }
+  .content-image{
+    width:10rem;
+  }
+}
+@media (max-width: 2000px) and (min-width: 1200px) {
+  .banner{
+    width: 200vw;
+  }
+  body{
+    font-size: 1rem;
+  }
+  .logo{
+    width:4.5rem;
+  }
   .content{
-    padding-top:1rem;
-    margin-top:2rem;
+    padding-top:2rem;
+    margin-top:3rem;
+  }
+  .button{
+    font-size: 1rem;
   }
   .content-image{
     width:10rem;

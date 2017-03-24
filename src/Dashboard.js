@@ -47,7 +47,6 @@ class Dashboard extends Component{
 		e.preventDefault()
 		this.sendMail(config, this)
 	}
-
 	closeSelection() {
 		this.setState({playlistID: null, playlistName: null})
 	}
@@ -107,7 +106,7 @@ class Dashboard extends Component{
 				<div
 					key={i}
 					tabIndex="0"
-					className={`${className} button-hover`}
+					className={`${className} button-hover playlist-card-contents`}
 					onClick={this.choosePlaylist.bind(this, playlist.id, playlist.name)}
 				>
 					<h5 className="playlist-name-title">{playlist.name}</h5>

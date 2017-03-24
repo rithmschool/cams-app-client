@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import banner from './banner.png';
+import banner from '../images/banner.png';
 import PlaylistWrapper from './PlaylistWrapper';
 import Dashboard from './Dashboard';
 import AssessmentsDashboard from './AssessmentsDashboard';

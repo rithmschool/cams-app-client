@@ -76,12 +76,11 @@ class Dashboard extends Component{
       this.setState({userPlaylists: response.data})
     })
   }
-
   render() {
     let playlists = this.state.userPlaylists.map((playlist, i) => {
 			let showForm = this.state.playlistName === playlist.name ?
 				<div>
-					<form onSubmit={this.handleSubmit.bind(this)}>
+					<form className="email" onSubmit={this.handleSubmit.bind(this)}>
 						<h5>Send to:</h5>
 						<input
 							type="email"
@@ -113,7 +112,6 @@ class Dashboard extends Component{
 					className={`${className} button-hover playlist-card-contents`}
 					onClick={this.choosePlaylist.bind(this, playlist.id, playlist.name)}
 				>
-					{playlistLength}
 					<h5 className="playlist-name-title">{playlist.name}</h5>
 					{playlist.videos.map((video, idx) => {
 						return(
@@ -151,7 +149,7 @@ class Dashboard extends Component{
 							</button>
 						</Link>
           </div>
-					<div className="playlist-card">
+					<div className="playlist-container">
 						{playlists}
 					</div>
         </div>

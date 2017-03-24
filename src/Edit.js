@@ -55,15 +55,33 @@ class Edit extends Component {
       <div>
         <h1>Edit</h1>
         <form onSubmit={this.handleSubmit.bind(this)}>
-          <input type="email" name="email" ref="edit" placeholder="new email" onChange={this.handleChange.bind(this)}/>
-
-          <input type="password" name="current_password" ref="current_password" placeholder="current password" onChange={this.handleChange.bind(this)}/>
-
-          <input type="password" name="new_password" ref="new_password" placeholder="new password" onChange={this.handleChange.bind(this)}/>
-
-          <input type="password" name="confirm_new_password" ref="confirm_new_password" placeholder="confirm new password" onChange={this.handleChange.bind(this)}/>
-
-          <button type="submit" value="Submit">Submit</button>
+          <input
+            type="email"
+            name="email"
+            ref="edit"
+            placeholder="new email"
+            onChange={this.handleChange.bind(this)}
+          />
+          <input
+            type="password"
+            name="current_password"
+            ref="current_password"
+            laceholder="current password" onChange={this.handleChange.bind(this)}
+          />
+          <input
+            type="password"
+            name="new_password"
+            ref="new_password"
+            placeholder="new password"
+            onChange={this.handleChange.bind(this)}
+          />
+          <input
+            type="password"
+            name="confirm_new_password"
+            ref="confirm_new_password"
+            placeholder="confirm new password" onChange={this.handleChange.bind(this)}
+          />
+          <button>type="submit" value="Submit">Submit</button>
         </form>
       </div>
     )

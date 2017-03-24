@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import './index.css';
 import './App.css';
 import Edit from './Edit'
-import banner from './banner.png';
+import banner from '../images/banner.png';
 import PlaylistWrapper from './PlaylistWrapper';
 import Dashboard from './Dashboard';
 import AssessmentsDashboard from './AssessmentsDashboard';

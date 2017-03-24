@@ -46,7 +46,7 @@ class PlaylistForm extends Component {
         <form onSubmit={this.handleSubmit.bind(this)}>
           <input
             ref={(input) => { this.nameInput = input; }}
-            type="string" onChange={this.handleChange.bind(this)}
+            type="string" required onChange={this.handleChange.bind(this)}
             name="name" placeholder="Playlist Name" value={this.state.name}
           />
           <button className="button button-hover" type="submit" value="Submit">Submit</button>

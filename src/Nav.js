@@ -38,7 +38,7 @@ class Nav extends Component {
       </button>
       <button
         className="sign button dropdown-content button-hover">
-        <Link to="/login" onclick={this.handleLogOut}>
+        <Link to="/login" onClick={this.handleLogOut}>
           Log out
         </Link>
       </button>

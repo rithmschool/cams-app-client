@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import './index.css';
 import './App.css';
-import EditUserForm from './EditUserForm'
+import EditUserForm from './EditUserForm';
 import banner from '../images/banner.png';
 import PlaylistWrapper from './PlaylistWrapper';
 import Dashboard from './Dashboard';
@@ -15,7 +15,7 @@ import {
   Route,
   Switch,
   Redirect
-} from 'react-router-dom'
+} from 'react-router-dom';
 import './index.css';
 import './App.css';
 
@@ -86,7 +86,7 @@ class App extends Component {
           <PrivateRoute path="/dashboard" component={Dashboard} />
           <PrivateRoute path="/assessments" component={AssessmentsDashboard}/>
           <PrivateRoute path="/playlists/new" component={PlaylistWrapper}/>
-          <EnsureCorrectUserRoute path="/users/:userId/edit" component={Edit}/>
+          <EnsureCorrectUserRoute path="/users/:userId/edit" component={EditUserForm}/>
         </Switch>
         <div className="diagonalbottom"></div>
         <div className="footer">
@@ -99,7 +99,6 @@ class App extends Component {
           </div>
           <div>
             <p>
-
             </p>
           </div>
         </div>

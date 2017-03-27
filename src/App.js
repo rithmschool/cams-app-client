@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import './index.css';
 import './App.css';
-import Edit from './Edit'
+import EditUserForm from './EditUserForm'
 import banner from '../images/banner.png';
 import PlaylistWrapper from './PlaylistWrapper';
 import Dashboard from './Dashboard';

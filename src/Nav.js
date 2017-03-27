@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom'
 import logo from '../images/logo.png';
 import './App.css';
 import Dropdown, { DropdownTrigger, DropdownContent } from 'react-simple-dropdown';
+import {getUserId} from './helpers.js';
 
 
 class Nav extends Component {
@@ -16,7 +17,7 @@ class Nav extends Component {
   }
 
   edit(e) {
-    let userId = JSON.parse(atob(localStorage.getItem('token').split('.')[1])).id
+    let userId = getUserId()
     this.context.router.history.push(`/users/${userId}/edit`)
   }
 

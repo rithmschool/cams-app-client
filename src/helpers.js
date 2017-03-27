@@ -8,3 +8,7 @@ export const ensureCorrectUser = (pathId) => {
   let tokenId = JSON.parse(atob(localStorage.getItem('token').split('.')[1])).id
   return +tokenId === +pathId;
 }
+
+export const getUserId = () => {
+    return JSON.parse(atob(localStorage.getItem('token').split('.')[1])).id
+}

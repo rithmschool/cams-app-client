@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {BASE_URL} from './helpers.js';
+import {BASE_URL}, {getUserId} from './helpers.js';
 import axios from 'axios';
 import {Link} from 'react-router-dom'
 
@@ -59,7 +59,7 @@ class Dashboard extends Component{
   }
 
   componentWillMount(){
-    let userID = JSON.parse(atob(localStorage.getItem('token').split('.')[1])).id
+    let userId = getUserId()
     axios.get(
       `${BASE_URL}/api/users/${userID}/playlists`,
       {

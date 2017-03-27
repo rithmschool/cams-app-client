@@ -2,7 +2,7 @@ import React, {PropTypes, Component} from 'react';
 import {BASE_URL} from './helpers.js';
 import axios from 'axios';
 
-class Edit extends Component {
+class EditUserForm extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -124,4 +124,4 @@ class Edit extends Component {
   }
 }
 
-export default Edit;
+export default EditUserForm;

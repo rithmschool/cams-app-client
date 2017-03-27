@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import PatientHome from './Patient'
+import PatientHome from './PatientHome'
 import VideoPlayer from './VideoPlayer'
 import {BASE_URL} from './helpers.js';
 import axios from 'axios';

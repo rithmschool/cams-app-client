@@ -4,7 +4,6 @@ import ucsf from '../images/ucsf.svg'
 import josh from '../images/josh.jpg'
 import tim from '../images/tim.jpg'
 import va from '../images/VA.png'
-import arrow from '../images/arrow.png'
 import assess from '../images/assess.png'
 import create from '../images/create.png'
 import user from '../images/user.png'
@@ -26,17 +25,17 @@ class Home extends Component {
             <p className="content-logo body-bold serif">CAMS was developed by UCSF as a way to dynamically create personalized baseline mental health exams.</p>
           </div>
 
-          <div className="left">
+          <div className="bucket">
             <div>
-              <img className="profiles button-hover" src={tim}></img>
+              <img alt="Time Campellone, PhD" className="profiles button-hover" src={tim}></img>
                 <p className="profile-title">Tim Campellone, PhD</p>
             </div>
             <div>
-              <img className="profiles button-hover" src={va}></img>
+              <img alt="SF VA Health Care System" className="profiles button-hover" src={va}></img>
                 <p className="profile-title">San Francisco VA Health Care System</p>
             </div>
             <div>
-              <img className="profiles button-hover" src={josh}></img>
+              <img alt="Josh Woolley, MD, PhD" className="profiles button-hover" src={josh}></img>
                 <p className="profile-title">Josh Woolley, MD, PhD</p>
             </div>
           </div>
@@ -48,11 +47,23 @@ class Home extends Component {
               - Baron William Thomson Kelvin
             </p>
           </div>
-          <div className="left">
-            <div><img className="box button-hover" src={create}/> <p className="profile-title ">Create a Video Playlist</p></div>
-            <div><img className="box button-hover" src={user}/> <p className="profile-title ">Patients Reactions to Playlist and Prompts are Recorderd</p></div>
-            <div><img className="box button-hover" src={assess}/> <p className="profile-title ">Clinician Reviews and Assess Returned Video</p></div>
-            <div><img className="box button-hover" src={happy}/> <p className="profile-title ">Reduce Patient Visits and Clinician Time</p></div>
+          <div className="bucket-fancy">
+            <div>
+              <img alt="Create" className="box button-hover" src={create}/>
+              <p className="profile-title-fancy">Create a Video Playlist</p>
+            </div>
+            <div>
+              <img alt="Watch" className="box button-hover" src={user}/>
+              <p className="profile-title-fancy">Patients Reactions to Playlist and Prompts are Recorderd</p>
+            </div>
+            <div>
+              <img alt="Assess" className="box button-hover" src={assess}/>
+              <p className="profile-title-fancy">Clinician Reviews and Assess Returned Video</p>
+            </div>
+            <div>
+              <img alt="Happy" className="box button-hover" src={happy}/>
+              <p className="profile-title-fancy">Reduce Patient Visits and Clinician Time</p>
+            </div>
           </div>
         </div>
       </div>

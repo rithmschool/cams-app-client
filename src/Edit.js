@@ -30,7 +30,6 @@ class Edit extends Component {
       })
     .then(response => {
       this.setState({email: response.data.email})
-      console.log(response.data.email)
     })
   }
 

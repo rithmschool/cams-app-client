@@ -207,16 +207,16 @@ p.profile-title-fancy {
 
 .song-title {
   padding: 0.5rem;
-  color: grey;
+  color: #9d9d9d;
   text-align: left;
   max-width: 15rem;
   font-size: 12px; }
 
 .delete {
-  color: #f8f8f8; }
+  color: #d0d0d0; }
 
 .delete:hover {
-  color: fa8072; }
+  color: #fa8072; }
 
 /*SLANTDIVSTUFF
 *********/
@@ -245,7 +245,7 @@ form * {
   padding: 0.7rem; }
 
 input::placeholder {
-  color: grey; }
+  color: #9d9d9d; }
 
 form h5 {
   background: none; }

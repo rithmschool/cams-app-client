@@ -86,7 +86,7 @@ class App extends Component {
           <PrivateRoute path="/dashboard" component={Dashboard} />
           <PrivateRoute path="/assessments" component={AssessmentsDashboard}/>
           <PrivateRoute path="/playlists/new" component={PlaylistWrapper}/>
-          <EnsureCorrectUserRoute path="/users/:userId/edit" component={Edit}/>
+          <EnsureCorrectUserRoute path="/users/:userId/edit" component={EditUserForm}/>
         </Switch>
         <div className="diagonalbottom"></div>
         <div className="footer">

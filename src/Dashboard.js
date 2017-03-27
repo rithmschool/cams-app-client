@@ -17,10 +17,11 @@ class Dashboard extends Component{
   }
 
   sendMail(config, thisArg) {
+    let userID = JSON.parse(atob(localStorage.getItem('token').split('.')[1])).id
     axios.post(`${BASE_URL}/api/users`, {
       email: thisArg.state.email
     }, config)
-    .then(response => axios.post(`${BASE_URL}/api/assessments`, {
+    .then(response => axios.post(`${BASE_URL}/api/users/${userID}/assessments`, {
       patient_id: response.data.id,
       playlist_id: thisArg.state.playlistID
       }, config))

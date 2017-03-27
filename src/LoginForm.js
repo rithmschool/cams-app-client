@@ -17,10 +17,10 @@ class LoginForm extends Component {
   }
 
   login(config, thisArg) {
-      axios.post(`${BASE_URL}/api/users/auth`, thisArg.state, config).then(response => {
-          localStorage.setItem('token', response.data.token)
-          thisArg.context.router.history.push('/dashboard')
-      })
+    axios.post(`${BASE_URL}/api/users/auth`, thisArg.state, config).then(response => {
+      localStorage.setItem('token', response.data.token)
+      thisArg.context.router.history.push('/dashboard')
+    })
   }
 
   handleChange(e) {

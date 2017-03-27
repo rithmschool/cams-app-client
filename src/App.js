@@ -1,11 +1,15 @@
 import React, {Component} from 'react';
-import banner from './banner.png';
+import './index.css';
+import './App.css';
+import Edit from './Edit'
+import banner from '../images/banner.png';
 import PlaylistWrapper from './PlaylistWrapper';
 import Dashboard from './Dashboard';
 import AssessmentsDashboard from './AssessmentsDashboard';
 import LoginForm from './LoginForm';
 import Home from './Home';
 import Nav from './Nav';
+import {ensureCorrectUser} from './helpers'
 import PatientWrapper from './PatientWrapper';
 import {
   Route,
@@ -19,6 +23,19 @@ import './App.css';
 const PrivateRoute = ({ component, ...rest }) => (
   <Route {...rest} render={props => (
     localStorage.getItem('token') ? (
+      React.createElement(component, props)
+    ) : (
+      <Redirect to={{
+        pathname: '/login',
+        state: { from: props.location }
+      }}/>
+    )
+  )}/>
+)
+
+const EnsureCorrectUserRoute = ({ component, ...rest }) => (
+  <Route {...rest} render={props => (
+    ensureCorrectUser(props.match.params.userId) ? (
       React.createElement(component, props)
     ) : (
       <Redirect to={{
@@ -69,12 +86,22 @@ class App extends Component {
           <PrivateRoute path="/dashboard" component={Dashboard} />
           <PrivateRoute path="/assessments" component={AssessmentsDashboard}/>
           <PrivateRoute path="/playlists/new" component={PlaylistWrapper}/>
+          <EnsureCorrectUserRoute path="/users/:userId/edit" component={Edit}/>
         </Switch>
         <div className="diagonalbottom"></div>
         <div className="footer">
-          <p className="bold-shadow center">CAMS Corp</p>
-          401 Parnassus Avenue
-          San Francisco, CA 94143
+          <div>
+            <div className="me">
+              <p>CAMS Corp</p>
+              401 Parnassus Avenue
+              San Francisco, CA 94143
+            </div>
+          </div>
+          <div>
+            <p>
+
+            </p>
+          </div>
         </div>
       </div>
     );

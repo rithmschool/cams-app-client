@@ -1,6 +1,6 @@
-import React, {Component} from 'react'
+import React, {PropTypes, Component} from 'react'
 import {Link} from 'react-router-dom'
-import logo from './logo.png';
+import logo from '../images/logo.png';
 import './App.css';
 import Dropdown, { DropdownTrigger, DropdownContent } from 'react-simple-dropdown';
 
@@ -11,17 +11,38 @@ class Nav extends Component {
     localStorage.removeItem('token');
   }
 
+  static contextTypes = {
+    router: PropTypes.object
+  }
+
+  edit(e) {
+    let userId = JSON.parse(atob(localStorage.getItem('token').split('.')[1])).id
+    this.context.router.history.push(`/users/${userId}/edit`)
+  }
+
   render() {
     let login =
-    <Link to="/login">
-      Login
-    </Link>
+    <div>
+      <button
+        className="sign button dropdown-content button-hover">
+        <Link to="/login">
+          Login
+        </Link>
+      </button>
+    </div>
 
     let logout =
-    <Link to="/login"
-      onClick={this.handleLogOut}>
-        Logout
-    </Link>
+    <div>
+      <button className="sign button dropdown-content button-hover" onClick={this.edit.bind(this)}>
+        Edit
+      </button>
+      <button
+        className="sign button dropdown-content button-hover">
+        <Link to="/login" onClick={this.handleLogOut}>
+          Logout
+        </Link>
+      </button>
+    </div>
 
     let home =
     <Link to="/">
@@ -43,17 +64,13 @@ class Nav extends Component {
             <button
               data-toggle="dropdown"
               className=" user button button-hover">
-                <i className="fa fa-2x fa-user-circle-o"
-                  aria-hidden="true">
-                </i>
+              <i className="fa fa-2x fa-user-circle-o"
+                aria-hidden="true">
+              </i>
             </button>
           </DropdownTrigger>
           <DropdownContent>
-            <div>
-              <button
-                className="sign button dropdown-content button-hover">
-                  {this.props.isLoggedIn ? logout : login}</button>
-            </div>
+            {this.props.isLoggedIn ? logout : login}
           </DropdownContent>
         </Dropdown>
       </div>

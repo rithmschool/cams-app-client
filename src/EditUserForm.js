@@ -40,7 +40,7 @@ class EditUserForm extends Component {
       current_password: this.state.current_password,
       new_password: this.state.new_password,
       confirm_new_password: this.state.confirm_new_password
-		}, config)
+    }, config)
     .then(response => {
       this.setState({error: false})
     }).catch(error => {

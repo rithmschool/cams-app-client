@@ -6,7 +6,7 @@ import banner from '../images/banner.png';
 import PlaylistWrapper from './PlaylistWrapper';
 import Dashboard from './Dashboard';
 import AssessmentsDashboard from './AssessmentsDashboard';
-import LoginForm from './Login';
+import LoginForm from './LoginForm';
 import Home from './Home';
 import Nav from './Nav';
 import {ensureCorrectUser} from './helpers'

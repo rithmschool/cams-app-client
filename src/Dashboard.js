@@ -5,58 +5,57 @@ import {Link} from 'react-router-dom'
 
 class Dashboard extends Component{
 
-	constructor(props) {
-		super(props)
-		this.state = {
-			email: "",
-			playlistID: null,
-			playlistName: null,
+  constructor(props) {
+    super(props)
+    this.state = {
+      email: "",
+      playlistID: null,
+      playlistName: null,
       userPlaylists: [],
-		}
-		this.closeSelection = this.closeSelection.bind(this)
-	}
+    }
+    this.closeSelection = this.closeSelection.bind(this)
+  }
 
-	sendMail(config, thisArg) {
-		axios.post(`${BASE_URL}/api/users`, {
-			email: thisArg.state.email
-		}, config)
-		.then(response => axios.post(`${BASE_URL}/api/assessments`, {
-			patient_id: response.data.id,
-			playlist_id: thisArg.state.playlistID
-			}, config))
-		.then(response => axios.post(`${BASE_URL}/api/users/mail`, {
-			assessment_id: response.data.id,
-			patient_id: response.data.patient_id
-			}, config))
-	}
+  sendMail(config, thisArg) {
+    axios.post(`${BASE_URL}/api/users`, {
+      email: thisArg.state.email
+    }, config)
+    .then(response => axios.post(`${BASE_URL}/api/assessments`, {
+      patient_id: response.data.id,
+      playlist_id: thisArg.state.playlistID
+      }, config))
+    .then(response => axios.post(`${BASE_URL}/api/users/mail`, {
+      assessment_id: response.data.id,
+      patient_id: response.data.patient_id
+      }, config))
+  }
 
-	handleChange(e) {
-		this.setState({
-			[e.target.name]: e.target.value
-		});
-	}
+  handleChange(e) {
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+  }
 
-	handleSubmit(e) {
-		let config = {
-			headers: {
-				'Accept': 'application/json',
-				'Content-Type': 'application/json',
-				'Authorization': 'bearer ' + localStorage.getItem('token')
-			}
-		}
-		e.preventDefault()
-		this.sendMail(config, this)
-	}
+  handleSubmit(e) {
+    let config = {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': 'bearer ' + localStorage.getItem('token')
+      }
+    }
+    e.preventDefault()
+    this.sendMail(config, this)
+  }
+  closeSelection() {
+    this.setState({playlistID: null, playlistName: null})
+  }
 
-	closeSelection() {
-		this.setState({playlistID: null, playlistName: null})
-	}
-
-	choosePlaylist(playlist_id, playlistName){
-		if (this.state.playlistID === null || playlist_id !== this.state.playlistID){
-			this.setState({playlistID: playlist_id, playlistName: playlistName})
-		}
-	}
+  choosePlaylist(playlist_id, playlistName){
+    if (this.state.playlistID === null || playlist_id !== this.state.playlistID){
+      this.setState({playlistID: playlist_id, playlistName: playlistName})
+    }
+  }
 
   componentWillMount(){
     let userId = JSON.parse(atob(localStorage.getItem('token').split('.')[1])).id
@@ -64,7 +63,7 @@ class Dashboard extends Component{
       `${BASE_URL}/api/users/${userId}/playlists`,
       {
         headers: {
-        	'Accept':'application/json',
+          'Accept':'application/json',
           'ContentType':'application/json',
           'Authorization':'bearer ' + localStorage.getItem('token')
         }
@@ -73,12 +72,11 @@ class Dashboard extends Component{
       this.setState({userPlaylists: response.data})
     })
   }
-
   render() {
     let playlists = this.state.userPlaylists.map((playlist, i) => {
 			let showForm = this.state.playlistName === playlist.name ?
 				<div>
-					<form onSubmit={this.handleSubmit.bind(this)}>
+					<form className="email" onSubmit={this.handleSubmit.bind(this)}>
 						<h5>Send to:</h5>
 						<input
 							type="email"
@@ -107,7 +105,7 @@ class Dashboard extends Component{
 				<div
 					key={i}
 					tabIndex="0"
-					className={`${className} button-hover`}
+					className={`${className} button-hover playlist-card-contents`}
 					onClick={this.choosePlaylist.bind(this, playlist.id, playlist.name)}
 				>
 					<h5 className="playlist-name-title">{playlist.name}</h5>
@@ -138,22 +136,22 @@ class Dashboard extends Component{
                   New Playlist
               </button>
             </Link>
-						<Link to="/assessments">
-							<button
-								className="button button-hover big-nav"
-								type="submit"
-								value="Submit">
-									Assessments
-							</button>
-						</Link>
+            <Link to="/assessments">
+              <button
+                className="button button-hover big-nav"
+                type="submit"
+                value="Submit">
+                  Assessments
+              </button>
+            </Link>
           </div>
-					<div className="playlist-card">
+					<div className="playlist-container">
 						{playlists}
 					</div>
         </div>
       </div>
-		)
-	}
+    )
+  }
 }
 
 export default Dashboard;

@@ -1,6 +1,6 @@
 import React, {PropTypes, Component} from 'react'
 import {Link} from 'react-router-dom'
-import logo from './logo.png';
+import logo from '../images/logo.png';
 import './App.css';
 import Dropdown, { DropdownTrigger, DropdownContent } from 'react-simple-dropdown';
 
@@ -12,13 +12,13 @@ class Nav extends Component {
   }
 
   static contextTypes = {
-		router: PropTypes.object
-	}
+    router: PropTypes.object
+  }
 
   edit(e) {
-		let userId = JSON.parse(atob(localStorage.getItem('token').split('.')[1])).id
-		this.context.router.history.push(`/users/${userId}/edit`)
-	}
+    let userId = JSON.parse(atob(localStorage.getItem('token').split('.')[1])).id
+    this.context.router.history.push(`/users/${userId}/edit`)
+  }
 
   render() {
     let login =
@@ -38,8 +38,8 @@ class Nav extends Component {
       </button>
       <button
         className="sign button dropdown-content button-hover">
-        <Link to="/logout">
-          Log out
+        <Link to="/login" onClick={this.handleLogOut}>
+          Logout
         </Link>
       </button>
     </div>

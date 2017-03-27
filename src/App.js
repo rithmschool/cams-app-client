@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import './index.css';
 import './App.css';
 import Edit from './Edit'
-import banner from './banner.png';
+import banner from '../images/banner.png';
 import PlaylistWrapper from './PlaylistWrapper';
 import Dashboard from './Dashboard';
 import AssessmentsDashboard from './AssessmentsDashboard';
@@ -90,9 +90,18 @@ class App extends Component {
         </Switch>
         <div className="diagonalbottom"></div>
         <div className="footer">
-          <p className="bold-shadow center">CAMS Corp</p>
-          401 Parnassus Avenue
-          San Francisco, CA 94143
+          <div>
+            <div className="me">
+              <p>CAMS Corp</p>
+              401 Parnassus Avenue
+              San Francisco, CA 94143
+            </div>
+          </div>
+          <div>
+            <p>
+
+            </p>
+          </div>
         </div>
       </div>
     );

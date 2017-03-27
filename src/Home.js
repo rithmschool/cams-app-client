@@ -50,19 +50,19 @@ class Home extends Component {
           <div className="bucket-fancy">
             <div>
               <img alt="Create" className="box button-hover" src={create}/>
-                <p className="profile-title-fancy">Create a Video Playlist</p>
+              <p className="profile-title-fancy">Create a Video Playlist</p>
             </div>
             <div>
               <img alt="Watch" className="box button-hover" src={user}/>
-                <p className="profile-title-fancy">Patients Reactions to Playlist and Prompts are Recorderd</p>
+              <p className="profile-title-fancy">Patients Reactions to Playlist and Prompts are Recorderd</p>
             </div>
             <div>
               <img alt="Assess" className="box button-hover" src={assess}/>
-                <p className="profile-title-fancy">Clinician Reviews and Assess Returned Video</p>
+              <p className="profile-title-fancy">Clinician Reviews and Assess Returned Video</p>
             </div>
             <div>
               <img alt="Happy" className="box button-hover" src={happy}/>
-                <p className="profile-title-fancy">Reduce Patient Visits and Clinician Time</p>
+              <p className="profile-title-fancy">Reduce Patient Visits and Clinician Time</p>
             </div>
           </div>
         </div>

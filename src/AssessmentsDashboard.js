@@ -1,10 +1,66 @@
 import React, {Component} from 'react';
+import {BASE_URL} from './helpers.js';
+import axios from 'axios';
 import {Link} from 'react-router-dom';
 
-class Assessment extends Component {
+class AssessmentsDashboard extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      doctorAssessments: [],
+      assessmentID: null
+    }
+  }
 
-  render(){
-    return(
+  selectAssessment(assessmentID){
+    if (this.state.assessmentID === null || assessmentID != this.state.assessmentID){
+      this.setState({assessmentID: assessmentID})
+    }
+    else if(this.state.assessmentID !== null){
+      this.setState({assessmentID: null})
+    }
+  }
+
+  componentWillMount() {
+    let userID = JSON.parse(atob(localStorage.getItem('token').split('.')[1])).id
+    axios.get(
+      `${BASE_URL}/api/users/${userID}/assessments`,
+      {
+        headers: {
+          'Accept': 'application/json',
+          'ContentType': 'application/json',
+          'Authorization': 'bearer ' + localStorage.getItem('token')
+        }
+      }
+    ).then(response => {
+      this.setState({doctorAssessments: response.data})
+    })
+  }
+
+  render() {
+    let assessments = this.state.doctorAssessments.map((assessment, i) => {
+      let completed = assessment.recording_url ?
+        <h6>Completed: Yes</h6> :
+        <h6>Completed: No</h6>
+      let className = this.state.assessmentID === assessment.id ?
+        'selected' :
+        'playlist-card'
+      return (
+        <div
+          key={i}
+          className={`${className} button-hover playlist-card-contents`}
+          onClick={this.selectAssessment.bind(this, assessment.id)}
+        >
+          <h5 className="playlist-name-title">
+            {assessment.patient_email.email}
+          </h5>
+          <h6>{assessment.playlist_name.name}</h6>
+          <h6>{assessment.date_added}</h6>
+          {completed}
+        </div>
+      )
+    })
+    return (
       <div>
         <div className="banner-text">
           <h1 className="banner-bold">Patient Assessments</h1>
@@ -19,26 +75,13 @@ class Assessment extends Component {
                 New Playlist
               </button>
             </Link>
-            <Link to="/assessments">
-              <button
-                className="button button-hover big-nav"
-                type="submit"
-                value="Submit">
-                Assessments
-              </button>
-            </Link>
           </div>
-          <div className="playlist-card">
-            <button
-              className="button button-hover"
-              value="info">
-              View Details
-            </button>
+          <div className="playlist-container">
+            {assessments}
           </div>
         </div>
       </div>
     )
   }
 }
-
-export default Assessment;
+export default AssessmentsDashboard;

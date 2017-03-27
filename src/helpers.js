@@ -6,5 +6,5 @@ export const ensureCorrectUser = (pathId) => {
   let token = localStorage.getItem('token');
   if(!token){return false;}
   let tokenId = JSON.parse(atob(localStorage.getItem('token').split('.')[1])).id
-  return tokenId == pathId;
+  return tokenId === pathId;
 }

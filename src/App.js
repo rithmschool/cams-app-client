@@ -97,10 +97,6 @@ class App extends Component {
               San Francisco, CA 94143
             </div>
           </div>
-          <div>
-            <p>
-            </p>
-          </div>
         </div>
       </div>
     );

@@ -22,7 +22,8 @@ class LoginForm extends Component {
     .then(response => {
       localStorage.setItem('token', response.data.token)
       thisArg.context.router.history.push('/dashboard')
-    }).catch(error => {
+    })
+    .catch(error => {
       this.setState({error: true})
   })}
 

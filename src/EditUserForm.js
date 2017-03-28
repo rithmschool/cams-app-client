@@ -1,5 +1,5 @@
 import React, {PropTypes, Component} from 'react';
-import {BASE_URL} from './helpers.js';
+import {BASE_URL, userID, config} from './helpers.js';
 import axios from 'axios';
 
 class EditUserForm extends Component {
@@ -19,23 +19,14 @@ class EditUserForm extends Component {
   }
 
   componentWillMount(){
-    let userId = JSON.parse(atob(localStorage.getItem('token').split('.')[1])).id
-    axios.get(`${BASE_URL}/api/users/${userId}`,
-      {
-        headers: {
-          'Accept':'application/json',
-          'ContentType':'application/json',
-          'Authorization':'bearer ' + localStorage.getItem('token')
-        }
-      })
+    axios.get(`${BASE_URL}/api/users/${userID()}`, config)
     .then(response => {
       this.setState({email: response.data.email})
     })
   }
 
   editUser(config, thisArg) {
-    let userId = JSON.parse(atob(localStorage.getItem('token').split('.')[1])).id;
-    axios.patch(`${BASE_URL}/api/users/${userId}`, {
+    axios.patch(`${BASE_URL}/api/users/${userID()}`, {
       email: thisArg.state.email,
       current_password: this.state.current_password,
       new_password: this.state.new_password,
@@ -54,17 +45,8 @@ class EditUserForm extends Component {
     });
   }
 
-  handleSubmit(event) {
-
-    let config = {
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        'Authorization': 'bearer ' + localStorage.getItem('token')
-      }
-    }
-
-    event.preventDefault()
+  handleSubmit(e) {
+    e.preventDefault()
     this.editUser(config, this)
     this.refs.edit.value = ''
     this.refs.current_password.value = ''

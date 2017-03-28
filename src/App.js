@@ -19,7 +19,6 @@ import {
 import './index.css';
 import './App.css';
 
-
 const PrivateRoute = ({ component, ...rest }) => (
   <Route {...rest} render={props => (
     localStorage.getItem('token') ? (
@@ -35,7 +34,7 @@ const PrivateRoute = ({ component, ...rest }) => (
 
 const EnsureCorrectUserRoute = ({ component, ...rest }) => (
   <Route {...rest} render={props => (
-    ensureCorrectUser(props.match.params.userId) ? (
+    ensureCorrectUser(props.match.params.userID) ? (
       React.createElement(component, props)
     ) : (
       <Redirect to={{
@@ -86,7 +85,7 @@ class App extends Component {
           <PrivateRoute path="/dashboard" component={Dashboard} />
           <PrivateRoute path="/assessments" component={AssessmentsDashboard}/>
           <PrivateRoute path="/playlists/new" component={PlaylistWrapper}/>
-          <EnsureCorrectUserRoute path="/users/:userId/edit" component={EditUserForm}/>
+          <EnsureCorrectUserRoute path="/users/:userID/edit" component={EditUserForm}/>
         </Switch>
         <div className="diagonalbottom"></div>
         <div className="footer">

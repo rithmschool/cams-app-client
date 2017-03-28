@@ -162,7 +162,7 @@ p.profile-title-fancy {
   background-image: linear-gradient(200deg, #84fab0 0%, #8fd3f4 100%); }
 
 .assessment {
-  max-width: 2rem;
+  max-width: 1.8rem;
   padding: 0px;
   background: #00c5cc; }
 
@@ -357,7 +357,9 @@ button.button.dropdown-content {
   .content-image {
     width: 10rem; } }
 
-@media (max-width: 2000px) and (min-width: 1200px) {
+@media (min-width: 1200px) {
+  .diagonalbottom {
+    transform: skew(-2deg, 2deg); }
   .banner {
     width: 170vw; }
   body {

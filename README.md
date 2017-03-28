@@ -15,7 +15,7 @@ All required packages are included in the package.json so an `npm i` should take
  * `node-sass` *for SASS* 💁
 
 ## How-To-Contribute
-1. Fork dat. 🥄
+1. Fork 🥄
 2. `npm i` all dependencies
 3. Make sure you've already python app dot pie'd the the flask server. (if not, <a href="https://github.com/rithmschool/cams-app">Czech</a> this out)
 4. There is currently no route to make a new user so be sure to ipython yourself into your local user table

@@ -12,3 +12,4 @@ export const ensureCorrectUser = (pathId) => {
 export const getUserId = () => {
     return JSON.parse(atob(localStorage.getItem('token').split('.')[1])).id
 }
+

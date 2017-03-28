@@ -17,7 +17,7 @@ class Nav extends Component {
   }
 
   edit(e) {
-    this.context.router.history.push(`/users/${userID}/edit`)
+    this.context.router.history.push(`/users/${userID()}/edit`)
   }
 
   render() {

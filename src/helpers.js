@@ -7,7 +7,7 @@ export const ensureCorrectUser = (pathId) => {
   return +tokenId === +pathId;
 }
 
-export const userID = JSON.parse(atob(localStorage.getItem('token').split('.')[1])).id
+export const userID = () => JSON.parse(atob(localStorage.getItem('token').split('.')[1])).id
 
 export const config = {
   headers: {

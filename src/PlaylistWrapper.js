@@ -21,7 +21,7 @@ class PlaylistWrapper extends Component {
   }
 
   addPlaylist(config, thisArg) {
-    axios.post(`${BASE_URL}/api/users/${userID}/playlists`,
+    axios.post(`${BASE_URL}/api/users/${userID()}/playlists`,
     thisArg.state, config)
     .then(response =>{
       let playlistID = response.data.id

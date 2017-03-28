@@ -22,7 +22,7 @@ class AssessmentsDashboard extends Component {
   }
 
   componentWillMount() {
-    axios.get(`${BASE_URL}/api/users/${userID}/assessments`, config)
+    axios.get(`${BASE_URL}/api/users/${userID()}/assessments`, config)
     .then(response => {
       this.setState({doctorAssessments: response.data})
     })

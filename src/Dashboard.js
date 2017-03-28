@@ -20,7 +20,7 @@ class Dashboard extends Component{
     axios.post(`${BASE_URL}/api/users`, {
       email: thisArg.state.email
     }, config)
-    .then(response => axios.post(`${BASE_URL}/api/users/${userID}/assessments`, {
+    .then(response => axios.post(`${BASE_URL}/api/users/${userID()}/assessments`, {
       patient_id: response.data.id,
       playlist_id: thisArg.state.playlistID
       }, config))
@@ -52,7 +52,7 @@ class Dashboard extends Component{
 
   componentWillMount(){
     axios.get(
-      `${BASE_URL}/api/users/${userID}/playlists`, config
+      `${BASE_URL}/api/users/${userID()}/playlists`, config
     ).then(response => {
       this.setState({userPlaylists: response.data})
     })

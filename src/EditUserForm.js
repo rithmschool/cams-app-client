@@ -19,14 +19,14 @@ class EditUserForm extends Component {
   }
 
   componentWillMount(){
-    axios.get(`${BASE_URL}/api/users/${userID}`, config)
+    axios.get(`${BASE_URL}/api/users/${userID()}`, config)
     .then(response => {
       this.setState({email: response.data.email})
     })
   }
 
   editUser(config, thisArg) {
-    axios.patch(`${BASE_URL}/api/users/${userID}`, {
+    axios.patch(`${BASE_URL}/api/users/${userID()}`, {
       email: thisArg.state.email,
       current_password: this.state.current_password,
       new_password: this.state.new_password,

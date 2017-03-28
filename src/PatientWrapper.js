@@ -16,7 +16,7 @@ class PatientWrapper extends Component {
 
   componentWillMount(){
     var self = this;
-    axios.get(`${BASE_URL}/api/users/${userID}/assessments/21`)
+    axios.get(`${BASE_URL}/api/users/${userID()}/assessments/21`)
     .then(function (response) {
       self.setState({videoIDs: response.data.screens});
     })

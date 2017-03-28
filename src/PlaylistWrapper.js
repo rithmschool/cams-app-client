@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PlaylistForm from './PlaylistForm';
 import VideoWrapper from './VideoWrapper';
-import {BASE_URL} from './helpers.js';
+import {BASE_URL}, {getUserId} from './helpers.js';
 import axios from 'axios';
 
 class PlaylistWrapper extends Component {
@@ -21,7 +21,7 @@ class PlaylistWrapper extends Component {
   }
 
   addPlaylist(config, thisArg) {
-    let userId = JSON.parse(atob(localStorage.getItem('token').split('.')[1])).id
+    let userId = getUserId()
     axios.post(`${BASE_URL}/api/users/${userId}/playlists`,
     thisArg.state, config)
     .then(response =>{

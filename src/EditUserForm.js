@@ -1,5 +1,5 @@
 import React, {PropTypes, Component} from 'react';
-import {BASE_URL} from './helpers.js';
+import {BASE_URL}, {getUserId} from './helpers.js';
 import axios from 'axios';
 
 class EditUserForm extends Component {
@@ -19,7 +19,7 @@ class EditUserForm extends Component {
   }
 
   componentWillMount(){
-    let userId = JSON.parse(atob(localStorage.getItem('token').split('.')[1])).id
+    let userId = getUserId()
     axios.get(`${BASE_URL}/api/users/${userId}`,
       {
         headers: {

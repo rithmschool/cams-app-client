@@ -1,4 +1,5 @@
 import React, {PropTypes, Component} from 'react';
+import {config} from './helpers.js';
 
 class PlaylistForm extends Component {
 
@@ -20,13 +21,6 @@ class PlaylistForm extends Component {
   }
 
   handleSubmit(e){
-    let config = {
-      headers: {
-        'Accept':'application/json',
-        'ContentType':'application/json',
-        'Authorization': 'bearer ' + localStorage.getItem('token')
-      }
-    }
     e.preventDefault()
     this.setState({name: ""})
     this.props.addPlaylist(config, this)

@@ -2,8 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import './index.css';
-import 'font-awesome/css/font-awesome.css'
-import {BrowserRouter as Router} from 'react-router-dom'
+import 'font-awesome/css/font-awesome.css';
+import {BrowserRouter as Router} from 'react-router-dom';
 
 ReactDOM.render(
   <Router>

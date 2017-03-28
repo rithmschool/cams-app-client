@@ -57,9 +57,9 @@ class PatientHome extends Component {
     });
   }
 
-  handleSpaceBar(event) {
-    if (event.keyCode === 32) {
-      event.preventDefault()
+  handleSpaceBar(e) {
+    if (e.keyCode === 32) {
+      e.preventDefault()
       // If the current video index is less than the length of the playlist
       if (this.state.videoIdx <= this.props.videosLength) {
         //If the first two instructional videos have completed and the video component has rendered start the recording

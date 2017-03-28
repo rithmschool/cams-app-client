@@ -1,5 +1,5 @@
 import React, {PropTypes, Component} from 'react';
-import {BASE_URL} from './helpers.js';
+import {BASE_URL, config} from './helpers.js';
 import axios from 'axios';
 
 class LoginForm extends Component {
@@ -17,7 +17,8 @@ class LoginForm extends Component {
   }
 
   login(config, thisArg) {
-    axios.post(`${BASE_URL}/api/users/auth`, thisArg.state, config).then(response => {
+    axios.post(`${BASE_URL}/api/users/auth`, thisArg.state, config)
+    .then(response => {
       localStorage.setItem('token', response.data.token)
       thisArg.context.router.history.push('/dashboard')
     })
@@ -29,14 +30,8 @@ class LoginForm extends Component {
     });
   }
 
-  handleSubmit(event) {
-    let config = {
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      }
-    }
-    event.preventDefault()
+  handleSubmit(e) {
+    e.preventDefault()
     this.login(config, this)
   }
 
@@ -56,7 +51,6 @@ class LoginForm extends Component {
     </div>
     )
   }
-
 }
 
 export default LoginForm;

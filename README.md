@@ -1,19 +1,18 @@
 # CAMS React Front-End
-Computerized Assessment of Mental Sandwiches (CAMS)
+Computerized Assessment of Mental Status (CAMS)
 This is the front end compliment to the flask app backend.
-
 
 ## Installation
 All required packages are included in the package.json so an `npm i` should take care of all dependencies.
-<p>A few of the packages used are:
-<br>`react-youtube` *displaying youtube videos within app playlist*
-<br>`recordrtc` *utilizing camera functionality*
-<br>`videojs-record` *recording functionality*
-<br>`font-awesome` *icons, free delicious icons*
-<br>`get-youtube-id` *parsing youtube links*
-<br>`axios` *promise functionality for user login and account creation*
-<br>`npm-run-all` *runs SASS build, watch css, and npm scripts*
-<br>`node-sass` *for SASS* 💁
+
+ * `react-youtube` *displaying youtube videos within app playlist*
+ * `recordrtc` *utilizing camera functionality*
+ * `videojs-record` *recording functionality*
+ * `font-awesome` *icons, free delicious icons*
+ * `get-youtube-id` *parsing youtube links*
+ * `axios` *promise functionality for user login and account creation*
+ * `npm-run-all` *runs SASS build, watch css, and npm scripts*
+ * `node-sass` *for SASS* 💁
 
 ## How-To-Contribute
 1. Fork dat. 🥄

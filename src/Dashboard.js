@@ -17,11 +17,10 @@ class Dashboard extends Component{
   }
 
   sendMail(config, thisArg) {
-    let userID = JSON.parse(atob(localStorage.getItem('token').split('.')[1])).id
     axios.post(`${BASE_URL}/api/users`, {
       email: thisArg.state.email
     }, config)
-    .then(response => axios.post(`${BASE_URL}/api/users/${userID}/assessments`, {
+    .then(response => axios.post(`${BASE_URL}/api/assessments`, {
       patient_id: response.data.id,
       playlist_id: thisArg.state.playlistID
       }, config))
@@ -59,9 +58,9 @@ class Dashboard extends Component{
   }
 
   componentWillMount(){
-    let userID = JSON.parse(atob(localStorage.getItem('token').split('.')[1])).id
+    let userId = JSON.parse(atob(localStorage.getItem('token').split('.')[1])).id
     axios.get(
-      `${BASE_URL}/api/users/${userID}/playlists`,
+      `${BASE_URL}/api/users/${userId}/playlists`,
       {
         headers: {
           'Accept':'application/json',
@@ -75,80 +74,62 @@ class Dashboard extends Component{
   }
   render() {
     let playlists = this.state.userPlaylists.map((playlist, i) => {
-      let showForm = this.state.playlistName === playlist.name ?
-        <div>
-          <form className="email" onSubmit={this.handleSubmit.bind(this)}>
-            <h5>Send to:</h5>
-            <input
-              type="email"
-              name="email"
-              placeholder="email"
-              value={this.state.email}
-              required onChange={this.handleChange.bind(this)}
-            />
-            <button
-              className="button button-hover"
-              type="submit"
-              value="Submit">
-              Submit
-            </button>
-          </form>
-          <div onClick={this.closeSelection}>
-            <i className="fa delete fa-times-circle button-hover" aria-hidden="true"></i>
-          </div>
-        </div> :
-        null
-      let className =
-        this.state.playlistID === playlist.id ?
-          'selected' :
-          'playlist-card'
-      return(
-        <div
-          key={i}
-          tabIndex="0"
-          className={`${className} button-hover playlist-card-contents`}
-          onClick={this.choosePlaylist.bind(this, playlist.id, playlist.name)}
-        >
-          <h5 className="playlist-name-title">{playlist.name}</h5>
-          {playlist.videos.map((video, idx) => {
-            return(
-              <p className="song-title" key={idx} >
-                {video.title}
-              </p>
-            )
-          })
-        }
-        {showForm}
-      </div>
-      )
-    })
-    return (
-      <div>
+			let showForm = this.state.playlistName === playlist.name ?
+				<div>
+					<form className="email" onSubmit={this.handleSubmit.bind(this)}>
+						<h5>Send to:</h5>
+						<input
+							type="email"
+							name="email"
+							placeholder="email"
+							value={this.state.email}
+							required onChange={this.handleChange.bind(this)}
+						/>
+						<button
+							className="button button-hover"
+							type="submit"
+							value="Submit">
+							Submit
+						</button>
+					</form>
+					<div onClick={this.closeSelection}>
+						<i className="fa delete fa-times-circle button-hover" aria-hidden="true"></i>
+					</div>
+				</div> :
+				null
+			let className =
+				this.state.playlistID === playlist.id ?
+					'selected' :
+					'playlist-card'
+			return(
+				<div
+					key={i}
+					tabIndex="0"
+					className={`${className} button-hover playlist-card-contents`}
+					onClick={this.choosePlaylist.bind(this, playlist.id, playlist.name)}
+				>
+					<h5 className="playlist-name-title">{playlist.name}</h5>
+					{playlist.videos.map((video, idx) => {
+						return(
+							<p className="song-title" key={idx} >
+								{video.title}
+							</p>
+						)
+					})
+				}
+				{showForm}
+			</div>
+			)
+		})
+		return (
+			<div>
         <div className="banner-text">
           <h1 className="banner-bold">Dashboard</h1>
         </div>
         <div className="content">
-          <div className="dash-nav">
-            <Link to="/playlists/new">
-              <button
-                className="button button-hover big-nav"
-                type="submit"
-                value="Submit">
-                  New Playlist
-              </button>
-            </Link>
-            <Link to="/assessments">
-              <button
-                className="button button-hover big-nav"
-                type="submit"
-                value="Submit">
-                  Assessments
-              </button>
-            </Link>
-          </div>
-          <div className="playlist-container">
-            {playlists}
-          </div>
+					<div className="playlist-container">
+						{playlists}
+					</div>
         </div>
       </div>
     )

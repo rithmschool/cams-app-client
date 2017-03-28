@@ -1,5 +1,6 @@
-import React, {PropTypes, Component} from 'react'
-import {Link} from 'react-router-dom'
+import React, {PropTypes, Component} from 'react';
+import {Link} from 'react-router-dom';
+import {userID} from './helpers.js';
 import logo from '../images/logo.png';
 import './App.css';
 import clip from '../images/assess.png';
@@ -17,8 +18,7 @@ class Nav extends Component {
   }
 
   edit(e) {
-    let userId = JSON.parse(atob(localStorage.getItem('token').split('.')[1])).id
-    this.context.router.history.push(`/users/${userId}/edit`)
+    this.context.router.history.push(`/users/${userID()}/edit`)
   }
 
   render() {

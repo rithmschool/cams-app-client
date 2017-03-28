@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PlaylistForm from './PlaylistForm';
 import VideoWrapper from './VideoWrapper';
-import {BASE_URL} from './helpers.js';
+import {BASE_URL, userID} from './helpers.js';
 import axios from 'axios';
 
 class PlaylistWrapper extends Component {
@@ -9,7 +9,7 @@ class PlaylistWrapper extends Component {
   constructor(props){
     super(props);
     this.state = {
-      playlistId: null,
+      playlistID: null,
       error: false
     }
     this.addPlaylistId = this.addPlaylistId.bind(this)
@@ -17,16 +17,15 @@ class PlaylistWrapper extends Component {
   }
 
   addPlaylistId(id){
-    this.setState({playlistId: id})
+    this.setState({playlistID: id})
   }
 
   addPlaylist(config, thisArg) {
-    let userId = JSON.parse(atob(localStorage.getItem('token').split('.')[1])).id
-    axios.post(`${BASE_URL}/api/users/${userId}/playlists`,
+    axios.post(`${BASE_URL}/api/users/${userID()}/playlists`,
     thisArg.state, config)
     .then(response =>{
-      let playlistId = response.data.id
-      this.addPlaylistId(playlistId)
+      let playlistID = response.data.id
+      this.addPlaylistId(playlistID)
       this.setState({error: false})
     }).catch(error =>{
       this.setState({error: true})
@@ -42,8 +41,8 @@ class PlaylistWrapper extends Component {
         <div className="content">
       <div>
         {
-          this.state.playlistId ?
-          <VideoWrapper playlistId={this.state.playlistId}/> :
+          this.state.playlistID ?
+          <VideoWrapper playlistID={this.state.playlistID}/> :
           <PlaylistForm addPlaylist={this.addPlaylist} error={this.state.error}/>
         }
       </div>

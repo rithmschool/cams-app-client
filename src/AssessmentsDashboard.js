@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {BASE_URL} from './helpers.js';
+import {BASE_URL, userID, config} from './helpers.js';
 import axios from 'axios';
 import {Link} from 'react-router-dom';
 
@@ -22,17 +22,8 @@ class AssessmentsDashboard extends Component {
   }
 
   componentWillMount() {
-    let userID = JSON.parse(atob(localStorage.getItem('token').split('.')[1])).id
-    axios.get(
-      `${BASE_URL}/api/users/${userID}/assessments`,
-      {
-        headers: {
-          'Accept': 'application/json',
-          'ContentType': 'application/json',
-          'Authorization': 'bearer ' + localStorage.getItem('token')
-        }
-      }
-    ).then(response => {
+    axios.get(`${BASE_URL}/api/users/${userID()}/assessments`, config)
+    .then(response => {
       this.setState({doctorAssessments: response.data})
     })
   }

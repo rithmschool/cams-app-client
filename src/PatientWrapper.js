@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PatientHome from './PatientHome'
 import VideoPlayer from './VideoPlayer'
-import {BASE_URL} from './helpers.js';
+import {BASE_URL, userID} from './helpers.js';
 import axios from 'axios';
 
 class PatientWrapper extends Component {
@@ -9,33 +9,32 @@ class PatientWrapper extends Component {
     super(props)
 
     this.state = {
-      videoIds: '',
+      videoIDs: '',
       videoIdx: 0
     }
-
   }
 
   componentWillMount(){
     var self = this;
-    axios.get(`${BASE_URL}/api/assessments/21`).then(function (response) {
-      self.setState({videoIds: response.data.screens});
+    axios.get(`${BASE_URL}/api/users/${userID()}/assessments/21`)
+    .then(function (response) {
+      self.setState({videoIDs: response.data.screens});
     })
   }
 
   render() {
     return(
-      <PatientHome videosLength={this.state.videoIds.length}>
+      <PatientHome videosLength={this.state.videoIDs.length}>
         <p>this is the first instructional message Press Space Bar to Continue</p>
         <p>this is the second instructional message Press Space Bar to Continue</p>
         <p>Please Watch the Video</p>
-        <VideoPlayer videos={this.state.videoIds} />
+        <VideoPlayer videos={this.state.videoIDs} />
         <p>Answer the Question</p>
         <p>Timer</p>
         <p>Bye!</p>
       </PatientHome>
     )
   }
-
 }
 
 export default PatientWrapper;

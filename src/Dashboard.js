@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import {BASE_URL} from './helpers.js';
+import {BASE_URL, userID, config} from './helpers.js';
 import axios from 'axios';
-import {Link} from 'react-router-dom'
+import {Link} from 'react-router-dom';
 
 class Dashboard extends Component{
 
@@ -20,7 +20,11 @@ class Dashboard extends Component{
     axios.post(`${BASE_URL}/api/users`, {
       email: thisArg.state.email
     }, config)
+<<<<<<< HEAD
     .then(response => axios.post(`${BASE_URL}/api/assessments`, {
+=======
+    .then(response => axios.post(`${BASE_URL}/api/users/${userID()}/assessments`, {
+>>>>>>> effc1b6b9e9ddae5e304a882fd62ba3a62110e81
       patient_id: response.data.id,
       playlist_id: thisArg.state.playlistID
       }, config))
@@ -37,13 +41,6 @@ class Dashboard extends Component{
   }
 
   handleSubmit(e) {
-    let config = {
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        'Authorization': 'bearer ' + localStorage.getItem('token')
-      }
-    }
     e.preventDefault()
     this.sendMail(config, this)
   }
@@ -58,6 +55,7 @@ class Dashboard extends Component{
   }
 
   componentWillMount(){
+<<<<<<< HEAD
     let userId = JSON.parse(atob(localStorage.getItem('token').split('.')[1])).id
     axios.get(
       `${BASE_URL}/api/users/${userId}/playlists`,
@@ -68,6 +66,10 @@ class Dashboard extends Component{
           'Authorization':'bearer ' + localStorage.getItem('token')
         }
       }
+=======
+    axios.get(
+      `${BASE_URL}/api/users/${userID()}/playlists`, config
+>>>>>>> effc1b6b9e9ddae5e304a882fd62ba3a62110e81
     ).then(response => {
       this.setState({userPlaylists: response.data})
     })

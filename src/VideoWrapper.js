@@ -22,7 +22,7 @@ class VideoWrapper extends Component {
   addVideo(url) {
     let youtubeID = getYouTubeID(url)
     return axios.post(`${BASE_URL}/api/videos`,
-    {url, youtubeID}, config)
+    {url, youtube_id: youtubeID}, config)
     .then(function(response) {
       axios.post(`${BASE_URL}/api/screens`, {
         video_id: response.data.id,

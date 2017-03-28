@@ -58,14 +58,6 @@ class AssessmentsDashboard extends Component {
         </div>
         <div className="content">
           <div className="dash-nav">
-            <Link to="/playlists/new">
-              <button
-                className="button button-hover big-nav"
-                type="submit"
-                value="Submit">
-                New Playlist
-              </button>
-            </Link>
           </div>
           <div className="playlist-container">
             {assessments}

@@ -8,7 +8,8 @@ class LoginForm extends Component {
     super(props)
     this.state = {
       email: "",
-      password: ""
+      password: "",
+      error: false
     }
   }
 
@@ -21,8 +22,9 @@ class LoginForm extends Component {
     .then(response => {
       localStorage.setItem('token', response.data.token)
       thisArg.context.router.history.push('/dashboard')
-    })
-  }
+    }).catch(error => {
+      this.setState({error: true})
+  })}
 
   handleChange(e) {
     this.setState({
@@ -36,6 +38,8 @@ class LoginForm extends Component {
   }
 
   render() {
+    let error = (this.state.error) ?
+      <p>Invalid credentials</p> : null;
     return (
       <div>
         <div className="banner-text">
@@ -46,6 +50,7 @@ class LoginForm extends Component {
           <input type="email" name="email" placeholder="email" required onChange={this.handleChange.bind(this)}/>
           <input type="password" name="password" placeholder="password" required onChange={this.handleChange.bind(this)}/>
           <button className="button button-hover" type="submit" value="Submit">Submit</button>
+          {error}
         </form>
       </div>
     </div>

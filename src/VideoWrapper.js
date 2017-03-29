@@ -9,8 +9,7 @@ class VideoWrapper extends Component {
   constructor(props){
     super(props)
     this.state = {
-      videoTitles: [],
-      questions: []
+      screenData: []
     }
     this.addVideo = this.addVideo.bind(this)
     this.addDone = this.addDone.bind(this)
@@ -31,20 +30,21 @@ class VideoWrapper extends Component {
       axios.post(`${BASE_URL}/api/screens`, {
         video_id: response.data.id,
         playlist_id: this.props.playlistId,
-        order: this.state.videoTitles.length+1
+        order: this.state.screenData.length+1
       }, config)
+      debugger
       this.setState({
-        videoTitles: this.state.videoTitles.concat(response.data.title)
+        screenData: this.state.screenData.concat("Video:  " + response.data.title)
       })
     }.bind(this))
   }
 
   addQuestion(question) {
-    debugger
+    if(question) { 
     this.setState({
-      questions: this.state.questions.concat([question, this.state.videoTitles.length])
+      screenData: this.state.screenData.concat("Question:  " + question)
     })
-  }
+  }}
 
   addDone(url){
     if(url){
@@ -57,10 +57,10 @@ class VideoWrapper extends Component {
 
   render(){
     var formComponents = []
-    for(var i=0; i<this.state.videoTitles.length; i++){
+    for(var i=0; i<this.state.screenData.length; i++){
       formComponents.push(
         <div key={i}>
-          {this.state.videoTitles[i]}
+          {this.state.screenData[i]}
 
         </div>
       )

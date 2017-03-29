@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 import {userID} from './helpers.js';
 import logo from '../images/logo.png';
 import './App.css';
+import clip from '../images/assessicon1.png';
 import Dropdown, { DropdownTrigger, DropdownContent } from 'react-simple-dropdown';
 
 
@@ -21,6 +22,36 @@ class Nav extends Component {
   }
 
   render() {
+    let nav =
+    <div>
+      <Link to="/dashboard">
+        <button
+          className="button button-hover"
+          type="submit"
+          value="Submit">
+          <i className="fa fa-2x fa-home" aria-hidden="true"></i>
+        </button>
+      </Link>
+
+      <Link to="/playlists/new">
+        <button
+          className="button button-hover"
+          type="submit"
+          value="Submit">
+            <i className="fa fa-2x fa-plus" aria-hidden="true"></i>
+        </button>
+      </Link>
+
+      <Link to="/assessments">
+        <button
+          className="button button-hover"
+          type="submit"
+          value="Submit">
+            <img className="assessment" src={clip}/>
+        </button>
+      </Link>
+    </div>
+
     let login =
     <div>
       <button
@@ -59,7 +90,12 @@ class Nav extends Component {
         <div>
           {this.props.isLoggedIn ? dashboard : home}
         </div>
-        <Dropdown className="account-dropdown" ref="dropdown">
+
+        <div>
+          {this.props.isLoggedIn ? nav : null}
+        </div>
+
+          <Dropdown className="account-dropdown" ref="dropdown">
           <DropdownTrigger>
             <button
               data-toggle="dropdown"

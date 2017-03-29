@@ -18,13 +18,16 @@ class PatientWrapper extends Component {
 
   componentWillMount(){
     var self = this;
-    var assessment_id = window.location.href.split('=')[1].split('&')[0]
-    var token = window.location.href.split('=')[2]
+    var data = window.location.href.split('?')[1]
+    var data_arr = data.split('&')
+    var doctor_id = data_arr[0].split('=')[1]
+    var assessment_id = data_arr[1].split('=')[1]
+    var token = data_arr[2].split('=')[1]
     self.setState({assessment_id: assessment_id});
     self.setState({token: token})
     if(assessment_id && token){
-      axios.get(`${BASE_URL}/api/assessments/${assessment_id}`, {token: token}).then(function (response) {
-        self.setState({videoIds: response.data.screens});
+      axios.get(`${BASE_URL}/api/users/${doctor_id}/assessments/${assessment_id}`, {token: token}).then(function (response) {
+        self.setState({videoIDs: response.data.screens});
       })
     }
   }

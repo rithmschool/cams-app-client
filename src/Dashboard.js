@@ -22,7 +22,8 @@ class Dashboard extends Component{
     }, config)
     .then(response => axios.post(`${BASE_URL}/api/users/${userID()}/assessments`, {
       patient_id: response.data.id,
-      playlist_id: thisArg.state.playlistID
+      playlist_id: thisArg.state.playlistID,
+      doctor_id: userID()
       }, config))
     .then(response => axios.post(`${BASE_URL}/api/users/mail`, {
       assessment_id: response.data.id,

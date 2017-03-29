@@ -47,7 +47,7 @@ class PatientHome extends Component {
     recordRTC.stopRecording(function () {
       let fd = new FormData();
       recordedBlob = recordRTC.getBlob();
-      fd.append('assessment_id', 21)
+      fd.append('assessment_id', this.props.assessment_id)
       fd.append('fname', 'video_' + Date.now() + '.webm');
       fd.append('file', recordedBlob)
       axios.post(`${BASE_URL}/api/recording`, fd).then(response => {

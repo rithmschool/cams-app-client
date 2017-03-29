@@ -9,10 +9,12 @@ class VideoWrapper extends Component {
   constructor(props){
     super(props)
     this.state = {
-      videoTitles: []
+      videoTitles: [],
+      questions: []
     }
     this.addVideo = this.addVideo.bind(this)
     this.addDone = this.addDone.bind(this)
+    this.addQuestion = this.addQuestion.bind(this)
   }
 
   static contextTypes = {
@@ -37,6 +39,13 @@ class VideoWrapper extends Component {
     }.bind(this))
   }
 
+  addQuestion(question) {
+    debugger
+    this.setState({
+      questions: this.state.questions.concat([question, this.state.videoTitles.length])
+    })
+  }
+
   addDone(url){
     if(url){
       this.addVideo(url).then(function(response) {
@@ -52,6 +61,7 @@ class VideoWrapper extends Component {
       formComponents.push(
         <div key={i}>
           {this.state.videoTitles[i]}
+
         </div>
       )
     }
@@ -59,7 +69,7 @@ class VideoWrapper extends Component {
       <div>
         <h3 className="">Add Videos</h3>
         {formComponents}
-        <VideoForm addVideo={this.addVideo} addDone={this.addDone}/>
+        <VideoForm addQuestion={this.addQuestion} addVideo={this.addVideo} addDone={this.addDone}/>
       </div>
     )
   }

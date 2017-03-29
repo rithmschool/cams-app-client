@@ -3,6 +3,7 @@ import VideoForm from './VideoForm';
 import {BASE_URL, config} from './helpers.js';
 import axios from 'axios';
 import getYouTubeID from 'get-youtube-id';
+import {SortableContainer, SortableElement, arrayMove} from 'react-sortable-hoc';
 
 class VideoWrapper extends Component {
 
@@ -46,23 +47,41 @@ class VideoWrapper extends Component {
     this.context.router.history.push('/dashboard')
   }
 
+  onSortEnd = ({oldIndex, newIndex}) => {
+    this.setState({
+      videoTitles: arrayMove(this.state.videoTitles, oldIndex, newIndex),
+    });
+  };
+
   render(){
     var formComponents = []
     for(var i=0; i<this.state.videoTitles.length; i++){
       formComponents.push(
         <div key={i}>
-          {this.state.videoTitles[i]}
+         {this.state.videoTitles[i]}
         </div>
       )
     }
     return(
       <div>
         <h3 className="">Add Videos</h3>
-        {formComponents}
+        <SortableList videoTitles={this.state.videoTitles} onSortEnd={this.onSortEnd} />
         <VideoForm addVideo={this.addVideo} addDone={this.addDone}/>
       </div>
     )
   }
 }
+
+const SortableVideo = SortableElement(({value, key}) => <li>{key}{value}</li>);
+
+const SortableList = SortableContainer(({videoTitles}) => {
+  return (
+    <ol>
+      {videoTitles.map((value, index) => (
+        <SortableVideo key={index + 1} index={index} value={value} />
+        ))}
+    </ol>
+    );
+})
 
 export default VideoWrapper;

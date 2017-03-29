@@ -30,7 +30,7 @@ class VideoWrapper extends Component {
     .then(function(response) {
       axios.post(`${BASE_URL}/api/screens`, {
         video_id: response.data.id,
-        playlist_id: this.props.playlistId,
+        playlist_id: this.props.playlistID,
         order: this.state.videoTitles.length+1
       }, config)
       this.setState({

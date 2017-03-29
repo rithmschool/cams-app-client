@@ -32,7 +32,6 @@ class VideoWrapper extends Component {
         playlist_id: this.props.playlistId,
         order: this.state.screenData.length+1
       }, config)
-      debugger
       this.setState({
         screenData: this.state.screenData.concat("Video:  " + response.data.title)
       })
@@ -67,7 +66,7 @@ class VideoWrapper extends Component {
     }
     return(
       <div>
-        <h3 className="">Add Videos</h3>
+        <h3 className="">Add Questions/Videos</h3>
         {formComponents}
         <VideoForm addQuestion={this.addQuestion} addVideo={this.addVideo} addDone={this.addDone}/>
       </div>

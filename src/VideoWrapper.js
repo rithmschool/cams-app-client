@@ -35,8 +35,8 @@ class VideoWrapper extends Component {
         screen_entity_type: 'video'
       }, config)
       this.setState({
-        screenData: this.state.screenData.concat("Video:  " + response.data.title)
-        order: this.state.screens.length+1
+        screenData: this.state.screenData.concat("Video:  " + response.data.title),
+        order: this.state.screenData.length+1
       }, config)
     }.bind(this))
   }
@@ -72,12 +72,12 @@ class VideoWrapper extends Component {
 
   onSortEnd = ({oldIndex, newIndex}) => {
     this.setState({
-      screens: arrayMove(this.state.screens, oldIndex, newIndex),
+      screens: arrayMove(this.state.screenData, oldIndex, newIndex),
     });
   };
 
   componentDidUpdate(){
-    this.state.screens.map((value,index) => {
+    this.state.screenData.map((value,index) => {
       axios.patch(`${BASE_URL}/api/screens`, {
         video_id: value.entity_id,
         playlist_id: this.props.playlistID,
@@ -91,7 +91,7 @@ class VideoWrapper extends Component {
     return(
       <div>
         <h3 className="">Add Videos</h3>
-        <SortableList screens={this.state.screens} onSortEnd={this.onSortEnd} />
+        <SortableList screens={this.state.screenData} onSortEnd={this.onSortEnd} />
         <VideoForm addQuestion={this.addQuestion} addVideo={this.addVideo} addDone={this.addDone}/>
       </div>
     )

@@ -33,7 +33,7 @@ class VideoWrapper extends Component {
         order: this.state.videoTitles.length+1
       }, config)
       this.setState({
-        videoTitles: this.state.videoTitles.concat(response.data.title)
+        videoTitles: this.state.videoTitles.concat([[response.data.title, response.data.id]])
       })
     }.bind(this))
   }
@@ -51,6 +51,13 @@ class VideoWrapper extends Component {
     this.setState({
       videoTitles: arrayMove(this.state.videoTitles, oldIndex, newIndex),
     });
+    this.state.videoTitles.map((value,index) => {
+      axios.patch(`${BASE_URL}/api/screens`, {
+        video_id: value[1],
+        playlist_id: this.props.playlistID,
+        order: index+1
+      }, config)
+    })
   };
 
   render(){
@@ -72,13 +79,13 @@ class VideoWrapper extends Component {
   }
 }
 
-const SortableVideo = SortableElement(({value, key}) => <li>{key}{value}</li>);
+const SortableVideo = SortableElement(({value, key}) => <li className="grabbable">{value}</li>);
 
 const SortableList = SortableContainer(({videoTitles}) => {
   return (
     <ol>
       {videoTitles.map((value, index) => (
-        <SortableVideo key={index + 1} index={index} value={value} />
+        <SortableVideo key={index + 1} index={index} value={value[0]} />
         ))}
     </ol>
     );

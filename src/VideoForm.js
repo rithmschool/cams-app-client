@@ -8,12 +8,20 @@ class VideoForm extends Component {
     super(props)
     this.state = {
       url: "",
+      videos: [],
+      searchtext: ''
     }
   }
 
   handleChange(e){
     this.setState({
       [e.target.name]: e.target.value
+    });
+  }
+
+  handleChange2(e){
+    this.setState({
+      searchtext: e.target.value
     });
   }
 
@@ -28,26 +36,48 @@ class VideoForm extends Component {
     this.props.addDone(this.state.url)
   }
 
+  handleAdd2(e){
+    e.preventDefault()
+    this.props.addVideo(e.target.getAttribute('data'))
+  }
+
   componentWillMount(){
     axios.get(
       `${BASE_URL}/api/videos`, config
     ).then(response => {
       this.setState({videos: response.data})
-      console.log(this.state.videos)
     })
   }
 
   render(){
-    let videos = this.state.videos.map((val, idx, arr) => {
-      console.log(val)
+    let stext = this.state.searchtext
+    let ha2 = this.handleAdd2.bind(this)
+    let showVideos = this.state.videos.map(function(val, idx, arr){
+      if(stext.toLowerCase() === ''){
+        return (
+          <div><a className="searchinput" onClick={ha2} data={val.url}>{val.title}</a></div>
+          )
+      }else{
+        if(val.title.toLowerCase().includes(stext.toLowerCase())){
+          return (
+          <div><a className="searchinput" onClick={ha2} data={val.url}>{val.title}</a></div>
+          )
+        }
+      }
     })
+    
 
     return(
       <div>
         <div className="video-form-wrapper">
           <div className="videos-list">
-            <h2>Videos</h2>
-
+              <input className="searchinput" type="text"
+                onChange={this.handleChange2.bind(this)}
+                name="searcher"
+                placeholder="Search for a video"
+                value={this.state.searchtext}
+              />
+              {showVideos}
           </div>
           <div className="videos-form">
             <form onSubmit={this.handleAdd.bind(this)}>

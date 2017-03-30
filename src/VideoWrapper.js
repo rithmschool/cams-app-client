@@ -37,7 +37,7 @@ class VideoWrapper extends Component {
       this.setState({
         screenData: this.state.screenData.concat("Video:  " + response.data.title),
         order: this.state.screenData.length+1
-      }, config)
+      })
     }.bind(this))
   }
 
@@ -72,7 +72,7 @@ class VideoWrapper extends Component {
 
   onSortEnd = ({oldIndex, newIndex}) => {
     this.setState({
-      screens: arrayMove(this.state.screenData, oldIndex, newIndex),
+      screenData: arrayMove(this.state.screenData, oldIndex, newIndex),
     });
   };
 

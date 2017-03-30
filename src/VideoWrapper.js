@@ -3,13 +3,14 @@ import VideoForm from './VideoForm';
 import {BASE_URL, config} from './helpers.js';
 import axios from 'axios';
 import getYouTubeID from 'get-youtube-id';
+import {SortableContainer, SortableElement, arrayMove} from 'react-sortable-hoc';
 
 class VideoWrapper extends Component {
 
   constructor(props){
     super(props)
     this.state = {
-      videoTitles: []
+      screens: []
     }
     this.addVideo = this.addVideo.bind(this)
     this.addDone = this.addDone.bind(this)
@@ -29,10 +30,10 @@ class VideoWrapper extends Component {
       axios.post(`${BASE_URL}/api/screens`, {
         video_id: response.data.id,
         playlist_id: this.props.playlistID,
-        order: this.state.videoTitles.length+1
+        order: this.state.screens.length+1
       }, config)
       this.setState({
-        videoTitles: this.state.videoTitles.concat(response.data.title)
+        screens: this.state.screens.concat([{title: response.data.title, entity_id: response.data.id}])
       })
     }.bind(this))
   }
@@ -46,23 +47,43 @@ class VideoWrapper extends Component {
     this.context.router.history.push('/dashboard')
   }
 
+  onSortEnd = ({oldIndex, newIndex}) => {
+    this.setState({
+      screens: arrayMove(this.state.screens, oldIndex, newIndex),
+    });
+  };
+
+  componentDidUpdate(){
+    this.state.screens.map((value,index) => {
+      axios.patch(`${BASE_URL}/api/screens`, {
+        video_id: value.entity_id,
+        playlist_id: this.props.playlistID,
+        order: index+1
+      }, config)
+    })
+  }
+
   render(){
-    var formComponents = []
-    for(var i=0; i<this.state.videoTitles.length; i++){
-      formComponents.push(
-        <div key={i}>
-          {this.state.videoTitles[i]}
-        </div>
-      )
-    }
     return(
       <div>
         <h3 className="">Add Videos</h3>
-        {formComponents}
+        <SortableList screens={this.state.screens} onSortEnd={this.onSortEnd} />
         <VideoForm addVideo={this.addVideo} addDone={this.addDone}/>
       </div>
     )
   }
 }
+
+const SortableVideo = SortableElement(({value, key}) => <li className="grabbable" key={key}>{value}</li>);
+
+const SortableList = SortableContainer(({screens}) => {
+  return (
+    <ol>
+      {screens.map((value, index) => (
+        <SortableVideo key={index + 1} index={index} value={value.title} />
+        ))}
+    </ol>
+    );
+})
 
 export default VideoWrapper;

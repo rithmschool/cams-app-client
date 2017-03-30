@@ -47,7 +47,7 @@ class Nav extends Component {
           className="button button-hover"
           type="submit"
           value="Submit">
-            <img className="assessment" src={clip}/>
+            <i className="fa fa-2x fa-folder-open" aria-hidden="true"></i>
         </button>
       </Link>
     </div>

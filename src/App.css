@@ -375,3 +375,10 @@ button.button.dropdown-content {
     width: 10rem; }
   h2.body-bold {
     margin-top: 0; } }
+
+.grabbable {
+  cursor: move;
+  cursor: grab; }
+
+.grabbable:active {
+  cursor: grabbing; }

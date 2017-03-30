@@ -3,6 +3,7 @@ import VideoForm from './VideoForm';
 import {BASE_URL, config} from './helpers.js';
 import axios from 'axios';
 import getYouTubeID from 'get-youtube-id';
+import {SortableContainer, SortableElement, arrayMove} from 'react-sortable-hoc';
 
 class VideoWrapper extends Component {
 
@@ -35,7 +36,8 @@ class VideoWrapper extends Component {
       }, config)
       this.setState({
         screenData: this.state.screenData.concat("Video:  " + response.data.title)
-      })
+        order: this.state.screens.length+1
+      }, config)
     }.bind(this))
   }
 
@@ -68,24 +70,44 @@ class VideoWrapper extends Component {
     this.context.router.history.push('/dashboard')
   }
 
-  render(){
-    var formComponents = []
-    for(var i=0; i<this.state.screenData.length; i++){
-      formComponents.push(
-        <div key={i}>
-          {this.state.screenData[i]}
+  onSortEnd = ({oldIndex, newIndex}) => {
+    this.setState({
+      screens: arrayMove(this.state.screens, oldIndex, newIndex),
+    });
+  };
 
-        </div>
-      )
-    }
+  componentDidUpdate(){
+    this.state.screens.map((value,index) => {
+      axios.patch(`${BASE_URL}/api/screens`, {
+        video_id: value.entity_id,
+        playlist_id: this.props.playlistID,
+        order: index+1
+      }, config)
+    })
+  }
+
+  render(){
+
     return(
       <div>
-        <h3 className="">Add Questions/Videos</h3>
-        {formComponents}
+        <h3 className="">Add Videos</h3>
+        <SortableList screens={this.state.screens} onSortEnd={this.onSortEnd} />
         <VideoForm addQuestion={this.addQuestion} addVideo={this.addVideo} addDone={this.addDone}/>
       </div>
     )
   }
 }
+
+const SortableVideo = SortableElement(({value, key}) => <li className="grabbable" key={key}>{value}</li>);
+
+const SortableList = SortableContainer(({screens}) => {
+  return (
+    <ol>
+      {screens.map((value, index) => (
+        <SortableVideo key={index + 1} index={index} value={value.title} />
+        ))}
+    </ol>
+    );
+})
 
 export default VideoWrapper;

@@ -28,9 +28,10 @@ class VideoWrapper extends Component {
     }, config)
     .then(function(response) {
       axios.post(`${BASE_URL}/api/screens`, {
-        video_id: response.data.id,
+        screen_entity_id: response.data.id,
         playlist_id: this.props.playlistID,
-        order: this.state.videoTitles.length+1
+        order: this.state.screenData.length+1,
+        screen_entity_type: 'video'
       }, config)
       this.setState({
         screenData: this.state.screenData.concat("Video:  " + response.data.title)
@@ -39,11 +40,24 @@ class VideoWrapper extends Component {
   }
 
   addQuestion(question) {
-    if(question) { 
-    this.setState({
-      screenData: this.state.screenData.concat("Question:  " + question)
+    if(question){  
+      return axios.post(`${BASE_URL}/api/questions`,{
+        text: question
+      }, config)
+      .then(response => {
+        axios.post(`${BASE_URL}/api/screens`, {
+        screen_entity_id: response.data.id,
+        playlist_id: this.props.playlistID,
+        order: this.state.screenData.length+1,
+        screen_entity_type: 'question'
+      }, config)
+        console.log(response)
+        this.setState({
+          screenData: this.state.screenData.concat("Question:  " + question)
+        })
     })
-  }}
+  }
+}
 
   addDone(url){
     if(url){

@@ -66,7 +66,6 @@ class VideoForm extends Component {
       }
     })
     
-
     return(
       <div>
         <div className="video-form-wrapper">

@@ -494,3 +494,13 @@ button.button.dropdown-content {
     margin-top: 0;
   }
 }
+
+.grabbable {
+    cursor: move;
+    cursor: grab;
+}
+
+ 
+.grabbable:active { 
+    cursor: grabbing;
+}

@@ -41,6 +41,7 @@ class Dashboard extends Component{
     e.preventDefault()
     this.sendMail(config, this)
   }
+
   closeSelection() {
     this.setState({playlistID: null, playlistName: null})
   }

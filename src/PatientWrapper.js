@@ -21,10 +21,15 @@ class PatientWrapper extends Component {
   componentWillMount(){
     var self = this;
     var data = window.location.href.split('?')[1]
-    var data_arr = data.split('&')
-    var doctor_id = data_arr[0].split('=')[1]
-    var assessment_id = data_arr[1].split('=')[1]
-    var token = data_arr[2].split('=')[1]
+    var data_obj = JSON.parse(
+              '{"' + 
+              decodeURI(data).replace(/"/g, '\\"')
+              .replace(/&/g, '","').
+              replace(/=/g,'":"') + '"}'
+          )
+    var doctor_id = data_obj['doctor_id']
+    var assessment_id = data_obj['assessment_id']
+    var token = data_obj['token']
     self.setState({assessment_id: assessment_id});
     self.setState({token: token})
     if(assessment_id && token){

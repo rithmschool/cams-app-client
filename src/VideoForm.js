@@ -8,6 +8,7 @@ class VideoForm extends Component {
     super(props)
     this.state = {
       url: "",
+      question: "",
       videos: [],
       searchtext: ''
     }
@@ -32,8 +33,13 @@ class VideoForm extends Component {
 
   handleAdd(e){
     e.preventDefault()
-    this.setState({url: ""})
-    this.props.addVideo(this.state.url)
+    if (e.target.className === "addQuestion") {
+      this.setState({question: ""});
+      this.props.addQuestion(this.state.question) 
+    } else {
+      this.setState({url: ""});
+      this.props.addVideo(this.state.url);
+    }
   }
 
   handleSubmit(e){
@@ -85,6 +91,15 @@ class VideoForm extends Component {
               {showVideos}
           </div>
           <div className="videos-form">
+            <form className="addQuestion" onSubmit={this.handleAdd.bind(this)}>
+            <input type="text"
+              onChange={this.handleChange.bind(this)}
+              name="question"
+              placeholder="Add A Question"
+              value={this.state.question}
+            />
+            <button type="submit" className="button" value="Add">+</button>
+          </form>
             <form onSubmit={this.handleAdd}>
               <input type="url"
                 onChange={this.handleChange}

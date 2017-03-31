@@ -61,65 +61,65 @@ class Dashboard extends Component{
   }
   render() {
     let playlists = this.state.userPlaylists.map((playlist, i) => {
-			let showForm = this.state.playlistName === playlist.name ?
-				<div>
-					<form className="email" onSubmit={this.handleSubmit.bind(this)}>
-						<h5>Send to:</h5>
-						<input
-							type="email"
-							name="email"
-							placeholder="email"
-							value={this.state.email}
-							required onChange={this.handleChange.bind(this)}
-						/>
-						<button
-							className="button button-hover"
-							type="submit"
-							value="Submit">
-							Submit
-						</button>
-					</form>
-					<div onClick={this.closeSelection}>
-						<i className="fa delete fa-times-circle button-hover" aria-hidden="true"></i>
-					</div>
-				</div> 
+      let showForm = this.state.playlistName === playlist.name ?
+        <div>
+          <form className="email" onSubmit={this.handleSubmit.bind(this)}>
+            <h5>Send to:</h5>
+            <input
+              type="email"
+              name="email"
+              placeholder="email"
+              value={this.state.email}
+              required onChange={this.handleChange.bind(this)}
+            />
+            <button
+              className="button button-hover"
+              type="submit"
+              value="Submit">
+              Submit
+            </button>
+          </form>
+          <div onClick={this.closeSelection}>
+            <i className="fa delete fa-times-circle button-hover" aria-hidden="true"></i>
+          </div>
+        </div> 
         :
-				null
+        null
 
-			let className =
-				this.state.playlistID === playlist.id ?
-					'selected' :
-					'playlist-card'
+      let className =
+        this.state.playlistID === playlist.id ?
+          'selected' :
+          'playlist-card'
 
-			return(
-				<div
-					key={i}
-					tabIndex="0"
-					className={`${className} button-hover playlist-card-contents`}
-					onClick={this.choosePlaylist.bind(this, playlist.id, playlist.name)}
-				>
-					<h5 className="playlist-name-title">{playlist.name}</h5>
-					{playlist.videos.map((video, idx) => {
-						return(
-							<p className="song-title" key={idx} >
-								{video.title}
-							</p>
-						)
-					})
-				}
-				{showForm}
-			</div>
-			)
-		})
-		return (
-			<div>
+      return(
+        <div
+          key={i}
+          tabIndex="0"
+          className={`${className} button-hover playlist-card-contents`}
+          onClick={this.choosePlaylist.bind(this, playlist.id, playlist.name)}
+        >
+          <h5 className="playlist-name-title">{playlist.name}</h5>
+          {playlist.videos.map((video, idx) => {
+            return(
+              <p className="song-title" key={idx} >
+                {video.title}
+              </p>
+            )
+          })
+        }
+        {showForm}
+      </div>
+      )
+    })
+    return (
+      <div>
         <div className="banner-text">
           <h1 className="banner-bold">Dashboard</h1>
         </div>
         <div className="content">
-					<div className="playlist-container">
-						{playlists}
-					</div>
+          <div className="playlist-container">
+            {playlists}
+          </div>
         </div>
       </div>
     )

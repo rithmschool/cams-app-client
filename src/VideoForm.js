@@ -11,6 +11,11 @@ class VideoForm extends Component {
       videos: [],
       searchtext: ''
     }
+    this.handleAddChange = this.handleAddChange.bind(this)
+    this.handleSearchChange = this.handleSearchChange.bind(this)
+    this.handleAdd = this.handleAdd.bind(this)
+    this.handleChange = this.handleChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   handleChange(e){
@@ -19,7 +24,7 @@ class VideoForm extends Component {
     });
   }
 
-  handleChange2(e){
+  handleSearchChange(e){
     this.setState({
       searchtext: e.target.value
     });
@@ -36,7 +41,7 @@ class VideoForm extends Component {
     this.props.addDone(this.state.url)
   }
 
-  handleAdd2(e){
+  handleAddChange(e){
     e.preventDefault()
     this.props.addVideo(e.target.getAttribute('data'))
   }
@@ -49,18 +54,19 @@ class VideoForm extends Component {
     })
   }
 
+
+
   render(){
     let stext = this.state.searchtext
-    let ha2 = this.handleAdd2.bind(this)
-    let showVideos = this.state.videos.map(function(val, idx, arr){
+    let showVideos = this.state.videos.map((val, idx, arr) => {
       if(stext.toLowerCase() === ''){
         return (
-          <div><a className="searchinput" onClick={ha2} data={val.url}>{val.title}</a></div>
+          <div><a className="searchinput" onClick={this.handleAddChange} data={val.url}>{val.title}</a></div>
           )
       }else{
         if(val.title.toLowerCase().includes(stext.toLowerCase())){
           return (
-          <div><a className="searchinput" onClick={ha2} data={val.url}>{val.title}</a></div>
+          <div><a className="searchinput" onClick={this.handleAddChange} data={val.url}>{val.title}</a></div>
           )
         }
       }
@@ -71,7 +77,7 @@ class VideoForm extends Component {
         <div className="video-form-wrapper">
           <div className="videos-list">
               <input className="searchinput" type="text"
-                onChange={this.handleChange2.bind(this)}
+                onChange={this.handleSearchChange}
                 name="searcher"
                 placeholder="Search for a video"
                 value={this.state.searchtext}
@@ -79,15 +85,15 @@ class VideoForm extends Component {
               {showVideos}
           </div>
           <div className="videos-form">
-            <form onSubmit={this.handleAdd.bind(this)}>
+            <form onSubmit={this.handleAdd}>
               <input type="url"
-                onChange={this.handleChange.bind(this)}
+                onChange={this.handleChange}
                 name="url"
                 placeholder="Video Url"
                 value={this.state.url}
               />
               <button type="submit" className="button" value="Add">+</button>
-              <button className="button" onClick={this.handleSubmit.bind(this)} value="Submit">Submit</button>
+              <button className="button" onClick={this.handleSubmit} value="Submit">Submit</button>
             </form>
           </div>
         </div>

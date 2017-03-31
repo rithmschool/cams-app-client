@@ -306,6 +306,33 @@ button.button.dropdown-content {
   padding: 2rem;
   max-width: 10rem; }
 
+.video-form-wrapper {
+  padding: 1%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 75vw;
+  margin-left: 12.5vw;
+  height: 15vw; }
+
+.videos-list {
+  width: 50%;
+  min-height: 100%; }
+
+.videos-form {
+  width: 50%;
+  min-height: 100%; }
+
+.searchvideo {
+  background-color: white; }
+
+.searchvideo:hover {
+  background-color: white;
+  cursor: pointer; }
+
+.searchinput:hover {
+  cursor: pointer; }
+
 /*MEDIA QUERIES*/
 @media (max-width: 600px) {
   .logo {

@@ -60,7 +60,6 @@ class Dashboard extends Component{
     })
   }
   render() {
-
     let playlists = this.state.userPlaylists.map((playlist, i) => {
 			let showForm = this.state.playlistName === playlist.name ?
 				<div>

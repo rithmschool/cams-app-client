@@ -39,7 +39,7 @@ class VideoWrapper extends Component {
           title: response.data.title,
           entity_id: response.data.id,
           type: 'video'
-            }]),
+        }]),
       })
     }.bind(this))
   }
@@ -61,7 +61,7 @@ class VideoWrapper extends Component {
             title: question,
             entity_id: response.data.id,
             type: 'question'
-            }])
+          }])
         })
     })
   }
@@ -94,7 +94,6 @@ class VideoWrapper extends Component {
   }
 
   render(){
-
     return(
       <div>
         <h3 className="">Add Videos</h3>

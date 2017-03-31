@@ -11,7 +11,6 @@ class VideoForm extends Component {
       question: "",
       videos: [],
       searchtext: ''
-
     }
     this.handleAddChange = this.handleAddChange.bind(this)
     this.handleSearchChange = this.handleSearchChange.bind(this)

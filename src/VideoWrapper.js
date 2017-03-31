@@ -29,14 +29,17 @@ class VideoWrapper extends Component {
     }, config)
     .then(function(response) {
       axios.post(`${BASE_URL}/api/screens`, {
-        screen_entity_id: response.data.id,
+        entity_id: response.data.id,
         playlist_id: this.props.playlistID,
         order: this.state.screenData.length+1,
-        screen_entity_type: 'video'
+        type: 'video'
       }, config)
       this.setState({
-        screenData: this.state.screenData.concat("Video:  " + response.data.title),
-        order: this.state.screenData.length+1
+        screenData: this.state.screenData.concat([{
+          title: response.data.title,
+          entity_id: response.data.id,
+          type: 'video'
+            }]),
       })
     }.bind(this))
   }
@@ -48,14 +51,17 @@ class VideoWrapper extends Component {
       }, config)
       .then(response => {
         axios.post(`${BASE_URL}/api/screens`, {
-        screen_entity_id: response.data.id,
+        entity_id: response.data.id,
         playlist_id: this.props.playlistID,
         order: this.state.screenData.length+1,
-        screen_entity_type: 'question'
+        type: 'question'
       }, config)
-        console.log(response)
         this.setState({
-          screenData: this.state.screenData.concat("Question:  " + question)
+          screenData: this.state.screenData.concat([{
+            title: question,
+            entity_id: response.data.id,
+            type: 'question'
+            }])
         })
     })
   }
@@ -79,9 +85,10 @@ class VideoWrapper extends Component {
   componentDidUpdate(){
     this.state.screenData.map((value,index) => {
       axios.patch(`${BASE_URL}/api/screens`, {
-        video_id: value.entity_id,
+        entity_id: value.entity_id,
         playlist_id: this.props.playlistID,
-        order: index+1
+        order: index+1,
+        type: value.type
       }, config)
     })
   }
@@ -91,7 +98,7 @@ class VideoWrapper extends Component {
     return(
       <div>
         <h3 className="">Add Videos</h3>
-        <SortableList screens={this.state.screenData} onSortEnd={this.onSortEnd} />
+        <SortableList screenData={this.state.screenData} onSortEnd={this.onSortEnd} />
         <VideoForm addQuestion={this.addQuestion} addVideo={this.addVideo} addDone={this.addDone}/>
       </div>
     )
@@ -100,10 +107,10 @@ class VideoWrapper extends Component {
 
 const SortableVideo = SortableElement(({value, key}) => <li className="grabbable" key={key}>{value}</li>);
 
-const SortableList = SortableContainer(({screens}) => {
+const SortableList = SortableContainer(({screenData}) => {
   return (
     <ol>
-      {screens.map((value, index) => (
+      {screenData.map((value, index) => (
         <SortableVideo key={index + 1} index={index} value={value.title} />
         ))}
     </ol>

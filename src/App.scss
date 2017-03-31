@@ -504,3 +504,17 @@ button.button.dropdown-content {
 .grabbable:active { 
     cursor: grabbing;
 }
+
+/*Timer
+********/
+
+.timer {
+  width: 100px;
+  height: 100px;
+  background: $main-blue;
+  border-radius: 50px
+}
+
+.center {
+  padding-top: 38px;
+}

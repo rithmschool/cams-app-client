@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import PatientHome from './PatientHome'
 import VideoPlayer from './VideoPlayer'
+import TimerWrapper from './TimerWrapper'
 import {BASE_URL, userID} from './helpers.js';
 import axios from 'axios';
 
@@ -12,7 +13,6 @@ class PatientWrapper extends Component {
 
     this.state = {
       videoIDs: '',
-      videoIdx: 0,
       assessment_id: 0,
       token: ''
     }
@@ -24,8 +24,8 @@ class PatientWrapper extends Component {
     var data_obj = JSON.parse(
               '{"' + 
               decodeURI(data).replace(/"/g, '\\"')
-              .replace(/&/g, '","').
-              replace(/=/g,'":"') + '"}'
+              .replace(/&/g, '","')
+              .replace(/=/g,'":"') + '"}'
           )
     var doctor_id = data_obj['doctor_id']
     var assessment_id = data_obj['assessment_id']
@@ -47,7 +47,7 @@ class PatientWrapper extends Component {
         <Text>When you are ready, please press the spacebar to continue to the video.</Text>
         <VideoPlayer videos={this.state.videoIDs} />
         <Text>Please describe what happened in the video. <br />Use as much detail as possible when describing the video. <br />You have 30 seconds. Please try to talk for the entire duration of the timer.<br /><br />Please press the spacebar when you are ready to start.</Text>
-        <Text>Timer</Text>
+        <TimerWrapper></TimerWrapper>
         <Text>Bye!</Text>
       </PatientHome>
     )

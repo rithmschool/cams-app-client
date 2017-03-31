@@ -60,6 +60,7 @@ class Dashboard extends Component{
     })
   }
   render() {
+
     let playlists = this.state.userPlaylists.map((playlist, i) => {
 			let showForm = this.state.playlistName === playlist.name ?
 				<div>
@@ -82,12 +83,15 @@ class Dashboard extends Component{
 					<div onClick={this.closeSelection}>
 						<i className="fa delete fa-times-circle button-hover" aria-hidden="true"></i>
 					</div>
-				</div> :
+				</div> 
+        :
 				null
+
 			let className =
 				this.state.playlistID === playlist.id ?
 					'selected' :
 					'playlist-card'
+
 			return(
 				<div
 					key={i}

@@ -78,9 +78,12 @@ class Dashboard extends Component{
 							Submit
 						</button>
 					</form>
-					<div onClick={this.closeSelection}>
-						<i className="fa delete fa-times-circle button-hover" aria-hidden="true"></i>
-					</div>
+          <div className="spacearound">
+					  <div onClick={this.closeSelection}>
+						  <i className="fa delete fa-times-circle button-hover" aria-hidden="true"></i>
+					  </div>
+            <Link to='/playlists/edit'><i className="fa fa-pencil-square button-hover delete" aria-hidden="true"></i></Link>
+          </div>
 				</div> :
 				null
 			let className =

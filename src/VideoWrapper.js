@@ -63,6 +63,16 @@ class VideoWrapper extends Component {
     })
   }
 
+  componentWillMount(){
+    if(this.props.editPlaylist){
+      axios.get(`${BASE_URL}/api/screens`, {
+        playlist_id: this.props.playlistID
+      }, config).then(response => {
+      this.setState({screens: response.data})
+        })
+      }
+    }
+
   render(){
     return(
       <div>

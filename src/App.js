@@ -20,9 +20,9 @@ import './index.css';
 import './App.css';
 
 const PrivateRoute = ({ component, ...rest }) => (
-  <Route {...rest} render={props => (
+  <Route {...rest} render={(props, routeProps) => (
     localStorage.getItem('token') ? (
-      React.createElement(component, props)
+      React.createElement(component, props, routeProps)
     ) : (
       <Redirect to={{
         pathname: '/login',
@@ -85,6 +85,7 @@ class App extends Component {
           <PrivateRoute path="/dashboard" component={Dashboard} />
           <PrivateRoute path="/assessments" component={AssessmentsDashboard}/>
           <PrivateRoute path="/playlists/new" component={PlaylistWrapper}/>
+          <PrivateRoute path="/playlists/edit" component={PlaylistWrapper}/>
           <EnsureCorrectUserRoute path="/users/:userID/edit" component={EditUserForm}/>
         </Switch>
         <div className="diagonalbottom"></div>

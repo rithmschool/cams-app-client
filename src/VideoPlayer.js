@@ -14,11 +14,11 @@ class VideoPlayer extends Component {
 
   _onEnd(e){
     e.target.stopVideo();
-    this.props.flag();
+    this.props.toggle();
   }
 
   componentDidMount(){
-    this.props.flag();
+    this.props.toggle();
   }
 
   render() {

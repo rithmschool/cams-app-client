@@ -18,7 +18,7 @@ class PatientHome extends Component {
       src: null,
       uploadSuccess: null,
       uploading: false,
-      flag: true,
+      keyBoardEnabled: true,
       stream: ''
     }
     this.handleSpaceBar = this.handleSpaceBar.bind(this)
@@ -47,7 +47,6 @@ class PatientHome extends Component {
       };
       recordRTC = RecordRTC(mediaStream, options)
       recordRTC.startRecording()
-      console.log()
     });
   }
 
@@ -74,7 +73,7 @@ class PatientHome extends Component {
   };
 
   handleSpaceBar(e) {
-    if (e.keyCode === 32 && this.state.flag) {
+    if (e.keyCode === 32 && this.state.keyBoardEnabled) {
       e.preventDefault()
       // If the current video index is less than the length of the playlist
       if (this.state.videoIdx <= this.props.videosLength) {
@@ -101,7 +100,7 @@ class PatientHome extends Component {
 
   toggle(){
     this.setState({
-      flag: !this.state.flag
+      keyBoardEnabled: !this.state.keyBoardEnabled
     })
   }
 
@@ -120,7 +119,7 @@ class PatientHome extends Component {
           <div>
             <div>{React.cloneElement(this.props.children[this.state.idx], {
                   videoIdx: this.state.videoIdx - 1,
-                  flag: this.toggle
+                  toggle: this.toggle
                 })}
             </div>
           </div>

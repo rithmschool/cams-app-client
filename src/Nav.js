@@ -18,7 +18,12 @@ class Nav extends Component {
   }
 
   edit(e) {
-    this.context.router.history.push(`/users/${userID()}/edit`)
+    this.context.router.history.push(`/users/${userID()}/edit`);
+  }
+
+  invite(e) {
+    console.log("Sending an invite")
+    this.context.router.history.push(`/users/${userID()}/invite`);
   }
 
   render() {
@@ -66,6 +71,9 @@ class Nav extends Component {
     <div>
       <button className="sign button dropdown-content button-hover" onClick={this.edit.bind(this)}>
         Edit
+      </button>
+      <button className="sign button dropdown-content button-hover" onClick={this.invite.bind(this)}>
+        Invite Doctor
       </button>
       <button
         className="sign button dropdown-content button-hover">

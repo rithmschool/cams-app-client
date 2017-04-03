@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import RecordRTC from 'recordrtc';
 import {BASE_URL} from './helpers.js';
 import axios from 'axios';
+import Timer from './Timer'
 let Whammy = RecordRTC.Whammy;
 let video = new Whammy.Video(100);
 let recordRTC;
@@ -16,11 +17,14 @@ class PatientHome extends Component {
       recordVideo: null,
       src: null,
       uploadSuccess: null,
-      uploading: false
+      uploading: false,
+      keyBoardEnabled: true,
+      stream: ''
     }
     this.handleSpaceBar = this.handleSpaceBar.bind(this)
     this.startRecord = this.startRecord.bind(this);
     this.stopRecord = this.stopRecord.bind(this);
+    this.toggle = this.toggle.bind(this)
   }
 
   captureUserMedia(callback) {
@@ -30,8 +34,12 @@ class PatientHome extends Component {
     });
   };
 
+
   startRecord() {
     this.captureUserMedia((mediaStream) => {
+      this.setState({
+        stream: mediaStream
+      })
       var options = {
         mimeType: 'video/webm',
         audioBitsPerSecond: 128000,
@@ -56,10 +64,16 @@ class PatientHome extends Component {
           console.log(err)
         });
     });
+    this.stopMedia()
   }
 
+  stopMedia() {
+    this.state.stream.getTracks()[1].stop()
+    this.state.stream.getTracks()[0].stop()
+  };
+
   handleSpaceBar(e) {
-    if (e.keyCode === 32) {
+    if (e.keyCode === 32 && this.state.keyBoardEnabled) {
       e.preventDefault()
       // If the current video index is less than the length of the playlist
       if (this.state.videoIdx <= this.props.videosLength) {
@@ -84,6 +98,12 @@ class PatientHome extends Component {
     }
   }
 
+  toggle(){
+    this.setState({
+      keyBoardEnabled: !this.state.keyBoardEnabled
+    })
+  }
+
   componentDidMount() {
     window.focus()
     document.addEventListener("keydown", this.handleSpaceBar)
@@ -97,7 +117,11 @@ class PatientHome extends Component {
         </div>
         <div className="content">
           <div>
-            <div>{React.cloneElement(this.props.children[this.state.idx], {videoIdx: this.state.videoIdx - 1})}</div>
+            <div>{React.cloneElement(this.props.children[this.state.idx], {
+                  videoIdx: this.state.videoIdx - 1,
+                  toggle: this.toggle
+                })}
+            </div>
           </div>
         </div>
       </div>

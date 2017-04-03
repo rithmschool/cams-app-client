@@ -414,4 +414,16 @@ button.button.dropdown-content {
 div.spacearound {
   display: flex;
   justify-content: space-around;
-  align-items: center; }
+  align-items: center; 
+  cursor: grabbing; }
+
+/*Timer
+********/
+.timer {
+  width: 100px;
+  height: 100px;
+  background: #00c5cc;
+  border-radius: 50px; }
+
+.center {
+  padding-top: 38px; }

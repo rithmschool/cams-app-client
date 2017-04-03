@@ -7,8 +7,16 @@ class AssessmentsDashboard extends Component {
     super(props)
     this.state = {
       doctorAssessments: [],
-      assessmentID: null
+      assessmentID: null,
+      downloaded: ''
     }
+  }
+
+  downloadFile(id){
+    axios.get(`${BASE_URL}/api/recording/${id}`)
+      .then(response => {
+        this.setState({downloaded: this.state.downloaded+response.data.id.toString()})
+      })
   }
 
   selectAssessment(assessmentID){
@@ -30,16 +38,23 @@ class AssessmentsDashboard extends Component {
   render() {
     let assessments = this.state.doctorAssessments.map((assessment, i) => {
       let completed = assessment.recording_url ?
-        <h6>Completed: Yes</h6> :
+        <div>
+          <h6>Completed: Yes</h6>
+          <button onClick={this.downloadFile.bind(this,assessment.id)}>Download</button>
+        </div> :
         <h6>Completed: No</h6>
       let className = this.state.assessmentID === assessment.id ?
         'selected' :
         'playlist-card'
+        let dl = this.state.downloaded.includes(assessment.id.toString()) ? <div>
+                    <h5>Download Complete.</h5>
+                    <h6>View in downloads folder</h6>
+                  </div> :
+                  <p></p>
       return (
         <div
           key={i}
           className={`${className} button-hover playlist-card-contents`}
-          onClick={this.selectAssessment.bind(this, assessment.id)}
         >
           <h5 className="playlist-name-title">
             {assessment.patient_email.email}
@@ -47,6 +62,7 @@ class AssessmentsDashboard extends Component {
           <h6>{assessment.playlist_name.name}</h6>
           <h6>{assessment.date_added}</h6>
           {completed}
+          {dl}
         </div>
       )
     })

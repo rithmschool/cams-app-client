@@ -13,12 +13,7 @@ class PlaylistWrapper extends Component {
       error: false,
       cleared: false
     }
-    this.addPlaylistId = this.addPlaylistId.bind(this)
     this.addPlaylist = this.addPlaylist.bind(this)
-  }
-
-  addPlaylistId(id){
-    this.setState({playlistID: id})
   }
 
   addPlaylist(config, thisArg) {
@@ -26,8 +21,7 @@ class PlaylistWrapper extends Component {
     thisArg.state, config)
     .then(response =>{
       let playlistID = response.data.id
-      this.addPlaylistId(playlistID)
-      this.setState({error: false})
+      this.setState({error: false, playlistID: playlistID, cleared: true})
     }).catch(error =>{
       this.setState({error: true})
     })
@@ -37,16 +31,17 @@ class PlaylistWrapper extends Component {
     if (this.props.match.params.playlistID){
       this.setState({playlistID: this.props.match.params.playlistID} )
     }
+
   }
 
   componentDidUpdate(){
-    if (this.props.editPlaylist === "false" && this.state.playlistID != null && this.state.cleared === false){
+    if (!this.props.editPlaylist && this.state.playlistID !== null && !this.state.cleared){
       this.setState({playlistID: null, cleared: true})
     }
   }
 
   render(){
-    let banner = this.props.editPlaylist === "true" ? "Edit" : "New"
+    let banner = this.props.editPlaylist === true ? "Edit" : "New"
     return(
       <div>
         <div className="banner-text">

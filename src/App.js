@@ -84,8 +84,8 @@ class App extends Component {
           <EnsureLoggedOut exact path="/login" component={LoginForm} />
           <PrivateRoute path="/dashboard" component={Dashboard} />
           <PrivateRoute path="/assessments" component={AssessmentsDashboard}/>
-          <PrivateRoute path="/playlists/new" component={PlaylistWrapper} editPlaylist="false"/>
-          <PrivateRoute path="/playlists/:playlistID/edit" component={PlaylistWrapper} editPlaylist="true"/>
+          <PrivateRoute path="/playlists/new" component={PlaylistWrapper} editPlaylist={false}/>
+          <PrivateRoute path="/playlists/:playlistID/edit" component={PlaylistWrapper} editPlaylist={true}/>
           <EnsureCorrectUserRoute path="/users/:userID/edit" component={EditUserForm}/>
         </Switch>
         <div className="diagonalbottom"></div>

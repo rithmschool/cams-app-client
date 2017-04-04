@@ -414,8 +414,7 @@ button.button.dropdown-content {
 div.spacearound {
   display: flex;
   justify-content: space-around;
-  align-items: center; 
-  cursor: grabbing; }
+  align-items: center; }
 
 /*Timer
 ********/

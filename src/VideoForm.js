@@ -67,12 +67,12 @@ class VideoForm extends Component {
     let showVideos = this.state.videos.map((val, idx, arr) => {
       if(stext.toLowerCase() === ''){
         return (
-          <div><a className="searchinput" onClick={this.handleAddChange} data={val.url}>{val.title}</a></div>
+          <div key={idx}><a className="searchinput" onClick={this.handleAddChange} data={val.url}>{val.title}</a></div>
           )
       }else{
         if(val.title.toLowerCase().includes(stext.toLowerCase())){
           return (
-          <div><a className="searchinput" onClick={this.handleAddChange} data={val.url}>{val.title}</a></div>
+          <div key={idx}><a className="searchinput" onClick={this.handleAddChange} data={val.url}>{val.title}</a></div>
           )
         }
       }

@@ -32,17 +32,30 @@ class PlaylistWrapper extends Component {
     })
   }
 
+  componentWillMount(){
+    if (this.props.match.params.playlistID){
+      this.setState({playlistID: this.props.match.params.playlistID} )
+    }
+  }
+
+  componentDidUpdate(){
+    if (this.props.editPlaylist === "false" && this.state.playlistID != null){
+      this.setState({playlistID: null})
+    }
+  }
+
   render(){
+    let banner = this.props.editPlaylist === "true" ? "Edit" : "New"
     return(
       <div>
         <div className="banner-text">
-          <h1 className="banner-bold">New Playlist</h1>
+          <h1 className="banner-bold">{banner} Playlist</h1>
         </div>
         <div className="content">
       <div>
         {
           this.state.playlistID ?
-          <VideoWrapper playlistID={this.state.playlistID}/> :
+          <VideoWrapper playlistID={parseInt(this.state.playlistID)} editPlaylist={this.props.editPlaylist}/> :
           <PlaylistForm addPlaylist={this.addPlaylist} error={this.state.error}/>
         }
       </div>

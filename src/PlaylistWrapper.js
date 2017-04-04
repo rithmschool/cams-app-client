@@ -10,7 +10,8 @@ class PlaylistWrapper extends Component {
     super(props);
     this.state = {
       playlistID: null,
-      error: false
+      error: false,
+      cleared: false
     }
     this.addPlaylistId = this.addPlaylistId.bind(this)
     this.addPlaylist = this.addPlaylist.bind(this)
@@ -39,8 +40,8 @@ class PlaylistWrapper extends Component {
   }
 
   componentDidUpdate(){
-    if (this.props.editPlaylist === "false" && this.state.playlistID != null){
-      this.setState({playlistID: null})
+    if (this.props.editPlaylist === "false" && this.state.playlistID != null && this.state.cleared === false){
+      this.setState({playlistID: null, cleared: true})
     }
   }
 

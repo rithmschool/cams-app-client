@@ -10,14 +10,10 @@ class PlaylistWrapper extends Component {
     super(props);
     this.state = {
       playlistID: null,
-      error: false
+      error: false,
+      cleared: false
     }
-    this.addPlaylistId = this.addPlaylistId.bind(this)
     this.addPlaylist = this.addPlaylist.bind(this)
-  }
-
-  addPlaylistId(id){
-    this.setState({playlistID: id})
   }
 
   addPlaylist(config, thisArg) {
@@ -25,24 +21,37 @@ class PlaylistWrapper extends Component {
     thisArg.state, config)
     .then(response =>{
       let playlistID = response.data.id
-      this.addPlaylistId(playlistID)
-      this.setState({error: false})
+      this.setState({error: false, playlistID: playlistID, cleared: true})
     }).catch(error =>{
       this.setState({error: true})
     })
   }
 
+  componentWillMount(){
+    if (this.props.match.params.playlistID){
+      this.setState({playlistID: this.props.match.params.playlistID} )
+    }
+
+  }
+
+  componentDidUpdate(){
+    if (!this.props.editPlaylist && this.state.playlistID !== null && !this.state.cleared){
+      this.setState({playlistID: null, cleared: true})
+    }
+  }
+
   render(){
+    let banner = this.props.editPlaylist === true ? "Edit" : "New"
     return(
       <div>
         <div className="banner-text">
-          <h1 className="banner-bold">New Playlist</h1>
+          <h1 className="banner-bold">{banner} Playlist</h1>
         </div>
         <div className="content">
       <div>
         {
           this.state.playlistID ?
-          <VideoWrapper playlistID={this.state.playlistID}/> :
+          <VideoWrapper playlistID={parseInt(this.state.playlistID)} editPlaylist={this.props.editPlaylist}/> :
           <PlaylistForm addPlaylist={this.addPlaylist} error={this.state.error}/>
         }
       </div>

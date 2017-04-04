@@ -47,6 +47,7 @@ class LoginForm extends Component {
           <h1 className="banner-bold">Dashboard</h1>
         </div>
         <div className="content">
+        <h1>Login</h1>
         <form onSubmit={this.handleSubmit.bind(this)}>
           <input type="email" name="email" placeholder="email" required onChange={this.handleChange.bind(this)}/>
           <input type="password" name="password" placeholder="password" required onChange={this.handleChange.bind(this)}/>

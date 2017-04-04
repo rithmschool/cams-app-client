@@ -7,8 +7,7 @@ class InviteDoctorForm extends Component {
         super(props)
         this.state = {
             email: '',
-            inviteSent: false,
-            error: false
+            response: ""
         }
     }
 
@@ -17,18 +16,18 @@ class InviteDoctorForm extends Component {
             email: thisArg.state.email
         }, config)
         .then(response => {
-            console.log("Email sent to" + response.data.email);
-            console.log(response);
             this.setState({
-                inviteSent: true
+                response: response.data
             });
         })
         .catch(response => {
-            debugger
             this.setState({
-                error: true
+                response: response.response.data
             });
         })
+        this.setState({
+            response: "One moment..."
+        });
     }
 
     handleChange(e) {
@@ -39,7 +38,6 @@ class InviteDoctorForm extends Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        console.log("Sumibtting");
         if (this.state.email) {
             this.inviteDoctor(config, this)
             this.setState({
@@ -49,8 +47,7 @@ class InviteDoctorForm extends Component {
     }
 
     render () {
-    let inviteSent = (this.state.inviteSent) ? <p>Invite Sent!</p> : null;
-    let inviteError = (this.state.error) ? <p>There was an error sending an invite to that email, please try again shortly.</p> : null;
+    let responseText = <p>{this.state.response}</p>
     return (
       <div>
         <div className="banner-text">
@@ -68,8 +65,7 @@ class InviteDoctorForm extends Component {
             />
             <button className="button button-hover" type="submit" value="Submit">Send Invite</button>
           </form>
-          {inviteSent}
-          {inviteError}
+          {responseText}
       </div>
     </div>
     )

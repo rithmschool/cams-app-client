@@ -19,11 +19,12 @@ import {
 import './index.css';
 import './App.css';
 import InviteDoctorForm from './InviteDoctorForm.js'
+import DoctorRegisterForm from './DoctorRegisterForm.js'
 
 const PrivateRoute = ({ component, ...rest }) => (
   <Route {...rest} render={props => (
     localStorage.getItem('token') ? (
-      React.createElement(component, Object.assign(props, rest))
+      React.createElement(component, props)
     ) : (
       <Redirect to={{
         pathname: '/login',
@@ -36,11 +37,11 @@ const PrivateRoute = ({ component, ...rest }) => (
 const EnsureCorrectUserRoute = ({ component, ...rest }) => (
   <Route {...rest} render={props => (
     ensureCorrectUser(props.match.params.userID) ? (
-      React.createElement(component, Object.assign(props, rest))
+      React.createElement(component, props)
     ) : (
       <Redirect to={{
         pathname: '/login',
-        state: { from: props.location }
+        state: { from: props.location}
       }}/>
     )
   )}/>
@@ -82,11 +83,11 @@ class App extends Component {
         <Switch>
           <Route exact path="/" component={Home} />
           <Route exact path="/patient/home" component={PatientWrapper} />
+          <EnsureLoggedOut exact path="/doctor/register" component={DoctorRegisterForm} />
           <EnsureLoggedOut exact path="/login" component={LoginForm} />
           <PrivateRoute path="/dashboard" component={Dashboard} />
           <PrivateRoute path="/assessments" component={AssessmentsDashboard}/>
-          <PrivateRoute path="/playlists/new" component={PlaylistWrapper} editPlaylist={false}/>
-          <PrivateRoute path="/playlists/:playlistID/edit" component={PlaylistWrapper} editPlaylist={true}/>
+          <PrivateRoute path="/playlists/new" component={PlaylistWrapper}/>
           <EnsureCorrectUserRoute path="/users/:userID/edit" component={EditUserForm}/>
           <PrivateRoute path="/users/:userID/invite" component={InviteDoctorForm} />
         </Switch>

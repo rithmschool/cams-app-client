@@ -405,10 +405,16 @@ button.button.dropdown-content {
 
 .grabbable {
   cursor: move;
-  cursor: grab; }
+  cursor: grab;
+  text-align: center; }
 
 .grabbable:active {
-  cursor: grabbing; }
+  cursor: move; }
+
+div.spacearound {
+  display: flex;
+  justify-content: space-around;
+  align-items: center; }
 
 /*Timer
 ********/

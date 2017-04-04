@@ -23,7 +23,7 @@ import InviteDoctorForm from './InviteDoctorForm.js'
 const PrivateRoute = ({ component, ...rest }) => (
   <Route {...rest} render={props => (
     localStorage.getItem('token') ? (
-      React.createElement(component, props)
+      React.createElement(component, Object.assign(props, rest))
     ) : (
       <Redirect to={{
         pathname: '/login',
@@ -36,7 +36,7 @@ const PrivateRoute = ({ component, ...rest }) => (
 const EnsureCorrectUserRoute = ({ component, ...rest }) => (
   <Route {...rest} render={props => (
     ensureCorrectUser(props.match.params.userID) ? (
-      React.createElement(component, props)
+      React.createElement(component, Object.assign(props, rest))
     ) : (
       <Redirect to={{
         pathname: '/login',
@@ -85,7 +85,8 @@ class App extends Component {
           <EnsureLoggedOut exact path="/login" component={LoginForm} />
           <PrivateRoute path="/dashboard" component={Dashboard} />
           <PrivateRoute path="/assessments" component={AssessmentsDashboard}/>
-          <PrivateRoute path="/playlists/new" component={PlaylistWrapper}/>
+          <PrivateRoute path="/playlists/new" component={PlaylistWrapper} editPlaylist={false}/>
+          <PrivateRoute path="/playlists/:playlistID/edit" component={PlaylistWrapper} editPlaylist={true}/>
           <EnsureCorrectUserRoute path="/users/:userID/edit" component={EditUserForm}/>
           <PrivateRoute path="/users/:userID/invite" component={InviteDoctorForm} />
         </Switch>

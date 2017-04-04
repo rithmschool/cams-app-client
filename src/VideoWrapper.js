@@ -1,6 +1,6 @@
 import React, {PropTypes, Component} from 'react';
 import VideoForm from './VideoForm';
-import {BASE_URL, config} from './helpers.js';
+import {BASE_URL, config, userID} from './helpers.js';
 import axios from 'axios';
 import getYouTubeID from 'get-youtube-id';
 import {SortableContainer, SortableElement, arrayMove} from 'react-sortable-hoc';
@@ -47,7 +47,7 @@ class VideoWrapper extends Component {
   addQuestion(question) {
     if(question){  
       return axios.post(`${BASE_URL}/api/questions`,{
-        text: question
+        title: question
       }, config)
       .then(response => {
         axios.post(`${BASE_URL}/api/screens`, {
@@ -92,6 +92,14 @@ class VideoWrapper extends Component {
       }, config)
     })
   }
+
+  componentWillMount(){
+    if(this.props.editPlaylist){ 
+      axios.get(`${BASE_URL}/api/users/${userID()}/playlists/${this.props.playlistID}`, config)
+        .then(response => {this.setState({screenData: response.data})
+        })
+      }
+    }
 
   render(){
     return(

@@ -14,7 +14,7 @@ class InviteDoctorForm extends Component {
     inviteDoctor(config, thisArg) {
         axios.post(`${BASE_URL}/api/users/invite`, {
             email: thisArg.state.email
-        }, config)
+        }, config() )
         .then(response => {
             this.setState({
                 response: response.data

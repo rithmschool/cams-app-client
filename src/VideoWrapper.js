@@ -26,14 +26,14 @@ class VideoWrapper extends Component {
     return axios.post(`${BASE_URL}/api/videos`, {
       url,
       youtube_id: youtubeID
-    }, config)
-    .then(function(response) {
+    }, config())
+    .then(response => {
       axios.post(`${BASE_URL}/api/screens`, {
         entity_id: response.data.id,
         playlist_id: this.props.playlistID,
         order: this.state.screenData.length+1,
         type: 'video'
-      }, config)
+      }, config())
       this.setState({
         screenData: this.state.screenData.concat([{
           title: response.data.title,
@@ -41,28 +41,28 @@ class VideoWrapper extends Component {
           type: 'video'
         }]),
       })
-    }.bind(this))
+    })
   }
 
   addQuestion(question) {
     if(question){  
       return axios.post(`${BASE_URL}/api/questions`,{
         title: question
-      }, config)
+      }, config())
       .then(response => {
         axios.post(`${BASE_URL}/api/screens`, {
         entity_id: response.data.id,
         playlist_id: this.props.playlistID,
         order: this.state.screenData.length+1,
         type: 'question'
-      }, config)
-        this.setState({
-          screenData: this.state.screenData.concat([{
-            title: question,
-            entity_id: response.data.id,
-            type: 'question'
-          }])
-        })
+      }, config())
+      this.setState({
+        screenData: this.state.screenData.concat([{
+          title: question,
+          entity_id: response.data.id,
+          type: 'question'
+        }])
+      })
     })
   }
 }
@@ -83,19 +83,19 @@ class VideoWrapper extends Component {
   };
 
   componentDidUpdate(){
-    this.state.screenData.map((value,index) => {
+    this.state.screenData.forEach((value,index) => {
       axios.patch(`${BASE_URL}/api/screens`, {
         entity_id: value.entity_id,
         playlist_id: this.props.playlistID,
         order: index+1,
         type: value.type
-      }, config)
+      }, config())
     })
   }
 
   componentWillMount(){
     if(this.props.editPlaylist){ 
-      axios.get(`${BASE_URL}/api/users/${userID()}/playlists/${this.props.playlistID}`, config)
+      axios.get(`${BASE_URL}/api/users/${userID()}/playlists/${this.props.playlistID}`, config())
         .then(response => {this.setState({screenData: response.data})
         })
       }

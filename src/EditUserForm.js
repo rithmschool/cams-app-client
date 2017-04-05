@@ -19,7 +19,7 @@ class EditUserForm extends Component {
   }
 
   componentWillMount(){
-    axios.get(`${BASE_URL}/api/users/${userID()}`, config)
+    axios.get(`${BASE_URL}/api/users/${userID()}`, config())
     .then(response => {
       this.setState({email: response.data.email})
     })
@@ -47,7 +47,7 @@ class EditUserForm extends Component {
 
   handleSubmit(e) {
     e.preventDefault()
-    this.editUser(config, this)
+    this.editUser(config(), this)
     this.refs.edit.value = ''
     this.refs.current_password.value = ''
     this.refs.new_password.value = ''

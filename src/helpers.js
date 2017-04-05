@@ -9,10 +9,10 @@ export const ensureCorrectUser = (pathId) => {
 
 export const userID = () => JSON.parse(atob(localStorage.getItem('token').split('.')[1])).id
 
-export const config = {
+export const config = () => ({
   headers: {
     'Accept':'application/json',
     'ContentType':'application/json',
     'Authorization':'bearer ' + localStorage.getItem('token')
   }
-}
+})

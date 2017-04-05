@@ -17,15 +17,16 @@ class LoginForm extends Component {
     router: PropTypes.object
   }
 
-  login(config, thisArg) {
-    axios.post(`${BASE_URL}/api/users/auth`, thisArg.state, config)
+  login(config) {
+    axios.post(`${BASE_URL}/api/users/auth`, this.state, config)
     .then(response => {
       localStorage.setItem('token', response.data.token)
-      thisArg.context.router.history.push('/dashboard')
+      this.context.router.history.push('/dashboard')
     })
     .catch(error => {
       this.setState({error: true})
-  })}
+    })
+  }
 
   handleChange(e) {
     this.setState({
@@ -35,7 +36,7 @@ class LoginForm extends Component {
 
   handleSubmit(e) {
     e.preventDefault()
-    this.login(config, this)
+    this.login(config())
   }
 
   render() {

@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import PatientHome from './PatientHome'
 import VideoPlayer from './VideoPlayer'
 import TimerWrapper from './TimerWrapper'
-import {BASE_URL, userID} from './helpers.js';
+import {BASE_URL} from './helpers.js';
 import axios from 'axios';
 
 const Text = props => <p>{props.children}</p>

@@ -3,7 +3,6 @@ import {Link} from 'react-router-dom';
 import {userID} from './helpers.js';
 import logo from '../images/logo.png';
 import './App.css';
-import clip from '../images/assessicon1.png';
 import Dropdown, { DropdownTrigger, DropdownContent } from 'react-simple-dropdown';
 
 

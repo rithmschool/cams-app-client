@@ -16,9 +16,9 @@ class PlaylistWrapper extends Component {
     this.addPlaylist = this.addPlaylist.bind(this)
   }
 
-  addPlaylist(config, thisArg) {
+  addPlaylist(config, data) {
     axios.post(`${BASE_URL}/api/users/${userID()}/playlists`,
-    thisArg.state, config)
+    data, config)
     .then(response =>{
       let playlistID = response.data.id
       this.setState({error: false, playlistID: playlistID, cleared: true})
@@ -51,7 +51,7 @@ class PlaylistWrapper extends Component {
       <div>
         {
           this.state.playlistID ?
-          <VideoWrapper playlistID={parseInt(this.state.playlistID)} editPlaylist={this.props.editPlaylist}/> :
+          <VideoWrapper playlistID={+this.state.playlistID} editPlaylist={this.props.editPlaylist}/> :
           <PlaylistForm addPlaylist={this.addPlaylist} error={this.state.error}/>
         }
       </div>

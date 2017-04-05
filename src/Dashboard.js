@@ -39,7 +39,7 @@ class Dashboard extends Component{
 
   handleSubmit(e) {
     e.preventDefault()
-    this.sendMail(config, this)
+    this.sendMail(config(), this)
   }
 
   closeSelection() {
@@ -54,7 +54,7 @@ class Dashboard extends Component{
 
   componentWillMount(){
     axios.get(
-      `${BASE_URL}/api/users/${userID()}/playlists`, config
+      `${BASE_URL}/api/users/${userID()}/playlists`, config()
     ).then(response => {
       this.setState({userPlaylists: response.data})
     })

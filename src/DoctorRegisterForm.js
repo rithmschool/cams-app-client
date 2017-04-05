@@ -39,12 +39,15 @@ class DoctorRegisterForm extends Component {
         .then(response => {
             this.setState({
                 response: response.data
-            })  
+            });
+            setTimeout(() => {
+              this.context.router.history.push(`/login`)
+            }, 3000);
         })
         .catch(response => {
             this.setState({
                 response: response.response.data
-            })    
+            })
         })
         this.setState({
                 response: "One moment..."
@@ -64,12 +67,7 @@ class DoctorRegisterForm extends Component {
                 response: 'Cannot have an empty password.'
             });
             return;
-        } else if (this.state.password !== this.state.confirmPassword) {
-            this.setState({
-                response: 'Passwords do not match.'
-            });
-            return;
-        }
+        } 
         this.registerDoctor(config, this)
         this.setState({
             password: '',

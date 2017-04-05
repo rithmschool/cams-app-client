@@ -54,7 +54,7 @@ class VideoForm extends Component {
 
   componentWillMount(){
     axios.get(
-      `${BASE_URL}/api/videos`, config
+      `${BASE_URL}/api/videos`, config()
     ).then(response => {
       this.setState({videos: response.data})
     })

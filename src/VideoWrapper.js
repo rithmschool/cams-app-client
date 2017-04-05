@@ -83,7 +83,7 @@ class VideoWrapper extends Component {
   };
 
   componentDidUpdate(){
-    this.state.screenData.map((value,index) => {
+    this.state.screenData.forEach((value,index) => {
       axios.patch(`${BASE_URL}/api/screens`, {
         entity_id: value.entity_id,
         playlist_id: this.props.playlistID,

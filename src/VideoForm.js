@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios';
-import {BASE_URL, userID, config} from './helpers.js';
+import {BASE_URL, config} from './helpers.js';
 
 class VideoForm extends Component {
 
@@ -65,17 +65,16 @@ class VideoForm extends Component {
   render(){
     let stext = this.state.searchtext
     let showVideos = this.state.videos.map((val, idx, arr) => {
-      if(stext.toLowerCase() === ''){
-        return (
-          <div key={idx}><a className="searchinput" onClick={this.handleAddChange} data={val.url}>{val.title}</a></div>
-          )
-      }else{
-        if(val.title.toLowerCase().includes(stext.toLowerCase())){
-          return (
-          <div key={idx}><a className="searchinput" onClick={this.handleAddChange} data={val.url}>{val.title}</a></div>
-          )
-        }
-      }
+      var showDiv = stext.toLowerCase() === '' || val.title.toLowerCase().includes(stext.toLowerCase())
+      return showDiv ? (
+        <div key={idx}>
+          <a className="searchinput" 
+             onClick={this.handleAddChange} 
+             data={val.url}>
+            {val.title}
+          </a>
+        </div>
+      ) : null
     })
     
     return(

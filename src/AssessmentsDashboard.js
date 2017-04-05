@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {BASE_URL, userID, config} from './helpers.js';
 import axios from 'axios';
-import {Link} from 'react-router-dom';
 
 class AssessmentsDashboard extends Component {
   constructor(props) {
@@ -13,8 +12,8 @@ class AssessmentsDashboard extends Component {
   }
 
   selectAssessment(assessmentID){
-    if (this.state.assessmentID === null || assessmentID != this.state.assessmentID){
-      this.setState({assessmentID: assessmentID})
+    if (this.state.assessmentID === null || assessmentID !== this.state.assessmentID){
+      this.setState({assessmentID})
     }
     else if(this.state.assessmentID !== null){
       this.setState({assessmentID: null})

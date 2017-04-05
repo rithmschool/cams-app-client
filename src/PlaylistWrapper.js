@@ -51,7 +51,7 @@ class PlaylistWrapper extends Component {
       <div>
         {
           this.state.playlistID ?
-          <VideoWrapper playlistID={parseInt(this.state.playlistID)} editPlaylist={this.props.editPlaylist}/> :
+          <VideoWrapper playlistID={+this.state.playlistID} editPlaylist={this.props.editPlaylist}/> :
           <PlaylistForm addPlaylist={this.addPlaylist} error={this.state.error}/>
         }
       </div>

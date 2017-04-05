@@ -8,6 +8,12 @@ import Dropdown, { DropdownTrigger, DropdownContent } from 'react-simple-dropdow
 
 class Nav extends Component {
 
+  constructor(props) {
+    super(props)
+    this.edit = this.edit.bind(this)
+    this.invite = this.invite.bind(this)
+  }
+
   handleLogOut(e) {
     localStorage.removeItem('token');
   }
@@ -21,7 +27,6 @@ class Nav extends Component {
   }
 
   invite(e) {
-    console.log("Sending an invite")
     this.context.router.history.push(`/users/${userID()}/invite`);
   }
 

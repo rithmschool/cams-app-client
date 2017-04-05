@@ -3,109 +3,116 @@ import {BASE_URL, userID, config} from './helpers.js';
 import axios from 'axios';
 
 class DoctorRegisterForm extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            password: '',
-            confirmPassword: '',
-            response: '',
-        }
+  constructor(props) {
+    super(props)
+    this.state = {
+        password: '',
+        confirmPassword: '',
+        response: '',
+        displayForm: false
     }
+    this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleChange = this.handleChange.bind(this)
+  }
 
-    static contextTypes = {
-    router: PropTypes.object
-    }
+  static contextTypes = {
+     router: PropTypes.object
+  }
 
-    componentWillMount(){
-        var token = this.props.location.search.split("=")[1];
-        axios.post(`${BASE_URL}/api/users/register`, {
-            token: token
-        }).then(response =>
-            this.setState({
-                response:response.data
-            })
-        ).catch(response => {
-            this.context.router.history.push(`/`);
-        })
-    }
+  componentWillMount() {
+    var token = this.props.location.search.split("=")[1];
+    axios.post(`${BASE_URL}/api/users/register`, {
+      token: token
+    }).then(response =>
+      this.setState({
+        response:response.data,
+        displayForm: true
+    })
+    ).catch(response => {
+      this.context.router.history.push(`/`);
+    })
+  }
 
-    registerDoctor(config) {
-        var token = this.props.location.search.split("=")[1];
-        axios.patch(`${BASE_URL}/api/users/register`, {
-            token: token,
-            password: this.state.password,
-            confirmPassword: this.state.confirmPassword
-        })
-        .then(response => {
-            this.setState({
-                response: response.data
-            });
-            setTimeout(() => {
-              this.context.router.history.push(`/login`)
-            }, 3000);
-        })
-        .catch(response => {
-            this.setState({
-                response: response.response.data
-            })
-        })
-        this.setState({
-                response: "One moment..."
-        })
-    }
+  registerDoctor(config) {
+    var token = this.props.location.search.split("=")[1];
+    axios.patch(`${BASE_URL}/api/users/register`, {
+      token: token,
+      password: this.state.password,
+      confirmPassword: this.state.confirmPassword
+    })
+    .then(response => {
+      this.setState({
+         response: response.data
+      });
+      setTimeout(() => {
+        this.context.router.history.push(`/login`)
+      }, 3000);
+    })
+    .catch(response => {
+      debugger
+      this.setState({
+        response: response.response.data
+      })
+    })
+    this.setState({
+            response: "Setting up your account, one moment..."
+    })
+  }
 
-    handleChange(e) {
-        this.setState({
-            [e.target.name]: e.target.value
-        });
-    }
+  handleChange(e) {
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+  }
 
-    handleSubmit(e) {
-        e.preventDefault();
-        if (!this.state.password || !this.state.confirmPassword) {
-            this.setState({
-                response: 'Cannot have an empty password.'
-            });
-            return;
-        } 
-        this.registerDoctor(config, this)
-        this.setState({
-            password: '',
-            confirmPassword: ''
-        })
-    }
+  handleSubmit(e) {
+    e.preventDefault();
+    if (!this.state.password || !this.state.confirmPassword) {
+      this.setState({
+        response: 'Cannot have an empty password.'
+      });
+      return;
+    } 
+    this.registerDoctor(config, this)
+    this.setState({
+      password: '',
+      confirmPassword: ''
+    })
+  }
 
-    render () {
+  render () {
     let responseText = <p>{this.state.response}</p>
     let passwordForm = (
-        <div className="content">
-          <h1>Create New Password</h1>
-          <form onSubmit={this.handleSubmit.bind(this)}>
+      <div>
+        <h1>Create New Password</h1>
+          <form onSubmit={this.handleSubmit}>
             <input
               type="password"
               name="password"
               placeholder="new password"
               value={this.state.password}
-              onChange={this.handleChange.bind(this)}
+              onChange={this.handleChange}
             />
             <input
               type="password"
               name="confirmPassword"
               placeholder="confirm new password"
               value={this.state.confirmPassword}
-              onChange={this.handleChange.bind(this)}
+              onChange={this.handleChange}
             />
             <button className="button button-hover" type="submit" value="Submit">Submit</button>
           </form>
-          {responseText}
-        </div>
+      </div>
       )
     return (
       <div>
         <div className="banner-text">
           <h1 className="banner-bold">Register</h1>
         </div>
-        {this.state.response ? passwordForm : null}
+        <div className="content">
+          {this.state.displayForm ? passwordForm : null}
+          {responseText}
+        </div>
       </div>
     )
   }

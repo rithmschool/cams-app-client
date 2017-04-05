@@ -3,50 +3,52 @@ import {BASE_URL, userID, config} from './helpers.js';
 import axios from 'axios';
 
 class InviteDoctorForm extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            email: '',
-            response: ""
-        }
-    }
+  constructor(props) {
+    super(props)
+      this.state = {
+        email: '',
+        response: ""
+      }
+    this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleChange = this.handleChange.bind(this)
+  }
 
-    inviteDoctor(config, thisArg) {
-        axios.post(`${BASE_URL}/api/users/invite`, {
-            email: thisArg.state.email
-        }, config() )
-        .then(response => {
-            this.setState({
-                response: response.data
-            });
-        })
-        .catch(response => {
-            this.setState({
-                response: response.response.data
-            });
-        })
+  inviteDoctor(config, thisArg) {
+    axios.post(`${BASE_URL}/api/users/invite`, {
+      email: thisArg.state.email
+    }, config() )
+    .then(response => {
+      this.setState({
+        response: response.data
+      });
+    })
+    .catch(response => {
+      this.setState({
+        response: response.response.data
+      });
+    })
+    this.setState({
+      response: "Getting ready to send your invite..."
+    });
+  }
+
+  handleChange(e) {
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+    if (this.state.email) {
+      this.inviteDoctor(config, this)
         this.setState({
-            response: "One moment..."
-        });
+          email: ''
+        })
     }
+  }
 
-    handleChange(e) {
-        this.setState({
-            [e.target.name]: e.target.value
-        });
-    }
-
-    handleSubmit(e) {
-        e.preventDefault();
-        if (this.state.email) {
-            this.inviteDoctor(config, this)
-            this.setState({
-                email: ''
-            })
-        }
-    }
-
-    render () {
+  render () {
     let responseText = <p>{this.state.response}</p>
     return (
       <div>
@@ -55,7 +57,7 @@ class InviteDoctorForm extends Component {
         </div>
         <div className="content">
           <h1>Invite New Doctor</h1>
-          <form onSubmit={this.handleSubmit.bind(this)}>
+          <form onSubmit={this.handleSubmit}>
             <input
               type="email"
               name="email"
@@ -70,6 +72,7 @@ class InviteDoctorForm extends Component {
     </div>
     )
   }
+
 }
 
 export default InviteDoctorForm;

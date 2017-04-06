@@ -38,9 +38,9 @@ class PatientHome extends Component {
         stream: mediaStream
       })
       var options = {
-        mimeType: 'video/webm',
+        mimeType: 'video/webm;codecs=H264',
         audioBitsPerSecond: 128000,
-        videoBitsPerSecond: 128000
+        videoBitsPerSecond: 512000
       };
       recordRTC = RecordRTC(mediaStream, options)
       recordRTC.startRecording()
@@ -53,7 +53,7 @@ class PatientHome extends Component {
       let fd = new FormData();
       recordedBlob = recordRTC.getBlob();
       fd.append('assessment_id', this.props.assessment_id)
-      fd.append('fname', 'video_' + Date.now() + '.webm');
+      fd.append('fname', 'video_' + Date.now() + '.mp4');
       fd.append('file', recordedBlob)
       axios.post(`${BASE_URL}/api/recording`, fd)
         .then(r => null)

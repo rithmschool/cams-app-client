@@ -11,7 +11,7 @@ class VideoViewer extends Component {
 
   render() {
     return (
-      <div>
+      <div className="lg">
         <video src={this.props.src} id="videoElement" autoPlay="true"/>
         <p>Please take this time to look at the video viewer to make sure it is positioned on your face.</p> 
         <p> Please adjust lighting so your face is clearly visible.</p>

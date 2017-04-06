@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {BASE_URL, userID, config} from './helpers.js';
+import {BASE_URL, config} from './helpers.js';
 import axios from 'axios';
 
 class InviteDoctorForm extends Component {
@@ -19,16 +19,16 @@ class InviteDoctorForm extends Component {
     }, config() )
     .then(response => {
       this.setState({
-        response: response.data
+        response: response.data.message
       });
     })
     .catch(response => {
       this.setState({
-        response: response.response.data
+        response: response.response.data.message
       });
     })
     this.setState({
-      response: "Getting ready to send your invite..."
+      response: "Sending your invite..."
     });
   }
 

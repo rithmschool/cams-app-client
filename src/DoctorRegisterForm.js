@@ -1,5 +1,5 @@
 import React, {PropTypes, Component} from 'react';
-import {BASE_URL, userID, config} from './helpers.js';
+import {BASE_URL, config} from './helpers.js';
 import axios from 'axios';
 
 class DoctorRegisterForm extends Component {
@@ -25,7 +25,7 @@ class DoctorRegisterForm extends Component {
       token: token
     }).then(response =>
       this.setState({
-        response:response.data,
+        response:response.data.message,
         displayForm: true
     })
     ).catch(response => {
@@ -42,20 +42,19 @@ class DoctorRegisterForm extends Component {
     })
     .then(response => {
       this.setState({
-         response: response.data
+        response: response.data.message
       });
       setTimeout(() => {
         this.context.router.history.push(`/login`)
       }, 3000);
     })
     .catch(response => {
-      debugger
       this.setState({
-        response: response.response.data
+        response: response.response.data.message
       })
     })
     this.setState({
-            response: "Setting up your account, one moment..."
+      response: "Setting up your account, one moment..."
     })
   }
 

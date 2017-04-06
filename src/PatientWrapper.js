@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import PatientHome from './PatientHome'
 import VideoPlayer from './VideoPlayer'
+import VideoViewer from './VideoViewer'
 import TimerWrapper from './TimerWrapper'
 import {BASE_URL} from './helpers.js';
 import axios from 'axios';
@@ -43,6 +44,7 @@ class PatientWrapper extends Component {
     return(
       <PatientHome videosLength={this.state.videoIDs.length} assessment_id={this.state.assessment_id}>
         <Text>Welcome! You will watch short videos and answer questions about yourself. <br />Please read the instructions carefully. You will have 30 seconds to respond to each question. <br />Your answers will be recorded so please speak OUT LOUD when responding. <br /><br />Please press the spacebar when you are ready to go forward</Text>
+        <VideoViewer/>
         <Text>You will now watch several short video clips. <br />After each video, you will be asked questions  about what happened in the video. <br />You will have 30 secons  to answer each question. <br />Please speak out loud and keep speaking until the time runs out. <br /><br />When you are ready, please press the spacebar to continue.</Text>
         <Text>When you are ready, please press the spacebar to continue to the video.</Text>
         <VideoPlayer videos={this.state.videoIDs} />

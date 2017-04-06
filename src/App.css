@@ -426,3 +426,7 @@ div.spacearound {
 
 .center {
   padding-top: 38px; }
+
+#videoElement {
+  width: 300px;
+  background-color: #666; }

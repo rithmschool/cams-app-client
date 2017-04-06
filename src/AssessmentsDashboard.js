@@ -8,15 +8,16 @@ class AssessmentsDashboard extends Component {
     this.state = {
       doctorAssessments: [],
       assessmentID: null,
-      downloaded: ''
+      downloaded: []
     }
   }
 
   downloadFile(id){
-    axios.get(`${BASE_URL}/api/recording/${id}`)
+    axios.get(`${BASE_URL}/api/recording/${id}`, config)
       .then(response => {
-        this.setState({downloaded: this.state.downloaded+response.data.id.toString()})
+        this.setState({downloaded: [response.data.id, response.data.url]})
       })
+
   }
 
   selectAssessment(assessmentID){
@@ -40,17 +41,15 @@ class AssessmentsDashboard extends Component {
       let completed = assessment.recording_url ?
         <div>
           <h6>Completed: Yes</h6>
-          <button onClick={this.downloadFile.bind(this,assessment.id)}>Download</button>
+          <button onClick={this.downloadFile.bind(this,assessment.id)}>Get Download Link</button>
         </div> :
         <h6>Completed: No</h6>
       let className = this.state.assessmentID === assessment.id ?
         'selected' :
         'playlist-card'
-        let dl = this.state.downloaded.includes(assessment.id.toString()) ? <div>
-                    <h5>Download Complete.</h5>
-                    <h6>View in downloads folder</h6>
-                  </div> :
-                  <p></p>
+
+      let dl = this.state.downloaded.includes(assessment.id) ? <button className="button button-hover" type="submit" value="Submit"><a href={this.state.downloaded[1]}>Download</a></button> : null
+
       return (
         <div
           key={i}

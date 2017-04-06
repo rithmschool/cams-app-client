@@ -3,7 +3,7 @@ import PatientHome from './PatientHome'
 import VideoPlayer from './VideoPlayer'
 import VideoViewer from './VideoViewer'
 import TimerWrapper from './TimerWrapper'
-import {BASE_URL} from './helpers.js';
+import {BASE_URL, userID, BrowserDetect} from './helpers.js';
 import axios from 'axios';
 
 const Text = props => <p>{props.children}</p>
@@ -59,17 +59,25 @@ class PatientWrapper extends Component {
   }
 
   render() {
+    BrowserDetect.init()
+    let display = BrowserDetect.browser === 'Chrome' ? <PatientHome videosLength={this.state.videoIDs.length} assessment_id={this.state.assessment_id}>
+                          <Text>Welcome! You will watch short videos and answer questions about yourself. <br />Please read the instructions carefully. You will have 30 seconds to respond to each question. <br />Your answers will be recorded so please speak OUT LOUD when responding. <br /><br />Please press the spacebar when you are ready to go forward</Text>
+                          <Text>You will now watch several short video clips. <br />After each video, you will be asked questions  about what happened in the video. <br />You will have 30 secons  to answer each question. <br />Please speak out loud and keep speaking until the time runs out. <br /><br />When you are ready, please press the spacebar to continue.</Text>
+                          <Text>When you are ready, please press the spacebar to continue to the video.</Text>
+                          <VideoPlayer videos={this.state.videoIDs} />
+                          <Text>Please describe what happened in the video. <br />Use as much detail as possible when describing the video. <br />You have 30 seconds. Please try to talk for the entire duration of the timer.<br /><br />Please press the spacebar when you are ready to start.</Text>
+                          <TimerWrapper></TimerWrapper>
+                          <Text>Bye!</Text>
+                        </PatientHome> 
+                        : <PatientHome videosLength={this.state.videoIDs.length} assessment_id={this.state.assessment_id}>
+                          <Text>Browser not supported. Please switch to <a href="https://www.google.com/chrome/browser/desktop/index.html">Google Chrome</a> to proceed.</Text>
+                          <VideoPlayer videos={this.state.videoIDs} />
+                          <TimerWrapper></TimerWrapper>
+                        </PatientHome>
     return(
-      <PatientHome videosLength={this.state.videoIDs.length} assessment_id={this.state.assessment_id}>
-        <Text>Welcome! You will watch short videos and answer questions about yourself. <br />Please read the instructions carefully. You will have 30 seconds to respond to each question. <br />Your answers will be recorded so please speak OUT LOUD when responding. <br /><br />Please press the spacebar when you are ready to go forward</Text>
-        <VideoViewer src={this.state.src}/>
-        <Text>You will now watch several short video clips. <br />After each video, you will be asked questions  about what happened in the video. <br />You will have 30 secons  to answer each question. <br />Please speak out loud and keep speaking until the time runs out. <br /><br />When you are ready, please press the spacebar to continue.</Text>
-        <Text>When you are ready, please press the spacebar to continue to the video.</Text>
-        <VideoPlayer videos={this.state.videoIDs} />
-        <Text>Please describe what happened in the video. <br />Use as much detail as possible when describing the video. <br />You have 30 seconds. Please try to talk for the entire duration of the timer.<br /><br />Please press the spacebar when you are ready to start.</Text>
-        <TimerWrapper></TimerWrapper>
-        <Text>Bye!</Text>
-      </PatientHome>
+        <div>
+          {display}
+        </div>
     )
   }
 }

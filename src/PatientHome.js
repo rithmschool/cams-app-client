@@ -109,9 +109,6 @@ class PatientHome extends Component {
   render() {
     return (
       <div>
-        <div className="banner-text">
-          <h1 className="banner-bold">Patient</h1>
-        </div>
         <div className="content">
           <div>
             <div>{React.cloneElement(this.props.children[this.state.idx], {

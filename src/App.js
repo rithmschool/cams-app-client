@@ -89,7 +89,6 @@ class App extends Component {
           <PrivateRoute path="/assessments" component={AssessmentsDashboard}/>
           <PrivateRoute path="/playlists/new" component={PlaylistWrapper} editPlaylist={false}/>
           <PrivateRoute path="/playlists/:playlistID/edit" component={PlaylistWrapper} editPlaylist={true}/>
-          <PrivateRoute path="/playlists/new" component={PlaylistWrapper}/>
           <EnsureCorrectUserRoute path="/users/:userID/edit" component={EditUserForm}/>
           <PrivateRoute path="/users/:userID/invite" component={InviteDoctorForm} />
         </Switch>

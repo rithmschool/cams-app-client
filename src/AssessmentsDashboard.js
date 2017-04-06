@@ -17,7 +17,6 @@ class AssessmentsDashboard extends Component {
       .then(response => {
         this.setState({downloaded: [response.data.id, response.data.url]})
       })
-
   }
 
   selectAssessment(assessmentID){

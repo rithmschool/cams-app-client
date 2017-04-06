@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 
 class VideoViewer extends Component {
 
-	constructor(props) {
+  constructor(props) {
     super(props)
     this.state = {
       src: null,
@@ -10,7 +10,7 @@ class VideoViewer extends Component {
     }
   }
 
-	captureUserMedia(callback) {
+  captureUserMedia(callback) {
     let params = {audio: true, video: true};
     navigator.getUserMedia(params, callback, (error) => {
       alert(JSON.stringify(error));
@@ -37,8 +37,6 @@ class VideoViewer extends Component {
       </div> 
     )
   }
-
-
 }
 
 export default VideoViewer;

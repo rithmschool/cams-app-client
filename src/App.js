@@ -18,6 +18,8 @@ import {
 } from 'react-router-dom';
 import './index.css';
 import './App.css';
+import InviteDoctorForm from './InviteDoctorForm.js'
+import DoctorRegisterForm from './DoctorRegisterForm.js'
 
 const PrivateRoute = ({ component, ...rest }) => (
   <Route {...rest} render={props => (
@@ -81,12 +83,14 @@ class App extends Component {
         <Switch>
           <Route exact path="/" component={Home} />
           <Route exact path="/patient/home" component={PatientWrapper} />
+          <EnsureLoggedOut exact path="/doctor/register" component={DoctorRegisterForm} />
           <EnsureLoggedOut exact path="/login" component={LoginForm} />
           <PrivateRoute path="/dashboard" component={Dashboard} />
           <PrivateRoute path="/assessments" component={AssessmentsDashboard}/>
           <PrivateRoute path="/playlists/new" component={PlaylistWrapper} editPlaylist={false}/>
           <PrivateRoute path="/playlists/:playlistID/edit" component={PlaylistWrapper} editPlaylist={true}/>
           <EnsureCorrectUserRoute path="/users/:userID/edit" component={EditUserForm}/>
+          <PrivateRoute path="/users/:userID/invite" component={InviteDoctorForm} />
         </Switch>
         <div className="diagonalbottom"></div>
         <div className="footer">

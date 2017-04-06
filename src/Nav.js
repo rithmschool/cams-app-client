@@ -8,6 +8,12 @@ import Dropdown, { DropdownTrigger, DropdownContent } from 'react-simple-dropdow
 
 class Nav extends Component {
 
+  constructor(props) {
+    super(props)
+    this.edit = this.edit.bind(this)
+    this.invite = this.invite.bind(this)
+  }
+
   handleLogOut(e) {
     localStorage.removeItem('token');
   }
@@ -17,7 +23,11 @@ class Nav extends Component {
   }
 
   edit(e) {
-    this.context.router.history.push(`/users/${userID()}/edit`)
+    this.context.router.history.push(`/users/${userID()}/edit`);
+  }
+
+  invite(e) {
+    this.context.router.history.push(`/users/${userID()}/invite`);
   }
 
   render() {
@@ -65,6 +75,9 @@ class Nav extends Component {
     <div>
       <button className="sign button dropdown-content button-hover" onClick={this.edit.bind(this)}>
         Edit
+      </button>
+      <button className="sign button dropdown-content button-hover" onClick={this.invite.bind(this)}>
+        Invite Doctor
       </button>
       <button
         className="sign button dropdown-content button-hover">

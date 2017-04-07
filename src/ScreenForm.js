@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import {BASE_URL, config} from './helpers.js';
 
-class VideoForm extends Component {
+class ScreenForm extends Component {
 
   constructor(props){
     super(props)
@@ -110,4 +110,4 @@ class VideoForm extends Component {
   }
 }
 
-export default VideoForm;
+export default ScreenForm;

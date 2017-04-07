@@ -1,12 +1,12 @@
 import React, {PropTypes, Component} from 'react';
-import VideoForm from './VideoForm';
+import ScreenForm from './ScreenForm';
 import {BASE_URL, config, userID} from './helpers.js';
 import axios from 'axios';
 import getYouTubeID from 'get-youtube-id';
 import {SortableContainer, SortableElement, arrayMove} from 'react-sortable-hoc';
 import RichQuestionEditor from './RichQuestionEditor.js';
 
-class VideoWrapper extends Component {
+class ScreenWrapper extends Component {
 
   constructor(props){
     super(props)
@@ -105,10 +105,10 @@ class VideoWrapper extends Component {
   render(){
     return(
       <div>
-        <h3 className="">Add Videos</h3>
+        <h3 className="">Add Videos and Questions</h3>
         <RichQuestionEditor className="question-editor"/>
         <SortableList screenData={this.state.screenData} onSortEnd={this.onSortEnd} />
-        <VideoForm addQuestion={this.addQuestion} addVideo={this.addVideo} addDone={this.addDone}/>
+        <ScreenForm addQuestion={this.addQuestion} addVideo={this.addVideo} addDone={this.addDone}/>
       </div>
     )
   }
@@ -126,4 +126,4 @@ const SortableList = SortableContainer(({screenData}) => {
     );
 })
 
-export default VideoWrapper;
+export default ScreenWrapper;

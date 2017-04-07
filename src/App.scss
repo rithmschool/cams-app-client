@@ -1,6 +1,6 @@
 @import 'variables';
 
-body {
+mainPage {
   font-family:$font-main;
   color: $dark-grey;
   background: $main-gradient;
@@ -109,11 +109,11 @@ button {
 }
 
 h1.banner-bold {
-  text-shadow: $heading-shadow;
   color: white;
-  font-style: italic;
-  text-transform: uppercase;
   max-width: 60vw;
+  opacity: 0.8;
+  font-size: 2.2em;
+  font-style: italic;
 }
 
 
@@ -548,7 +548,7 @@ div.spacearound {
 }
 
 #videoElement {
-    width: 300px;
+    width: 500px;
     background-color: #666;
 }
 

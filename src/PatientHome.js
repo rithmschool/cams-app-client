@@ -2,9 +2,12 @@ import React, {Component} from 'react';
 import RecordRTC from 'recordrtc';
 import {BASE_URL} from './helpers.js';
 import axios from 'axios';
-import VideoPlayer from './VideoPlayer'
-import VideoViewer from './VideoViewer'
-import TimerWrapper from './TimerWrapper'
+import Timer from './Timer';
+import Timeline from './horizontal-timeline/Timeline';
+import VideoPlayer from './VideoPlayer';
+import VideoViewer from './VideoViewer';
+import TimerWrapper from './TimerWrapper';
+
 let recordRTC;
 
 const Text = props => <div className="lg">{props.children}</div>
@@ -144,6 +147,7 @@ class PatientHome extends Component {
     return (
       <div className="content">
         {screens[this.state.idx]}
+        <Timeline valuesLength={screens.length} keyBoardEnabled={this.state.keyBoardEnabled}></Timeline>
       </div>
     )
   }

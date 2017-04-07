@@ -1,4 +1,4 @@
-import React, {PropTypes} from 'react';
+import React from 'react';
 import {Motion, spring} from 'react-motion';
 import EventLine from './EventLine';
 import Events from './Events';
@@ -28,7 +28,7 @@ class EventsBar extends React.Component {
 
 
   handleSpaceBar = (event) => {
-    if(event.keyCode === 32){
+    if(event.keyCode === 32 && this.props.keyBoardEnabled){
       this.props.spaceBarClick()
     }
   }

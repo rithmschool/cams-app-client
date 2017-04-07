@@ -121,7 +121,7 @@ class PatientHome extends Component {
                 })}
             </div>
           </div>
-          <Timeline></Timeline>
+          <Timeline keyBoardEnabled={this.state.keyBoardEnabled}></Timeline>
         </div>
       </div>
     )

@@ -57,6 +57,7 @@ class HorizontalTimeline extends Component {
  				slidingMotion={props.slidingMotion}
  				styles={props.styles}
  				isTouchEnabled={props.isTouchEnabled}
+ 				keyBoardEnabled={this.props.keyBoardEnabled}
  			/>
  		)
 

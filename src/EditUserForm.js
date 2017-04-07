@@ -10,8 +10,10 @@ class EditUserForm extends Component {
       current_password: '',
       new_password: '',
       confirm_new_password: '',
-      error: false
+      message: ''
     }
+    this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleChange = this.handleChange.bind(this)
   }
 
   static contextTypes = {
@@ -19,7 +21,7 @@ class EditUserForm extends Component {
   }
 
   componentWillMount(){
-    axios.get(`${BASE_URL}/api/users/${userID()}`, config)
+    axios.get(`${BASE_URL}/api/users/${userID()}`, config())
     .then(response => {
       this.setState({email: response.data.email})
     })
@@ -33,9 +35,21 @@ class EditUserForm extends Component {
       confirm_new_password: this.state.confirm_new_password
     }, config)
     .then(response => {
-      this.setState({error: false})
+      this.setState({
+        message: 'You have successfully updated your account!',
+        current_password: '',
+        new_password: '',
+        confirm_new_password: '',
+        email: response.data.email
+      })
     }).catch(error => {
-      this.setState({error: true})
+      this.setState({
+        message: `Please re-enter the correct current password 
+          and check to see if the new and confirm password fields are the same.`,
+        current_password: '',
+        new_password: '',
+        confirm_new_password: ''
+      })
     })
   }
 
@@ -47,16 +61,13 @@ class EditUserForm extends Component {
 
   handleSubmit(e) {
     e.preventDefault()
-    this.editUser(config, this)
-    this.refs.edit.value = ''
-    this.refs.current_password.value = ''
-    this.refs.new_password.value = ''
-    this.refs.confirm_new_password.value = ''
+    this.editUser(config(), this)
   }
 
   render () {
-    let error = (this.state.error) ?
-      <p>Please renter the correct current password and check to see if the new and confirm password fields are the same</p> : null;
+    let message = this.state.message ?
+      <p>{this.state.message}</p> :
+      null;
     return (
       <div>
         <div className="banner-text">
@@ -64,41 +75,37 @@ class EditUserForm extends Component {
         </div>
         <div className="content">
           <h1>Profile</h1>
-          <form onSubmit={this.handleSubmit.bind(this)}>
+          <form onSubmit={this.handleSubmit}>
             <input
               type="email"
               name="email"
-              ref="edit"
               placeholder="new email"
               value={this.state.email}
-              onChange={this.handleChange.bind(this)}
+              onChange={this.handleChange}
             />
             <input
               type="password"
               name="current_password"
-              ref="current_password"
               placeholder="current password"
               value={this.state.current_password}
-              onChange={this.handleChange.bind(this)}
+              onChange={this.handleChange}
             />
             <input
               type="password"
               name="new_password"
-              ref="new_password"
               placeholder="new password"
               value={this.state.new_password}
-              onChange={this.handleChange.bind(this)}
+              onChange={this.handleChange}
             />
             <input
               type="password"
               name="confirm_new_password"
-              ref="confirm_new_password"
               placeholder="confirm new password"
               value={this.state.confirm_new_password}
-              onChange={this.handleChange.bind(this)}
+              onChange={this.handleChange}
             />
             <button className="button button-hover" type="submit" value="Submit">Update</button>
-            {error}
+            {message}
           </form>
       </div>
     </div>

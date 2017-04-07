@@ -2,6 +2,17 @@ import React, {Component} from 'react';
 import {BASE_URL, userID, config} from './helpers.js';
 import axios from 'axios';
 import {Link} from 'react-router-dom';
+import './Dashboard.css';
+
+class Close extends Component{
+  render() {
+    return (
+      <div onClick={this.props.handleClose}>
+        <i className="fa delete fa-times-circle button-hover" aria-hidden="true"></i>
+      </div>
+    )
+  }
+}
 
 class Dashboard extends Component{
 
@@ -12,23 +23,36 @@ class Dashboard extends Component{
       playlistID: null,
       playlistName: null,
       userPlaylists: [],
+      successMessage: '',
+      loading: false
     }
     this.closeSelection = this.closeSelection.bind(this)
+    this.handleChange = this.handleChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  sendMail(config, thisArg) {
+  sendMail(config) {
+    this.setState({loading: true})
     axios.post(`${BASE_URL}/api/users`, {
-      email: thisArg.state.email
+      email: this.state.email
     }, config)
     .then(response => axios.post(`${BASE_URL}/api/users/${userID()}/assessments`, {
       patient_id: response.data.id,
-      playlist_id: thisArg.state.playlistID,
+      playlist_id: this.state.playlistID,
       doctor_id: userID()
-      }, config))
+    }, config))
     .then(response => axios.post(`${BASE_URL}/api/users/mail`, {
       assessment_id: response.data.id,
       patient_id: response.data.patient_id
-      }, config))
+    }, config))
+    .then(response => {
+      this.setState({
+      playlistID: null,
+      playlistName: null,
+      email: '',
+      successMessage: response.data.message,
+      loading: false
+    })})
   }
 
   handleChange(e) {
@@ -39,11 +63,11 @@ class Dashboard extends Component{
 
   handleSubmit(e) {
     e.preventDefault()
-    this.sendMail(config, this)
+    this.sendMail(config())
   }
 
   closeSelection() {
-    this.setState({playlistID: null, playlistName: null})
+    this.setState({playlistID: null, playlistName: null, successMessage: ''})
   }
 
   choosePlaylist(playlist_id, playlistName){
@@ -54,23 +78,37 @@ class Dashboard extends Component{
 
   componentWillMount(){
     axios.get(
-      `${BASE_URL}/api/users/${userID()}/playlists`, config
+      `${BASE_URL}/api/users/${userID()}/playlists`, config()
     ).then(response => {
       this.setState({userPlaylists: response.data})
     })
   }
   render() {
+    let loadingMessage = this.state.loading ?
+      <div className="loading">
+        Please wait, we are sending your email now.
+        <i className="fa fa-spinner fa-spin" aria-hidden="true"></i>
+      </div> :
+      null;
+
+    let successMessage = this.state.successMessage ?
+      <div className="email-sent">
+        {this.state.successMessage}
+        <Close handleClose={this.closeSelection}/>
+      </div> : 
+      null;
+
     let playlists = this.state.userPlaylists.map((playlist, i) => {
       let showForm = this.state.playlistName === playlist.name ?
         <div>
-          <form className="email" onSubmit={this.handleSubmit.bind(this)}>
+          <form className="email" onSubmit={this.handleSubmit}>
             <h5>Send to:</h5>
             <input
               type="email"
               name="email"
               placeholder="email"
               value={this.state.email}
-              required onChange={this.handleChange.bind(this)}
+              required onChange={this.handleChange}
             />
             <button
               className="button button-hover"
@@ -79,8 +117,11 @@ class Dashboard extends Component{
               Submit
             </button>
           </form>
-          <div onClick={this.closeSelection}>
-            <i className="fa delete fa-times-circle button-hover" aria-hidden="true"></i>
+          <div className="spacearound">
+            <Close handleClose={this.closeSelection}/>
+            <Link to={`playlists/${playlist.id}/edit`}>
+              <i className="fa fa-pencil-square button-hover delete" aria-hidden="true"></i>
+            </Link>
           </div>
         </div> 
         :
@@ -117,6 +158,8 @@ class Dashboard extends Component{
           <h1 className="banner-bold">Dashboard</h1>
         </div>
         <div className="content">
+          {loadingMessage}
+          {successMessage}
           <div className="playlist-container">
             {playlists}
           </div>

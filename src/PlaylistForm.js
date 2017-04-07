@@ -22,8 +22,8 @@ class PlaylistForm extends Component {
 
   handleSubmit(e){
     e.preventDefault()
+    this.props.addPlaylist(config(), this.state)
     this.setState({name: ""})
-    this.props.addPlaylist(config, this)
   }
 
   componentDidUpdate() {

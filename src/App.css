@@ -1,4 +1,4 @@
-body {
+mainPage {
   font-family: -apple-system, BlinkMacSystemFont, sans-serif;
   color: #4d4d4d;
   background: linear-gradient(135deg, #00d8ff 0%, #7db9e8 100%);
@@ -85,11 +85,10 @@ button {
   color: white; }
 
 h1.banner-bold {
-  text-shadow: -2px 2px 0px #009eb8, -3px 3px 0px #00aea7;
   color: white;
-  font-style: italic;
-  text-transform: uppercase;
-  max-width: 60vw; }
+  max-width: 60vw;
+  opacity: .95;
+  font-size: 2.2em; }
 
 /* CONTENT
 *********/
@@ -405,10 +404,16 @@ button.button.dropdown-content {
 
 .grabbable {
   cursor: move;
-  cursor: grab; }
+  cursor: grab;
+  text-align: center; }
 
 .grabbable:active {
-  cursor: grabbing; }
+  cursor: move; }
+
+div.spacearound {
+  display: flex;
+  justify-content: space-around;
+  align-items: center; }
 
 /*Timer
 ********/
@@ -420,3 +425,7 @@ button.button.dropdown-content {
 
 .center {
   padding-top: 38px; }
+
+#videoElement {
+  width: 500px;
+  background-color: #666; }

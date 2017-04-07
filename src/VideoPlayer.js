@@ -23,8 +23,8 @@ class VideoPlayer extends Component {
 
   render() {
     const opts = {
-      height: '390',
-      width: '640',
+      height: '562.5',
+      width: '1000',
       playerVars: { // https://developers.google.com/youtube/player_parameters
         autoplay: 1,
         controls: 0
@@ -37,7 +37,8 @@ class VideoPlayer extends Component {
           opts={opts}
           onReady={this._onReady}
           onEnd={this._onEnd}
-        /> 
+        />
+        <p className="lg">Press the space key to move on once the video has ended </p>
       </div>
     )
   }

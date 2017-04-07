@@ -91,12 +91,6 @@ class VideoForm extends Component {
           </div>
           <div className="videos-form">
             <form className="addQuestion" onSubmit={this.handleAdd.bind(this)}>
-            <input type="text"
-              onChange={this.handleChange.bind(this)}
-              name="question"
-              placeholder="Add A Question"
-              value={this.state.question}
-            />
             <button type="submit" className="button" value="Add">+</button>
           </form>
             <form onSubmit={this.handleAdd}>

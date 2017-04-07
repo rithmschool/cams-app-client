@@ -4,6 +4,7 @@ import {BASE_URL, config, userID} from './helpers.js';
 import axios from 'axios';
 import getYouTubeID from 'get-youtube-id';
 import {SortableContainer, SortableElement, arrayMove} from 'react-sortable-hoc';
+import RichQuestionEditor from './RichQuestionEditor.js';
 
 class VideoWrapper extends Component {
 
@@ -105,6 +106,7 @@ class VideoWrapper extends Component {
     return(
       <div>
         <h3 className="">Add Videos</h3>
+        <RichQuestionEditor className="question-editor"/>
         <SortableList screenData={this.state.screenData} onSortEnd={this.onSortEnd} />
         <VideoForm addQuestion={this.addQuestion} addVideo={this.addVideo} addDone={this.addDone}/>
       </div>

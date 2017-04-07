@@ -3,7 +3,6 @@ import RecordRTC from 'recordrtc';
 import {BASE_URL} from './helpers.js';
 import axios from 'axios';
 import Timer from './Timer';
-
 import Timeline from './horizontal-timeline/Timeline';
 
 let Whammy = RecordRTC.Whammy;

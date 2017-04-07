@@ -5,16 +5,18 @@ class TimerWrapper extends Component {
   constructor(props){
     super(props);
     this.state = {
-      counter: 30
+      counter: 30,
+      timerId: null
     };
   }
 
   componentDidMount() {
     this.props.toggle()
-    setInterval(
+    let timerId = setInterval(
       () => this.tick(),
       1000
     );
+    this.setState({timerId})
   }
 
   tick() {
@@ -24,6 +26,7 @@ class TimerWrapper extends Component {
       });     
     } else {
       this.props.toggle()
+      clearTimeout(this.state.timerId)
     }
 
   }
@@ -35,4 +38,3 @@ class TimerWrapper extends Component {
 }
 
 export default TimerWrapper;
-

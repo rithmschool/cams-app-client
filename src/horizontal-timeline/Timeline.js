@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
 import HorizontalTimeline from './HorizontalTimeline'
 
-const VALUES = [0.5, 0.5, 2, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5];   
-
 class Timeline extends Component {
   constructor(props) {
     super(props);
@@ -11,6 +9,7 @@ class Timeline extends Component {
   }
 
   render() {
+    let VALUES = Array(this.props.valuesLength).fill(0.5); 
     return (
       <div>
         <HorizontalTimeline

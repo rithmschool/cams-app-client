@@ -2,9 +2,8 @@ import React, {PropTypes, Component} from 'react';
 import {Link} from 'react-router-dom';
 import {userID} from './helpers.js';
 import logo from '../images/logo.png';
-import './App.css';
+import './Nav.css';
 import Dropdown, { DropdownTrigger, DropdownContent } from 'react-simple-dropdown';
-
 
 class Nav extends Component {
 

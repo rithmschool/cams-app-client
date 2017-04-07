@@ -2,10 +2,14 @@ import React, {Component} from 'react';
 import RecordRTC from 'recordrtc';
 import {BASE_URL} from './helpers.js';
 import axios from 'axios';
-import Timer from './Timer'
+import Timer from './Timer';
+
+import Timeline from './horizontal-timeline/Timeline';
+
 let Whammy = RecordRTC.Whammy;
 let video = new Whammy.Video(100);
 let recordRTC;
+
 
 class PatientHome extends Component {
 
@@ -123,6 +127,7 @@ class PatientHome extends Component {
                 })}
             </div>
           </div>
+          <Timeline></Timeline>
         </div>
       </div>
     )

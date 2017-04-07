@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import PlaylistForm from './PlaylistForm';
-import VideoWrapper from './VideoWrapper';
+import ScreenWrapper from './ScreenWrapper';
 import {BASE_URL, userID} from './helpers.js';
 import axios from 'axios';
 
@@ -51,7 +51,7 @@ class PlaylistWrapper extends Component {
       <div>
         {
           this.state.playlistID ?
-          <VideoWrapper playlistID={+this.state.playlistID} editPlaylist={this.props.editPlaylist}/> :
+          <ScreenWrapper playlistID={+this.state.playlistID} editPlaylist={this.props.editPlaylist}/> :
           <PlaylistForm addPlaylist={this.addPlaylist} error={this.state.error}/>
         }
       </div>

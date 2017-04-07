@@ -2,7 +2,14 @@ import React, {Component} from 'react';
 import RecordRTC from 'recordrtc';
 import {BASE_URL} from './helpers.js';
 import axios from 'axios';
+import VideoPlayer from './VideoPlayer'
+import VideoViewer from './VideoViewer'
+import TimerWrapper from './TimerWrapper'
 let recordRTC;
+
+const Text = props => <div className="lg">{props.children}</div>
+
+const QuestionView = props => <p>{props.text}</p>
 
 class PatientHome extends Component {
 
@@ -10,11 +17,7 @@ class PatientHome extends Component {
     super(props)
     this.state = {
       idx: 0,
-      videoIdx: 1,
-      recordVideo: null,
       src: null,
-      uploadSuccess: null,
-      uploading: false,
       keyBoardEnabled: true,
       stream: ''
     }
@@ -29,8 +32,13 @@ class PatientHome extends Component {
     navigator.getUserMedia(params, callback, (error) => {
       alert(JSON.stringify(error));
     });
-  };
+  }
 
+  requestUserMedia() {
+    this.captureUserMedia(stream => {
+      this.setState({ src: window.URL.createObjectURL(stream) });
+    });
+  }
 
   startRecord() {
     this.captureUserMedia((mediaStream) => {
@@ -67,31 +75,20 @@ class PatientHome extends Component {
   stopMedia() {
     this.state.stream.getTracks()[1].stop()
     this.state.stream.getTracks()[0].stop()
-  };
+  }
 
   handleSpaceBar(e) {
     if (e.keyCode === 32 && this.state.keyBoardEnabled) {
       e.preventDefault()
-      // If the current video index is less than the length of the playlist
-      if (this.state.videoIdx <= this.props.videosLength) {
-        //If the first two instructional videos have completed and the video component has rendered start the recording
-        if (this.state.idx === 2) {
-          this.startRecord()
-        }
-        //If the timer for the question response has completed and we have made it through all the videos in the
-        //stop recording and send the recording file
-        if (this.state.idx === 5 && this.state.videoIdx === this.props.videosLength) {
-          this.setState({idx: 6})
-          this.stopRecord()
-          // Keep cycling through the components until we reach the timer
-        } else if (this.state.idx <= 4) {
-          this.setState({idx: ++this.state.idx})
-          //If we reach the timer and we are not on the last video in the playlist then go to the next video in the
-          //playlist's instructions.
-        } else if (this.state.idx === 5 && this.state.videoIdx !== this.props.videosLength) {
-          this.setState({idx: 2, videoIdx: ++this.state.videoIdx})
-        }
+      if (this.state.idx === 2) {
+        this.startRecord()
       }
+
+      this.setState({idx: ++this.state.idx}, () => {
+        if (this.state.idx === this.props.screenCount) {
+          this.stopRecord();
+        }
+      })
     }
   }
 
@@ -104,20 +101,49 @@ class PatientHome extends Component {
   componentDidMount() {
     window.focus()
     document.addEventListener("keydown", this.handleSpaceBar)
+    this.requestUserMedia();
   }
 
   render() {
+    let screens = [
+      <Text>
+        <p>Welcome! You will watch short videos and answer questions about yourself.</p> 
+        <p>Please read the instructions carefully. You will have 30 seconds to respond to each question.</p>
+        <p>Your answers will be recorded so please speak OUT LOUD when responding.</p>
+        <p>Please press the spacebar when you are ready to go forward.</p>
+      </Text>,
+      <VideoViewer src={this.state.src} />,
+      <Text>
+        <p>You will now watch several short video clips.</p>
+        <p>After each video, you will be asked questions about what happened in the video.</p> 
+        <p>You will have 30 seconds to answer each question.</p>
+        <p>Please speak out loud and keep speaking until the time runs out.</p>
+        <p>When you are ready, please press the spacebar to continue.</p>
+      </Text>
+    ]
+    screens = this.props.screens.reduce((prev, screenData) => (
+      prev.concat(screenData.type === "video" ? [
+        <VideoPlayer toggle={this.toggle} videoId={screenData.youtube_id}/>,
+        <Text>
+          <p>Please describe what happened in the video.</p>
+          <p>Use as much detail as possible when describing the video.</p>
+          <p>You have 30 seconds. Please try to talk for the entire duration of the timer.</p>
+          <p>Please press the spacebar when you are ready to start.</p>
+        </Text>,
+        <TimerWrapper toggle={this.toggle}/>
+      ] : [
+        <QuestionView text={screenData.title}/>,
+        <TimerWrapper toggle={this.toggle}/>
+      ])
+    ), screens)
+    screens.push(
+      <Text>
+        <p>Thank you for participating in CAMS!</p>
+      </Text>
+    )
     return (
-      <div>
-        <div className="content">
-          <div>
-            <div>{React.cloneElement(this.props.children[this.state.idx], {
-                  videoIdx: this.state.videoIdx - 1,
-                  toggle: this.toggle
-                })}
-            </div>
-          </div>
-        </div>
+      <div className="content">
+        {screens[this.state.idx]}
       </div>
     )
   }

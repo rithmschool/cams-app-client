@@ -90,17 +90,17 @@ class Main extends Component {
           <EnsureCorrectUserRoute path="/users/:userID/edit" component={EditUserForm}/>
           <PrivateRoute path="/users/:userID/invite" component={InviteDoctorForm} />
         </Switch>
-        <div className="diagonalbottom"></div>
-          <div className="footer">
-            <div>
-              <div className="me">
-                <p>CAMS Corp</p>
-                401 Parnassus Avenue
-                San Francisco, CA 94143
-              </div>
+        <div className="diagonalbottom"/>
+        <div className="footer">
+          <div>
+            <div className="me">
+              <p>CAMS Corp</p>
+              401 Parnassus Avenue
+              San Francisco, CA 94143
             </div>
           </div>
         </div>
+      </div>
     );
   }
 }

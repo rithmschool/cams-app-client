@@ -2,13 +2,6 @@ import React, {Component} from 'react';
 
 class VideoViewer extends Component {
 
-  constructor(props) {
-    super(props)
-    this.state = {
-      src: null
-    }
-  }
-
   render() {
     return (
       <div className="lg">

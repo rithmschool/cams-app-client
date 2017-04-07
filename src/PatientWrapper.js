@@ -39,7 +39,6 @@ class PatientWrapper extends Component {
     self.setState({token: token})
     if(assessment_id && token){
       axios.get(`${BASE_URL}/api/users/${doctor_id}/assessments/${assessment_id}`, {token: token}).then(function (response) {
-        console.log("got data")
         self.setState({
           screens: response.data.screens,
           screenCount: response.data.screens.reduce((prev, curScreen) => (

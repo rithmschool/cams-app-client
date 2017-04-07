@@ -3,12 +3,10 @@ import {Motion, spring} from 'react-motion';
 import EventLine from './EventLine';
 import Events from './Events';
 
-
 //implement updateSlide
 class EventsBar extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = { 
       position: 0,
     }
@@ -18,14 +16,12 @@ class EventsBar extends React.Component {
     document.body.addEventListener('keydown', this.handleSpaceBar);
   }
 
-
   componentWillReceiveProps() {
     const selectedEvent = this.props.events[this.props.index]
     this.setState({
       position: selectedEvent.distance
     })
   }
-
 
   handleSpaceBar = (event) => {
     if(event.keyCode === 32 && this.props.keyBoardEnabled){
@@ -46,7 +42,6 @@ class EventsBar extends React.Component {
             margin: '300px 200px 0px 200px',
           }}
         >
-
         <Motion
             style={{
               x: spring(this.state.position, this.props.slidingMotion)

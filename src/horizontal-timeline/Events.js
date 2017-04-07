@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import TimelineDot from './TimelineDot';
 
- 
 const Events = ({ events, selectedIndex, styles, spaceBarClick, labelWidth }) => (
   <ol
     className='events-bar'

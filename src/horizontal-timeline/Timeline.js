@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
 import HorizontalTimeline from './HorizontalTimeline'
 
-//remove first value
-const VALUES = [0.5, 0.5, 2, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5];    //remove the first value and add extra value at the last
+const VALUES = [0.5, 0.5, 2, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5];   
 
 class Timeline extends Component {
   constructor(props) {
@@ -35,3 +34,4 @@ class Timeline extends Component {
 }
 
 export default Timeline;
+

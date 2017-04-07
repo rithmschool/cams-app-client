@@ -5,7 +5,6 @@ import axios from 'axios';
 import Timer from './Timer';
 import Timeline from './horizontal-timeline/Timeline';
 
-
 let recordRTC;
 
 class PatientHome extends Component {

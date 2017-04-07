@@ -58,7 +58,6 @@ class PatientWrapper extends Component {
     }
   }
 
-
   render() {
     BrowserDetect.init()
     let display = BrowserDetect.browser === 'Chrome' ? (

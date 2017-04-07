@@ -43,7 +43,7 @@ class EventsBar extends React.Component {
           style={{
             position: 'relative',
             height: '100%',
-            margin: '200px 200px 0px 200px',
+            margin: '350px 200px 0px 200px',
           }}
         >
 

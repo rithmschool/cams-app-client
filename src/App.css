@@ -151,7 +151,8 @@ p.profile-title-fancy {
   align-content: center;
   border-radius: 0.5rem;
   background: #f8f8f8;
-  margin: 5rem 0; }
+  margin: 5rem 0;
+  flex-wrap: wrap; }
 
 .bucket-fancy {
   display: flex;
@@ -229,7 +230,7 @@ p.profile-title-fancy {
   background: white;
   height: 10rem;
   margin: -5rem 0 -1rem -1rem;
-  width: 102vw;
+  width: 110%;
   transform: skew(-2deg, 4deg);
   box-shadow: 0px 3px 0px #009eb8, 0px 8px 0px #00aea7, 0px 12px 0px rgba(51, 207, 164, 0.5), 0px 15px 0px rgba(51, 207, 164, 0.3), 0px 19px 0px rgba(51, 207, 164, 0.2); }
 

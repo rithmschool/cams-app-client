@@ -44,7 +44,6 @@ class EventsBar extends React.Component {
             top: '5%',
             left: '15%',
             right: '15%',
-            paddingBottom: '100px'
           }}
         >
         <Motion

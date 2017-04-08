@@ -32,21 +32,19 @@ class PatientWrapper extends Component {
         .replace(/&/g, '","')
         .replace(/=/g,'":"') + '"}'
     )
-    var doctor_id = data_obj['doctor_id']
-    var assessment_id = data_obj['assessment_id']
-    var token = data_obj['token']
-    self.setState({assessment_id: assessment_id});
-    self.setState({token: token})
-    if(assessment_id && token){
-      axios.get(`${BASE_URL}/api/users/${doctor_id}/assessments/${assessment_id}`, {token: token}).then(function (response) {
+    var token = data_obj['token'];
+    axios.get(`${BASE_URL}/api/users/confirm/${token}`
+      ).then(function(response) {
+      self.setState({assessment_id: response.data.assessment_id});
+      return axios.get(`${BASE_URL}/api/users/${response.data.doctor_id}/assessments/${response.data.assessment_id}`, {token: token})
+    }).then(function(response) {
         self.setState({
           screens: response.data.screens,
           screenCount: response.data.screens.reduce((prev, curScreen) => (
             prev + (curScreen.type === 'video' ? 3 : 2)
           ), 3)
-        });
+        })
       })
-    }
   }
 
   render() {

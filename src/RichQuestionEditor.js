@@ -2,7 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import {BASE_URL, config} from './helpers.js';
 import axios from 'axios';
 import RichTextEditor from 'react-rte';
-import {EditorState, convertFromRaw, convertToRaw, RichUtils} from 'draft-js';
+
 
 
 class RichQuestionEditor extends Component {
@@ -24,10 +24,11 @@ class RichQuestionEditor extends Component {
   };
 
   handleSubmit() {
-    let html = this.state.richEditorState.toString('html')
-    return axios.post(`${BASE_URL}/api/questions`,{
-        title: html
-      }, config()
+    this.props.addQuestion(this.state.richEditorState.toString('html')
+    // let html = this.state.richEditorState.toString('html')
+    // return axios.post(`${BASE_URL}/api/questions`,{
+    //     title: html
+    //   }, config()
     ).then( () => 
       this.setState({
         richEditorState: RichTextEditor.createEmptyValue()
@@ -37,7 +38,7 @@ class RichQuestionEditor extends Component {
         error: "There was an error, please try again."
       })
     })
-  };
+  }
 
   render () {
 

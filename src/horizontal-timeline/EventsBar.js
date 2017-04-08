@@ -18,9 +18,11 @@ class EventsBar extends React.Component {
 
   componentWillReceiveProps() {
     const selectedEvent = this.props.events[this.props.index]
-    this.setState({
-      position: selectedEvent.distance
-    })
+    if(selectedEvent) {
+      this.setState({
+        position: selectedEvent.distance
+      })      
+    }
   }
 
   handleSpaceBar = (event) => {
@@ -30,7 +32,7 @@ class EventsBar extends React.Component {
   }
 
   render() {
-    const filledValue = this.props.events[this.props.index].distance - this.props.barPaddingLeft;
+    var filledValue = this.props.events[this.props.index].distance - this.props.barPaddingLeft;
     const eventLineWidth = this.props.totalWidth - this.props.barPaddingLeft - this.props.barPaddingRight;
     return(
       <div>
@@ -39,7 +41,7 @@ class EventsBar extends React.Component {
           style={{
             position: 'relative',
             height: '100%',
-            margin: '300px 200px 0px 200px',
+            margin: '300px 200px 0px 270px',
           }}
         >
         <Motion

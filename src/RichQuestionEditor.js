@@ -25,10 +25,6 @@ class RichQuestionEditor extends Component {
 
   handleSubmit() {
     this.props.addQuestion(this.state.richEditorState.toString('html')
-    // let html = this.state.richEditorState.toString('html')
-    // return axios.post(`${BASE_URL}/api/questions`,{
-    //     title: html
-    //   }, config()
     ).then( () => 
       this.setState({
         richEditorState: RichTextEditor.createEmptyValue()

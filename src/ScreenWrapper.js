@@ -45,10 +45,9 @@ class ScreenWrapper extends Component {
     })
   }
 
-  addQuestion(question) {
-    if(question){  
-      return axios.post(`${BASE_URL}/api/questions`,{
-        title: question
+  addQuestion(html) {
+    return axios.post(`${BASE_URL}/api/questions`,{
+        title: html
       }, config())
       .then(response => {
         axios.post(`${BASE_URL}/api/screens`, {
@@ -59,14 +58,36 @@ class ScreenWrapper extends Component {
       }, config())
       this.setState({
         screenData: this.state.screenData.concat([{
-          title: question,
+          title: response.data.title,
           entity_id: response.data.id,
           type: 'question'
         }])
       })
     })
   }
-}
+
+//   addQuestion(question) {
+//     if(question){  
+//       return axios.post(`${BASE_URL}/api/questions`,{
+//         title: question
+//       }, config())
+//       .then(response => {
+//         axios.post(`${BASE_URL}/api/screens`, {
+//         entity_id: response.data.id,
+//         playlist_id: this.props.playlistID,
+//         order: this.state.screenData.length+1,
+//         type: 'question'
+//       }, config())
+//       this.setState({
+//         screenData: this.state.screenData.concat([{
+//           title: question,
+//           entity_id: response.data.id,
+//           type: 'question'
+//         }])
+//       })
+//     })
+//   }
+// }
 
   addDone(url){
     if(url){
@@ -106,7 +127,7 @@ class ScreenWrapper extends Component {
     return(
       <div>
         <h3 className="">Add Videos and Questions</h3>
-        <RichQuestionEditor className="question-editor"/>
+        <RichQuestionEditor className="question-editor" addQuestion={this.addQuestion}/>
         <SortableList screenData={this.state.screenData} onSortEnd={this.onSortEnd} />
         <ScreenForm addQuestion={this.addQuestion} addVideo={this.addVideo} addDone={this.addDone}/>
       </div>
@@ -114,13 +135,20 @@ class ScreenWrapper extends Component {
   }
 }
 
-const SortableVideo = SortableElement(({value, key}) => <li className="grabbable" key={key}>{value}</li>);
+const SortableVideo = SortableElement( ({value, key, type}) => {
+  if (type === "video") {
+    return <li className="grabbable" key={key}>{value}</li>
+  } else {
+    let html = {__html: value.slice(0,60).split('\n').join("")}
+    return <li className="grabbable" key={key} dangerouslySetInnerHTML={html}></li>
+  }
+})
 
 const SortableList = SortableContainer(({screenData}) => {
   return (
     <ol>
       {screenData.map((value, index) => (
-        <SortableVideo key={index + 1} index={index} value={value.title} />
+        <SortableVideo key={index + 1} index={index} value={value.title} type={value.type} />
         ))}
     </ol>
     );

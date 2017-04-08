@@ -90,9 +90,6 @@ class ScreenForm extends Component {
               {showVideos}
           </div>
           <div className="videos-form">
-            <form className="addQuestion" onSubmit={this.handleAdd.bind(this)}>
-            <button type="submit" className="button" value="Add">+</button>
-          </form>
             <form onSubmit={this.handleAdd}>
               <input type="url"
                 onChange={this.handleChange}

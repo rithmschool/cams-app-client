@@ -27,7 +27,8 @@ class VideoPlayer extends Component {
       width: '1000',
       playerVars: { // https://developers.google.com/youtube/player_parameters
         autoplay: 1,
-        controls: 0
+        controls: 0,
+        rel: 0
       }
     };
     return (

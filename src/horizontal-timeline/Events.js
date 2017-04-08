@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import TimelineDot from './TimelineDot';
 
 const Events = ({ events, selectedIndex, styles, spaceBarClick, labelWidth }) => (

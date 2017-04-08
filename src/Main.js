@@ -77,6 +77,7 @@ class Main extends Component {
       <div className="mainPage">
         <Nav isLoggedIn={!!this.state.token}/>
         <div>
+          <div className="gradient"/>
           <img className="banner" src={banner} alt="patient and clinician smiling"/>
         </div>
         <Switch>

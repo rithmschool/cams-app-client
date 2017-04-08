@@ -183,6 +183,7 @@ p.profile-title-fancy {
   border-radius: 0.5rem;
   background: $light-grey;
   margin:5rem 0;
+  flex-wrap: wrap;
 }
 .bucket-fancy {
   display: flex;
@@ -277,7 +278,7 @@ p.profile-title-fancy {
   background: white;
   height: 10rem;
   margin: -5rem 0 -1rem -1rem;
-  width: 102vw;
+  width: 110%;
   transform: skew(-2deg, 4deg);
   box-shadow: 0px 3px 0px rgb(0, 158, 184), 0px 8px 0px #00aea7, 0px 12px 0px rgba(51, 207, 164, 0.5), 0px 15px 0px rgba(51, 207, 164, 0.3), 0px 19px 0px rgba(51, 207, 164, 0.2);
 }
@@ -521,8 +522,8 @@ button.button.dropdown-content {
     text-align: center;
 }
 
- 
-.grabbable:active { 
+
+.grabbable:active {
     cursor: move;
 }
 
@@ -551,4 +552,3 @@ div.spacearound {
     width: 500px;
     background-color: #666;
 }
-

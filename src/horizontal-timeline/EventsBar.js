@@ -39,10 +39,12 @@ class EventsBar extends React.Component {
         <div
           className='events-wrapper'
           style={{
-            // position: 'relative',
-            // height: '100%',
-            paddingBottom: '150px',
-            margin: '0px 350px, 0px, 300px',
+            position: 'fixed',
+            margin: '0 auto',
+            top: '5%',
+            left: '15%',
+            right: '15%',
+            paddingBottom: '100px'
           }}
         >
         <Motion
@@ -54,8 +56,9 @@ class EventsBar extends React.Component {
                 className='events'
                 style={{
                   position: 'absolute',
-                  left: 0,
-                  top: 70,
+                  left: '50%',
+                  marginLeft: -this.props.totalWidth / 2,
+                  top: 0,
                   height: 2,
                   width: this.props.totalWidth,
                 }}

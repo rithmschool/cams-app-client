@@ -24,7 +24,8 @@ class Timeline extends Component {
           minEventPadding={ 20 }
           maxEventPadding={ 120 }
           containerWidth={ 800 }
-          containerHeight={ 100 } />
+          containerHeight={ 100 } 
+        />
       </div>
     );
   }

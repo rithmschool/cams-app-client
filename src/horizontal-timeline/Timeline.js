@@ -1,10 +1,12 @@
 import React, {Component} from 'react';
 import HorizontalTimeline from './HorizontalTimeline'
 
+
 class Timeline extends Component {
   constructor(props) {
     super(props);
     this.state = { value: 0 };
+
   }
 
   render() {
@@ -23,9 +25,6 @@ class Timeline extends Component {
           maxEventPadding={ 120 }
           containerWidth={ 800 }
           containerHeight={ 100 } />
-        <div className='text-center'>
-          {this.state.value}
-        </div> 
       </div>
     );
   }

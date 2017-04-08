@@ -1,0 +1,13 @@
+@media(max-width: 895px) {
+  .welcome {
+    justify-content: center;
+  }
+}
+
+@media(max-width: 1100px) {
+  .bucket-fancy {
+    flex-direction: column;
+    max-width: 300px;
+    margin: 0 auto;
+  }
+}

@@ -8,6 +8,7 @@ import assess from '../images/assess.png'
 import create from '../images/create.png'
 import user from '../images/user.png'
 import happy from '../images/happy.png'
+import './Home.css';
 
 class Home extends Component {
 

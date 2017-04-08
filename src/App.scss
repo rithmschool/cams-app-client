@@ -1,18 +1,6 @@
-$main-gradient: linear-gradient(135deg, #00d8ff 0%, #7db9e8 100%);
-$alt-gradient: linear-gradient(200deg, #84fab0 0%, #8fd3f4 100%);
-$font-main: -apple-system, BlinkMacSystemFont, sans-serif;
-$font-serif: Georgia, serif;
-$light-grey: #f8f8f8;
-$dark-grey: #4d4d4d;
-$main-blue: #00c5cc;
-$heading-shadow:-2px 2px 0px #009eb8, -3px 3px 0px #00aea7;
-$title-shadow: -1px 1px 1px rgba(0, 0, 0, 0.22);
-$nav-shadow:0px 1px 3px rgba(#808080, 0.13);
-$danger: #fa8072;
-$success: #33cfa4;
-$bold-grey:#9d9d9d;
+@import 'variables';
 
-body {
+mainPage {
   font-family:$font-main;
   color: $dark-grey;
   background: $main-gradient;
@@ -121,11 +109,11 @@ button {
 }
 
 h1.banner-bold {
-  text-shadow: $heading-shadow;
   color: white;
-  font-style: italic;
-  text-transform: uppercase;
   max-width: 60vw;
+  opacity: 0.8;
+  font-size: 2.2em;
+  font-style: italic;
 }
 
 
@@ -392,6 +380,38 @@ button.button.dropdown-content {
   max-width: 10rem;
 }
 
+.video-form-wrapper {
+  padding: 1%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 75vw;
+  margin-left: 12.5vw;
+  height: 15vw; }
+
+.videos-list {
+  width: 50%;
+  min-height: 100%;
+}
+
+.videos-form {
+  width: 50%;
+  min-height: 100%;
+}
+
+.searchvideo{
+  background-color: white;
+}
+
+.searchvideo:hover{
+  background-color: white;
+  cursor: pointer;
+}
+
+.searchinput:hover{
+  cursor: pointer;
+}
+
 
 /*MEDIA QUERIES*/
 
@@ -494,3 +514,41 @@ button.button.dropdown-content {
     margin-top: 0;
   }
 }
+
+.grabbable {
+    cursor: move;
+    cursor: grab;
+    text-align: center;
+}
+
+ 
+.grabbable:active { 
+    cursor: move;
+}
+
+div.spacearound {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+
+/*Timer
+********/
+
+.timer {
+  width: 100px;
+  height: 100px;
+  background: $main-blue;
+  border-radius: 50px
+}
+
+.center {
+  padding-top: 38px;
+}
+
+#videoElement {
+    width: 500px;
+    background-color: #666;
+}
+

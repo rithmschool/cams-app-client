@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import PatientHome from './PatientHome'
-import VideoPlayer from './VideoPlayer'
-import {BASE_URL, userID} from './helpers.js';
+import {BASE_URL, BrowserDetect} from './helpers.js';
 import axios from 'axios';
 
 class PatientWrapper extends Component {
@@ -9,30 +8,60 @@ class PatientWrapper extends Component {
     super(props)
 
     this.state = {
-      videoIDs: '',
-      videoIdx: 0
+      screens: [],
+      assessment_id: 0,
+      token: '',
+      src: null,
+      screenCount: 0
     }
   }
 
+  captureUserMedia(callback) {
+    let params = {audio: true, video: true};
+    navigator.getUserMedia(params, callback, (error) => {
+      alert(JSON.stringify(error));
+    });
+  };
+
   componentWillMount(){
     var self = this;
-    axios.get(`${BASE_URL}/api/users/${userID()}/assessments/21`)
-    .then(function (response) {
-      self.setState({videoIDs: response.data.screens});
-    })
+    var data = window.location.href.split('?')[1]
+    var data_obj = JSON.parse(
+      '{"' + 
+      decodeURI(data).replace(/"/g, '\\"')
+        .replace(/&/g, '","')
+        .replace(/=/g,'":"') + '"}'
+    )
+    var token = data_obj['token'];
+    axios.get(`${BASE_URL}/api/users/confirm/${token}`
+      ).then(function(response) {
+      self.setState({assessment_id: response.data.assessment_id});
+      return axios.get(`${BASE_URL}/api/users/${response.data.doctor_id}/assessments/${response.data.assessment_id}`, {token: token})
+    }).then(function(response) {
+        self.setState({
+          screens: response.data.screens,
+          screenCount: response.data.screens.reduce((prev, curScreen) => (
+            prev + (curScreen.type === 'video' ? 3 : 2)
+          ), 3)
+        })
+      })
   }
 
   render() {
+    BrowserDetect.init()
+    let display = BrowserDetect.browser === 'Chrome' ? (
+      <PatientHome 
+        screens={this.state.screens} 
+        screenCount={this.state.screenCount}
+        assessment_id={this.state.assessment_id}
+      />
+    ) : (
+      <p>Browser not supported. Please switch to <a href="https://www.google.com/chrome/browser/desktop/index.html">Google Chrome</a> to proceed.</p>
+    )
     return(
-      <PatientHome videosLength={this.state.videoIDs.length}>
-        <p>this is the first instructional message Press Space Bar to Continue</p>
-        <p>this is the second instructional message Press Space Bar to Continue</p>
-        <p>Please Watch the Video</p>
-        <VideoPlayer videos={this.state.videoIDs} />
-        <p>Answer the Question</p>
-        <p>Timer</p>
-        <p>Bye!</p>
-      </PatientHome>
+      <div>
+        {display}
+      </div>
     )
   }
 }

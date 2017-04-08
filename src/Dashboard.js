@@ -141,11 +141,19 @@ class Dashboard extends Component{
         >
           <h5 className="playlist-name-title">{playlist.name}</h5>
           {playlist.videos.map((video, idx) => {
-            return(
+            if (video.type === "video") {
+              return(
               <p className="song-title" key={idx} >
                 {video.title}
               </p>
-            )
+              )
+            } else {
+              let html = {__html: video.title.slice(0,30).split('\n').join("")}
+              return(
+                <p className="song-title" key={idx} dangerouslySetInnerHTML={html}>
+                </p>
+              )
+            }
           })
         }
         {showForm}

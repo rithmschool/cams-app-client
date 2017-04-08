@@ -39,9 +39,10 @@ class EventsBar extends React.Component {
         <div
           className='events-wrapper'
           style={{
-            position: 'relative',
-            height: '100%',
-            margin: '300px 200px 0px 270px',
+            // position: 'relative',
+            // height: '100%',
+            paddingBottom: '150px',
+            margin: '0px 350px, 0px, 300px',
           }}
         >
         <Motion

@@ -6,6 +6,7 @@ import Timeline from './horizontal-timeline/Timeline';
 import VideoPlayer from './VideoPlayer';
 import VideoViewer from './VideoViewer';
 import TimerWrapper from './TimerWrapper';
+import "./PatientHome.css";
 
 let recordRTC;
 
@@ -144,9 +145,9 @@ class PatientHome extends Component {
       </Text>
     )
     return (
-      <div className="content">
-        {screens[this.state.idx]}
+      <div className="patient-home">
         <Timeline valuesLength={screens.length} keyBoardEnabled={this.state.keyBoardEnabled}></Timeline>
+        {screens[this.state.idx]}
       </div>
     )
   }

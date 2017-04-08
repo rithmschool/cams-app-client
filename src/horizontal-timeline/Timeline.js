@@ -22,10 +22,8 @@ class Timeline extends Component {
           minEventPadding={ 20 }
           maxEventPadding={ 120 }
           containerWidth={ 800 }
-          containerHeight={ 100 } />
-        <div className='text-center'>
-          {this.state.value}
-        </div> 
+          containerHeight={ 100 } 
+        />
       </div>
     );
   }

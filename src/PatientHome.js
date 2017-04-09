@@ -9,10 +9,6 @@ let recordRTC;
 
 const Text = props => <div className="lg">{props.children}</div>
 
-// const QuestionView = props => {
-//   return <p>{props.text}</p>
-// } 
-
 const QuestionView = props => {
   let html = {__html: props.text};
   return <div dangerouslySetInnerHTML={html}></div>

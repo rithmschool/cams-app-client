@@ -66,28 +66,6 @@ class ScreenWrapper extends Component {
     })
   }
 
-//   addQuestion(question) {
-//     if(question){  
-//       return axios.post(`${BASE_URL}/api/questions`,{
-//         title: question
-//       }, config())
-//       .then(response => {
-//         axios.post(`${BASE_URL}/api/screens`, {
-//         entity_id: response.data.id,
-//         playlist_id: this.props.playlistID,
-//         order: this.state.screenData.length+1,
-//         type: 'question'
-//       }, config())
-//       this.setState({
-//         screenData: this.state.screenData.concat([{
-//           title: question,
-//           entity_id: response.data.id,
-//           type: 'question'
-//         }])
-//       })
-//     })
-//   }
-// }
 
   addDone(url){
     if(url){
@@ -139,7 +117,8 @@ const SortableVideo = SortableElement( ({value, key, type}) => {
   if (type === "video") {
     return <li className="grabbable" key={key}>{value}</li>
   } else {
-    let html = {__html: value.slice(0,60).split('\n').join("")}
+    // let html = {__html: value.slice(0,60).split('\n').join("")}
+    let html = {__html: value.slice(0,100).replace(/<(?:.|\r\n|\n|\r)*?>/gm, '')};
     return <li className="grabbable" key={key} dangerouslySetInnerHTML={html}></li>
   }
 })

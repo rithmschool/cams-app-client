@@ -149,7 +149,6 @@ class Dashboard extends Component{
               )
             } else {
               let html = {__html: video.title.slice(0,35).replace(/<(?:.|\r\n|\n|\r)*?>/gm, '')}
-              // let html = {__html: video.title.slice(0,30).replace(/<[^>]*>.*?(<[^>]*>)?/ , ' ').replace(/\s{2,}/g, ' ').trim();} 
               return(
                 <p className="song-title" key={idx} dangerouslySetInnerHTML={html}>
                 </p>

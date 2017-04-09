@@ -117,7 +117,6 @@ const SortableVideo = SortableElement( ({value, key, type}) => {
   if (type === "video") {
     return <li className="grabbable" key={key}>{value}</li>
   } else {
-    // let html = {__html: value.slice(0,60).split('\n').join("")}
     let html = {__html: value.slice(0,100).replace(/<(?:.|\r\n|\n|\r)*?>/gm, '')};
     return <li className="grabbable" key={key} dangerouslySetInnerHTML={html}></li>
   }

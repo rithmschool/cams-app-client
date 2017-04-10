@@ -43,7 +43,7 @@ class EventsBar extends React.Component {
             margin: '0 auto',
             top: '5%',
             left: '15%',
-            right: '15%'
+            right: '15%',
           }}
         >
         <Motion

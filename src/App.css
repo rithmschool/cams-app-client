@@ -93,12 +93,8 @@ h1.banner-bold {
 
 /* CONTENT
 *********/
-.content {
-  margin-top: 1rem;
-  text-align: center;
-  padding: 2rem;
-  background: white;
-  padding-bottom: 10rem; }
+.screens {
+  padding-top: 5rem; }
 
 .content-image {
   display: flex;

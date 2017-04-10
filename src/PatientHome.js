@@ -146,8 +146,12 @@ class PatientHome extends Component {
     )
     return (
       <div className="patient-home">
-        <Timeline valuesLength={screens.length} keyBoardEnabled={this.state.keyBoardEnabled}></Timeline>
-        {screens[this.state.idx]}
+        <div>
+            <Timeline valuesLength={screens.length} keyBoardEnabled={this.state.keyBoardEnabled}></Timeline>
+        </div>
+        <div className="screens">
+          {screens[this.state.idx]}
+        </div>
       </div>
     )
   }

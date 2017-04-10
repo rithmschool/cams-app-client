@@ -1,5 +1,7 @@
 import React, {PropTypes, Component} from 'react';
 import ScreenForm from './ScreenForm';
+import VideoForm from './VideoForm';
+import QuestionForm from './QuestionForm'
 import {BASE_URL, config, userID} from './helpers.js';
 import axios from 'axios';
 import getYouTubeID from 'get-youtube-id';
@@ -104,9 +106,21 @@ class ScreenWrapper extends Component {
   render(){
     return(
       <div>
+<<<<<<< HEAD:src/ScreenWrapper.js
         <h3 className="">Add Videos and Questions</h3>
         <SortableList screenData={this.state.screenData} onSortEnd={this.onSortEnd} />
         <ScreenForm addQuestion={this.addQuestion} addVideo={this.addVideo} addDone={this.addDone}/>
+=======
+        <div className="createplaylistheader">
+        <h3>Create Playlist</h3>
+        </div>
+        <div className = "createplaylist">
+          <SortableList screenData={this.state.screenData} onSortEnd={this.onSortEnd} />
+          <VideoForm addVideo={this.addVideo}/>
+          <QuestionForm addQuestion={this.addQuestion}></QuestionForm>
+        </div>
+        <button className="button" onClick={this.addDone} value="Submit">Submit Playlist</button>
+>>>>>>> styling changes and refactoring of components:src/VideoWrapper.js
       </div>
     )
   }
@@ -116,11 +130,14 @@ const SortableVideo = SortableElement(({value, key}) => <li className="grabbable
 
 const SortableList = SortableContainer(({screenData}) => {
   return (
-    <ol>
+    <div className="sortablelist">
+    <h4>Playlist</h4>
+    <ol className="playlistlist">
       {screenData.map((value, index) => (
         <SortableVideo key={index + 1} index={index} value={value.title} />
         ))}
     </ol>
+    </div>
     );
 })
 

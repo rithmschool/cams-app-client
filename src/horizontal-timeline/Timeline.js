@@ -1,12 +1,10 @@
 import React, {Component} from 'react';
 import HorizontalTimeline from './HorizontalTimeline'
 
-
 class Timeline extends Component {
   constructor(props) {
     super(props);
     this.state = { value: 0 };
-
   }
 
   render() {

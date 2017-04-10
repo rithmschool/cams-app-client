@@ -40,7 +40,7 @@ class AssessmentsDashboard extends Component {
       let completed = assessment.recording_url ?
         <div>
           <h6>Completed: Yes</h6>
-          <button onClick={this.downloadFile.bind(this,assessment.id)}>Get Download Link</button>
+          <button className="button button-hover" onClick={this.downloadFile.bind(this,assessment.id)}>Get Download Link</button>
         </div> :
         <h6>Completed: No</h6>
       let className = this.state.assessmentID === assessment.id ?

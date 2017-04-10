@@ -13,7 +13,7 @@ class AssessmentsDashboard extends Component {
   }
 
   downloadFile(id){
-    axios.get(`${BASE_URL}/api/recording/${id}`, config)
+    axios.get(`${BASE_URL}/api/recording/${id}`, config())
       .then(response => {
         this.setState({downloaded: [response.data.id, response.data.url]})
       })

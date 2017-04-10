@@ -33,6 +33,7 @@ class Dashboard extends Component{
 
   sendMail(config) {
     this.setState({loading: true})
+    window.scrollTo(0, 0)
     axios.post(`${BASE_URL}/api/users`, {
       email: this.state.email
     }, config)

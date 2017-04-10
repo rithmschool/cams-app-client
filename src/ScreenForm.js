@@ -16,7 +16,6 @@ class ScreenForm extends Component {
     this.handleSearchChange = this.handleSearchChange.bind(this)
     this.handleAdd = this.handleAdd.bind(this)
     this.handleChange = this.handleChange.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   handleChange(e){
@@ -33,18 +32,8 @@ class ScreenForm extends Component {
 
   handleAdd(e){
     e.preventDefault()
-    if (e.target.className === "addQuestion") {
-      this.setState({question: ""});
-      this.props.addQuestion(this.state.question) 
-    } else {
       this.setState({url: ""});
       this.props.addVideo(this.state.url);
-    }
-  }
-
-  handleSubmit(e){
-    e.preventDefault()
-    this.props.addDone(this.state.url)
   }
 
   handleAddChange(e){
@@ -68,7 +57,7 @@ class ScreenForm extends Component {
       var showDiv = stext.toLowerCase() === '' || val.title.toLowerCase().includes(stext.toLowerCase())
       return showDiv ? (
         <div key={idx}>
-          <a className="searchinput" 
+          <a className="searchitem" 
              onClick={this.handleAddChange} 
              data={val.url}>
             {val.title}
@@ -78,28 +67,9 @@ class ScreenForm extends Component {
     })
     
     return(
-      <div>
-        <div className="video-form-wrapper">
           <div className="videos-list">
-              <input className="searchinput" type="text"
-                onChange={this.handleSearchChange}
-                name="searcher"
-                placeholder="Search for a video"
-                value={this.state.searchtext}
-              />
-              {showVideos}
-          </div>
-          <div className="videos-form">
-            <form className="addQuestion" onSubmit={this.handleAdd.bind(this)}>
-            <input type="text"
-              onChange={this.handleChange.bind(this)}
-              name="question"
-              placeholder="Add A Question"
-              value={this.state.question}
-            />
-            <button type="submit" className="button" value="Add">+</button>
-          </form>
-            <form onSubmit={this.handleAdd}>
+              <h4>Add Videos</h4>
+              <form onSubmit={this.handleAdd}>
               <input type="url"
                 onChange={this.handleChange}
                 name="url"
@@ -107,11 +77,17 @@ class ScreenForm extends Component {
                 value={this.state.url}
               />
               <button type="submit" className="button" value="Add">+</button>
-              <button className="button" onClick={this.handleSubmit} value="Submit">Submit</button>
             </form>
+              <input className="searchinput" type="text"
+                onChange={this.handleSearchChange}
+                name="searcher"
+                placeholder="Search for a video"
+                value={this.state.searchtext}
+              />
+              <div className="searchedvideos">
+              {showVideos}
+              </div>
           </div>
-        </div>
-      </div>
     )
   }
 }

@@ -381,23 +381,54 @@ button.button.dropdown-content {
   max-width: 10rem;
 }
 
-.video-form-wrapper {
-  padding: 1%;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  width: 75vw;
-  margin-left: 12.5vw;
-  height: 15vw; }
-
 .videos-list {
-  width: 50%;
-  min-height: 100%;
+  box-sizing: border-box;
+  padding: 2%;
+  padding-top: 0px;
+  height: 25vw;
+  width: 30vw;
+  border: 0px solid;
+  border-radius: 10px;
+  background-color: #F1F1F1;
 }
 
-.videos-form {
-  width: 50%;
-  min-height: 100%;
+.createplaylistheader{
+  height: 2.5vw;
+}
+
+.createplaylist{
+  display: flex;
+  justify-content: space-around;
+}
+
+.questions-form {
+  box-sizing: border-box;
+  padding: 2%;
+  padding-top: 0px;
+  height: 25vw;
+  width: 30vw;
+  border: 0px solid;
+  border-radius: 10px;
+  background-color: #F1F1F1;
+}
+
+.sortablelist{
+  padding: 2%;
+  padding-top: 0px;
+  min-height: 25vw;
+  width: 30vw;
+  box-sizing: border-box;
+  border: 0px solid;
+  border-radius: 10px;
+  background-color: #F1F1F1;
+}
+
+.grabbable{
+  text-align: left;
+}
+
+.playlistlist{
+  text-align: left;
 }
 
 .searchvideo{
@@ -409,8 +440,29 @@ button.button.dropdown-content {
   cursor: pointer;
 }
 
-.searchinput:hover{
-  cursor: pointer;
+.searchinput{
+  margin-bottom: 10px;
+  border-radius: 4px;
+  border: none;
+  background: #f8f8f8;
+  padding: 0.7rem;
+}
+
+.searchedvideos{
+  overflow-y: scroll;
+  height: 35%;
+  width: 26vw;
+  background-color: #f8f8f8;
+  border-radius: 2%;
+  color: black;
+}
+
+.searchitem{
+  color: black;
+}
+
+.searchitem:hover{
+  cursor: pointer
 }
 
 
@@ -519,7 +571,7 @@ button.button.dropdown-content {
 .grabbable {
     cursor: move;
     cursor: grab;
-    text-align: center;
+    padding: 1%;
 }
 
 

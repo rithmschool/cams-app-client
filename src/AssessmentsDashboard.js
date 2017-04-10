@@ -58,7 +58,7 @@ class AssessmentsDashboard extends Component {
             {assessment.patient_email.email}
           </h5>
           <h6>{assessment.playlist_name.name}</h6>
-          <h6>{assessment.date_added}</h6>
+          <h6>{assessment.date_added.slice(0,-6)}</h6>
           {completed}
           {dl}
         </div>

@@ -40,7 +40,7 @@ class AssessmentsDashboard extends Component {
       let completed = assessment.recording_url ?
         <div>
           <h6>Completed: Yes</h6>
-          <button onClick={this.downloadFile.bind(this,assessment.id)}>Get Download Link</button>
+          <button className="button button-hover" onClick={this.downloadFile.bind(this,assessment.id)}>Get Download Link</button>
         </div> :
         <h6>Completed: No</h6>
       let className = this.state.assessmentID === assessment.id ?
@@ -58,7 +58,7 @@ class AssessmentsDashboard extends Component {
             {assessment.patient_email.email}
           </h5>
           <h6>{assessment.playlist_name.name}</h6>
-          <h6>{assessment.date_added}</h6>
+          <h6>{assessment.date_added.slice(0,-6)}</h6>
           {completed}
           {dl}
         </div>

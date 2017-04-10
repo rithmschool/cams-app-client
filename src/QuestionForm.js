@@ -20,8 +20,8 @@ class QuestionForm extends Component {
 
   handleAdd(e){
     e.preventDefault()
-      this.setState({question: ""});
-      this.props.addQuestion(this.state.question)
+    this.setState({question: ""})
+    this.props.addQuestion(this.state.question)
   }
 
   render(){
@@ -29,14 +29,14 @@ class QuestionForm extends Component {
           <div className="questions-form">
             <h4>Add Questions</h4>
             <form className="addQuestion" onSubmit={this.handleAdd.bind(this)}>
-            <input type="text"
-              onChange={this.handleChange.bind(this)}
-              name="question"
-              placeholder="Add A Question"
-              value={this.state.question}
-            />
-            <button type="submit" className="button" value="Add">+</button>
-          </form>
+              <input type="text"
+                onChange={this.handleChange.bind(this)}
+                name="question"
+                placeholder="Add A Question"
+                value={this.state.question}
+              />
+              <button type="submit" className="button" value="Add">+</button>
+            </form>
           </div>
     )
   }

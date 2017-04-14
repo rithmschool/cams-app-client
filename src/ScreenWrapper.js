@@ -5,6 +5,7 @@ import {BASE_URL, config, userID} from './helpers.js';
 import axios from 'axios';
 import getYouTubeID from 'get-youtube-id';
 import {SortableContainer, SortableElement, arrayMove} from 'react-sortable-hoc';
+import RichQuestionEditor from './RichQuestionEditor.js';
 
 class ScreenWrapper extends Component {
 
@@ -45,10 +46,9 @@ class ScreenWrapper extends Component {
     })
   }
 
-  addQuestion(question) {
-    if(question){  
-      return axios.post(`${BASE_URL}/api/questions`,{
-        title: question
+  addQuestion(html) {
+    return axios.post(`${BASE_URL}/api/questions`,{
+        title: html
       }, config())
       .then(response => {
         axios.post(`${BASE_URL}/api/screens`, {
@@ -59,14 +59,14 @@ class ScreenWrapper extends Component {
       }, config())
       this.setState({
         screenData: this.state.screenData.concat([{
-          title: question,
+          title: response.data.title,
           entity_id: response.data.id,
           type: 'question'
         }])
       })
     })
   }
-}
+
 
   addDone(url){
     if(url){
@@ -111,7 +111,7 @@ class ScreenWrapper extends Component {
         <div className = "createplaylist">
           <SortableList screenData={this.state.screenData} onSortEnd={this.onSortEnd} />
           <ScreenForm addVideo={this.addVideo}/>
-          <QuestionForm addQuestion={this.addQuestion}></QuestionForm>
+          <RichQuestionEditor addQuestion={this.addQuestion}></RichQuestionEditor>
         </div>
         <button className="button" onClick={this.addDone} value="Submit">Submit Playlist</button>
       </div>
@@ -119,7 +119,14 @@ class ScreenWrapper extends Component {
   }
 }
 
-const SortableVideo = SortableElement(({value, key}) => <li className="grabbable" key={key}>{value}</li>);
+const SortableVideo = SortableElement( ({value, key, type}) => {
+  if (type === "video") {
+    return <li className="grabbable" key={key}>{value}</li>
+  } else {
+    let html = {__html: value.replace(/<(?:.|\r\n|\n|\r)*?>/gm, '').slice(0,100)};
+    return <li className="grabbable" key={key} dangerouslySetInnerHTML={html}></li>
+  }
+})
 
 const SortableList = SortableContainer(({screenData}) => {
   return (
@@ -127,7 +134,7 @@ const SortableList = SortableContainer(({screenData}) => {
     <h4>Playlist</h4>
     <ol className="playlistlist">
       {screenData.map((value, index) => (
-        <SortableVideo key={index + 1} index={index} value={value.title} />
+        <SortableVideo key={index + 1} index={index} value={value.title} type={value.type} />
         ))}
     </ol>
     </div>

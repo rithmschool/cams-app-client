@@ -111,7 +111,7 @@ class ScreenWrapper extends Component {
         <div className = "createplaylist">
           <SortableList screenData={this.state.screenData} onSortEnd={this.onSortEnd} />
           <ScreenForm addVideo={this.addVideo}/>
-          <QuestionForm addQuestion={this.addQuestion}></QuestionForm>
+          <RichQuestionEditor addQuestion={this.addQuestion}></RichQuestionEditor>
         </div>
         <button className="button" onClick={this.addDone} value="Submit">Submit Playlist</button>
       </div>
@@ -123,7 +123,7 @@ const SortableVideo = SortableElement( ({value, key, type}) => {
   if (type === "video") {
     return <li className="grabbable" key={key}>{value}</li>
   } else {
-    let html = {__html: value.slice(0,100).replace(/<(?:.|\r\n|\n|\r)*?>/gm, '')};
+    let html = {__html: value.replace(/<(?:.|\r\n|\n|\r)*?>/gm, '').slice(0,100)};
     return <li className="grabbable" key={key} dangerouslySetInnerHTML={html}></li>
   }
 })

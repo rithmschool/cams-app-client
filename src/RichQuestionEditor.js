@@ -61,15 +61,16 @@ class RichQuestionEditor extends Component {
     let error = (this.state.error) ? <p>{this.state.error}</p> : null;
 
     return (
-      <div>
-        <div className="content">
+      <div className="questions-form">
+
+            <h4>Add Questions</h4>
             <RichTextEditor
               value={this.state.richEditorState}
               onChange={this.onChange}
               toolbarConfig={toolbarConfig}
             />
-            <button onClick={this.handleSubmit}>SUBMIT</button>
-        </div>
+            <button className="button" onClick={this.handleSubmit}>+</button>
+
         {error}
       </div>
     );

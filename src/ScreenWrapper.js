@@ -56,9 +56,9 @@ class ScreenWrapper extends Component {
         .post(
           `${BASE_URL}/api/questions`,
           {
-            title: question
+            title: question,
             playlist_id: this.props.playlistID,
-            order: this.state.screenData.length + 1,
+            order: this.state.screenData.length + 1
           },
           config()
         )

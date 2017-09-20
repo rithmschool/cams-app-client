@@ -31,21 +31,13 @@ class ScreenWrapper extends Component {
         `${BASE_URL}/api/videos`,
         {
           url,
-          youtube_id: youtubeID
+          youtube_id: youtubeID,
+          playlist_id: this.props.playlistID,
+          order: this.state.screenData.length + 1
         },
         config()
       )
       .then(response => {
-        axios.post(
-          `${BASE_URL}/api/screens`,
-          {
-            entity_id: response.data.id,
-            playlist_id: this.props.playlistID,
-            order: this.state.screenData.length + 1,
-            type: "video"
-          },
-          config()
-        );
         this.setState({
           screenData: this.state.screenData.concat([
             {
@@ -65,20 +57,12 @@ class ScreenWrapper extends Component {
           `${BASE_URL}/api/questions`,
           {
             title: question
+            playlist_id: this.props.playlistID,
+            order: this.state.screenData.length + 1,
           },
           config()
         )
         .then(response => {
-          axios.post(
-            `${BASE_URL}/api/screens`,
-            {
-              entity_id: response.data.id,
-              playlist_id: this.props.playlistID,
-              order: this.state.screenData.length + 1,
-              type: "question"
-            },
-            config()
-          );
           this.setState({
             screenData: this.state.screenData.concat([
               {

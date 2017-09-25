@@ -1,10 +1,10 @@
-import React, {Component} from 'react';
-import YouTube from 'react-youtube';
+import React, { Component } from "react";
+import YouTube from "react-youtube";
 
 class VideoPlayer extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
-    this._onEnd = this._onEnd.bind(this)
+    this._onEnd = this._onEnd.bind(this);
   }
 
   _onReady(e) {
@@ -12,20 +12,21 @@ class VideoPlayer extends Component {
     e.target.playVideo();
   }
 
-  _onEnd(e){
+  _onEnd(e) {
     e.target.stopVideo();
     this.props.toggle();
   }
 
-  componentDidMount(){
+  componentDidMount() {
     this.props.toggle();
   }
 
   render() {
     const opts = {
-      height: '562.5',
-      width: '1000',
-      playerVars: { // https://developers.google.com/youtube/player_parameters
+      height: "562.5",
+      width: "1000",
+      playerVars: {
+        // https://developers.google.com/youtube/player_parameters
         autoplay: 1,
         controls: 0,
         rel: 0
@@ -39,10 +40,17 @@ class VideoPlayer extends Component {
           onReady={this._onReady}
           onEnd={this._onEnd}
         />
-        <p className="lg">Press the space key to move on once the video has ended </p>
+        <p className="lg">
+          Press the space key to move on once the video has ended{" "}
+        </p>
       </div>
-    )
+    );
   }
 }
+
+VideoPlayer.propTypes = {
+  toggle: PropTypes.func.isRequired,
+  videoId: PropTypes.string.isRequired
+};
 
 export default VideoPlayer;

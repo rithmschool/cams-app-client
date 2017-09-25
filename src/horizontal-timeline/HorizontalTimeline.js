@@ -1,22 +1,26 @@
-import React,  {Component} from 'react';
-import EventsBar from './EventsBar';
+import React, { Component } from "react";
+import EventsBar from "./EventsBar";
 
 class HorizontalTimeline extends Component {
-
   render() {
-    if(!this.props.containerWidth) {
+    if (!this.props.containerWidth) {
       return false;
     }
 
-    const seperation = ( times, minEventPadding, maxEventPadding, startPadding ) => {
+    const seperation = (
+      times,
+      minEventPadding,
+      maxEventPadding,
+      startPadding
+    ) => {
       const distances = new Array(times.length);
-      distances[0] = startPadding
-      for (let idx=1; idx<distances.length; idx++) {
+      distances[0] = startPadding;
+      for (let idx = 1; idx < distances.length; idx++) {
         // calculating distance from origin
-        distances[idx] = distances[idx-1] + (times[idx - 1] * maxEventPadding);
+        distances[idx] = distances[idx - 1] + times[idx - 1] * maxEventPadding;
       }
       return distances;
-    }
+    };
 
     const props = this.props;
     const times = this.props.values;
@@ -25,7 +29,7 @@ class HorizontalTimeline extends Component {
       times,
       this.props.minEventPadding,
       this.props.maxEventPadding,
-      this.props.linePadding,
+      this.props.linePadding
     );
 
     const events = distances.map((distance, index) => ({
@@ -37,7 +41,7 @@ class HorizontalTimeline extends Component {
       events[events.length - 1].distance + this.props.linePadding,
       this.props.containerWidth
     );
-    
+
     let barPaddingRight = 0;
     let barPaddingLeft = 0;
 
@@ -57,15 +61,15 @@ class HorizontalTimeline extends Component {
         isTouchEnabled={props.isTouchEnabled}
         keyBoardEnabled={this.props.keyBoardEnabled}
       />
-    )
+    );
   }
 }
 
 HorizontalTimeline.defaultProps = {
   styles: {
-    outline: '#dfdfdf',
-    background: '#dfdfdf',
-    foreground: '#00c5cc'
+    outline: "#dfdfdf",
+    background: "#dfdfdf",
+    foreground: "#00c5cc"
   },
 
   fillingMotion: {
@@ -76,7 +80,9 @@ HorizontalTimeline.defaultProps = {
     stiffness: 150,
     damping: 25
   },
-  isTouchEnabled: true,
+  isTouchEnabled: true
 };
+
+HorizontalTimeline.propTypes = {};
 
 export default HorizontalTimeline;

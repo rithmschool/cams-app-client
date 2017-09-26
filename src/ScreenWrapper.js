@@ -1,4 +1,4 @@
-import React, { PropTypes, Component } from "react";
+import React, { Component } from "react";
 import ScreenForm from "./ScreenForm";
 import { BASE_URL, config, userID } from "./helpers.js";
 import axios from "axios";
@@ -8,12 +8,9 @@ import {
   SortableElement,
   arrayMove
 } from "react-sortable-hoc";
+import PropTypes from "prop-types";
 
 class ScreenWrapper extends Component {
-  static contextTypes = {
-    router: PropTypes.object
-  };
-
   constructor(props) {
     super(props);
     this.state = {
@@ -111,11 +108,11 @@ class ScreenWrapper extends Component {
     if (url) {
       this.addVideo(url).then(
         function(response) {
-          this.context.router.history.push("/dashboard");
+          this.props.history.push("/dashboard");
         }.bind(this)
       );
     }
-    this.context.router.history.push("/dashboard");
+    this.props.history.push("/dashboard");
   }
 
   onSortEnd = ({ oldIndex, newIndex }) => {
@@ -187,5 +184,10 @@ class ScreenWrapper extends Component {
     );
   }
 }
+
+ScreenWrapper.propTypes = {
+  playlistID: PropTypes.number.isRequired,
+  addPlaylist: PropTypes.func.isRequired
+};
 
 export default ScreenWrapper;

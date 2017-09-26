@@ -9,7 +9,7 @@ class PatientWrapper extends Component {
 
     this.state = {
       screens: [],
-      assessment_id: 0,
+      assessmentId: 0,
       token: '',
       src: null,
       screenCount: 0
@@ -35,7 +35,7 @@ class PatientWrapper extends Component {
     var token = data_obj['token'];
     axios.get(`${BASE_URL}/api/users/confirm/${token}`
       ).then(function(response) {
-      self.setState({assessment_id: response.data.assessment_id});
+      self.setState({assessmentId: response.data.assessment_id});
       return axios.get(`${BASE_URL}/api/users/${response.data.doctor_id}/assessments/${response.data.assessment_id}`, {token: token})
     }).then(function(response) {
         self.setState({
@@ -53,7 +53,7 @@ class PatientWrapper extends Component {
       <PatientHome 
         screens={this.state.screens} 
         screenCount={this.state.screenCount}
-        assessment_id={this.state.assessment_id}
+        assessmentId={this.state.assessmentId}
       />
     ) : (
       <p>Browser not supported. Please switch to <a href="https://www.google.com/chrome/browser/desktop/index.html">Google Chrome</a> to proceed.</p>

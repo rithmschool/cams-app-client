@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import axios from "axios";
 import { BASE_URL, config } from "./helpers.js";
 import FileInput from "react-file-input";
+import "./ScreenForm.css";
+import PropTypes from "prop-types";
 
 class ScreenForm extends Component {
   constructor(props) {
@@ -156,20 +158,17 @@ class ScreenForm extends Component {
                 Submit
               </button>
             </form>
-            <input
-              className="searchinput"
-              type="text"
-              onChange={this.handleSearchChange}
-              name="searcher"
-              placeholder="Search for a video"
-              value={this.state.searchtext}
-            />
-            <div className="searchedvideos">{showVideos}</div>
           </div>
         </div>
       </div>
     );
   }
 }
+
+ScreenForm.propTypes = {
+  addQuestion: PropTypes.func.isRequired,
+  addVideo: PropTypes.func.isRequired,
+  addDone: PropTypes.func.isRequired
+};
 
 export default ScreenForm;

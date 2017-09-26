@@ -1,4 +1,4 @@
-mainPage {
+mainpage {
   font-family: -apple-system, BlinkMacSystemFont, sans-serif;
   color: #4d4d4d;
   background: linear-gradient(135deg, #00d8ff 0%, #7db9e8 100%);
@@ -26,10 +26,10 @@ a {
   text-align: right; }
 
 .xs {
-  font-size: .4rem; }
+  font-size: 0.4rem; }
 
 .sm {
-  font-size: .6rem; }
+  font-size: 0.6rem; }
 
 .me {
   font-size: 1rem; }
@@ -268,7 +268,9 @@ form h5 {
   transition-property: transform;
   transition-timing-function: ease-out; }
 
-.button-hover:hover, .button-hover:focus, .button-hover:active {
+.button-hover:hover,
+.button-hover:focus,
+.button-hover:active {
   transform: translateY(3px); }
 
 /*DROPDOWN
@@ -303,16 +305,6 @@ button.button.dropdown-content {
   padding: 2rem;
   max-width: 10rem; }
 
-.videos-list {
-  box-sizing: border-box;
-  padding: 2%;
-  padding-top: 0px;
-  height: 25vw;
-  width: 30vw;
-  border: 0px solid;
-  border-radius: 10px;
-  background-color: #F1F1F1; }
-
 .createplaylistheader {
   height: 2.5vw; }
 
@@ -328,7 +320,7 @@ button.button.dropdown-content {
   width: 30vw;
   border: 0px solid;
   border-radius: 10px;
-  background-color: #F1F1F1; }
+  background-color: #f1f1f1; }
 
 .sortablelist {
   padding: 2%;
@@ -338,7 +330,7 @@ button.button.dropdown-content {
   box-sizing: border-box;
   border: 0px solid;
   border-radius: 10px;
-  background-color: #F1F1F1; }
+  background-color: #f1f1f1; }
 
 .grabbable {
   text-align: left; }
@@ -352,21 +344,6 @@ button.button.dropdown-content {
 .searchvideo:hover {
   background-color: white;
   cursor: pointer; }
-
-.searchinput {
-  margin-bottom: 10px;
-  border-radius: 4px;
-  border: none;
-  background: #f8f8f8;
-  padding: 0.7rem; }
-
-.searchedvideos {
-  overflow-y: scroll;
-  height: 35%;
-  width: 26vw;
-  background-color: #f8f8f8;
-  border-radius: 2%;
-  color: black; }
 
 .searchitem {
   color: black; }

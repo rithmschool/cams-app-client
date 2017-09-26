@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import HorizontalTimeline from "./HorizontalTimeline";
+import PropTypes from "prop-types";
 
 class Timeline extends Component {
   constructor(props) {
@@ -8,16 +9,15 @@ class Timeline extends Component {
   }
 
   render() {
-    let VALUES = Array(this.props.valuesLength).fill(0.5);
     return (
       <div>
         <HorizontalTimeline
           spaceBarClick={() => {
-            this.setState({ value: ++this.state.value });
+            this.setState({ value: this.state.value + 1 });
           }}
           keyBoardEnabled={this.props.keyBoardEnabled}
           index={this.state.value}
-          values={VALUES}
+          numScreens={this.props.numScreens}
           linePadding={100}
           minEventPadding={20}
           maxEventPadding={120}
@@ -30,7 +30,7 @@ class Timeline extends Component {
 }
 
 Timeline.propTypes = {
-  valuesLength: PropTypes.number.isRequired,
+  numScreens: PropTypes.number.isRequired,
   keyBoardEnabled: PropTypes.bool.isRequired
 };
 

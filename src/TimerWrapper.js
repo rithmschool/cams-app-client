@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Timer from "./Timer";
+import PropTypes from "prop-types";
 
 class TimerWrapper extends Component {
   constructor(props) {
@@ -19,7 +20,7 @@ class TimerWrapper extends Component {
   tick() {
     if (this.state.counter > 0) {
       this.setState({
-        counter: --this.state.counter
+        counter: this.state.counter - 1
       });
     } else {
       this.props.toggle();
@@ -37,7 +38,7 @@ class TimerWrapper extends Component {
 }
 
 TimerWrapper.propTypes = {
-  toggle: PropType.func.isRequired
+  toggle: PropTypes.func.isRequired
 };
 
 export default TimerWrapper;

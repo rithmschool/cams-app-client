@@ -1,7 +1,7 @@
-@import 'variables';
+@import "variables";
 
-mainPage {
-  font-family:$font-main;
+mainpage {
+  font-family: $font-main;
   color: $dark-grey;
   background: $main-gradient;
   background-size: cover;
@@ -35,11 +35,11 @@ a {
 }
 
 .xs {
-  font-size: .4rem;
+  font-size: 0.4rem;
 }
 
 .sm {
-  font-size: .6rem;
+  font-size: 0.6rem;
 }
 
 .me {
@@ -92,7 +92,6 @@ button {
   text-decoration: none;
 }
 
-
 /*BANNER
 *********/
 
@@ -115,7 +114,6 @@ h1.banner-bold {
   font-size: 2.2em;
   font-style: italic;
 }
-
 
 /* CONTENT
 *********/
@@ -178,7 +176,7 @@ p.profile-title-fancy {
   align-content: center;
   border-radius: 0.5rem;
   background: $light-grey;
-  margin:5rem 0;
+  margin: 5rem 0;
   flex-wrap: wrap;
 }
 .bucket-fancy {
@@ -186,13 +184,13 @@ p.profile-title-fancy {
   justify-content: space-around;
   align-content: center;
   border-radius: 0.5rem;
-  color:white;
+  color: white;
   background-image: $alt-gradient;
 }
-.assessment{
+.assessment {
   max-width: 2rem;
-  padding:0px;
-  background:$main-blue;
+  padding: 0px;
+  background: $main-blue;
 }
 
 .big-nav {
@@ -211,7 +209,6 @@ p.profile-title-fancy {
   box-shadow: $nav-shadow;
   border-radius: 0.5rem;
 }
-
 
 /*PLAYLIST
 *********/
@@ -252,20 +249,19 @@ p.profile-title-fancy {
 
 .song-title {
   padding: 0.5rem;
-  color:$bold-grey;
+  color: $bold-grey;
   text-align: left;
   max-width: 15rem;
   font-size: 12px;
 }
 
 .delete {
-  color:rgb(208, 208, 208);
+  color: rgb(208, 208, 208);
 }
 
 .delete:hover {
   color: $danger;
 }
-
 
 /*SLANTDIVSTUFF
 *********/
@@ -276,9 +272,10 @@ p.profile-title-fancy {
   margin: -5rem 0 -1rem -1rem;
   width: 110%;
   transform: skew(-2deg, 4deg);
-  box-shadow: 0px 3px 0px rgb(0, 158, 184), 0px 8px 0px #00aea7, 0px 12px 0px rgba(51, 207, 164, 0.5), 0px 15px 0px rgba(51, 207, 164, 0.3), 0px 19px 0px rgba(51, 207, 164, 0.2);
+  box-shadow: 0px 3px 0px rgb(0, 158, 184), 0px 8px 0px #00aea7,
+    0px 12px 0px rgba(51, 207, 164, 0.5), 0px 15px 0px rgba(51, 207, 164, 0.3),
+    0px 19px 0px rgba(51, 207, 164, 0.2);
 }
-
 
 /* FORMS
 *********/
@@ -300,15 +297,15 @@ form * {
 }
 
 input::placeholder {
-  color:$bold-grey;
+  color: $bold-grey;
 }
 
 form h5 {
-  background: none
+  background: none;
 }
 
-form.email {}
-
+form.email {
+}
 
 /*LINK
 *********/
@@ -316,7 +313,6 @@ form.email {}
 .link {
   color: $main-blue;
 }
-
 
 /* KEYFRAMES
 *********/
@@ -331,10 +327,11 @@ form.email {}
   transition-timing-function: ease-out;
 }
 
-.button-hover:hover, .button-hover:focus, .button-hover:active {
+.button-hover:hover,
+.button-hover:focus,
+.button-hover:active {
   transform: translateY(3px);
 }
-
 
 /*DROPDOWN
 *********/
@@ -364,7 +361,6 @@ button.button.dropdown-content {
   margin: 0.5rem 0;
 }
 
-
 /*FOOTER
 *********/
 
@@ -377,22 +373,11 @@ button.button.dropdown-content {
   max-width: 10rem;
 }
 
-.videos-list {
-  box-sizing: border-box;
-  padding: 2%;
-  padding-top: 0px;
-  height: 25vw;
-  width: 30vw;
-  border: 0px solid;
-  border-radius: 10px;
-  background-color: #F1F1F1;
-}
-
-.createplaylistheader{
+.createplaylistheader {
   height: 2.5vw;
 }
 
-.createplaylist{
+.createplaylist {
   display: flex;
   justify-content: space-around;
 }
@@ -405,10 +390,10 @@ button.button.dropdown-content {
   width: 30vw;
   border: 0px solid;
   border-radius: 10px;
-  background-color: #F1F1F1;
+  background-color: #f1f1f1;
 }
 
-.sortablelist{
+.sortablelist {
   padding: 2%;
   padding-top: 0px;
   min-height: 25vw;
@@ -416,51 +401,33 @@ button.button.dropdown-content {
   box-sizing: border-box;
   border: 0px solid;
   border-radius: 10px;
-  background-color: #F1F1F1;
+  background-color: #f1f1f1;
 }
 
-.grabbable{
+.grabbable {
   text-align: left;
 }
 
-.playlistlist{
+.playlistlist {
   text-align: left;
 }
 
-.searchvideo{
+.searchvideo {
   background-color: white;
 }
 
-.searchvideo:hover{
+.searchvideo:hover {
   background-color: white;
   cursor: pointer;
 }
 
-.searchinput{
-  margin-bottom: 10px;
-  border-radius: 4px;
-  border: none;
-  background: #f8f8f8;
-  padding: 0.7rem;
-}
-
-.searchedvideos{
-  overflow-y: scroll;
-  height: 35%;
-  width: 26vw;
-  background-color: #f8f8f8;
-  border-radius: 2%;
+.searchitem {
   color: black;
 }
 
-.searchitem{
-  color: black;
+.searchitem:hover {
+  cursor: pointer;
 }
-
-.searchitem:hover{
-  cursor: pointer
-}
-
 
 /*MEDIA QUERIES*/
 
@@ -537,7 +504,7 @@ button.button.dropdown-content {
 }
 
 @media (min-width: 1200px) {
-  .diagonalbottom{
+  .diagonalbottom {
     transform: skew(-2deg, 2deg);
   }
   .banner {
@@ -565,14 +532,13 @@ button.button.dropdown-content {
 }
 
 .grabbable {
-    cursor: move;
-    cursor: grab;
-    padding: 1%;
+  cursor: move;
+  cursor: grab;
+  padding: 1%;
 }
 
-
 .grabbable:active {
-    cursor: move;
+  cursor: move;
 }
 
 div.spacearound {
@@ -581,7 +547,6 @@ div.spacearound {
   align-items: center;
 }
 
-
 /*Timer
 ********/
 
@@ -589,7 +554,7 @@ div.spacearound {
   width: 100px;
   height: 100px;
   background: $main-blue;
-  border-radius: 50px
+  border-radius: 50px;
 }
 
 .center {
@@ -597,8 +562,8 @@ div.spacearound {
 }
 
 #videoElement {
-    width: 500px;
-    background-color: #666;
+  width: 500px;
+  background-color: #666;
 }
 
 .content {

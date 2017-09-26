@@ -71,6 +71,7 @@ class PlaylistWrapper extends Component {
     );
   }
 }
+
 PlaylistWrapper.propTypes = {
   editPlaylist: PropTypes.bool.isRequired
 };

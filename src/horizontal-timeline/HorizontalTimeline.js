@@ -1,45 +1,38 @@
 import React, { Component } from "react";
 import EventsBar from "./EventsBar";
+import PropTypes from "prop-types";
 
 class HorizontalTimeline extends Component {
   render() {
-    if (!this.props.containerWidth) {
+    const {
+      maxEventPadding,
+      linePadding,
+      time,
+      containerWidth,
+      containerHeight,
+      index,
+      spaceBarClick,
+      keyBoardEnabled,
+      numScreens,
+      fillingMotion,
+      styles
+    } = this.props;
+
+    if (!containerWidth) {
       return false;
     }
 
-    const seperation = (
-      times,
-      minEventPadding,
-      maxEventPadding,
-      startPadding
-    ) => {
-      const distances = new Array(times.length);
-      distances[0] = startPadding;
-      for (let idx = 1; idx < distances.length; idx++) {
-        // calculating distance from origin
-        distances[idx] = distances[idx - 1] + times[idx - 1] * maxEventPadding;
-      }
-      return distances;
-    };
+    let distance = linePadding;
 
-    const props = this.props;
-    const times = this.props.values;
-
-    const distances = seperation(
-      times,
-      this.props.minEventPadding,
-      this.props.maxEventPadding,
-      this.props.linePadding
-    );
-
-    const events = distances.map((distance, index) => ({
-      distance,
-      time: this.props.values[index]
-    }));
+    const events = [];
+    for (var i = 0; i < numScreens; i++) {
+      events.push({ distance, time });
+      distance += time * maxEventPadding;
+    }
 
     const totalWidth = Math.max(
-      events[events.length - 1].distance + this.props.linePadding,
-      this.props.containerWidth
+      events[events.length - 1].distance + linePadding,
+      containerWidth
     );
 
     let barPaddingRight = 0;
@@ -47,19 +40,17 @@ class HorizontalTimeline extends Component {
 
     return (
       <EventsBar
-        width={this.props.containerWidth}
-        height={this.props.containerHeight}
+        width={containerWidth}
+        height={containerHeight}
         events={events}
-        index={this.props.index}
-        spaceBarClick={this.props.spaceBarClick}
+        index={index}
+        spaceBarClick={spaceBarClick}
         totalWidth={totalWidth}
         barPaddingLeft={barPaddingLeft}
         barPaddingRight={barPaddingRight}
-        fillingMotion={props.fillingMotion}
-        slidingMotion={props.slidingMotion}
-        styles={props.styles}
-        isTouchEnabled={props.isTouchEnabled}
-        keyBoardEnabled={this.props.keyBoardEnabled}
+        fillingMotion={fillingMotion}
+        styles={styles}
+        keyBoardEnabled={keyBoardEnabled}
       />
     );
   }
@@ -76,13 +67,30 @@ HorizontalTimeline.defaultProps = {
     stiffness: 150,
     damping: 25
   },
-  slidingMotion: {
-    stiffness: 150,
-    damping: 25
-  },
-  isTouchEnabled: true
+
+  time: 0.5
 };
 
-HorizontalTimeline.propTypes = {};
+HorizontalTimeline.propTypes = {
+  spaceBarClick: PropTypes.func.isRequired,
+  keyBoardEnabled: PropTypes.bool.isRequired,
+  index: PropTypes.number.isRequired,
+  numScreens: PropTypes.number.isRequired,
+  linePadding: PropTypes.number.isRequired,
+  minEventPadding: PropTypes.number.isRequired,
+  maxEventPadding: PropTypes.number.isRequired,
+  containerWidth: PropTypes.number.isRequired,
+  containerHeight: PropTypes.number.isRequired,
+  time: PropTypes.number.isRequired,
+  styles: PropTypes.shape({
+    outline: PropTypes.string.isRequired,
+    background: PropTypes.string.isRequired,
+    foreground: PropTypes.string.isRequired
+  }),
+  fillingMotion: PropTypes.shape({
+    stiffness: PropTypes.number.isRequired,
+    damping: PropTypes.number.isRequired
+  })
+};
 
 export default HorizontalTimeline;

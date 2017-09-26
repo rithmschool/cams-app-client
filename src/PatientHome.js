@@ -175,7 +175,7 @@ class PatientHome extends Component {
       <div className="patient-home">
         <div>
           <Timeline
-            valuesLength={screens.length}
+            numScreens={screens.length}
             keyBoardEnabled={this.state.keyBoardEnabled}
           />
         </div>

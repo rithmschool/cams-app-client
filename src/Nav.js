@@ -116,6 +116,7 @@ class Nav extends Component {
     );
   }
 }
+
 Nav.propTypes = {
   isLoggedIn: PropTypes.bool.isRequired
 };

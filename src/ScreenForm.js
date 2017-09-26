@@ -130,6 +130,7 @@ class ScreenForm extends Component {
     );
   }
 }
+
 ScreenForm.propTypes = {
   addQuestion: PropTypes.func.isRequired,
   addVideo: PropTypes.func.isRequired,

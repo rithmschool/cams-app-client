@@ -27,10 +27,11 @@ const Events = ({
     ))}
   </ol>
 );
+
 Events.propTypes = {
   events: PropTypes.func.isRequired,
   selectedIndex: PropTypes.number.isRequired,
-  styles: PropTypes.object.isRequired, //not sure if this is right
+  styles: PropTypes.object.isRequired,
   spaceBarClick: PropTypes.bool.isRequired,
   labelWidth: PropTypes.number.isRequired
 };

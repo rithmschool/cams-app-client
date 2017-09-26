@@ -44,6 +44,7 @@ class QuestionForm extends Component {
     );
   }
 }
+
 QuestionForm.propTypes = {
   addQuestion: PropTypes.func.isRequired
 };

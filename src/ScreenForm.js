@@ -1,12 +1,14 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { BASE_URL, config } from "./helpers.js";
+import FileInput from "react-file-input";
 
 class ScreenForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
       url: "",
+      file: null,
       question: "",
       videos: [],
       searchtext: ""
@@ -16,11 +18,21 @@ class ScreenForm extends Component {
     this.handleAdd = this.handleAdd.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleUpload = this.handleUpload.bind(this);
+    this.handleUploadChange = this.handleUploadChange.bind(this);
   }
 
   handleChange(e) {
+    console.log(e.target.name, e.target.value);
     this.setState({
       [e.target.name]: e.target.value
+    });
+  }
+
+  handleUploadChange(e) {
+    console.log(e.target.name, e.target.files[0]);
+    this.setState({
+      [e.target.name]: e.target.files[0]
     });
   }
 
@@ -28,6 +40,13 @@ class ScreenForm extends Component {
     this.setState({
       searchtext: e.target.value
     });
+  }
+
+  handleUpload(e) {
+    e.preventDefault();
+    this.props.addFile(e.target);
+    console.log(e.target);
+    this.setState({ file: null });
   }
 
   handleAdd(e) {
@@ -103,6 +122,21 @@ class ScreenForm extends Component {
                 +
               </button>
             </form>
+
+            <form enctype="multipart/form-data" onSubmit={this.handleUpload}>
+              <input type="file" name="file" onChange={this.handleChange} />
+              {/*<FileInput
+                name="file"
+                accept=".mp4,.avi"
+                placeholder="Video File"
+                className="inputClass"
+                onChange={this.handleUploadChange}
+              />*/}
+              <button type="submit" className="button" value="Add">
+                +
+              </button>
+            </form>
+
             <form onSubmit={this.handleAdd}>
               <input
                 type="url"

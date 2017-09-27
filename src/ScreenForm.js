@@ -12,6 +12,7 @@ class ScreenForm extends Component {
       url: "",
       file: null,
       question: "",
+      timer: 30,
       videos: [],
       searchtext: ""
     };
@@ -54,8 +55,11 @@ class ScreenForm extends Component {
   handleAdd(e) {
     e.preventDefault();
     if (e.target.className === "addQuestion") {
-      this.setState({ question: "" });
-      this.props.addQuestion(this.state.question);
+      this.setState({ question: "", timer: 30 });
+      this.props.addQuestion({
+        question: this.state.question,
+        timer: this.state.timer ? this.state.timer : 30
+      });
     } else {
       this.setState({ url: "" });
       this.props.addVideo(this.state.url);
@@ -119,6 +123,14 @@ class ScreenForm extends Component {
                 name="question"
                 placeholder="Add A Question"
                 value={this.state.question}
+              />
+              <label htmlFor="timer">Timer</label>
+              <input
+                type="number"
+                onChange={this.handleChange.bind(this)}
+                name="timer"
+                // placeholder="Add A Question"
+                value={this.state.timer}
               />
               <button type="submit" className="button" value="Add">
                 +

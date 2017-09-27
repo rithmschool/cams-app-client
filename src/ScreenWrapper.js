@@ -9,6 +9,7 @@ import {
   arrayMove
 } from "react-sortable-hoc";
 import PropTypes from "prop-types";
+import { withRouter } from "react-router-dom";
 
 class ScreenWrapper extends Component {
   constructor(props) {
@@ -193,4 +194,4 @@ ScreenWrapper.propTypes = {
   addPlaylist: PropTypes.func.isRequired
 };
 
-export default ScreenWrapper;
+export default withRouter(ScreenWrapper);

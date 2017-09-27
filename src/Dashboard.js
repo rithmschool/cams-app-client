@@ -1,59 +1,72 @@
-import React, {Component} from 'react';
-import {BASE_URL, userID, config} from './helpers.js';
-import axios from 'axios';
-import {Link} from 'react-router-dom';
-import './Dashboard.css';
+import React, { Component } from "react";
+import { BASE_URL, userID, config } from "./helpers.js";
+import axios from "axios";
+import { Link } from "react-router-dom";
+import "./Dashboard.css";
 
-class Close extends Component{
-  render() {
-    return (
-      <div onClick={this.props.handleClose}>
-        <i className="fa delete fa-times-circle button-hover" aria-hidden="true"></i>
-      </div>
-    )
-  }
-}
+const Close = ({ handleClose }) => (
+  <div onClick={handleClose}>
+    <i className="fa delete fa-times-circle button-hover" aria-hidden="true" />
+  </div>
+);
 
-class Dashboard extends Component{
-
+class Dashboard extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       email: "",
       playlistID: null,
       playlistName: null,
       userPlaylists: [],
-      successMessage: '',
+      successMessage: "",
       loading: false
-    }
-    this.closeSelection = this.closeSelection.bind(this)
-    this.handleChange = this.handleChange.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
+    };
+    this.closeSelection = this.closeSelection.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   sendMail(config) {
-    this.setState({loading: true})
-    window.scrollTo(0, 0)
-    axios.post(`${BASE_URL}/api/users`, {
-      email: this.state.email
-    }, config)
-    .then(response => axios.post(`${BASE_URL}/api/users/${userID()}/assessments`, {
-      patient_id: response.data.id,
-      playlist_id: this.state.playlistID,
-      doctor_id: userID()
-    }, config))
-    .then(response => axios.post(`${BASE_URL}/api/users/mail`, {
-      assessment_id: response.data.id,
-      patient_id: response.data.patient_id
-    }, config))
-    .then(response => {
-      this.setState({
-      playlistID: null,
-      playlistName: null,
-      email: '',
-      successMessage: response.data.message,
-      loading: false
-    })})
+    this.setState({ loading: true });
+    window.scrollTo(0, 0);
+    axios
+      .post(
+        `${BASE_URL}/api/users`,
+        {
+          email: this.state.email
+        },
+        config
+      )
+      .then(response =>
+        axios.post(
+          `${BASE_URL}/api/users/${userID()}/assessments`,
+          {
+            patient_id: response.data.id,
+            playlist_id: this.state.playlistID,
+            doctor_id: userID()
+          },
+          config
+        )
+      )
+      .then(response =>
+        axios.post(
+          `${BASE_URL}/api/users/mail`,
+          {
+            assessment_id: response.data.id,
+            patient_id: response.data.patient_id
+          },
+          config
+        )
+      )
+      .then(response => {
+        this.setState({
+          playlistID: null,
+          playlistName: null,
+          email: "",
+          successMessage: response.data.message,
+          loading: false
+        });
+      });
   }
 
   handleChange(e) {
@@ -63,77 +76,83 @@ class Dashboard extends Component{
   }
 
   handleSubmit(e) {
-    e.preventDefault()
-    this.sendMail(config())
+    e.preventDefault();
+    this.sendMail(config());
   }
 
   closeSelection() {
-    this.setState({playlistID: null, playlistName: null, successMessage: ''})
+    this.setState({ playlistID: null, playlistName: null, successMessage: "" });
   }
 
-  choosePlaylist(playlist_id, playlistName){
-    if (this.state.playlistID === null || playlist_id !== this.state.playlistID){
-      this.setState({playlistID: playlist_id, playlistName: playlistName})
+  choosePlaylist(playlist_id, playlistName) {
+    if (
+      this.state.playlistID === null ||
+      playlist_id !== this.state.playlistID
+    ) {
+      this.setState({ playlistID: playlist_id, playlistName: playlistName });
     }
   }
 
-  componentWillMount(){
-    axios.get(
-      `${BASE_URL}/api/users/${userID()}/playlists`, config()
-    ).then(response => {
-      this.setState({userPlaylists: response.data})
-    })
+  componentWillMount() {
+    axios
+      .get(`${BASE_URL}/api/users/${userID()}/playlists`, config())
+      .then(response => {
+        this.setState({ userPlaylists: response.data });
+      });
   }
   render() {
-    let loadingMessage = this.state.loading ?
+    let loadingMessage = this.state.loading ? (
       <div className="loading">
         Please wait, we are sending your email now.
-        <i className="fa fa-spinner fa-spin" aria-hidden="true"></i>
-      </div> :
-      null;
+        <i className="fa fa-spinner fa-spin" aria-hidden="true" />
+      </div>
+    ) : null;
 
-    let successMessage = this.state.successMessage ?
+    let successMessage = this.state.successMessage ? (
       <div className="email-sent">
         {this.state.successMessage}
-        <Close handleClose={this.closeSelection}/>
-      </div> : 
-      null;
+        <Close handleClose={this.closeSelection} />
+      </div>
+    ) : null;
 
     let playlists = this.state.userPlaylists.map((playlist, i) => {
-      let showForm = this.state.playlistName === playlist.name ?
-        <div>
-          <form className="email" onSubmit={this.handleSubmit}>
-            <h5>Send to:</h5>
-            <input
-              type="email"
-              name="email"
-              placeholder="email"
-              value={this.state.email}
-              required onChange={this.handleChange}
-            />
-            <button
-              className="button button-hover"
-              type="submit"
-              value="Submit">
-              Submit
-            </button>
-          </form>
-          <div className="spacearound">
-            <Close handleClose={this.closeSelection}/>
-            <Link to={`playlists/${playlist.id}/edit`}>
-              <i className="fa fa-pencil-square button-hover delete" aria-hidden="true"></i>
-            </Link>
+      let showForm =
+        this.state.playlistName === playlist.name ? (
+          <div>
+            <form className="email" onSubmit={this.handleSubmit}>
+              <h5>Send to:</h5>
+              <input
+                type="email"
+                name="email"
+                placeholder="email"
+                value={this.state.email}
+                required
+                onChange={this.handleChange}
+              />
+              <button
+                className="button button-hover"
+                type="submit"
+                value="Submit"
+              >
+                Submit
+              </button>
+            </form>
+            <div className="spacearound">
+              <Close handleClose={this.closeSelection} />
+              <Link to={`playlists/${playlist.id}/edit`}>
+                <i
+                  className="fa fa-pencil-square button-hover delete"
+                  aria-hidden="true"
+                />
+              </Link>
+            </div>
           </div>
-        </div> 
-        :
-        null
+        ) : null;
 
       let className =
-        this.state.playlistID === playlist.id ?
-          'selected' :
-          'playlist-card'
+        this.state.playlistID === playlist.id ? "selected" : "playlist-card";
 
-      return(
+      return (
         <div
           key={i}
           tabIndex="0"
@@ -142,17 +161,16 @@ class Dashboard extends Component{
         >
           <h5 className="playlist-name-title">{playlist.name}</h5>
           {playlist.videos.map((video, idx) => {
-            return(
-              <p className="song-title" key={idx} >
+            return (
+              <p className="song-title" key={idx}>
                 {video.title}
               </p>
-            )
-          })
-        }
-        {showForm}
-      </div>
-      )
-    })
+            );
+          })}
+          {showForm}
+        </div>
+      );
+    });
     return (
       <div>
         <div className="banner-text">
@@ -161,12 +179,10 @@ class Dashboard extends Component{
         <div className="content">
           {loadingMessage}
           {successMessage}
-          <div className="playlist-container">
-            {playlists}
-          </div>
+          <div className="playlist-container">{playlists}</div>
         </div>
       </div>
-    )
+    );
   }
 }
 

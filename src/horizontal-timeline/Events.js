@@ -1,14 +1,21 @@
-import React from 'react';
-import TimelineDot from './TimelineDot';
+import React from "react";
+import TimelineDot from "./TimelineDot";
+import PropTypes from "prop-types";
 
-const Events = ({ events, selectedIndex, styles, spaceBarClick, labelWidth }) => (
+const Events = ({
+  events,
+  selectedIndex,
+  styles,
+  spaceBarClick,
+  labelWidth
+}) => (
   <ol
-    className='events-bar'
-    style={ {
-      listStyle: 'none'
-    } }
+    className="events-bar"
+    style={{
+      listStyle: "none"
+    }}
   >
-    {events.map((event, index) =>
+    {events.map((event, index) => (
       <TimelineDot
         distanceFromOrigin={event.distance}
         index={index}
@@ -17,8 +24,16 @@ const Events = ({ events, selectedIndex, styles, spaceBarClick, labelWidth }) =>
         selected={selectedIndex}
         styles={styles}
       />
-    )}
+    ))}
   </ol>
 );
+
+Events.propTypes = {
+  events: PropTypes.func.isRequired,
+  selectedIndex: PropTypes.number.isRequired,
+  styles: PropTypes.object.isRequired,
+  spaceBarClick: PropTypes.bool.isRequired,
+  labelWidth: PropTypes.number.isRequired
+};
 
 export default Events;

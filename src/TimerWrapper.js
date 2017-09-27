@@ -1,8 +1,9 @@
-import React, {Component} from 'react';
-import Timer from './Timer'
+import React, { Component } from "react";
+import Timer from "./Timer";
+import PropTypes from "prop-types";
 
 class TimerWrapper extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
       counter: 30,
@@ -11,30 +12,33 @@ class TimerWrapper extends Component {
   }
 
   componentDidMount() {
-    this.props.toggle()
-    let timerId = setInterval(
-      () => this.tick(),
-      1000
-    );
-    this.setState({timerId})
+    this.props.toggle();
+    let timerId = setInterval(() => this.tick(), 1000);
+    this.setState({ timerId });
   }
 
   tick() {
-    if(this.state.counter > 0){
+    if (this.state.counter > 0) {
       this.setState({
-        counter: --this.state.counter
-      });     
+        counter: this.state.counter - 1
+      });
     } else {
-      this.props.toggle()
-      clearTimeout(this.state.timerId)
+      this.props.toggle();
+      clearTimeout(this.state.timerId);
     }
-
   }
-  render(){
+  render() {
     return (
-      <Timer count={this.state.counter}></Timer>
-    )
+      <div>
+        <Timer count={this.state.counter} />
+        <p> This is a question </p>
+      </div>
+    );
   }
 }
+
+TimerWrapper.propTypes = {
+  toggle: PropTypes.func.isRequired
+};
 
 export default TimerWrapper;

@@ -1,15 +1,16 @@
-import React, {Component} from 'react';
+import React from "react";
+import PropTypes from "prop-types";
 
-class Timer extends Component {
-	render() {
-		return (
-			<div>
-				<div className="timer">
-					<h2 className='center'> {this.props.count} </h2>
-				</div>
-			</div>
-		);
-	}
-}
+const Timer = ({ count }) => (
+  <div>
+    <div className="timer">
+      <h2 className="center"> {count} </h2>
+    </div>
+  </div>
+);
+
+Timer.propTypes = {
+  count: PropTypes.number.isRequired
+};
 
 export default Timer;

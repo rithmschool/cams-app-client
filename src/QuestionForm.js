@@ -20,11 +20,11 @@ class QuestionForm extends Component {
 
   handleAdd(e) {
     e.preventDefault();
-    this.setState({ question: "", timer: 30 });
     this.props.addQuestion({
       question: this.state.question,
-      timer: this.state.timer ? this.state.timer : 30
+      timer: this.state.timer || 30
     });
+    this.setState({ question: "", timer: 30 });
   }
 
   render() {

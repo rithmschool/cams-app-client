@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { BASE_URL, config } from "./helpers.js";
-import FileInput from "react-file-input";
 import "./ScreenForm.css";
 import QuestionForm from "./QuestionForm";
 import PropTypes from "prop-types";

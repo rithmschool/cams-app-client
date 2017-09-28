@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { BASE_URL, config } from "./helpers.js";
 import PropTypes from "prop-types";
 
 class QuestionForm extends Component {

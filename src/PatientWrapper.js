@@ -46,7 +46,6 @@ class PatientWrapper extends Component {
         );
       })
       .then(function(response) {
-        console.log(response.data);
         self.setState({
           screens: response.data.screens,
           screenCount: response.data.screens.reduce(
@@ -64,7 +63,7 @@ class PatientWrapper extends Component {
         <PatientHome
           screens={this.state.screens}
           screenCount={this.state.screenCount}
-          assessmentId={this.state.assessmentId}
+          assessmentId={+this.state.assessmentId}
         />
       ) : (
         <p>

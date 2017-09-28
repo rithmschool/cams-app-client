@@ -4,7 +4,7 @@
   "private": true,
   "engines": {
     "node": "8.4.0",
-    "nvm": "5.4.2"
+    "npm": "5.4.2"
   },
   "dependencies": {
     "axios": "^0.15.3",

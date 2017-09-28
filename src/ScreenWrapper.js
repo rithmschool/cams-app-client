@@ -20,6 +20,7 @@ class ScreenWrapper extends Component {
     this.addVideo = this.addVideo.bind(this);
     this.addDone = this.addDone.bind(this);
     this.addQuestion = this.addQuestion.bind(this);
+    this.onSortEnd = this.onSortEnd.bind(this);
   }
 
   addVideo(url) {
@@ -83,7 +84,6 @@ class ScreenWrapper extends Component {
       );
     }
 
-    console.log("all done", this, this.props);
     this.props.history.push("/dashboard");
   }
 

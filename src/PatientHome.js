@@ -63,7 +63,7 @@ class PatientHome extends Component {
     recordRTC.stopRecording(() => {
       let fd = new FormData();
       recordedBlob = recordRTC.getBlob();
-      fd.append("assessment_id", this.props.assessment_id);
+      fd.append("assessmentId", this.props.assessmentId);
       fd.append("fname", "video_" + Date.now() + ".mp4");
       fd.append("file", recordedBlob);
       axios
@@ -195,7 +195,7 @@ PatientHome.propTypes = {
       title: PropTypes.string.isRequired
     })
   ).isRequired,
-  assesmentId: PropTypes.number.isRequired,
+  assessmentId: PropTypes.number.isRequired,
   screenCount: PropTypes.number.isRequired
 };
 

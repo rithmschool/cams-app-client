@@ -161,7 +161,10 @@ class PatientHome extends Component {
               ]
             : [
                 <QuestionView text={screenData.title} />,
-                <TimerWrapper toggle={this.toggle} timer={screenData.timer} />
+                <div>
+                  <QuestionView text={screenData.title} />
+                  <TimerWrapper toggle={this.toggle} timer={screenData.timer} />
+                </div>
               ]
         ),
       screens

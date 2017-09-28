@@ -31,7 +31,6 @@ class TimerWrapper extends Component {
     return (
       <div>
         <Timer count={this.state.counter} />
-        <p> This is a question </p>
       </div>
     );
   }

@@ -3,6 +3,7 @@ import axios from "axios";
 import { BASE_URL, config } from "./helpers.js";
 import FileInput from "react-file-input";
 import "./ScreenForm.css";
+import QuestionForm from "./QuestionForm";
 import PropTypes from "prop-types";
 
 class ScreenForm extends Component {
@@ -11,8 +12,6 @@ class ScreenForm extends Component {
     this.state = {
       url: "",
       file: null,
-      question: "",
-      timer: 30,
       videos: [],
       searchtext: ""
     };
@@ -26,14 +25,12 @@ class ScreenForm extends Component {
   }
 
   handleChange(e) {
-    console.log(e.target.name, e.target.value);
     this.setState({
       [e.target.name]: e.target.value
     });
   }
 
   handleUploadChange(e) {
-    console.log(e.target.name, e.target.files[0]);
     this.setState({
       [e.target.name]: e.target.files[0]
     });
@@ -48,22 +45,13 @@ class ScreenForm extends Component {
   handleUpload(e) {
     e.preventDefault();
     this.props.addFile(e.target);
-    console.log(e.target);
     this.setState({ file: null });
   }
 
   handleAdd(e) {
     e.preventDefault();
-    if (e.target.className === "addQuestion") {
-      this.setState({ question: "", timer: 30 });
-      this.props.addQuestion({
-        question: this.state.question,
-        timer: this.state.timer ? this.state.timer : 30
-      });
-    } else {
-      this.setState({ url: "" });
-      this.props.addVideo(this.state.url);
-    }
+    this.setState({ url: "" });
+    this.props.addVideo(this.state.url);
   }
 
   handleSubmit(e) {
@@ -115,28 +103,8 @@ class ScreenForm extends Component {
             />
             {showVideos}
           </div>
+          <QuestionForm addQuestion={this.props.addQuestion} />
           <div className="videos-form">
-            <form className="addQuestion" onSubmit={this.handleAdd.bind(this)}>
-              <input
-                type="text"
-                onChange={this.handleChange.bind(this)}
-                name="question"
-                placeholder="Add A Question"
-                value={this.state.question}
-              />
-              <label htmlFor="timer">Timer</label>
-              <input
-                type="number"
-                onChange={this.handleChange.bind(this)}
-                name="timer"
-                // placeholder="Add A Question"
-                value={this.state.timer}
-              />
-              <button type="submit" className="button" value="Add">
-                +
-              </button>
-            </form>
-
             <form enctype="multipart/form-data" onSubmit={this.handleUpload}>
               <input type="file" name="file" onChange={this.handleChange} />
               {/*<FileInput

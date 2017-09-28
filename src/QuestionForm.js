@@ -6,7 +6,8 @@ class QuestionForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      question: ""
+      question: "",
+      timer: 30
     };
     this.handleAdd = this.handleAdd.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -20,21 +21,31 @@ class QuestionForm extends Component {
 
   handleAdd(e) {
     e.preventDefault();
-    this.setState({ question: "" });
-    this.props.addQuestion(this.state.question);
+    this.setState({ question: "", timer: 30 });
+    this.props.addQuestion({
+      question: this.state.question,
+      timer: this.state.timer ? this.state.timer : 30
+    });
   }
 
   render() {
     return (
       <div className="questions-form">
         <h4>Add Questions</h4>
-        <form className="addQuestion" onSubmit={this.handleAdd.bind(this)}>
+        <form className="addQuestion" onSubmit={this.handleAdd}>
           <input
             type="text"
-            onChange={this.handleChange.bind(this)}
+            onChange={this.handleChange}
             name="question"
             placeholder="Add A Question"
             value={this.state.question}
+          />
+          <label htmlFor="timer">Timer (in secs)</label>
+          <input
+            type="number"
+            onChange={this.handleChange}
+            name="timer"
+            value={this.state.timer}
           />
           <button type="submit" className="button" value="Add">
             +

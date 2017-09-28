@@ -55,7 +55,7 @@ class ScreenWrapper extends Component {
         .post(
           `${BASE_URL}/api/questions`,
           {
-            title: question.question,
+            title: question.title,
             timer: question.timer,
             playlist_id: this.props.playlistID,
             order: this.state.screenData.length + 1
@@ -66,7 +66,7 @@ class ScreenWrapper extends Component {
           this.setState({
             screenData: this.state.screenData.concat([
               {
-                title: question.question,
+                title: question.title,
                 timer: question.timer,
                 entity_id: response.data.id,
                 type: "question"
@@ -159,8 +159,8 @@ class ScreenWrapper extends Component {
 }
 
 ScreenWrapper.propTypes = {
-  playlistID: PropTypes.number.isRequired,
-  addPlaylist: PropTypes.func.isRequired
+  playlistID: PropTypes.number.isRequired
+  // addPlaylist: PropTypes.func.isRequired
 };
 
 export default withRouter(ScreenWrapper);

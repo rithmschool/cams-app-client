@@ -19,8 +19,6 @@ class ScreenForm extends Component {
     this.handleAdd = this.handleAdd.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleUpload = this.handleUpload.bind(this);
-    this.handleUploadChange = this.handleUploadChange.bind(this);
   }
 
   handleChange(e) {
@@ -29,22 +27,10 @@ class ScreenForm extends Component {
     });
   }
 
-  handleUploadChange(e) {
-    this.setState({
-      [e.target.name]: e.target.files[0]
-    });
-  }
-
   handleSearchChange(e) {
     this.setState({
       searchtext: e.target.value
     });
-  }
-
-  handleUpload(e) {
-    e.preventDefault();
-    this.props.addFile(e.target);
-    this.setState({ file: null });
   }
 
   handleAdd(e) {
@@ -104,20 +90,6 @@ class ScreenForm extends Component {
           </div>
           <QuestionForm addQuestion={this.props.addQuestion} />
           <div className="videos-form">
-            <form enctype="multipart/form-data" onSubmit={this.handleUpload}>
-              <input type="file" name="file" onChange={this.handleChange} />
-              {/*<FileInput
-                name="file"
-                accept=".mp4,.avi"
-                placeholder="Video File"
-                className="inputClass"
-                onChange={this.handleUploadChange}
-              />*/}
-              <button type="submit" className="button" value="Add">
-                +
-              </button>
-            </form>
-
             <form onSubmit={this.handleAdd}>
               <input
                 type="url"

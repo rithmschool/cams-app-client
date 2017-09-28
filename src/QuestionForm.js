@@ -5,7 +5,7 @@ class QuestionForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      question: "",
+      title: "",
       timer: 30
     };
     this.handleAdd = this.handleAdd.bind(this);
@@ -21,10 +21,10 @@ class QuestionForm extends Component {
   handleAdd(e) {
     e.preventDefault();
     this.props.addQuestion({
-      question: this.state.question,
+      title: this.state.title,
       timer: this.state.timer || 30
     });
-    this.setState({ question: "", timer: 30 });
+    this.setState({ title: "", timer: 30 });
   }
 
   render() {
@@ -35,9 +35,9 @@ class QuestionForm extends Component {
           <input
             type="text"
             onChange={this.handleChange}
-            name="question"
+            name="title"
             placeholder="Add A Question"
-            value={this.state.question}
+            value={this.state.title}
           />
           <label htmlFor="timer">Timer (in secs)</label>
           <input

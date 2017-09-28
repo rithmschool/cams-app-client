@@ -82,14 +82,16 @@ class ScreenWrapper extends Component {
         }.bind(this)
       );
     }
+
+    console.log("all done", this, this.props);
     this.props.history.push("/dashboard");
   }
 
-  onSortEnd = ({ oldIndex, newIndex }) => {
+  onSortEnd({ oldIndex, newIndex }) {
     this.setState({
       screenData: arrayMove(this.state.screenData, oldIndex, newIndex)
     });
-  };
+  }
 
   componentWillMount() {
     if (this.props.editPlaylist) {

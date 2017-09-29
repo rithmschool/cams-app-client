@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import Timer from "./Timer";
 import PropTypes from "prop-types";
 
 class TimerWrapper extends Component {
@@ -30,7 +29,9 @@ class TimerWrapper extends Component {
   render() {
     return (
       <div>
-        <Timer count={this.state.counter} />
+        <div className="timer">
+          <h2 className="center"> {this.state.counter} </h2>
+        </div>
         <p> This is a question </p>
       </div>
     );

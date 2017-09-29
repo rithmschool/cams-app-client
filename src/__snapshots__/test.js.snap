@@ -1,3 +1,19 @@
+exports[`test shapshot of TimerWrapper 1`] = `
+<div>
+  <div>
+    <div
+      className="timer">
+      <h2
+        className="center">
+         
+        45
+         
+      </h2>
+    </div>
+  </div>
+</div>
+`;
+
 exports[`test snapshot of timer 1`] = `
 <div>
   <div

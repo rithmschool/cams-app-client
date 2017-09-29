@@ -20,14 +20,14 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">3.7% </span>
+        <span class="strong">4.17% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>1/27</span>
+        <span class='fraction'>1/24</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>0/6</span>
+        <span class='fraction'>0/4</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
@@ -35,9 +35,9 @@
         <span class='fraction'>0/10</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">3.7% </span>
+        <span class="strong">4.17% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>1/27</span>
+        <span class='fraction'>1/24</span>
       </div>
     </div>
   </div>
@@ -168,22 +168,8 @@
 123
 124
 125
-126
-127
-128
-129
-130
-131
-132
-133
-134
-135
-136
-137
-138
-139
-140
-141</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+126</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -221,11 +207,6 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -264,17 +245,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -327,6 +297,7 @@
 import axios from "axios";
 import { BASE_URL, config } from "./helpers.js";
 import "./ScreenForm.css";
+import QuestionForm from "./QuestionForm";
 import PropTypes from "prop-types";
 &nbsp;
 class ScreenForm extends Component {
@@ -334,7 +305,7 @@ class ScreenForm extends Component {
 <span class="cstat-no" title="statement not covered" >    super(props);</span>
 <span class="cstat-no" title="statement not covered" >    this.state = {</span>
       url: "",
-      question: "",
+      file: null,
       videos: [],
       searchtext: ""
     };
@@ -359,13 +330,8 @@ class ScreenForm extends Component {
 &nbsp;
 <span class="fstat-no" title="function not covered" >  ha</span>ndleAdd(e) {
 <span class="cstat-no" title="statement not covered" >    e.preventDefault();</span>
-<span class="cstat-no" title="statement not covered" >    if (e.target.className === "addQuestion") {</span>
-<span class="cstat-no" title="statement not covered" >      this.setState({ question: "" });</span>
-<span class="cstat-no" title="statement not covered" >      this.props.addQuestion(this.state.question);</span>
-    } else {
-<span class="cstat-no" title="statement not covered" >      this.setState({ url: "" });</span>
-<span class="cstat-no" title="statement not covered" >      this.props.addVideo(this.state.url);</span>
-    }
+<span class="cstat-no" title="statement not covered" >    this.setState({ url: "" });</span>
+<span class="cstat-no" title="statement not covered" >    this.props.addVideo(this.state.url);</span>
   }
 &nbsp;
 <span class="fstat-no" title="function not covered" >  ha</span>ndleSubmit(e) {
@@ -417,19 +383,8 @@ class ScreenForm extends Component {
             /&gt;
             {showVideos}
           &lt;/div&gt;
+          &lt;QuestionForm addQuestion={this.props.addQuestion} /&gt;
           &lt;div className="videos-form"&gt;
-            &lt;form className="addQuestion" onSubmit={this.handleAdd.bind(this)}&gt;
-              &lt;input
-                type="text"
-                onChange={this.handleChange.bind(this)}
-                name="question"
-                placeholder="Add A Question"
-                value={this.state.question}
-              /&gt;
-              &lt;button type="submit" className="button" value="Add"&gt;
-                +
-              &lt;/button&gt;
-            &lt;/form&gt;
             &lt;form onSubmit={this.handleAdd}&gt;
               &lt;input
                 type="url"
@@ -469,7 +424,7 @@ export default ScreenForm;
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu Sep 28 2017 17:18:41 GMT-0700 (PDT)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Sep 29 2017 14:23:14 GMT-0700 (PDT)
 </div>
 </div>
 <script src="../prettify.js"></script>

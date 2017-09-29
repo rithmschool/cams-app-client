@@ -1,0 +1,3 @@
+exports[`test nav bar snapshot when logged in 1`] = `undefined`;
+
+exports[`test nav bar snapshot when logged out 1`] = `undefined`;

@@ -32,7 +32,6 @@ class TimerWrapper extends Component {
         <div className="timer">
           <h2 className="center"> {this.state.counter} </h2>
         </div>
-        <p> This is a question </p>
       </div>
     );
   }

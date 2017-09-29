@@ -1,12 +1,12 @@
 import React, { Component } from "react";
-import { BASE_URL, config } from "./helpers.js";
 import PropTypes from "prop-types";
 
 class QuestionForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      question: ""
+      title: "",
+      timer: 30
     };
     this.handleAdd = this.handleAdd.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -20,21 +20,31 @@ class QuestionForm extends Component {
 
   handleAdd(e) {
     e.preventDefault();
-    this.setState({ question: "" });
-    this.props.addQuestion(this.state.question);
+    this.props.addQuestion({
+      title: this.state.title,
+      timer: this.state.timer || 30
+    });
+    this.setState({ title: "", timer: 30 });
   }
 
   render() {
     return (
       <div className="questions-form">
         <h4>Add Questions</h4>
-        <form className="addQuestion" onSubmit={this.handleAdd.bind(this)}>
+        <form className="addQuestion" onSubmit={this.handleAdd}>
           <input
             type="text"
-            onChange={this.handleChange.bind(this)}
-            name="question"
+            onChange={this.handleChange}
+            name="title"
             placeholder="Add A Question"
-            value={this.state.question}
+            value={this.state.title}
+          />
+          <label htmlFor="timer">Timer (in secs)</label>
+          <input
+            type="number"
+            onChange={this.handleChange}
+            name="timer"
+            value={this.state.timer}
           />
           <button type="submit" className="button" value="Add">
             +

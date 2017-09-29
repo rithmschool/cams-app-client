@@ -5,7 +5,7 @@ class TimerWrapper extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      counter: 30,
+      counter: props.timer || 30,
       timerId: null
     };
   }

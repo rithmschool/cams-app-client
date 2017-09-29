@@ -6,7 +6,7 @@ class TimerWrapper extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      counter: 30,
+      counter: props.timer || 30,
       timerId: null
     };
   }
@@ -31,7 +31,6 @@ class TimerWrapper extends Component {
     return (
       <div>
         <Timer count={this.state.counter} />
-        <p> Question here </p>
       </div>
     );
   }

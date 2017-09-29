@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import { BASE_URL, config } from "./helpers.js";
 import "./ScreenForm.css";
+import QuestionForm from "./QuestionForm";
 import PropTypes from "prop-types";
 
 class ScreenForm extends Component {
@@ -9,7 +10,7 @@ class ScreenForm extends Component {
     super(props);
     this.state = {
       url: "",
-      question: "",
+      file: null,
       videos: [],
       searchtext: ""
     };
@@ -34,13 +35,8 @@ class ScreenForm extends Component {
 
   handleAdd(e) {
     e.preventDefault();
-    if (e.target.className === "addQuestion") {
-      this.setState({ question: "" });
-      this.props.addQuestion(this.state.question);
-    } else {
-      this.setState({ url: "" });
-      this.props.addVideo(this.state.url);
-    }
+    this.setState({ url: "" });
+    this.props.addVideo(this.state.url);
   }
 
   handleSubmit(e) {
@@ -92,19 +88,8 @@ class ScreenForm extends Component {
             />
             {showVideos}
           </div>
+          <QuestionForm addQuestion={this.props.addQuestion} />
           <div className="videos-form">
-            <form className="addQuestion" onSubmit={this.handleAdd.bind(this)}>
-              <input
-                type="text"
-                onChange={this.handleChange.bind(this)}
-                name="question"
-                placeholder="Add A Question"
-                value={this.state.question}
-              />
-              <button type="submit" className="button" value="Add">
-                +
-              </button>
-            </form>
             <form onSubmit={this.handleAdd}>
               <input
                 type="url"

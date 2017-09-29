@@ -3,6 +3,7 @@ import axios from "axios";
 import { BASE_URL, config } from "./helpers.js";
 import "./ScreenForm.css";
 import QuestionForm from "./QuestionForm";
+import VideoUploadForm from "./VideoUploadForm";
 import PropTypes from "prop-types";
 
 class ScreenForm extends Component {
@@ -89,6 +90,7 @@ class ScreenForm extends Component {
             {showVideos}
           </div>
           <QuestionForm addQuestion={this.props.addQuestion} />
+          <VideoUploadForm />
           <div className="videos-form">
             <form onSubmit={this.handleAdd}>
               <input

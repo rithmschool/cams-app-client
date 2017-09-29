@@ -158,7 +158,7 @@ class ScreenWrapper extends Component {
 
 ScreenWrapper.propTypes = {
   playlistID: PropTypes.number.isRequired,
-  addPlaylist: PropTypes.func.isRequired
+  editPlaylist: PropTypes.bool.isRequired
 };
 
 export default withRouter(ScreenWrapper);

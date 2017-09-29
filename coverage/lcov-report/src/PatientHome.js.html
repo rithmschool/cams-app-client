@@ -1,0 +1,674 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/PatientHome.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../prettify.css" />
+    <link rel="stylesheet" href="../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../index.html">All files</a> / <a href="index.html">src</a> PatientHome.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">6.25% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>3/48</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/10</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/20</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">6.52% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>3/46</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, { Component } from "react";
+import RecordRTC from "recordrtc";
+import { BASE_URL } from "./helpers.js";
+import axios from "axios";
+import Timeline from "./horizontal-timeline/Timeline";
+import VideoPlayer from "./VideoPlayer";
+import VideoViewer from "./VideoViewer";
+import TimerWrapper from "./TimerWrapper";
+import "./PatientHome.css";
+import PropTypes from "prop-types";
+&nbsp;
+let recordRTC;
+&nbsp;
+const Text = <span class="fstat-no" title="function not covered" >pr</span>ops =&gt; <span class="cstat-no" title="statement not covered" >&lt;div className="lg"&gt;{props.children}&lt;/div&gt;;</span>
+&nbsp;
+const QuestionView = <span class="fstat-no" title="function not covered" >pr</span>ops =&gt; <span class="cstat-no" title="statement not covered" >&lt;p&gt;{props.text}&lt;/p&gt;;</span>
+&nbsp;
+class PatientHome extends Component {
+<span class="fstat-no" title="function not covered" >  co</span>nstructor(props) {
+<span class="cstat-no" title="statement not covered" >    super(props);</span>
+<span class="cstat-no" title="statement not covered" >    this.state = {</span>
+      idx: 0,
+      src: null,
+      keyBoardEnabled: true,
+      stream: ""
+    };
+<span class="cstat-no" title="statement not covered" >    this.handleSpaceBar = this.handleSpaceBar.bind(this);</span>
+<span class="cstat-no" title="statement not covered" >    this.startRecord = this.startRecord.bind(this);</span>
+<span class="cstat-no" title="statement not covered" >    this.stopRecord = this.stopRecord.bind(this);</span>
+<span class="cstat-no" title="statement not covered" >    this.toggle = this.toggle.bind(this);</span>
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  ca</span>ptureUserMedia(callback) {
+    let params = <span class="cstat-no" title="statement not covered" >{ audio: true, video: true };</span>
+<span class="cstat-no" title="statement not covered" >    navigator.getUserMedia(params, callback, <span class="fstat-no" title="function not covered" >er</span>ror =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >      alert(JSON.stringify(error));</span>
+    });
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  re</span>questUserMedia() {
+<span class="cstat-no" title="statement not covered" >    this.captureUserMedia(<span class="fstat-no" title="function not covered" >st</span>ream =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >      this.setState({ src: window.URL.createObjectURL(stream) });</span>
+    });
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  st</span>artRecord() {
+<span class="cstat-no" title="statement not covered" >    this.captureUserMedia(<span class="fstat-no" title="function not covered" >me</span>diaStream =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >      this.setState({</span>
+        stream: mediaStream
+      });
+      var options = <span class="cstat-no" title="statement not covered" >{</span>
+        mimeType: "video/webm;codecs=H264",
+        audioBitsPerSecond: 128000,
+        videoBitsPerSecond: 512000
+      };
+<span class="cstat-no" title="statement not covered" >      recordRTC = RecordRTC(mediaStream, options);</span>
+<span class="cstat-no" title="statement not covered" >      recordRTC.startRecording();</span>
+    });
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  st</span>opRecord() {
+    let recordedBlob;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    recordRTC.stopRecording(<span class="fstat-no" title="function not covered" >()</span> =&gt; {</span>
+      let fd = <span class="cstat-no" title="statement not covered" >new FormData();</span>
+<span class="cstat-no" title="statement not covered" >      recordedBlob = recordRTC.getBlob();</span>
+<span class="cstat-no" title="statement not covered" >      fd.append("assessment_id", this.props.assessmentId);</span>
+<span class="cstat-no" title="statement not covered" >      fd.append("fname", "video_" + Date.now() + ".mp4");</span>
+<span class="cstat-no" title="statement not covered" >      fd.append("file", recordedBlob);</span>
+<span class="cstat-no" title="statement not covered" >      axios</span>
+        .post(`${BASE_URL}/api/recording`, fd)
+        .then(<span class="fstat-no" title="function not covered" >r </span>=&gt; {})
+        .catch(<span class="fstat-no" title="function not covered" >er</span>r =&gt; {
+<span class="cstat-no" title="statement not covered" >          console.log(err);</span>
+        });
+    });
+<span class="cstat-no" title="statement not covered" >    this.stopMedia();</span>
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  st</span>opMedia() {
+<span class="cstat-no" title="statement not covered" >    this.state.stream.getTracks()[1].stop();</span>
+<span class="cstat-no" title="statement not covered" >    this.state.stream.getTracks()[0].stop();</span>
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  ha</span>ndleSpaceBar(e) {
+<span class="cstat-no" title="statement not covered" >    if (e.keyCode === 32 &amp;&amp; this.state.keyBoardEnabled) {</span>
+<span class="cstat-no" title="statement not covered" >      e.preventDefault();</span>
+<span class="cstat-no" title="statement not covered" >      if (this.state.idx === 2) {</span>
+<span class="cstat-no" title="statement not covered" >        this.startRecord();</span>
+      }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      this.setState({ idx: ++this.state.idx }, <span class="fstat-no" title="function not covered" >()</span> =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >        if (this.state.idx === this.props.screenCount) {</span>
+<span class="cstat-no" title="statement not covered" >          this.stopRecord();</span>
+        }
+      });
+    }
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  to</span>ggle() {
+<span class="cstat-no" title="statement not covered" >    this.setState({</span>
+      keyBoardEnabled: !this.state.keyBoardEnabled
+    });
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  co</span>mponentDidMount() {
+<span class="cstat-no" title="statement not covered" >    window.focus();</span>
+<span class="cstat-no" title="statement not covered" >    document.addEventListener("keydown", this.handleSpaceBar);</span>
+<span class="cstat-no" title="statement not covered" >    this.requestUserMedia();</span>
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  re</span>nder() {
+    let screens = <span class="cstat-no" title="statement not covered" >[</span>
+      &lt;Text&gt;
+        &lt;p&gt;
+          Welcome! You will watch short videos and answer questions about
+          yourself.
+        &lt;/p&gt;
+        &lt;p&gt;
+          Please read the instructions carefully. You will have 30 seconds to
+          respond to each question.
+        &lt;/p&gt;
+        &lt;p&gt;
+          Your answers will be recorded so please speak OUT LOUD when
+          responding.
+        &lt;/p&gt;
+        &lt;p&gt;Please press the spacebar when you are ready to go forward.&lt;/p&gt;
+      &lt;/Text&gt;,
+      &lt;VideoViewer src={this.state.src} /&gt;,
+      &lt;Text&gt;
+        &lt;p&gt;You will now watch several short video clips.&lt;/p&gt;
+        &lt;p&gt;
+          After each video, you will be asked questions about what happened in
+          the video.
+        &lt;/p&gt;
+        &lt;p&gt;You will have 30 seconds to answer each question.&lt;/p&gt;
+        &lt;p&gt;Please speak out loud and keep speaking until the time runs out.&lt;/p&gt;
+        &lt;p&gt;When you are ready, please press the spacebar to continue.&lt;/p&gt;
+      &lt;/Text&gt;
+    ];
+<span class="cstat-no" title="statement not covered" >    screens = this.props.screens.reduce(</span>
+<span class="fstat-no" title="function not covered" >      (p</span>rev, screenData) =&gt;
+<span class="cstat-no" title="statement not covered" >        prev.concat(</span>
+          screenData.type === "video"
+            ? [
+                &lt;VideoPlayer
+                  toggle={this.toggle}
+                  videoId={screenData.youtube_id}
+                /&gt;,
+                &lt;Text&gt;
+                  &lt;p&gt;Please describe what happened in the video.&lt;/p&gt;
+                  &lt;p&gt;
+                    Use as much detail as possible when describing the video.
+                  &lt;/p&gt;
+                  &lt;p&gt;
+                    You have 30 seconds. Please try to talk for the entire
+                    duration of the timer.
+                  &lt;/p&gt;
+                  &lt;p&gt;Please press the spacebar when you are ready to start.&lt;/p&gt;
+                &lt;/Text&gt;,
+                &lt;TimerWrapper toggle={this.toggle} /&gt;
+              ]
+            : [
+                &lt;QuestionView text={screenData.title} /&gt;,
+                &lt;TimerWrapper toggle={this.toggle} /&gt;
+              ]
+        ),
+      screens
+    );
+<span class="cstat-no" title="statement not covered" >    screens.push(</span>
+      &lt;Text&gt;
+        &lt;p&gt;Thank you for participating in CAMS!&lt;/p&gt;
+      &lt;/Text&gt;
+    );
+<span class="cstat-no" title="statement not covered" >    return (</span>
+      &lt;div className="patient-home"&gt;
+        &lt;div&gt;
+          &lt;Timeline
+            numScreens={screens.length}
+            keyBoardEnabled={this.state.keyBoardEnabled}
+          /&gt;
+        &lt;/div&gt;
+        &lt;div className="screens"&gt;{screens[this.state.idx]}&lt;/div&gt;
+      &lt;/div&gt;
+    );
+  }
+}
+&nbsp;
+PatientHome.propTypes = {
+  screens: PropTypes.arrayOf(
+    PropTypes.shape({
+      duration: PropTypes.string,
+      type: PropTypes.string.isRequired,
+      id: PropTypes.number.isRequired,
+      url: PropTypes.string,
+      title: PropTypes.string.isRequired
+    })
+  ).isRequired,
+  assessmentId: PropTypes.number.isRequired,
+  screenCount: PropTypes.number.isRequired
+};
+&nbsp;
+export default PatientHome;
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu Sep 28 2017 17:18:41 GMT-0700 (PDT)
+</div>
+</div>
+<script src="../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../sorter.js"></script>
+</body>
+</html>

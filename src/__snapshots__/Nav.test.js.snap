@@ -1,3 +1,138 @@
-exports[`test nav bar snapshot when logged in 1`] = `undefined`;
+exports[`test nav bar snapshot when logged in 1`] = `
+<div
+  className="nav">
+  <div>
+    <a
+      href="/dashboard"
+      onClick={[Function]}>
+      <img
+        alt="Dashboard"
+        className="logo button-hover"
+        src="logo.png" />
+    </a>
+  </div>
+  <div>
+    <div>
+      <a
+        href="/dashboard"
+        onClick={[Function]}>
+        <button
+          className="button button-hover"
+          type="submit"
+          value="Submit">
+          <i
+            aria-hidden="true"
+            className="fa fa-2x fa-home" />
+        </button>
+      </a>
+      <a
+        href="/playlists/new"
+        onClick={[Function]}>
+        <button
+          className="button button-hover"
+          type="submit"
+          value="Submit">
+          <i
+            aria-hidden="true"
+            className="fa fa-2x fa-plus" />
+        </button>
+      </a>
+      <a
+        href="/assessments"
+        onClick={[Function]}>
+        <button
+          className="button button-hover"
+          type="submit"
+          value="Submit">
+          <i
+            aria-hidden="true"
+            className="fa fa-2x fa-folder-open" />
+        </button>
+      </a>
+    </div>
+  </div>
+  <div
+    className="dropdown account-dropdown"
+    style={undefined}>
+    <a
+      className="dropdown__trigger "
+      onClick={[Function]}>
+      <button
+        className=" user button button-hover"
+        data-toggle="dropdown">
+        <i
+          aria-hidden="true"
+          className="fa fa-2x fa-user-circle-o" />
+      </button>
+    </a>
+    <div
+      className="dropdown__content ">
+      <div>
+        <button
+          className="sign button dropdown-content button-hover"
+          onClick={[Function]}>
+          Edit
+        </button>
+        <button
+          className="sign button dropdown-content button-hover"
+          onClick={[Function]}>
+          Invite Doctor
+        </button>
+        <button
+          className="sign button dropdown-content button-hover">
+          <a
+            href="/login"
+            onClick={[Function]}>
+            Logout
+          </a>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+`;
 
-exports[`test nav bar snapshot when logged out 1`] = `undefined`;
+exports[`test nav bar snapshot when logged out 1`] = `
+<div
+  className="nav">
+  <div>
+    <a
+      href="/"
+      onClick={[Function]}>
+      <img
+        alt="Home"
+        className="logo button-hover"
+        src="logo.png" />
+    </a>
+  </div>
+  <div />
+  <div
+    className="dropdown account-dropdown"
+    style={undefined}>
+    <a
+      className="dropdown__trigger "
+      onClick={[Function]}>
+      <button
+        className=" user button button-hover"
+        data-toggle="dropdown">
+        <i
+          aria-hidden="true"
+          className="fa fa-2x fa-user-circle-o" />
+      </button>
+    </a>
+    <div
+      className="dropdown__content ">
+      <div>
+        <button
+          className="sign button dropdown-content button-hover">
+          <a
+            href="/login"
+            onClick={[Function]}>
+            Login
+          </a>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+`;

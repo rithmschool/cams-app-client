@@ -63,7 +63,7 @@ class PatientWrapper extends Component {
         <PatientHome
           screens={this.state.screens}
           screenCount={this.state.screenCount}
-          assessmentId={this.state.assessmentId}
+          assessmentId={+this.state.assessmentId}
         />
       ) : (
         <p>

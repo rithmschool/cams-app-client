@@ -2,10 +2,7 @@ import React, { Component } from "react";
 import RecordRTC from "recordrtc";
 import { BASE_URL } from "./helpers.js";
 import axios from "axios";
-
-//import Timeline from "./horizontal-timeline/Timeline";
 import HorizontalTimeline from "./horizontal-timeline/HorizontalTimeline";
-
 import VideoPlayer from "./VideoPlayer";
 import VideoViewer from "./VideoViewer";
 import TimerWrapper from "./TimerWrapper";

@@ -1,53 +1,76 @@
-import React, {Component} from 'react';
-import {BASE_URL, userID, config} from './helpers.js';
-import axios from 'axios';
+import React, { Component } from "react";
+import { BASE_URL, userID, config } from "./helpers.js";
+import axios from "axios";
+import "./AssessmentsDashboard.css";
 
 class AssessmentsDashboard extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       doctorAssessments: [],
-      assessmentID: null,
-      downloaded: []
-    }
+      selected: { id: null, url: null }
+    };
   }
 
-  downloadFile(id){
-    axios.get(`${BASE_URL}/api/recording/${id}`, config())
-      .then(response => {
-        this.setState({downloaded: [response.data.id, response.data.url]})
-      })
+  downloadFile(id) {
+    axios.get(`${BASE_URL}/api/recording/${id}`, config()).then(response => {
+      this.setState({ selected: { id, url: response.data.url } });
+    });
   }
 
-  selectAssessment(assessmentID){
-    if (this.state.assessmentID === null || assessmentID !== this.state.assessmentID){
-      this.setState({assessmentID})
-    }
-    else if(this.state.assessmentID !== null){
-      this.setState({assessmentID: null})
-    }
+  selectAssessment(assessmentID) {
+    this.setState({ selected: { id: null, url: null } });
   }
 
   componentWillMount() {
-    axios.get(`${BASE_URL}/api/users/${userID()}/assessments`, config())
-    .then(response => {
-      this.setState({doctorAssessments: response.data})
-    })
+    axios
+      .get(`${BASE_URL}/api/users/${userID()}/assessments`, config())
+      .then(response => {
+        this.setState({ doctorAssessments: response.data });
+      });
   }
 
   render() {
     let assessments = this.state.doctorAssessments.map((assessment, i) => {
-      let completed = assessment.recording_url ?
-        <div>
-          <h6>Completed: Yes</h6>
-          <button className="button button-hover" onClick={this.downloadFile.bind(this,assessment.id)}>Get Download Link</button>
-        </div> :
-        <h6>Completed: No</h6>
-      let className = this.state.assessmentID === assessment.id ?
-        'selected' :
-        'playlist-card'
-
-      let dl = this.state.downloaded.includes(assessment.id) ? <button className="button button-hover" type="submit" value="Submit"><a href={this.state.downloaded[1]}>Download</a></button> : null
+      let completed = <h6>Completed: No</h6>;
+      let className = "playlist-card";
+      if (this.state.selected.id === assessment.id) {
+        completed = (
+          <div>
+            <div>
+              <video
+                className="playlist-video"
+                src={this.state.selected.url}
+                preload="metadata"
+                controls="true"
+              />
+            </div>
+            <button
+              className="button button-hover"
+              onClick={this.selectAssessment.bind(this, assessment.id)}
+            >
+              Close
+            </button>
+            <button
+              className="button button-hover"
+              type="submit"
+              value="Submit"
+            >
+              <a href={this.state.selected.url}>Download</a>
+            </button>
+          </div>
+        );
+        className = "selected";
+      } else if (assessment.recording_url) {
+        completed = (
+          <button
+            className="button button-hover"
+            onClick={this.downloadFile.bind(this, assessment.id)}
+          >
+            Get Video
+          </button>
+        );
+      }
 
       return (
         <div
@@ -58,26 +81,23 @@ class AssessmentsDashboard extends Component {
             {assessment.patient_email.email}
           </h5>
           <h6>{assessment.playlist_name.name}</h6>
-          <h6>{assessment.date_added.slice(0,-6)}</h6>
+          <h6>{assessment.date_added.slice(0, -6)}</h6>
           {completed}
-          {dl}
         </div>
-      )
-    })
+      );
+    });
+
     return (
       <div>
         <div className="banner-text">
           <h1 className="banner-bold">Patient Assessments</h1>
         </div>
         <div className="content">
-          <div className="dash-nav">
-          </div>
-          <div className="playlist-container">
-            {assessments}
-          </div>
+          <div className="dash-nav" />
+          <div className="playlist-container">{assessments}</div>
         </div>
       </div>
-    )
+    );
   }
 }
 export default AssessmentsDashboard;

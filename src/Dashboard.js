@@ -162,7 +162,7 @@ class Dashboard extends Component {
           <h5 className="playlist-name-title">{playlist.name}</h5>
           {playlist.videos.map((video, idx) => {
             return (
-              <p className="song-title" key={idx}>
+              <p className="video-title" key={idx}>
                 {video.title}
               </p>
             );

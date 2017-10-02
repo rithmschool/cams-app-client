@@ -51,7 +51,12 @@ class ScreenForm extends Component {
   }
 
   componentWillMount() {
-    axios.get(`${BASE_URL}/api/videos`, config()).then(response => {
+    // axios.get(`${BASE_URL}/api/videos`, config()).then(response => {
+    //   // console.log(response.data);
+    //   this.setState({ videos: response.data });
+    // });
+    axios.get(`${BASE_URL}/api/files`, config()).then(response => {
+      console.log(response.data);
       this.setState({ videos: response.data });
     });
   }
@@ -67,13 +72,29 @@ class ScreenForm extends Component {
           <a
             className="searchinput"
             onClick={this.handleAddChange}
-            data={val.url}
+            // data={val.url}
           >
             {val.title}
           </a>
         </div>
       ) : null;
     });
+    // let showVideos = this.state.videos.map((val, idx, arr) => {
+    //   var showDiv =
+    //     stext.toLowerCase() === "" ||
+    //     val.title.toLowerCase().includes(stext.toLowerCase());
+    //   return showDiv ? (
+    //     <div key={idx}>
+    //       <a
+    //         className="searchinput"
+    //         onClick={this.handleAddChange}
+    //         data={val.url}
+    //       >
+    //         {val.title}
+    //       </a>
+    //     </div>
+    //   ) : null;
+    // });
 
     return (
       <div>

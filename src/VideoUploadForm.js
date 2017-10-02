@@ -55,22 +55,32 @@ class VideoUploadForm extends Component {
     this.handleFileSubmit = this.handleFileSubmit.bind(this);
     this.getSignedRequest = this.getSignedRequest.bind(this);
     this.uploadFile = this.uploadFile.bind(this);
+    this.handleChange = this.handleChange.bind(this);
     this.state = {
-      status: "Upload not started",
+      status: "",
       width: 0,
       showProgressBar: false
     };
+  }
+
+  handleChange(e) {
+    this.setState({
+      status: "",
+      width: 0,
+      showProgressBar: false
+    });
   }
 
   handleFileSubmit(e) {
     e.preventDefault();
     const file = this.fileInput.files[0];
     if (!file) alert("No file selected!");
-    this.setState({
-      width: 0,
-      showProgressBar: true
-    });
-    this.getSignedRequest(file);
+    else {
+      this.setState({
+        showProgressBar: true
+      });
+      this.getSignedRequest(file);
+    }
   }
 
   getSignedRequest(file) {
@@ -83,7 +93,7 @@ class VideoUploadForm extends Component {
       })
       .then(response => {
         console.log("signd request complete!", response);
-        this.setState({ status: "Starting Upload!" });
+        // this.setState({ status: "Starting Upload!" });
         this.uploadFile(file, response.data.data, response.data.url);
       })
       .catch(err => console.log(err));
@@ -121,7 +131,10 @@ class VideoUploadForm extends Component {
   }
 
   render() {
-    let progressPercent = this.state.width ? `${this.state.width}%` : "";
+    let progressMsg =
+      this.state.width === 100
+        ? this.state.status
+        : this.state.width ? `${this.state.width}%` : "";
     let progressBar = this.state.showProgressBar ? (
       <div style={styles.progressWrapper}>
         <div style={{ ...styles.progressBar, width: `${this.state.width}%` }}>
@@ -134,6 +147,7 @@ class VideoUploadForm extends Component {
       <div>
         <form onSubmit={this.handleFileSubmit}>
           <input
+            onChange={this.handleChange}
             type="file"
             id="file-input"
             ref={input => (this.fileInput = input)}
@@ -141,7 +155,7 @@ class VideoUploadForm extends Component {
           <input type="submit" value="Add Video" />
         </form>
         {progressBar}
-        <div>{progressPercent}</div>
+        <div>{progressMsg}</div>
       </div>
     );
   }

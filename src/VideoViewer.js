@@ -14,7 +14,7 @@ const VideoViewer = ({ src }) => (
 );
 
 VideoViewer.propTypes = {
-  src: PropTypes.string.isRequired
+  src: PropTypes.string
 };
 
 export default VideoViewer;

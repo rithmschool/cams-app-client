@@ -1,0 +1,27 @@
+exports[`test shapshot of TimerWrapper with timer prop 1`] = `
+<div>
+  <div
+    className="timer">
+    <h2
+      className="center">
+       
+      45
+       
+    </h2>
+  </div>
+</div>
+`;
+
+exports[`test shapshot of TimerWrapper without timer prop 1`] = `
+<div>
+  <div
+    className="timer">
+    <h2
+      className="center">
+       
+      30
+       
+    </h2>
+  </div>
+</div>
+`;

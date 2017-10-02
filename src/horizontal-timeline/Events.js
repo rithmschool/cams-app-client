@@ -29,11 +29,11 @@ const Events = ({
 );
 
 Events.propTypes = {
-  events: PropTypes.func.isRequired,
+  events: PropTypes.array.isRequired,
   selectedIndex: PropTypes.number.isRequired,
   styles: PropTypes.object.isRequired,
-  spaceBarClick: PropTypes.bool.isRequired,
-  labelWidth: PropTypes.number.isRequired
+  spaceBarClick: PropTypes.func.isRequired,
+  labelWidth: PropTypes.number
 };
 
 export default Events;

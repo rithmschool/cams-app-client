@@ -1,4 +1,4 @@
-import VideoViewer from "./VideoViewer";
+import VideoViewer from "../VideoViewer";
 import React from "react";
 import ReactDOM from "react-dom";
 import { shallow, mount } from "enzyme";

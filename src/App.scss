@@ -210,6 +210,37 @@ p.profile-title-fancy {
   border-radius: 0.5rem;
 }
 
+/*PLAYLIST
+*********/
+
+.playlist-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  background: $light-grey;
+  padding: 1rem;
+  border-radius: 2px;
+}
+
+.playlist-card {
+  width: 17%;
+}
+.playlist-video {
+  width: 90%;
+}
+.playlist-card-contents {
+  background: white;
+  border-radius: 0.2rem;
+  margin: 0.4rem;
+  padding: 0.5rem;
+  box-shadow: $nav-shadow;
+}
+
+.playlist-card-contents:focus {
+  outline: 0px;
+}
+
 .email-form {
   align-self: center;
 }

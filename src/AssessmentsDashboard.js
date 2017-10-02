@@ -14,16 +14,11 @@ class AssessmentsDashboard extends Component {
 
   downloadFile(id) {
     axios.get(`${BASE_URL}/api/recording/${id}`, config()).then(response => {
-      this.setState({ selected: { id: id, url: response.data.url } });
+      this.setState({ selected: { id, url: response.data.url } });
     });
   }
 
   selectAssessment(assessmentID) {
-    // if (assessmentID !== this.state.selected.id) {
-    //   this.setState({ selected: { id: assessmentID, url: null } });
-    // } else {
-    //   this.setState({ selected: { id: null, url: null } });
-    // }
     this.setState({ selected: { id: null, url: null } });
   }
 

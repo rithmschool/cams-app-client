@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { BASE_URL, userID, config } from "./helpers.js";
 import axios from "axios";
-import "./AssessmentsDashboard.css";
 
 class AssessmentsDashboard extends Component {
   constructor(props) {

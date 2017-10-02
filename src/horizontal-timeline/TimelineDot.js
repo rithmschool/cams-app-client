@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import Radium from "radium"; //radium provides powerful styling capabilities without CSS
 import PropTypes from "prop-types";
-//import "./TimelineDot.css";
 
 const dots = {
   // The base style information for the event dot that appers exactly on the timeline

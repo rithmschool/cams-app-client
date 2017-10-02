@@ -8,26 +8,23 @@ class AssessmentsDashboard extends Component {
     super(props);
     this.state = {
       doctorAssessments: [],
-      assessmentID: null,
-      downloaded: []
+      selected: { id: null, url: null }
     };
   }
 
   downloadFile(id) {
     axios.get(`${BASE_URL}/api/recording/${id}`, config()).then(response => {
-      this.setState({ downloaded: [response.data.id, response.data.url] });
+      this.setState({ selected: { id: id, url: response.data.url } });
     });
   }
 
   selectAssessment(assessmentID) {
-    if (
-      this.state.assessmentID === null ||
-      assessmentID !== this.state.assessmentID
-    ) {
-      this.setState({ assessmentID });
-    } else if (this.state.assessmentID !== null) {
-      this.setState({ assessmentID: null });
-    }
+    // if (assessmentID !== this.state.selected.id) {
+    //   this.setState({ selected: { id: assessmentID, url: null } });
+    // } else {
+    //   this.setState({ selected: { id: null, url: null } });
+    // }
+    this.setState({ selected: { id: null, url: null } });
   }
 
   componentWillMount() {
@@ -40,30 +37,31 @@ class AssessmentsDashboard extends Component {
 
   render() {
     let assessments = this.state.doctorAssessments.map((assessment, i) => {
-      console.log(
-        assessment.recording_url,
-        !!assessment.recording_url,
-        this.state.downloaded.includes(assessment.id)
-      );
       let completed = <h6>Completed: No</h6>;
       let className = "playlist-card";
-      if (this.state.downloaded.includes(assessment.id)) {
+      if (this.state.selected.id === assessment.id) {
         completed = (
           <div>
             <div>
               <video
                 className="playlist-video"
-                src={this.state.downloaded[1]}
+                src={this.state.selected.url}
                 preload="metadata"
                 controls="true"
               />
             </div>
             <button
               className="button button-hover"
+              onClick={this.selectAssessment.bind(this, assessment.id)}
+            >
+              Close
+            </button>
+            <button
+              className="button button-hover"
               type="submit"
               value="Submit"
             >
-              <a href={this.state.downloaded[1]}>Download</a>
+              <a href={this.state.selected.url}>Download</a>
             </button>
           </div>
         );

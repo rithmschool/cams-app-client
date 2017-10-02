@@ -149,14 +149,13 @@ class Dashboard extends Component {
           </div>
         ) : null;
 
-      let className =
-        this.state.playlistID === playlist.id ? "selected" : "playlist-card";
+      let className = this.state.playlistID === playlist.id ? "selected" : null;
 
       return (
         <div
           key={i}
           tabIndex="0"
-          className={`${className} button-hover playlist-card-contents`}
+          className={`${className} playlist-card button-hover playlist-card-contents`}
           onClick={this.choosePlaylist.bind(this, playlist.id, playlist.name)}
         >
           <h5 className="playlist-name-title">{playlist.name}</h5>

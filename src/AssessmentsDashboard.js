@@ -42,6 +42,13 @@ class AssessmentsDashboard extends Component {
           <div
             key={i}
             className={`playlist-card button-hover playlist-card-contents`}
+            onClick={e => {
+              e.currentTarget.className = e.currentTarget.className.includes(
+                "video-selected"
+              )
+                ? e.currentTarget.className.replace(" video-selected", "")
+                : e.currentTarget.className + " video-selected";
+            }}
           >
             <h5 className="playlist-name-title">
               {assessment.patient_email.email}

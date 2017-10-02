@@ -38,7 +38,8 @@ class TimerWrapper extends Component {
 }
 
 TimerWrapper.propTypes = {
-  toggle: PropTypes.func.isRequired
+  toggle: PropTypes.func.isRequired,
+  timer: PropTypes.number
 };
 
 export default TimerWrapper;

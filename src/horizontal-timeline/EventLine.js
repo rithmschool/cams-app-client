@@ -28,7 +28,7 @@ const EventLine = ({ styles, fillingMotion }) => (
 
 EventLine.propTypes = {
   styles: PropTypes.object.isRequired,
-  fillingMotion: PropTypes.string.isRequired
+  fillingMotion: PropTypes.object.isRequired
 };
 
 export default EventLine;

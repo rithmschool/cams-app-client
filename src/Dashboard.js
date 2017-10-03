@@ -48,16 +48,17 @@ class Dashboard extends Component {
           config
         )
       )
-      .then(response =>
-        axios.post(
+      .then(response => {
+        console.log(response.data);
+        return axios.post(
           `${BASE_URL}/api/users/mail`,
           {
             assessment_id: response.data.id,
             patient_id: response.data.patient_id
           },
           config
-        )
-      )
+        );
+      })
       .then(response => {
         this.setState({
           playlistID: null,
@@ -97,6 +98,7 @@ class Dashboard extends Component {
     axios
       .get(`${BASE_URL}/api/users/${userID()}/playlists`, config())
       .then(response => {
+        console.log(response.data);
         this.setState({ userPlaylists: response.data });
       });
   }

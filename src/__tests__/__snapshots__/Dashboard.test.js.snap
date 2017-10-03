@@ -1,0 +1,35 @@
+exports[`test dashboard matches snapshot  1`] = `
+<div>
+  <div
+    className="banner-text">
+    <h1
+      className="banner-bold">
+      Dashboard
+    </h1>
+  </div>
+  <div
+    className="content">
+    <div
+      className="playlist-container" />
+  </div>
+</div>
+`;
+
+exports[`test mockAdapter works 1`] = `
+<Dashboard>
+  <div>
+    <div
+      className="banner-text">
+      <h1
+        className="banner-bold">
+        Dashboard
+      </h1>
+    </div>
+    <div
+      className="content">
+      <div
+        className="playlist-container" />
+    </div>
+  </div>
+</Dashboard>
+`;

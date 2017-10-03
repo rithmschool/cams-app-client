@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import { BASE_URL, userID, config } from "./helpers.js";
+import { BASE_URL, userID, config, dateFormat } from "./helpers.js";
 import axios from "axios";
+import Assessment from "./Assessment";
 
 class AssessmentsDashboard extends Component {
   constructor(props) {
@@ -17,6 +18,21 @@ class AssessmentsDashboard extends Component {
     });
   }
 
+  handleEvaluated(id) {
+    axios
+      .patch(
+        `${BASE_URL}/api/users/${userID()}/assessments/${id}`,
+        {},
+        config()
+      )
+      .then(response => {
+        var newDoctorAssessments = this.state.doctorAssessments.map(
+          v => (v.id === id ? response.data : v)
+        );
+        this.setState({ doctorAssessments: newDoctorAssessments });
+      });
+  }
+
   selectAssessment(assessmentID) {
     this.setState({ selected: { id: null, url: null } });
   }
@@ -25,64 +41,29 @@ class AssessmentsDashboard extends Component {
     axios
       .get(`${BASE_URL}/api/users/${userID()}/assessments`, config())
       .then(response => {
+        console.log(response.data);
         this.setState({ doctorAssessments: response.data });
       });
   }
 
   render() {
     let assessments = this.state.doctorAssessments.map((assessment, i) => {
-      let completed = <h6>Completed: No</h6>;
-      let className = "playlist-card";
-      if (this.state.selected.id === assessment.id) {
-        completed = (
-          <div>
-            <div>
-              <video
-                className="playlist-video"
-                src={this.state.selected.url}
-                preload="metadata"
-                controls="true"
-              />
-            </div>
-            <button
-              className="button button-hover"
-              onClick={this.selectAssessment.bind(this, assessment.id)}
-            >
-              Close
-            </button>
-            <button
-              className="button button-hover"
-              type="submit"
-              value="Submit"
-            >
-              <a href={this.state.selected.url}>Download</a>
-            </button>
-          </div>
-        );
-        className = "selected";
-      } else if (assessment.recording_url) {
-        completed = (
-          <button
-            className="button button-hover"
-            onClick={this.downloadFile.bind(this, assessment.id)}
-          >
-            Get Video
-          </button>
-        );
-      }
-
+      let selected = this.state.selected.id === assessment.id;
+      let download_url = selected ? this.state.selected.url : null;
       return (
-        <div
-          key={i}
-          className={`${className} button-hover playlist-card-contents`}
-        >
-          <h5 className="playlist-name-title">
-            {assessment.patient_email.email}
-          </h5>
-          <h6>{assessment.playlist_name.name}</h6>
-          <h6>{assessment.date_added.slice(0, -6)}</h6>
-          {completed}
-        </div>
+        <Assessment
+          key={assessment.id}
+          download_url={download_url}
+          recording_url={assessment.recording_url}
+          handlelUnselect={this.selectAssessment.bind(this, assessment.id)}
+          handleSelect={this.downloadFile.bind(this, assessment.id)}
+          handleEvaluated={this.handleEvaluated.bind(this, assessment.id)}
+          patient_email={assessment.patient_email.email}
+          playlist_name={assessment.playlist_name.name}
+          date_added={dateFormat(assessment.date_added)}
+          date_assessed={dateFormat(assessment.date_assessed)}
+          date_evaluated={dateFormat(assessment.date_evaluated)}
+        />
       );
     });
 

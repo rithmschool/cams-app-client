@@ -16,20 +16,39 @@ exports[`test dashboard matches snapshot  1`] = `
 `;
 
 exports[`test mockAdapter works 1`] = `
-<Dashboard>
-  <div>
+<div>
+  <div
+    className="banner-text">
+    <h1
+      className="banner-bold">
+      Dashboard
+    </h1>
+  </div>
+  <div
+    className="content">
     <div
-      className="banner-text">
-      <h1
-        className="banner-bold">
-        Dashboard
-      </h1>
-    </div>
-    <div
-      className="content">
+      className="playlist-container">
       <div
-        className="playlist-container" />
+        className="null playlist-card button-hover playlist-card-contents"
+        key="0"
+        onClick={[Function]}
+        tabIndex="0">
+        <h5
+          className="playlist-name-title">
+          playlist 1
+        </h5>
+      </div>
+      <div
+        className="null playlist-card button-hover playlist-card-contents"
+        key="1"
+        onClick={[Function]}
+        tabIndex="0">
+        <h5
+          className="playlist-name-title">
+          playlist 2
+        </h5>
+      </div>
     </div>
   </div>
-</Dashboard>
+</div>
 `;

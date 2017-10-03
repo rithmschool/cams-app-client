@@ -41,7 +41,6 @@ class AssessmentsDashboard extends Component {
     axios
       .get(`${BASE_URL}/api/users/${userID()}/assessments`, config())
       .then(response => {
-        console.log(response.data);
         this.setState({ doctorAssessments: response.data });
       });
   }

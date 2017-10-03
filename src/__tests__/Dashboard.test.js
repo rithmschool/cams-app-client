@@ -12,15 +12,6 @@ import LocalStorageMock from "../setupTests/LocalStorageMock";
 
 beforeAll(() => {
   localStorage.setItem("token", ".eyJpZCI6NH0=.");
-  //   data: [{
-  //   id: 1,
-  //   name: "playlist 1",
-  //   videos: [],
-  // }, {
-  //   id: 2,
-  //   name: "playlist 2",
-  //   videos: []
-  // }]
 });
 
 test("dashboard matches snapshot ", () => {
@@ -65,10 +56,34 @@ test("renders without crashing", () => {
 //   }, 0);
 // });
 
-test("mockAdapter works", done => {
-  let mockAdapter = new MockAdapter(axios);
-  mockAdapter.onGet(`${BASE_URL}/api/users/${userID()}/playlists`).reply(200, {
-    data: [
+// test("mockAdapter works", done => {
+//   let mockAdapter = new MockAdapter(axios);
+//   mockAdapter.onGet(`${BASE_URL}/api/users/${userID()}/playlists`).reply(200, {
+//     data: [
+//       {
+//         id: 1,
+//         name: "playlist 1",
+//         videos: []
+//       },
+//       {
+//         id: 2,
+//         name: "playlist 2",
+//         videos: []
+//       }
+//     ]
+//   });
+//   const dashboard = mount(<Dashboard />);
+//   axios.get(`${BASE_URL}/api/users/${userID()}/playlists`).then(() => {
+//     expect(toJson(dashboard)).toMatchSnapshot();
+//     console.log(dashboard.debug());
+//     done();
+//   });
+// });
+
+test("mockAdapter works", () => {
+  const dashboard = shallow(<Dashboard />);
+  dashboard.setState({
+    userPlaylists: [
       {
         id: 1,
         name: "playlist 1",
@@ -81,17 +96,5 @@ test("mockAdapter works", done => {
       }
     ]
   });
-  const dashboard = mount(<Dashboard />);
-  axios.get(`${BASE_URL}/api/users/${userID()}/playlists`).then(() => {
-    expect(toJson(dashboard)).toMatchSnapshot();
-    console.log(dashboard.debug());
-    done();
-  });
-  // let response = axios.post(
-  //   `${BASE_URL}/api/users/${userID()}/playlists`,
-  //   {
-  //     userPlaylists: response.data
-  //   },
-  //   config
-  // );
+  expect(toJson(dashboard)).toMatchSnapshot();
 });

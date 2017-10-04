@@ -1,13 +1,13 @@
 import React from "react";
-import logo from "../images/logo.png";
-import ucsf from "../images/ucsf.svg";
-import josh from "../images/josh.jpg";
-import tim from "../images/tim.jpg";
-import va from "../images/VA.png";
-import assess from "../images/assess.png";
-import create from "../images/create.png";
-import user from "../images/user.png";
-import happy from "../images/happy.png";
+import logo from "./images/logo.png";
+import ucsf from "./images/ucsf.svg";
+import josh from "./images/josh.jpg";
+import tim from "./images/tim.jpg";
+import va from "./images/VA.png";
+import assess from "./images/assess.png";
+import create from "./images/create.png";
+import user from "./images/user.png";
+import happy from "./images/happy.png";
 import "./Home.css";
 
 const Home = () => (

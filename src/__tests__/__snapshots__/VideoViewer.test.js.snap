@@ -1,3 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`snapshot of VideoViewer 1`] = `
+<div
+  className="lg"
+>
+  <video
+    autoPlay="true"
+    id="videoElement"
+    src="something"
+  />
+  <p>
+    Please take this time to look at the video viewer to make sure it is positioned on your face.
+  </p>
+  <p>
+     Please adjust lighting so your face is clearly visible.
+  </p>
+  <p>
+    Press the spacebar when you are ready to go forward
+  </p>
+</div>
+`;
+
 exports[`test snapshot of VideoViewer 1`] = `
 <div
   className="lg">

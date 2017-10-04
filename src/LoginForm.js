@@ -33,7 +33,6 @@ class LoginForm extends Component {
   }
 
   handleSubmit(e) {
-    console.log(e);
     e.preventDefault();
     this.login(config());
   }

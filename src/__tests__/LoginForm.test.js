@@ -23,9 +23,16 @@ test("matches snapshot with errors", () => {
   expect(toJson(login)).toMatchSnapshot();
 });
 
-it("should pass a selected value to the onChange handler", () => {
+it("should pass a selected value to the onSubmit handler", () => {
   const spy = jest.spyOn(LoginForm.prototype, "handleSubmit");
   const wrapper = shallow(<LoginForm />);
   wrapper.find("form").simulate("submit", { preventDefault() {} });
+  expect(spy).toHaveBeenCalled();
+});
+
+it("should pass a selected value to the onChange handler", () => {
+  const spy = jest.spyOn(LoginForm.prototype, "handleChange");
+  const wrapper = shallow(<LoginForm />);
+  wrapper.find("form").simulate("change", { name: "value" });
   expect(spy).toHaveBeenCalled();
 });

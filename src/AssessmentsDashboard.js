@@ -48,20 +48,20 @@ class AssessmentsDashboard extends Component {
   render() {
     let assessments = this.state.doctorAssessments.map((assessment, i) => {
       let selected = this.state.selected.id === assessment.id;
-      let download_url = selected ? this.state.selected.url : null;
+      let downloadUrl = selected ? this.state.selected.url : null;
       return (
         <Assessment
           key={assessment.id}
-          download_url={download_url}
-          recording_url={assessment.recording_url}
+          downloadUrl={downloadUrl}
+          recordingUrl={assessment.recording_url}
           handlelUnselect={this.selectAssessment.bind(this, assessment.id)}
           handleSelect={this.downloadFile.bind(this, assessment.id)}
           handleEvaluated={this.handleEvaluated.bind(this, assessment.id)}
-          patient_email={assessment.patient_email.email}
-          playlist_name={assessment.playlist_name.name}
-          date_added={dateFormat(assessment.date_added)}
-          date_assessed={dateFormat(assessment.date_assessed)}
-          date_evaluated={dateFormat(assessment.date_evaluated)}
+          patientEmail={assessment.patient_email.email}
+          playlistName={assessment.playlist_name.name}
+          dateAdded={dateFormat(assessment.date_added)}
+          dateAssessed={dateFormat(assessment.date_assessed)}
+          dateEvaluated={dateFormat(assessment.date_evaluated)}
         />
       );
     });
@@ -80,3 +80,5 @@ class AssessmentsDashboard extends Component {
   }
 }
 export default AssessmentsDashboard;
+
+

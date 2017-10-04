@@ -30,22 +30,6 @@ const styles = {
     WebkitTransition: "width .6s ease",
     Otransition: "width .6s ease",
     transition: "width .6s ease"
-  },
-  cancelButton: {
-    marginTop: "5px",
-    WebkitAppearance: "none",
-    padding: 0,
-    cursor: "pointer",
-    background: "0 0",
-    border: 0,
-    float: "left",
-    fontSize: "21px",
-    fontWeight: 700,
-    lineHeight: 1,
-    color: "#000",
-    textShadow: "0 1px 0 #fff",
-    filter: "alpha(opacity=20)",
-    opacity: ".2"
   }
 };
 

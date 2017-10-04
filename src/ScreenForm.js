@@ -16,7 +16,7 @@ class ScreenForm extends Component {
     };
     this.handleAddChange = this.handleAddChange.bind(this);
     this.handleSearchChange = this.handleSearchChange.bind(this);
-    // this.handleAdd = this.handleAdd.bind(this);
+    this.handleFileAdd = this.handleFileAdd.bind(this);
     this.handleChange = this.handleChange.bind(this);
     // this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -33,11 +33,11 @@ class ScreenForm extends Component {
     });
   }
 
-  // handleAdd(e) {
-  //   e.preventDefault();
-  //   this.setState({ url: "" });
-  //   this.props.addVideo(this.state.url);
-  // }
+  handleFileAdd(file) {
+    this.props.addVideoFile(file).then(response => {
+      this.getAllVideoFiles();
+    });
+  }
 
   // handleSubmit(e) {
   //   e.preventDefault();
@@ -49,14 +49,21 @@ class ScreenForm extends Component {
     this.props.addVideoFile(e.target.text);
   }
 
+  getAllVideoFiles() {
+    axios.get(`${BASE_URL}/api/videofiles`, config()).then(response => {
+      this.setState({ videos: response.data });
+    });
+  }
+
   componentWillMount() {
     // axios.get(`${BASE_URL}/api/videos`, config()).then(response => {
     //   // console.log(response.data);
     //   this.setState({ videos: response.data });
     // });
-    axios.get(`${BASE_URL}/api/videofiles`, config()).then(response => {
-      this.setState({ videos: response.data });
-    });
+    // axios.get(`${BASE_URL}/api/videofiles`, config()).then(response => {
+    //   this.setState({ videos: response.data });
+    // });
+    this.getAllVideoFiles();
   }
 
   render() {
@@ -110,7 +117,7 @@ class ScreenForm extends Component {
           </div>
           <QuestionForm addQuestion={this.props.addQuestion} />
           <VideoUploadForm
-            addVideoFile={this.props.addVideoFile}
+            addVideoFile={this.handleFileAdd}
             addDone={this.props.addDone}
             fileName={this.state.searchtext}
           />

@@ -5,6 +5,9 @@ import PropTypes from "prop-types";
 class VideoPlayer extends Component {
   constructor(props) {
     super(props);
+    // this.state = {
+    //   selected: { id: null, url: null }
+    // };
     this._onEnd = this._onEnd.bind(this);
   }
 
@@ -14,8 +17,7 @@ class VideoPlayer extends Component {
   }
 
   _onEnd(e) {
-    e.target.stopVideo();
-    this.props.toggle();
+    e.target.onended = () => this.props.toggle();
   }
 
   componentDidMount() {
@@ -23,24 +25,24 @@ class VideoPlayer extends Component {
   }
 
   render() {
-    const opts = {
-      height: "562.5",
-      width: "1000",
-      playerVars: {
-        // https://developers.google.com/youtube/player_parameters
-        autoplay: 1,
-        controls: 0,
-        rel: 0
-      }
-    };
+    // const opts = {
+    //   height: "562.5",
+    //   width: "1000",
+    //   playerVars: {
+    //     // https://developers.google.com/youtube/player_parameters
+    //     autoplay: 1,
+    //     controls: 0,
+    //     rel: 0
+    //   }
+    // };
     return (
       <div>
-        <YouTube
-          videoId={this.props.videoId}
-          opts={opts}
-          onReady={this._onReady}
-          onEnd={this._onEnd}
+        <video
+          autoPlay="true"
+          src={this.props.url}
+          onEnded={this.props.toggle}
         />
+
         <p className="lg">
           Press the space key to move on once the video has ended{" "}
         </p>
@@ -49,9 +51,16 @@ class VideoPlayer extends Component {
   }
 }
 
+// <YouTube
+//   videoId={this.props.videoId}
+//   opts={opts}
+//   onReady={this._onReady}
+//   onEnd={this._onEnd}
+// />
+
 VideoPlayer.propTypes = {
-  toggle: PropTypes.func.isRequired,
-  videoId: PropTypes.string.isRequired
+  toggle: PropTypes.func.isRequired
+  // videoId: PropTypes.string.isRequired
 };
 
 export default VideoPlayer;

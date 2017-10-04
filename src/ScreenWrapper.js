@@ -19,8 +19,33 @@ class ScreenWrapper extends Component {
     };
     this.addVideo = this.addVideo.bind(this);
     this.addDone = this.addDone.bind(this);
+    this.addVideoFile = this.addVideoFile.bind(this);
     this.addQuestion = this.addQuestion.bind(this);
     this.onSortEnd = this.onSortEnd.bind(this);
+  }
+
+  addVideoFile(file) {
+    return axios
+      .post(
+        `${BASE_URL}/api/videofiles`,
+        {
+          title: file,
+          playlist_id: this.props.playlistID,
+          order: this.state.screenData.length + 1
+        },
+        config()
+      )
+      .then(response => {
+        this.setState({
+          screenData: this.state.screenData.concat([
+            {
+              title: response.data.title,
+              entity_id: response.data.id,
+              type: "video"
+            }
+          ])
+        });
+      });
   }
 
   addVideo(url) {
@@ -77,9 +102,9 @@ class ScreenWrapper extends Component {
     }
   }
 
-  addDone(url) {
-    if (url) {
-      this.addVideo(url).then(
+  addDone(file) {
+    if (file) {
+      this.addVideoFile(file).then(
         function(response) {
           this.props.history.push("/dashboard");
         }.bind(this)
@@ -151,7 +176,7 @@ class ScreenWrapper extends Component {
           addQuestion={this.addQuestion}
           addVideo={this.addVideo}
           addDone={this.addDone}
-          addFile={this.addFile}
+          addVideoFile={this.addVideoFile}
         />
       </div>
     );

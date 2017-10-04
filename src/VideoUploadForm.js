@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BASE_URL } from "./helpers.js";
+import { BASE_URL, config } from "./helpers.js";
 import axios from "axios";
 
 // import PropTypes from "prop-types";
@@ -56,7 +56,9 @@ class VideoUploadForm extends Component {
     this.getSignedRequest = this.getSignedRequest.bind(this);
     this.uploadFile = this.uploadFile.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
     this.state = {
+      file: "",
       status: "",
       width: 0,
       showProgressBar: false
@@ -64,11 +66,18 @@ class VideoUploadForm extends Component {
   }
 
   handleChange(e) {
+    const fileName = this.fileInput.files[0].name;
     this.setState({
+      file: fileName,
       status: "",
       width: 0,
       showProgressBar: false
     });
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+    this.props.addDone(this.state.file || this.props.fileName);
   }
 
   handleFileSubmit(e) {
@@ -85,7 +94,7 @@ class VideoUploadForm extends Component {
 
   getSignedRequest(file) {
     axios
-      .get(`${BASE_URL}/api/files/sign-s3`, {
+      .get(`${BASE_URL}/api/videofiles/sign-s3`, {
         params: {
           file_name: file.name,
           file_type: file.type
@@ -121,6 +130,12 @@ class VideoUploadForm extends Component {
         }
       })
       .then(response => {
+        console.log(file);
+        this.props.addVideoFile(file.name);
+        // axios.get(`${BASE_URL}/api/videofiles`, config()).then(response => {
+        //   this.props.addVideoFile(response.data);
+        // });
+
         this.setState({
           status: "Upload Complete!",
           showProgressBar: false
@@ -156,6 +171,9 @@ class VideoUploadForm extends Component {
         </form>
         {progressBar}
         <div>{progressMsg}</div>
+        <button className="button" onClick={this.handleSubmit} value="Submit">
+          Submit
+        </button>
       </div>
     );
   }

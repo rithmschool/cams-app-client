@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PatientHome from "./PatientHome";
-import { BASE_URL, BrowserDetect } from "./helpers.js";
+import { BASE_URL, BrowserDetect, config } from "./helpers.js";
 import axios from "axios";
 
 class PatientWrapper extends Component {
@@ -53,8 +53,41 @@ class PatientWrapper extends Component {
             3
           )
         });
+      })
+      .then(function(response) {
+        axios
+          .get(`${BASE_URL}/api/videofiles/s3Bucket`, config())
+          .then(response => {
+            let screens = self.state.screens.map(s => {
+              if (s.type === "video") {
+                response.data.forEach(v => {
+                  if (s.title === v.title) {
+                    s = { ...s, url: v.url };
+                  }
+                });
+              }
+              return s;
+            });
+            self.setState({ screens });
+          });
       });
   }
+
+  // componentDidMount() {
+  //   axios.get(`${BASE_URL}/api/videofiles`, config()).then(response => {
+  //     let screens = this.state.screens.map(s => {
+  //       if (s.type === "video") {
+  //         response.data.forEach(v => {
+  //           if (s.title === v.title) {
+  //             s = { ...s, url: v.url };
+  //           }
+  //         });
+  //       }
+  //       return s;
+  //     });
+  //     this.setState({ screens });
+  //   });
+  // }
 
   render() {
     BrowserDetect.init();

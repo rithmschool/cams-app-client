@@ -10,16 +10,15 @@ class ScreenForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      url: "",
-      file: null,
+      file: "",
       videos: [],
       searchtext: ""
     };
     this.handleAddChange = this.handleAddChange.bind(this);
     this.handleSearchChange = this.handleSearchChange.bind(this);
-    this.handleAdd = this.handleAdd.bind(this);
+    // this.handleAdd = this.handleAdd.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    // this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange(e) {
@@ -34,20 +33,20 @@ class ScreenForm extends Component {
     });
   }
 
-  handleAdd(e) {
-    e.preventDefault();
-    this.setState({ url: "" });
-    this.props.addVideo(this.state.url);
-  }
+  // handleAdd(e) {
+  //   e.preventDefault();
+  //   this.setState({ url: "" });
+  //   this.props.addVideo(this.state.url);
+  // }
 
-  handleSubmit(e) {
-    e.preventDefault();
-    this.props.addDone(this.state.url);
-  }
+  // handleSubmit(e) {
+  //   e.preventDefault();
+  //   this.props.addDone(file);
+  // }
 
   handleAddChange(e) {
     e.preventDefault();
-    this.props.addVideo(e.target.getAttribute("data"));
+    this.props.addVideoFile(e.target.text);
   }
 
   componentWillMount() {
@@ -55,8 +54,7 @@ class ScreenForm extends Component {
     //   // console.log(response.data);
     //   this.setState({ videos: response.data });
     // });
-    axios.get(`${BASE_URL}/api/files`, config()).then(response => {
-      console.log(response.data);
+    axios.get(`${BASE_URL}/api/videofiles`, config()).then(response => {
       this.setState({ videos: response.data });
     });
   }
@@ -111,33 +109,39 @@ class ScreenForm extends Component {
             {showVideos}
           </div>
           <QuestionForm addQuestion={this.props.addQuestion} />
-          <VideoUploadForm />
-          <div className="videos-form">
-            <form onSubmit={this.handleAdd}>
-              <input
-                type="url"
-                onChange={this.handleChange}
-                name="url"
-                placeholder="Video Url"
-                value={this.state.url}
-              />
-              <button type="submit" className="button" value="Add">
-                +
-              </button>
-              <button
-                className="button"
-                onClick={this.handleSubmit}
-                value="Submit"
-              >
-                Submit
-              </button>
-            </form>
-          </div>
+          <VideoUploadForm
+            addVideoFile={this.props.addVideoFile}
+            addDone={this.props.addDone}
+            fileName={this.state.searchtext}
+          />
         </div>
       </div>
     );
   }
 }
+
+// <div className="videos-form">
+// <form onSubmit={this.handleAdd}>
+
+// <button
+// className="button"
+// onClick={this.handleSubmit}
+// value="Submit"
+// >
+//Submit
+//</button>
+//</form>
+//</div>
+// <input
+// type="url"
+// onChange={this.handleChange}
+// name="url"
+// placeholder="Video Url"
+// value={this.state.url}
+// />
+// <button type="submit" className="button" value="Add">
+// +
+// </button>
 
 ScreenForm.propTypes = {
   addQuestion: PropTypes.func.isRequired,

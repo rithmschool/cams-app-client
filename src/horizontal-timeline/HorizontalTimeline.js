@@ -3,6 +3,11 @@ import EventsBar from "./EventsBar";
 import PropTypes from "prop-types";
 
 class HorizontalTimeline extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { value: 0 };
+  }
+
   render() {
     const {
       maxEventPadding,
@@ -10,7 +15,6 @@ class HorizontalTimeline extends Component {
       time,
       containerWidth,
       containerHeight,
-      index,
       spaceBarClick,
       keyBoardEnabled,
       numScreens,
@@ -43,8 +47,10 @@ class HorizontalTimeline extends Component {
         width={containerWidth}
         height={containerHeight}
         events={events}
-        index={index}
-        spaceBarClick={spaceBarClick}
+        index={this.state.value}
+        spaceBarClick={() => {
+          this.setState({ value: this.state.value + 1 });
+        }}
         totalWidth={totalWidth}
         barPaddingLeft={barPaddingLeft}
         barPaddingRight={barPaddingRight}

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import RecordRTC from "recordrtc";
 import { BASE_URL } from "./helpers.js";
 import axios from "axios";
-import Timeline from "./horizontal-timeline/Timeline";
+import HorizontalTimeline from "./horizontal-timeline/HorizontalTimeline";
 import VideoPlayer from "./VideoPlayer";
 import VideoViewer from "./VideoViewer";
 import TimerWrapper from "./TimerWrapper";
@@ -10,10 +10,6 @@ import "./PatientHome.css";
 import PropTypes from "prop-types";
 
 let recordRTC;
-
-const Text = props => <div className="lg">{props.children}</div>;
-
-const QuestionView = props => <p>{props.text}</p>;
 
 class PatientHome extends Component {
   constructor(props) {
@@ -111,7 +107,7 @@ class PatientHome extends Component {
 
   render() {
     let screens = [
-      <Text>
+      <div className="lg">
         <p>
           Welcome! You will watch short videos and answer questions about
           yourself.
@@ -125,9 +121,9 @@ class PatientHome extends Component {
           responding.
         </p>
         <p>Please press the spacebar when you are ready to go forward.</p>
-      </Text>,
+      </div>,
       <VideoViewer src={this.state.src} />,
-      <Text>
+      <div className="lg">
         <p>You will now watch several short video clips.</p>
         <p>
           After each video, you will be asked questions about what happened in
@@ -136,7 +132,7 @@ class PatientHome extends Component {
         <p>You will have 30 seconds to answer each question.</p>
         <p>Please speak out loud and keep speaking until the time runs out.</p>
         <p>When you are ready, please press the spacebar to continue.</p>
-      </Text>
+      </div>
     ];
     screens = this.props.screens.reduce(
       (prev, screenData) =>
@@ -144,7 +140,7 @@ class PatientHome extends Component {
           screenData.type === "video"
             ? [
                 <VideoPlayer toggle={this.toggle} url={screenData.url} />,
-                <Text>
+                <div className="lg">
                   <p>Please describe what happened in the video.</p>
                   <p>
                     Use as much detail as possible when describing the video.
@@ -154,13 +150,13 @@ class PatientHome extends Component {
                     duration of the timer.
                   </p>
                   <p>Please press the spacebar when you are ready to start.</p>
-                </Text>,
+                </div>,
                 <TimerWrapper toggle={this.toggle} />
               ]
             : [
-                <QuestionView text={screenData.title} />,
+                <p>{screenData.title}</p>,
                 <div>
-                  <QuestionView text={screenData.title} />
+                  <p>{screenData.title} </p>
                   <TimerWrapper toggle={this.toggle} timer={screenData.timer} />
                 </div>
               ]
@@ -168,16 +164,21 @@ class PatientHome extends Component {
       screens
     );
     screens.push(
-      <Text>
+      <div className="lg">
         <p>Thank you for participating in CAMS!</p>
-      </Text>
+      </div>
     );
     return (
       <div className="patient-home">
         <div>
-          <Timeline
+          <HorizontalTimeline
             numScreens={screens.length}
             keyBoardEnabled={this.state.keyBoardEnabled}
+            linePadding={100}
+            minEventPadding={20}
+            maxEventPadding={120}
+            containerWidth={800}
+            containerHeight={100}
           />
         </div>
         <div className="screens">{screens[this.state.idx]}</div>

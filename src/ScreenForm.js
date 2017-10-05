@@ -18,7 +18,6 @@ class ScreenForm extends Component {
     this.handleSearchChange = this.handleSearchChange.bind(this);
     this.handleFileAdd = this.handleFileAdd.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    // this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange(e) {
@@ -39,11 +38,6 @@ class ScreenForm extends Component {
     });
   }
 
-  // handleSubmit(e) {
-  //   e.preventDefault();
-  //   this.props.addDone(file);
-  // }
-
   handleAddChange(e) {
     e.preventDefault();
     this.props.addVideoFile(e.target.text);
@@ -56,13 +50,6 @@ class ScreenForm extends Component {
   }
 
   componentWillMount() {
-    // axios.get(`${BASE_URL}/api/videos`, config()).then(response => {
-    //   // console.log(response.data);
-    //   this.setState({ videos: response.data });
-    // });
-    // axios.get(`${BASE_URL}/api/videofiles`, config()).then(response => {
-    //   this.setState({ videos: response.data });
-    // });
     this.getAllVideoFiles();
   }
 
@@ -74,32 +61,12 @@ class ScreenForm extends Component {
         val.title.toLowerCase().includes(stext.toLowerCase());
       return showDiv ? (
         <div key={idx}>
-          <a
-            className="searchinput"
-            onClick={this.handleAddChange}
-            // data={val.url}
-          >
+          <a className="searchinput" onClick={this.handleAddChange}>
             {val.title}
           </a>
         </div>
       ) : null;
     });
-    // let showVideos = this.state.videos.map((val, idx, arr) => {
-    //   var showDiv =
-    //     stext.toLowerCase() === "" ||
-    //     val.title.toLowerCase().includes(stext.toLowerCase());
-    //   return showDiv ? (
-    //     <div key={idx}>
-    //       <a
-    //         className="searchinput"
-    //         onClick={this.handleAddChange}
-    //         data={val.url}
-    //       >
-    //         {val.title}
-    //       </a>
-    //     </div>
-    //   ) : null;
-    // });
 
     return (
       <div>
@@ -118,7 +85,6 @@ class ScreenForm extends Component {
           <QuestionForm addQuestion={this.props.addQuestion} />
           <VideoUploadForm
             addVideoFile={this.handleFileAdd}
-            addDone={this.props.addDone}
             fileName={this.state.searchtext}
           />
         </div>
@@ -127,33 +93,9 @@ class ScreenForm extends Component {
   }
 }
 
-// <div className="videos-form">
-// <form onSubmit={this.handleAdd}>
-
-// <button
-// className="button"
-// onClick={this.handleSubmit}
-// value="Submit"
-// >
-//Submit
-//</button>
-//</form>
-//</div>
-// <input
-// type="url"
-// onChange={this.handleChange}
-// name="url"
-// placeholder="Video Url"
-// value={this.state.url}
-// />
-// <button type="submit" className="button" value="Add">
-// +
-// </button>
-
 ScreenForm.propTypes = {
   addQuestion: PropTypes.func.isRequired,
-  addVideo: PropTypes.func.isRequired,
-  addDone: PropTypes.func.isRequired
+  addVideoFile: PropTypes.func.isRequired
 };
 
 export default ScreenForm;

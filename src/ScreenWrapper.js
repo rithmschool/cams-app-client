@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import ScreenForm from "./ScreenForm";
 import { BASE_URL, config, userID } from "./helpers.js";
 import axios from "axios";
-import getYouTubeID from "get-youtube-id";
 import {
   SortableContainer,
   SortableElement,
@@ -17,8 +16,6 @@ class ScreenWrapper extends Component {
     this.state = {
       screenData: []
     };
-    this.addVideo = this.addVideo.bind(this);
-    this.addDone = this.addDone.bind(this);
     this.addVideoFile = this.addVideoFile.bind(this);
     this.addQuestion = this.addQuestion.bind(this);
     this.onSortEnd = this.onSortEnd.bind(this);
@@ -30,32 +27,6 @@ class ScreenWrapper extends Component {
         `${BASE_URL}/api/videofiles`,
         {
           title: file,
-          playlist_id: this.props.playlistID,
-          order: this.state.screenData.length + 1
-        },
-        config()
-      )
-      .then(response => {
-        this.setState({
-          screenData: this.state.screenData.concat([
-            {
-              title: response.data.title,
-              entity_id: response.data.id,
-              type: "video"
-            }
-          ])
-        });
-      });
-  }
-
-  addVideo(url) {
-    let youtubeID = getYouTubeID(url);
-    return axios
-      .post(
-        `${BASE_URL}/api/videos`,
-        {
-          url,
-          youtube_id: youtubeID,
           playlist_id: this.props.playlistID,
           order: this.state.screenData.length + 1
         },
@@ -100,17 +71,6 @@ class ScreenWrapper extends Component {
           });
         });
     }
-  }
-
-  addDone(file) {
-    if (file) {
-      this.addVideoFile(file).then(
-        function(response) {
-          this.props.history.push("/dashboard");
-        }.bind(this)
-      );
-    }
-    this.props.history.push("/dashboard");
   }
 
   onSortEnd({ oldIndex, newIndex }) {
@@ -175,7 +135,6 @@ class ScreenWrapper extends Component {
         <ScreenForm
           addQuestion={this.addQuestion}
           addVideo={this.addVideo}
-          addDone={this.addDone}
           addVideoFile={this.addVideoFile}
         />
       </div>

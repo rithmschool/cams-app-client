@@ -6,7 +6,6 @@ import axios from "axios";
 class PatientWrapper extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       screens: [],
       assessmentId: 0,
@@ -53,41 +52,30 @@ class PatientWrapper extends Component {
             3
           )
         });
+        return response.data.screens;
       })
       .then(function(response) {
-        axios
-          .get(`${BASE_URL}/api/videofiles/s3Bucket`, config())
-          .then(response => {
-            let screens = self.state.screens.map(s => {
-              if (s.type === "video") {
-                response.data.forEach(v => {
-                  if (s.title === v.title) {
-                    s = { ...s, url: v.url };
-                  }
-                });
-              }
-              return s;
-            });
-            self.setState({ screens });
+        let screensPromises = response
+          .filter(s => s.type === "video")
+          .map(s => {
+            return axios.get(`${BASE_URL}/api/videofiles/${s.title}`, config());
           });
+
+        Promise.all(screensPromises).then(response => {
+          let screens = self.state.screens.map(s => {
+            if (s.type === "video") {
+              response.forEach(v => {
+                if (s.title === v.data.title) {
+                  s = { ...s, url: v.data.url };
+                }
+              });
+            }
+            return s;
+          });
+          self.setState({ screens });
+        });
       });
   }
-
-  // componentDidMount() {
-  //   axios.get(`${BASE_URL}/api/videofiles`, config()).then(response => {
-  //     let screens = this.state.screens.map(s => {
-  //       if (s.type === "video") {
-  //         response.data.forEach(v => {
-  //           if (s.title === v.title) {
-  //             s = { ...s, url: v.url };
-  //           }
-  //         });
-  //       }
-  //       return s;
-  //     });
-  //     this.setState({ screens });
-  //   });
-  // }
 
   render() {
     BrowserDetect.init();

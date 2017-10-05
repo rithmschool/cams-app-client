@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import { BASE_URL, config } from "./helpers.js";
+import { BASE_URL } from "./helpers.js";
 import axios from "axios";
+import PropTypes from "prop-types";
 
-// import PropTypes from "prop-types";
 const styles = {
   progressWrapper: {
     height: "50px",
@@ -40,12 +40,12 @@ class VideoUploadForm extends Component {
     this.getSignedRequest = this.getSignedRequest.bind(this);
     this.uploadFile = this.uploadFile.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
     this.state = {
       file: "",
       status: "",
       width: 0,
-      showProgressBar: false
+      showProgressBar: false,
+      errors: false
     };
   }
 
@@ -57,11 +57,6 @@ class VideoUploadForm extends Component {
       width: 0,
       showProgressBar: false
     });
-  }
-
-  handleSubmit(e) {
-    e.preventDefault();
-    this.props.addDone(this.state.file || this.props.fileName);
   }
 
   handleFileSubmit(e) {
@@ -85,11 +80,14 @@ class VideoUploadForm extends Component {
         }
       })
       .then(response => {
-        console.log("signd request complete!", response);
-        // this.setState({ status: "Starting Upload!" });
         this.uploadFile(file, response.data.data, response.data.url);
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        this.setState({
+          status: "There was an error. Please try again.",
+          errors: true
+        });
+      });
   }
 
   uploadFile(file, s3Data, url) {
@@ -110,30 +108,39 @@ class VideoUploadForm extends Component {
           this.setState({
             width: percentCompleted
           });
-          console.log("Progress:-" + percentCompleted);
         }
       })
       .then(response => {
-        console.log(file);
         this.props.addVideoFile(file.name);
-        // axios.get(`${BASE_URL}/api/videofiles`, config()).then(response => {
-        //   this.props.addVideoFile(response.data);
-        // });
-
         this.setState({
           status: "Upload Complete!",
           showProgressBar: false
         });
-        console.log("upload successful!", response);
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        this.setState({
+          status: "There was an error. Please try again.",
+          errors: true
+        });
+      });
   }
 
   render() {
-    let progressMsg =
-      this.state.width === 100
-        ? this.state.status
-        : this.state.width ? `${this.state.width}%` : "";
+    // let progressMsg = this.state.errors
+    //   ? this.state.status
+    //   : this.state.width === 100
+    //     ? this.state.status
+    //     : this.state.width ? `${this.state.width}%` : "";
+
+    let progressMsg = "";
+    if (this.state.errors) {
+      progressMsg = this.state.status;
+    } else if (this.state.width === 100) {
+      progressMsg = this.state.status;
+    } else if (this.state.width) {
+      progressMsg = `${this.state.width}%`;
+    }
+
     let progressBar = this.state.showProgressBar ? (
       <div style={styles.progressWrapper}>
         <div style={{ ...styles.progressBar, width: `${this.state.width}%` }}>
@@ -155,12 +162,14 @@ class VideoUploadForm extends Component {
         </form>
         {progressBar}
         <div>{progressMsg}</div>
-        <button className="button" onClick={this.handleSubmit} value="Submit">
-          Submit
-        </button>
       </div>
     );
   }
 }
+
+VideoUploadForm.propTypes = {
+  addVideoFile: PropTypes.func.isRequired,
+  fileName: PropTypes.string.isRequired
+};
 
 export default VideoUploadForm;

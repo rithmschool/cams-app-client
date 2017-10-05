@@ -18,3 +18,12 @@ test("shapshot of TimerWrapper without timer prop", () => {
     .toJSON();
   expect(timer).toMatchSnapshot();
 });
+
+test("snapshot of TimerWrapper when counter > 0", () => {
+  const timerWrapper = shallow(<TimerWrapper toggle={function() {}} />);
+  timerWrapper.setState({
+    counter: 0,
+    timerId: 1
+  });
+  expect(toJson(timerWrapper)).toMatchSnapshot();
+});

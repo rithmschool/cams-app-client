@@ -49,7 +49,6 @@ class Dashboard extends Component {
         )
       )
       .then(response => {
-        console.log(response.data);
         return axios.post(
           `${BASE_URL}/api/users/mail`,
           {
@@ -98,7 +97,6 @@ class Dashboard extends Component {
     axios
       .get(`${BASE_URL}/api/users/${userID()}/playlists`, config())
       .then(response => {
-        console.log(response.data);
         this.setState({ userPlaylists: response.data });
       });
   }
@@ -116,7 +114,6 @@ class Dashboard extends Component {
         <Close handleClose={this.closeSelection} />
       </div>
     ) : null;
-
     let playlists = this.state.userPlaylists.map((playlist, i) => {
       let showForm =
         this.state.playlistName === playlist.name ? (

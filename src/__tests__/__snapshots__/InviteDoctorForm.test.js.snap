@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches snapshot of InviteDoctorForm 1`] = `
+<div>
+  <div
+    className="banner-text"
+  >
+    <h1
+      className="banner-bold"
+    >
+      Invite
+    </h1>
+  </div>
+  <div
+    className="content"
+  >
+    <h1>
+      Invite New Doctor
+    </h1>
+    <form
+      onSubmit={[Function]}
+    >
+      <input
+        name="email"
+        onChange={[Function]}
+        placeholder="email"
+        type="email"
+        value=""
+      />
+      <button
+        className="button button-hover"
+        type="submit"
+        value="Submit"
+      >
+        Send Invite
+      </button>
+    </form>
+    <p>
+      
+    </p>
+  </div>
+</div>
+`;

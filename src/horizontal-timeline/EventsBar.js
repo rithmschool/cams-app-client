@@ -44,7 +44,10 @@ class EventsBar extends React.Component {
       fillingMotion,
       spaceBarClick
     } = this.props;
-    const filledValue = events[index].distance - barPaddingLeft;
+    const filledValue =
+      index >= events.length
+        ? events[events.length - 1] - barPaddingLeft
+        : events[index].distance - barPaddingLeft;
     const eventLineWidth = totalWidth - barPaddingLeft - barPaddingRight;
     const line1Styles = {
       left: barPaddingLeft,

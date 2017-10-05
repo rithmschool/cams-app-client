@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`shapshot of an invalid browser 1`] = `
+<div>
+  <p>
+    Browser not supported. Please switch to
+     
+    <a
+      href="https://www.google.com/chrome/browser/desktop/index.html"
+    >
+      Google Chrome
+    </a>
+     
+    to proceed.
+  </p>
+</div>
+`;

@@ -6,7 +6,6 @@
     "node": "8.4.0",
     "npm": "5.4.2"
   },
-
   "dependencies": {
     "axios": "^0.15.3",
     "axios-mock-adapter": "^1.9.0",
@@ -29,6 +28,7 @@
     "react-test-renderer": "^15.6.2",
     "react-youtube": "^7.3.0",
     "recordrtc": "^5.4.1",
+    "url-search-params": "^0.10.0",
     "videojs-record": "^1.6.0"
   },
   "devDependencies": {
@@ -41,8 +41,7 @@
   },
   "scripts": {
     "build-css": "node-sass src/ -o src/",
-    "watch-css":
-      "npm run build-css && node-sass src/ -o src/ --watch --recursive",
+    "watch-css": "npm run build-css && node-sass src/ -o src/ --watch --recursive",
     "start-js": "react-scripts start",
     "start": "npm-run-all -p watch-css start-js",
     "build": "npm run build-css && react-scripts build",

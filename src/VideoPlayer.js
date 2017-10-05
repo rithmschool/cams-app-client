@@ -32,8 +32,8 @@ class VideoPlayer extends Component {
       <div>
         <video
           autoPlay="true"
-          height="100%"
-          width="100%"
+          height="450px"
+          width="750px"
           src={this.props.url}
           onEnded={this.onEnd}
         />

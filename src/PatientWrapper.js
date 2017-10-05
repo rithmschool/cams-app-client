@@ -58,7 +58,8 @@ class PatientWrapper extends Component {
         let screensPromises = response
           .filter(s => s.type === "video")
           .map(s => {
-            return axios.get(`${BASE_URL}/api/videofiles/${s.title}`, config());
+            let title = decodeURIComponent(s.title);
+            return axios.get(`${BASE_URL}/api/videofiles/${title}`, config());
           });
 
         Promise.all(screensPromises).then(response => {

@@ -126,12 +126,6 @@ class VideoUploadForm extends Component {
   }
 
   render() {
-    // let progressMsg = this.state.errors
-    //   ? this.state.status
-    //   : this.state.width === 100
-    //     ? this.state.status
-    //     : this.state.width ? `${this.state.width}%` : "";
-
     let progressMsg = "";
     if (this.state.errors) {
       progressMsg = this.state.status;

@@ -1,10 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { shallow, mount } from "enzyme";
-import renderer from "react-test-renderer";
+import { shallow } from "enzyme";
 import Dashboard from "../Dashboard";
 import toJson from "enzyme-to-json";
-import { Switch, MemoryRouter, Link } from "react-router-dom";
 import MockAdapter from "axios-mock-adapter";
 import { BASE_URL, userID, config } from "../helpers.js";
 import LocalStorageMock from "../setupTests/LocalStorageMock";
@@ -26,7 +24,7 @@ test("renders without crashing", () => {
   shallow(<Dashboard />);
 });
 
-test("mockAdapter works", () => {
+test("Dashboard renders playlists when they exist", () => {
   const dashboard = shallow(<Dashboard />);
   dashboard.setState({
     userPlaylists: [

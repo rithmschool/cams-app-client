@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { shallow, mount } from "enzyme";
+import { shallow } from "enzyme";
 import PatientWrapper from "../PatientWrapper";
 import toJson from "enzyme-to-json";
 import LocalStorageMock from "../setupTests/LocalStorageMock";

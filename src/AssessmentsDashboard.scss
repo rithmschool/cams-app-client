@@ -1,0 +1,63 @@
+table {
+  border: 3px solid #009eb8;
+  border-radius: 10px;
+  width: 100%;
+}
+.al-button {
+  background-color: white;
+  border: 3px solid white;
+  border-radius: 3px;
+  padding: 0.2rem;
+  box-shadow: 0px 1px 3px rgba(51, 207, 164, 0.5);
+  color: #00c5cc;
+  margin: 0.5rem;
+}
+th {
+  border: 3px solid #00aea7;
+  color: #00c5cc;
+}
+tr:first-child th:last-child {
+  border-top-right-radius: 7px;
+}
+tr:first-child th:first-child {
+  border-top-left-radius: 7px;
+}
+td {
+  border: 2px solid #61dafb;
+  padding: 5px;
+}
+tr:last-child td:first-child {
+  border-bottom-left-radius: 7px;
+}
+tr:last-child td:last-child {
+  border-bottom-right-radius: 7px;
+}
+.ReactModal__Body--open {
+  overflow: hidden;
+}
+.video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  width: 80%;
+  background-color: white;
+  outline-color: rgb(0, 64, 128);
+  outline-style: auto;
+  outline-width: 5px;
+  margin: auto auto;
+  button {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    display: block;
+    color: red;
+  }
+  video {
+    padding-bottom: 20px;
+  }
+  h2 {
+    text-align: center;
+  }
+}

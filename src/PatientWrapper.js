@@ -47,7 +47,7 @@ class PatientWrapper extends Component {
         });
         return response.data.screens;
       })
-      .then(function(response) {
+      .then(response => {
         let screensPromises = response
           .filter(s => s.type === "video")
           .map(s => {
@@ -56,7 +56,7 @@ class PatientWrapper extends Component {
           });
 
         Promise.all(screensPromises).then(response => {
-          let screens = self.state.screens.map(s => {
+          let screens = this.state.screens.map(s => {
             if (s.type === "video") {
               response.forEach(v => {
                 if (s.title === v.data.title) {
@@ -66,7 +66,7 @@ class PatientWrapper extends Component {
             }
             return s;
           });
-          self.setState({ screens });
+          this.setState({ screens });
         });
       });
   }

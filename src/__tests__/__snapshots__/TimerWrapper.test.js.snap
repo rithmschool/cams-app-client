@@ -32,7 +32,7 @@ exports[`shapshot of TimerWrapper without timer prop 1`] = `
 </div>
 `;
 
-exports[`snapshot of TimerWrapper when counter > 0 1`] = `
+exports[`snapshot of TimerWrapper when counter is set to zero 1`] = `
 <div>
   <div
     className="timer"

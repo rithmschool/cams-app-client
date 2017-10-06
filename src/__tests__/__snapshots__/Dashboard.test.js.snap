@@ -1,27 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`dashboard matches snapshot  1`] = `
-<div>
-  <div
-    className="banner-text"
-  >
-    <h1
-      className="banner-bold"
-    >
-      Dashboard
-    </h1>
-  </div>
-  <div
-    className="content"
-  >
-    <div
-      className="playlist-container"
-    />
-  </div>
-</div>
-`;
-
-exports[`mockAdapter works 1`] = `
+exports[`Dashboard renders playlists when they exist 1`] = `
 <div>
   <div
     className="banner-text"
@@ -63,6 +42,27 @@ exports[`mockAdapter works 1`] = `
         </h5>
       </div>
     </div>
+  </div>
+</div>
+`;
+
+exports[`dashboard matches snapshot  1`] = `
+<div>
+  <div
+    className="banner-text"
+  >
+    <h1
+      className="banner-bold"
+    >
+      Dashboard
+    </h1>
+  </div>
+  <div
+    className="content"
+  >
+    <div
+      className="playlist-container"
+    />
   </div>
 </div>
 `;

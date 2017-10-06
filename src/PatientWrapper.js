@@ -29,24 +29,26 @@ class PatientWrapper extends Component {
     const token = query.get("token");
     console.log(token);
 
-    axios.get(`${BASE_URL}/api/users/confirm/${token}`).then(response => {
-      this.setState({ assessmentId: response.data.assessment_id });
-      console.log(`${BASE_URL}/api/users/confirm/${token}`);
-      //     return axios.get(
-      //       `${BASE_URL}/api/users/${response.data
-      //         .doctor_id}/assessments/${response.data.assessment_id}`,
-      //       { token: token }
-      //     );
-    });
-    //   .then(response => {
-    //     this.setState({
-    //       screens: response.data.screens,
-    //       screenCount: response.data.screens.reduce(
-    //         (prev, curScreen) => prev + (curScreen.type === "video" ? 3 : 2),
-    //         3
-    //       )
-    //     });
-    //   });
+    axios
+      .get(`${BASE_URL}/api/users/confirm/${token}`)
+      .then(response => {
+        this.setState({ assessmentId: response.data.assessment_id });
+        console.log(`${BASE_URL}/api/users/confirm/${token}`);
+        return axios.get(
+          `${BASE_URL}/api/users/${response.data
+            .doctor_id}/assessments/${response.data.assessment_id}`,
+          { token: token }
+        );
+      })
+      .then(response => {
+        this.setState({
+          screens: response.data.screens,
+          screenCount: response.data.screens.reduce(
+            (prev, curScreen) => prev + (curScreen.type === "video" ? 3 : 2),
+            3
+          )
+        });
+      });
   }
 
   render() {

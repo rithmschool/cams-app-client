@@ -32,7 +32,6 @@ class PatientWrapper extends Component {
       .get(`${BASE_URL}/api/users/confirm/${token}`)
       .then(response => {
         this.setState({ assessmentId: response.data.assessment_id });
-        console.log(`${BASE_URL}/api/users/confirm/${token}`);
         return axios.get(
           `${BASE_URL}/api/users/${response.data
             .doctor_id}/assessments/${response.data.assessment_id}`,

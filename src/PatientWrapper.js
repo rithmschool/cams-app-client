@@ -1,13 +1,12 @@
 import React, { Component } from "react";
 import PatientHome from "./PatientHome";
-import { BASE_URL, BrowserDetect } from "./helpers.js";
+import { BASE_URL, BrowserDetect, config } from "./helpers.js";
 import axios from "axios";
 import URLSearchParams from "url-search-params";
 
 class PatientWrapper extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       screens: [],
       assessmentId: 0,
@@ -45,6 +44,29 @@ class PatientWrapper extends Component {
             (prev, curScreen) => prev + (curScreen.type === "video" ? 3 : 2),
             3
           )
+        });
+        return response.data.screens;
+      })
+      .then(function(response) {
+        let screensPromises = response
+          .filter(s => s.type === "video")
+          .map(s => {
+            let title = decodeURIComponent(s.title);
+            return axios.get(`${BASE_URL}/api/videofiles/${title}`, config());
+          });
+
+        Promise.all(screensPromises).then(response => {
+          let screens = self.state.screens.map(s => {
+            if (s.type === "video") {
+              response.forEach(v => {
+                if (s.title === v.data.title) {
+                  s = { ...s, url: v.data.url };
+                }
+              });
+            }
+            return s;
+          });
+          self.setState({ screens });
         });
       });
   }

@@ -139,10 +139,7 @@ class PatientHome extends Component {
         prev.concat(
           screenData.type === "video"
             ? [
-                <VideoPlayer
-                  toggle={this.toggle}
-                  videoId={screenData.youtube_id}
-                />,
+                <VideoPlayer toggle={this.toggle} url={screenData.url} />,
                 <div className="lg">
                   <p>Please describe what happened in the video.</p>
                   <p>

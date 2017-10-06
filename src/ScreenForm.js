@@ -3,22 +3,21 @@ import axios from "axios";
 import { BASE_URL, config } from "./helpers.js";
 import "./ScreenForm.css";
 import QuestionForm from "./QuestionForm";
+import VideoUploadForm from "./VideoUploadForm";
 import PropTypes from "prop-types";
 
 class ScreenForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      url: "",
-      file: null,
+      file: "",
       videos: [],
       searchtext: ""
     };
     this.handleAddChange = this.handleAddChange.bind(this);
     this.handleSearchChange = this.handleSearchChange.bind(this);
-    this.handleAdd = this.handleAdd.bind(this);
+    this.handleFileAdd = this.handleFileAdd.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange(e) {
@@ -33,26 +32,25 @@ class ScreenForm extends Component {
     });
   }
 
-  handleAdd(e) {
-    e.preventDefault();
-    this.setState({ url: "" });
-    this.props.addVideo(this.state.url);
-  }
-
-  handleSubmit(e) {
-    e.preventDefault();
-    this.props.addDone(this.state.url);
+  handleFileAdd(file) {
+    this.props.addVideoFile(file).then(response => {
+      this.getAllVideoFiles();
+    });
   }
 
   handleAddChange(e) {
     e.preventDefault();
-    this.props.addVideo(e.target.getAttribute("data"));
+    this.props.addVideoFile(e.target.text);
+  }
+
+  getAllVideoFiles() {
+    axios.get(`${BASE_URL}/api/videofiles`, config()).then(response => {
+      this.setState({ videos: response.data });
+    });
   }
 
   componentWillMount() {
-    axios.get(`${BASE_URL}/api/videos`, config()).then(response => {
-      this.setState({ videos: response.data });
-    });
+    this.getAllVideoFiles();
   }
 
   render() {
@@ -63,11 +61,7 @@ class ScreenForm extends Component {
         val.title.toLowerCase().includes(stext.toLowerCase());
       return showDiv ? (
         <div key={idx}>
-          <a
-            className="searchinput"
-            onClick={this.handleAddChange}
-            data={val.url}
-          >
+          <a className="searchinput" onClick={this.handleAddChange}>
             {val.title}
           </a>
         </div>
@@ -89,27 +83,10 @@ class ScreenForm extends Component {
             {showVideos}
           </div>
           <QuestionForm addQuestion={this.props.addQuestion} />
-          <div className="videos-form">
-            <form onSubmit={this.handleAdd}>
-              <input
-                type="url"
-                onChange={this.handleChange}
-                name="url"
-                placeholder="Video Url"
-                value={this.state.url}
-              />
-              <button type="submit" className="button" value="Add">
-                +
-              </button>
-              <button
-                className="button"
-                onClick={this.handleSubmit}
-                value="Submit"
-              >
-                Submit
-              </button>
-            </form>
-          </div>
+          <VideoUploadForm
+            addVideoFile={this.handleFileAdd}
+            fileName={this.state.searchtext}
+          />
         </div>
       </div>
     );
@@ -118,8 +95,7 @@ class ScreenForm extends Component {
 
 ScreenForm.propTypes = {
   addQuestion: PropTypes.func.isRequired,
-  addVideo: PropTypes.func.isRequired,
-  addDone: PropTypes.func.isRequired
+  addVideoFile: PropTypes.func.isRequired
 };
 
 export default ScreenForm;

@@ -36,6 +36,7 @@ class VideoPlayer extends Component {
           width="750px"
           src={this.props.url}
           onEnded={this.onEnd}
+          onContextMenu={e => e.preventDefault()}
         />
         {endText}
       </div>

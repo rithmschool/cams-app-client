@@ -27,7 +27,6 @@ class PatientWrapper extends Component {
   componentWillMount() {
     const query = new URLSearchParams(this.props.location.search);
     const token = query.get("token");
-    console.log(token);
 
     axios
       .get(`${BASE_URL}/api/users/confirm/${token}`)

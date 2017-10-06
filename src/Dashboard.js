@@ -97,7 +97,6 @@ class Dashboard extends Component {
     axios
       .get(`${BASE_URL}/api/users/${userID()}/playlists`, config())
       .then(response => {
-        console.log(response);
         this.setState({ userPlaylists: response.data });
       });
   }

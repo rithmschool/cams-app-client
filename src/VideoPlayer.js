@@ -12,16 +12,12 @@ class VideoPlayer extends Component {
 
   onEnd() {
     this.props.toggle();
-    this.setState({
-      videoEnded: true
-    });
+    this.setState({ videoEnded: true });
   }
 
   componentDidMount() {
     this.props.toggle();
-    this.setState({
-      videoEnded: false
-    });
+    this.setState({ videoEnded: false });
   }
 
   render() {

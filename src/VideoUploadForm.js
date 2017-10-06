@@ -2,36 +2,7 @@ import React, { Component } from "react";
 import { BASE_URL } from "./helpers.js";
 import axios from "axios";
 import PropTypes from "prop-types";
-
-const styles = {
-  progressWrapper: {
-    height: "50px",
-    marginTop: "10px",
-    width: "250px",
-    float: "left",
-    overflow: "hidden",
-    backgroundColor: "#f5f5f5",
-    border: "1px solid black",
-    borderRadius: "4px",
-    WebkitBoxShadow: "inset 0 1px 2px rgba(0,0,0,.1)",
-    boxShadow: "inset 0 1px 2px rgba(0,0,0,.1)"
-  },
-  progressBar: {
-    float: "left",
-    width: 0,
-    height: "100%",
-    fontSize: "12px",
-    lineHeight: "20px",
-    color: "#fff",
-    textAlign: "center",
-    backgroundColor: "#5cb85c",
-    WebkitBoxShadow: "inset 0 -1px 0 rgba(0,0,0,.15)",
-    boxShadow: "inset 0 -1px 0 rgba(0,0,0,.15)",
-    WebkitTransition: "width .6s ease",
-    Otransition: "width .6s ease",
-    transition: "width .6s ease"
-  }
-};
+import "./VideoUploadForm.css";
 
 class VideoUploadForm extends Component {
   constructor(props) {
@@ -136,10 +107,11 @@ class VideoUploadForm extends Component {
     }
 
     let progressBar = this.state.showProgressBar ? (
-      <div style={styles.progressWrapper}>
-        <div style={{ ...styles.progressBar, width: `${this.state.width}%` }}>
-          {" "}
-        </div>
+      <div className="progress-wrapper">
+        <div
+          className="progress-bar"
+          style={{ width: `${this.state.width}%` }}
+        />
       </div>
     ) : null;
 

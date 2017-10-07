@@ -10,6 +10,8 @@ class LoginForm extends Component {
       password: "",
       error: false
     };
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   login(config) {
@@ -44,20 +46,20 @@ class LoginForm extends Component {
         </div>
         <div className="content">
           <h1>Login</h1>
-          <form onSubmit={this.handleSubmit.bind(this)}>
+          <form onSubmit={this.handleSubmit}>
             <input
               type="email"
               name="email"
               placeholder="email"
               required
-              onChange={this.handleChange.bind(this)}
+              onChange={this.handleChange}
             />
             <input
               type="password"
               name="password"
               placeholder="password"
               required
-              onChange={this.handleChange.bind(this)}
+              onChange={this.handleChange}
             />
             <button
               className="button button-hover"

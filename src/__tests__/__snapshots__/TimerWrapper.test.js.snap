@@ -1,9 +1,13 @@
-exports[`test shapshot of TimerWrapper with timer prop 1`] = `
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`shapshot of TimerWrapper with timer prop 1`] = `
 <div>
   <div
-    className="timer">
+    className="timer"
+  >
     <h2
-      className="center">
+      className="center"
+    >
        
       45
        
@@ -12,14 +16,32 @@ exports[`test shapshot of TimerWrapper with timer prop 1`] = `
 </div>
 `;
 
-exports[`test shapshot of TimerWrapper without timer prop 1`] = `
+exports[`shapshot of TimerWrapper without timer prop 1`] = `
 <div>
   <div
-    className="timer">
+    className="timer"
+  >
     <h2
-      className="center">
+      className="center"
+    >
        
       30
+       
+    </h2>
+  </div>
+</div>
+`;
+
+exports[`snapshot of TimerWrapper when counter is set to zero 1`] = `
+<div>
+  <div
+    className="timer"
+  >
+    <h2
+      className="center"
+    >
+       
+      0
        
     </h2>
   </div>

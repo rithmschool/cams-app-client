@@ -15,7 +15,6 @@ class HorizontalTimeline extends Component {
       time,
       containerWidth,
       containerHeight,
-      spaceBarClick,
       keyBoardEnabled,
       numScreens,
       fillingMotion,
@@ -78,9 +77,7 @@ HorizontalTimeline.defaultProps = {
 };
 
 HorizontalTimeline.propTypes = {
-  spaceBarClick: PropTypes.func.isRequired,
   keyBoardEnabled: PropTypes.bool.isRequired,
-  index: PropTypes.number.isRequired,
   numScreens: PropTypes.number.isRequired,
   linePadding: PropTypes.number.isRequired,
   minEventPadding: PropTypes.number.isRequired,

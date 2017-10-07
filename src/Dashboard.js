@@ -48,16 +48,16 @@ class Dashboard extends Component {
           config
         )
       )
-      .then(response =>
-        axios.post(
+      .then(response => {
+        return axios.post(
           `${BASE_URL}/api/users/mail`,
           {
             assessment_id: response.data.id,
             patient_id: response.data.patient_id
           },
           config
-        )
-      )
+        );
+      })
       .then(response => {
         this.setState({
           playlistID: null,
@@ -114,7 +114,6 @@ class Dashboard extends Component {
         <Close handleClose={this.closeSelection} />
       </div>
     ) : null;
-
     let playlists = this.state.userPlaylists.map((playlist, i) => {
       let showForm =
         this.state.playlistName === playlist.name ? (
@@ -161,7 +160,7 @@ class Dashboard extends Component {
           <h5 className="playlist-name-title">{playlist.name}</h5>
           {playlist.videos.map((video, idx) => {
             return (
-              <p className="song-title" key={idx}>
+              <p className="video-title" key={idx}>
                 {video.title}
               </p>
             );

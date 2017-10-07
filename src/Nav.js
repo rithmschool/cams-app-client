@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { withRouter, Link } from "react-router-dom";
 import { userID } from "./helpers.js";
-import logo from "../images/logo.png";
+import logo from "./images/logo.png";
 import "./Nav.css";
 import Dropdown, {
   DropdownTrigger,

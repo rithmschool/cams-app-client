@@ -5,7 +5,7 @@ import renderer from "react-test-renderer";
 import Nav from "../Nav";
 import toJson from "enzyme-to-json";
 import { Switch, MemoryRouter, Link } from "react-router-dom";
-import LocalStorageMock from "../testing_helpers/LocalStorageMock";
+import LocalStorageMock from "../setupTests/LocalStorageMock";
 
 test("nav bar snapshot when logged in", () => {
   const nav = renderer

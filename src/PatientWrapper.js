@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import PatientHome from "./PatientHome";
-import { BASE_URL, BrowserDetect } from "./helpers.js";
+import { BASE_URL, BrowserDetect, config } from "./helpers.js";
 import axios from "axios";
+import URLSearchParams from "url-search-params";
 
 class PatientWrapper extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       screens: [],
       assessmentId: 0,
@@ -24,34 +24,49 @@ class PatientWrapper extends Component {
   }
 
   componentWillMount() {
-    var self = this;
-    var data = window.location.href.split("?")[1];
-    var data_obj = JSON.parse(
-      '{"' +
-        decodeURI(data)
-          .replace(/"/g, '\\"')
-          .replace(/&/g, '","')
-          .replace(/=/g, '":"') +
-        '"}'
-    );
-    var token = data_obj["token"];
+    const query = new URLSearchParams(this.props.location.search);
+    const token = query.get("token");
+
     axios
       .get(`${BASE_URL}/api/users/confirm/${token}`)
-      .then(function(response) {
-        self.setState({ assessmentId: response.data.assessment_id });
+      .then(response => {
+        this.setState({ assessmentId: response.data.assessment_id });
         return axios.get(
           `${BASE_URL}/api/users/${response.data
             .doctor_id}/assessments/${response.data.assessment_id}`,
           { token: token }
         );
       })
-      .then(function(response) {
-        self.setState({
+      .then(response => {
+        this.setState({
           screens: response.data.screens,
           screenCount: response.data.screens.reduce(
             (prev, curScreen) => prev + (curScreen.type === "video" ? 3 : 2),
             3
           )
+        });
+        return response.data.screens;
+      })
+      .then(response => {
+        let screensPromises = response
+          .filter(s => s.type === "video")
+          .map(s => {
+            let title = decodeURIComponent(s.title);
+            return axios.get(`${BASE_URL}/api/videofiles/${title}`, config());
+          });
+
+        Promise.all(screensPromises).then(response => {
+          let screens = this.state.screens.map(s => {
+            if (s.type === "video") {
+              response.forEach(v => {
+                if (s.title === v.data.title) {
+                  s = { ...s, url: v.data.url };
+                }
+              });
+            }
+            return s;
+          });
+          this.setState({ screens });
         });
       });
   }

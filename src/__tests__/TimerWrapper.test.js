@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { shallow, mount } from "enzyme";
+import { shallow } from "enzyme";
 import renderer from "react-test-renderer";
 import TimerWrapper from "../TimerWrapper";
 import toJson from "enzyme-to-json";
@@ -17,4 +17,13 @@ test("shapshot of TimerWrapper without timer prop", () => {
     .create(<TimerWrapper toggle={function() {}} />)
     .toJSON();
   expect(timer).toMatchSnapshot();
+});
+
+test("snapshot of TimerWrapper when counter is set to zero", () => {
+  const timerWrapper = shallow(<TimerWrapper toggle={function() {}} />);
+  timerWrapper.setState({
+    counter: 0,
+    timerId: 1
+  });
+  expect(toJson(timerWrapper)).toMatchSnapshot();
 });

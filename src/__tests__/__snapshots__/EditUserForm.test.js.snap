@@ -1,0 +1,64 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EditUserForm snapshot 1`] = `
+<div>
+  <div
+    className="banner-text"
+  >
+    <h1
+      className="banner-bold"
+    >
+      Update
+    </h1>
+  </div>
+  <div
+    className="content"
+  >
+    <h1>
+      Profile
+    </h1>
+    <form
+      onSubmit={[Function]}
+    >
+      <input
+        name="email"
+        onChange={[Function]}
+        placeholder="new email"
+        type="email"
+        value="something"
+      />
+      <input
+        name="current_password"
+        onChange={[Function]}
+        placeholder="current password"
+        type="password"
+        value="something"
+      />
+      <input
+        name="new_password"
+        onChange={[Function]}
+        placeholder="new password"
+        type="password"
+        value="somethingelse"
+      />
+      <input
+        name="confirm_new_password"
+        onChange={[Function]}
+        placeholder="confirm new password"
+        type="password"
+        value="somethingelse"
+      />
+      <button
+        className="button button-hover"
+        type="submit"
+        value="Submit"
+      >
+        Update
+      </button>
+      <p>
+        nothing
+      </p>
+    </form>
+  </div>
+</div>
+`;

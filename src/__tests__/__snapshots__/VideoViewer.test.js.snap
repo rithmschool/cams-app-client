@@ -1,10 +1,14 @@
-exports[`test snapshot of VideoViewer 1`] = `
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`snapshot of VideoViewer 1`] = `
 <div
-  className="lg">
+  className="lg"
+>
   <video
     autoPlay="true"
     id="videoElement"
-    src="something" />
+    src="something"
+  />
   <p>
     Please take this time to look at the video viewer to make sure it is positioned on your face.
   </p>

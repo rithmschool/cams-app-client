@@ -14,14 +14,19 @@ class AssessmentsDashboard extends Component {
       selected: { id: null, url: null },
       modalIsOpen: false,
       sorts: [
-        { name: "Patient Email", value: "patientEmail", selected: true },
+        { name: "Patient Email", value: "patientEmail", selected: false },
         { name: "Playlist", value: "playlistName", selected: false },
         { name: "Date Added", value: "dateAdded", selected: false },
         { name: "Date Assessed", value: "dateAssessed", selected: false },
         { name: "Date Evaluated", value: "dateEvaluated", selected: false },
-        { name: "Recently Changed", value: "dateChanged", selected: false }
+        { name: "Recently Changed", value: "dateChanged", selected: true }
       ],
-      sortOrder: -1
+      sortOrder: -1,
+      filters: [
+        { name: "All", value: () => true, selected: true },
+        { name: "Not Assesed", value: v => !v.dateAssessed, selected: false },
+        { name: "Not Evaluated", value: v => !v.dateEvaluated, selected: false }
+      ]
     };
     this.closeModal = this.closeModal.bind(this);
   }
@@ -49,14 +54,12 @@ class AssessmentsDashboard extends Component {
             }
           )
         );
-        debugger;
         this.setState({ doctorAssessments: res });
       });
   }
 
   handleVideo(id) {
     axios.get(`${BASE_URL}/api/recording/${id}`, config()).then(response => {
-      console.log(response);
       this.setState({
         selected: { id, url: response.data.url },
         modalIsOpen: true
@@ -75,6 +78,13 @@ class AssessmentsDashboard extends Component {
     this.setState({ sorts });
   }
 
+  handleFilter(val) {
+    let filters = this.state.filters.map(v =>
+      Object.assign({}, v, { selected: v.value === val })
+    );
+    this.setState({ filters });
+  }
+
   changeSortOrder() {
     this.setState({ sortOrder: this.state.sortOrder * -1 });
   }
@@ -91,7 +101,12 @@ class AssessmentsDashboard extends Component {
           v =>
             v.id === id
               ? Object.assign({}, v, {
-                  dateEvaluated: response.data.date_evaluated
+                  dateChanged: Math.max(
+                    createDate(response.data.date_added),
+                    createDate(response.data.date_assessed),
+                    createDate(response.data.date_evaluated)
+                  ),
+                  dateEvaluated: createDate(response.data.date_evaluated)
                 })
               : v
         );
@@ -101,32 +116,34 @@ class AssessmentsDashboard extends Component {
 
   render() {
     let sortField = this.state.sorts.filter(v => v.selected)[0].value;
-    let assessments = this.state.doctorAssessments.sort((a, b) => {
-      var res = 0;
-      if (a[sortField] > b[sortField]) res = 1;
-      else if (a[sortField] < b[sortField]) res = -1;
-      else {
-        if (a.id > b.id) res = 1;
-        else if (a.id < b.id) res = -1;
-      }
-      return res * this.state.sortOrder;
-    });
-
-    assessments = assessments.map((assessment, i) => {
-      return (
-        <Assessment
-          key={assessment.id}
-          recordingUrl={assessment.recordingUrl}
-          handleEvaluated={this.handleEvaluated.bind(this, assessment.id)}
-          patientEmail={assessment.patientEmail}
-          playlistName={assessment.playlistName}
-          dateAdded={dateFormat(assessment.dateAdded)}
-          dateAssessed={dateFormat(assessment.dateAssessed)}
-          dateEvaluated={dateFormat(assessment.dateEvaluated)}
-          handleVideo={this.handleVideo.bind(this, assessment.id)}
-        />
-      );
-    });
+    let filterField = this.state.filters.filter(v => v.selected)[0].value;
+    let assessments = this.state.doctorAssessments
+      .filter(filterField)
+      .sort((a, b) => {
+        var res = 0;
+        if (a[sortField] > b[sortField]) res = 1;
+        else if (a[sortField] < b[sortField]) res = -1;
+        else {
+          if (a.id > b.id) res = 1;
+          else if (a.id < b.id) res = -1;
+        }
+        return res * this.state.sortOrder;
+      })
+      .map((assessment, i) => {
+        return (
+          <Assessment
+            key={assessment.id}
+            recordingUrl={assessment.recordingUrl}
+            handleEvaluated={this.handleEvaluated.bind(this, assessment.id)}
+            patientEmail={assessment.patientEmail}
+            playlistName={assessment.playlistName}
+            dateAdded={dateFormat(assessment.dateAdded)}
+            dateAssessed={dateFormat(assessment.dateAssessed)}
+            dateEvaluated={dateFormat(assessment.dateEvaluated)}
+            handleVideo={this.handleVideo.bind(this, assessment.id)}
+          />
+        );
+      });
 
     return (
       <div>
@@ -139,7 +156,7 @@ class AssessmentsDashboard extends Component {
             <thead>
               <tr>
                 <th colSpan="3">
-                  <label htmlFor="title">Sort: </label>
+                  <label>Sort: </label>
                   <Dropdown
                     id="Sorts"
                     title={this.state.sorts.filter(v => v.selected)[0].name}
@@ -156,7 +173,13 @@ class AssessmentsDashboard extends Component {
                   </button>
                 </th>
                 <th colSpan="3">
-                  <label>Filter</label>
+                  <label>Filter: </label>
+                  <Dropdown
+                    id="Filter"
+                    title={this.state.filters.filter(v => v.selected)[0].name}
+                    content={this.state.filters}
+                    onChange={this.handleFilter.bind(this)}
+                  />
                 </th>
               </tr>
               <tr>

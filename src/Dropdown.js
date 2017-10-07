@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import "./Dropdown.css";
 
-const Assessment = ({ title, content, onChange }) => {
+const Dropdown = ({ title, content, onChange }) => {
   let contents = content.map((v, i) => (
     <div key={i}>
       <a
@@ -23,4 +23,10 @@ const Assessment = ({ title, content, onChange }) => {
   );
 };
 
-export default Assessment;
+Dropdown.propTypes = {
+  title: PropTypes.string.isRequired,
+  content: PropTypes.array,
+  onChange: PropTypes.func
+};
+
+export default Dropdown;

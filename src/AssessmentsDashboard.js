@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BASE_URL, userID, config, dateFormat } from "./helpers.js";
+import { BASE_URL, userID, config, dateFormat, createDate } from "./helpers.js";
 import axios from "axios";
 import Assessment from "./Assessment";
 import Dropdown from "./Dropdown.js";
@@ -20,7 +20,8 @@ class AssessmentsDashboard extends Component {
         { name: "Date Assessed", value: "dateAssessed", selected: false },
         { name: "Date Evaluated", value: "dateEvaluated", selected: false },
         { name: "Recently Changed", value: "dateChanged", selected: false }
-      ]
+      ],
+      sortOrder: -1
     };
     this.closeModal = this.closeModal.bind(this);
   }
@@ -36,13 +37,19 @@ class AssessmentsDashboard extends Component {
               id: v.id,
               patientEmail: v.patient_email.email,
               playlistName: v.playlist_name.name,
-              dateAdded: v.date_added,
-              dateAssessed: v.date_assessed,
-              dateEvaluated: v.date_evaluated,
+              dateAdded: createDate(v.date_added),
+              dateAssessed: createDate(v.date_assessed),
+              dateEvaluated: createDate(v.date_evaluated),
+              dateChanged: Math.max(
+                createDate(v.date_added),
+                createDate(v.date_assessed),
+                createDate(v.date_evaluated)
+              ),
               recordingUrl: v.recording_url
             }
           )
         );
+        debugger;
         this.setState({ doctorAssessments: res });
       });
   }
@@ -68,6 +75,10 @@ class AssessmentsDashboard extends Component {
     this.setState({ sorts });
   }
 
+  changeSortOrder() {
+    this.setState({ sortOrder: this.state.sortOrder * -1 });
+  }
+
   handleEvaluated(id) {
     axios
       .patch(
@@ -90,11 +101,15 @@ class AssessmentsDashboard extends Component {
 
   render() {
     let sortField = this.state.sorts.filter(v => v.selected)[0].value;
-    console.log("sortField", sortField);
     let assessments = this.state.doctorAssessments.sort((a, b) => {
-      if (a[sortField] > b[sortField]) return 1;
-      if (a[sortField] < b[sortField]) return -1;
-      return 0;
+      var res = 0;
+      if (a[sortField] > b[sortField]) res = 1;
+      else if (a[sortField] < b[sortField]) res = -1;
+      else {
+        if (a.id > b.id) res = 1;
+        else if (a.id < b.id) res = -1;
+      }
+      return res * this.state.sortOrder;
     });
 
     assessments = assessments.map((assessment, i) => {
@@ -131,11 +146,13 @@ class AssessmentsDashboard extends Component {
                     content={this.state.sorts}
                     onChange={this.handleSort.bind(this)}
                   />
-                  <button className="al-button">
-                    {String.fromCharCode(8679)}
-                  </button>
-                  <button className="al-button">
-                    {String.fromCharCode(8681)}
+                  <button
+                    className="al-button"
+                    onClick={this.changeSortOrder.bind(this)}
+                  >
+                    {this.state.sortOrder === -1
+                      ? String.fromCharCode(8681)
+                      : String.fromCharCode(8679)}
                   </button>
                 </th>
                 <th colSpan="3">

@@ -145,7 +145,5 @@ export const dateFormat = date => {
 };
 
 export const createDate = date => {
-  // if (date) return date.slice(0, -6);
-  // else return "";
   return date ? new Date(date) : 0;
 };

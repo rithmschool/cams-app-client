@@ -412,7 +412,7 @@ button.button.dropdown-content {
 .sortablelist {
   padding: 2%;
   padding-top: 0px;
-  min-height: 25vw;
+  height: 30vw;
   width: 30vw;
   box-sizing: border-box;
   border: 0px solid;
@@ -421,6 +421,7 @@ button.button.dropdown-content {
   line-height: 25px;
   margin: 0 auto;
   overflow: auto;
+  white-space: nowrap;
 }
 
 .grabbable {

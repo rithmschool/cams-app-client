@@ -120,6 +120,9 @@ class ScreenForm extends Component {
         <div className="form-wrapper">
           <div className="videos-list">
             <h4>Videos List</h4>
+            <p>
+              <small>Click on video name to add to playlist</small>
+            </p>
             <input
               className="searchinput"
               type="text"

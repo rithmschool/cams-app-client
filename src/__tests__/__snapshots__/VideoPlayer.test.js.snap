@@ -2,17 +2,13 @@
 
 exports[`matches snapshot of VideoPlayer 1`] = `
 <div>
-  <span>
-    <div
-      className={undefined}
-      id={undefined}
-    />
-  </span>
-  <p
-    className="lg"
-  >
-    Press the space key to move on once the video has ended
-     
-  </p>
+  <video
+    autoPlay="true"
+    height="450px"
+    onContextMenu={[Function]}
+    onEnded={[Function]}
+    src={undefined}
+    width="750px"
+  />
 </div>
 `;

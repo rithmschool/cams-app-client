@@ -1,0 +1,209 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Renders instructions 1`] = `
+<div
+  className="patient-home"
+>
+  <div>
+    <HorizontalTimeline
+      containerHeight={100}
+      containerWidth={800}
+      fillingMotion={
+        Object {
+          "damping": 25,
+          "stiffness": 150,
+        }
+      }
+      keyBoardEnabled={true}
+      linePadding={100}
+      maxEventPadding={120}
+      minEventPadding={20}
+      numScreens={4}
+      styles={
+        Object {
+          "background": "#dfdfdf",
+          "foreground": "#00c5cc",
+          "outline": "#dfdfdf",
+        }
+      }
+      time={0.5}
+    />
+  </div>
+  <div
+    className="screens"
+  >
+    <div
+      className="lg"
+    >
+      <p>
+        Welcome! You will watch short videos and answer questions about yourself.
+      </p>
+      <p>
+        Please read the instructions carefully. You will have 30 seconds to respond to each question.
+      </p>
+      <p>
+        Your answers will be recorded so please speak OUT LOUD when responding.
+      </p>
+      <p>
+        Please press the spacebar when you are ready to go forward.
+      </p>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Renders question when there's a question 1`] = `
+<div
+  className="patient-home"
+>
+  <div>
+    <HorizontalTimeline
+      containerHeight={100}
+      containerWidth={800}
+      fillingMotion={
+        Object {
+          "damping": 25,
+          "stiffness": 150,
+        }
+      }
+      keyBoardEnabled={true}
+      linePadding={100}
+      maxEventPadding={120}
+      minEventPadding={20}
+      numScreens={6}
+      styles={
+        Object {
+          "background": "#dfdfdf",
+          "foreground": "#00c5cc",
+          "outline": "#dfdfdf",
+        }
+      }
+      time={0.5}
+    />
+  </div>
+  <div
+    className="screens"
+  >
+    <div
+      className="lg"
+    >
+      <p>
+        Welcome! You will watch short videos and answer questions about yourself.
+      </p>
+      <p>
+        Please read the instructions carefully. You will have 30 seconds to respond to each question.
+      </p>
+      <p>
+        Your answers will be recorded so please speak OUT LOUD when responding.
+      </p>
+      <p>
+        Please press the spacebar when you are ready to go forward.
+      </p>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Renders videoplayer when there's a video 1`] = `
+<div
+  className="patient-home"
+>
+  <div>
+    <HorizontalTimeline
+      containerHeight={100}
+      containerWidth={800}
+      fillingMotion={
+        Object {
+          "damping": 25,
+          "stiffness": 150,
+        }
+      }
+      keyBoardEnabled={true}
+      linePadding={100}
+      maxEventPadding={120}
+      minEventPadding={20}
+      numScreens={7}
+      styles={
+        Object {
+          "background": "#dfdfdf",
+          "foreground": "#00c5cc",
+          "outline": "#dfdfdf",
+        }
+      }
+      time={0.5}
+    />
+  </div>
+  <div
+    className="screens"
+  >
+    <div
+      className="lg"
+    >
+      <p>
+        Welcome! You will watch short videos and answer questions about yourself.
+      </p>
+      <p>
+        Please read the instructions carefully. You will have 30 seconds to respond to each question.
+      </p>
+      <p>
+        Your answers will be recorded so please speak OUT LOUD when responding.
+      </p>
+      <p>
+        Please press the spacebar when you are ready to go forward.
+      </p>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`matches snapshot of PatientHome 1`] = `
+<div
+  className="patient-home"
+>
+  <div>
+    <HorizontalTimeline
+      containerHeight={100}
+      containerWidth={800}
+      fillingMotion={
+        Object {
+          "damping": 25,
+          "stiffness": 150,
+        }
+      }
+      keyBoardEnabled={true}
+      linePadding={100}
+      maxEventPadding={120}
+      minEventPadding={20}
+      numScreens={4}
+      styles={
+        Object {
+          "background": "#dfdfdf",
+          "foreground": "#00c5cc",
+          "outline": "#dfdfdf",
+        }
+      }
+      time={0.5}
+    />
+  </div>
+  <div
+    className="screens"
+  >
+    <div
+      className="lg"
+    >
+      <p>
+        Welcome! You will watch short videos and answer questions about yourself.
+      </p>
+      <p>
+        Please read the instructions carefully. You will have 30 seconds to respond to each question.
+      </p>
+      <p>
+        Your answers will be recorded so please speak OUT LOUD when responding.
+      </p>
+      <p>
+        Please press the spacebar when you are ready to go forward.
+      </p>
+    </div>
+  </div>
+</div>
+`;

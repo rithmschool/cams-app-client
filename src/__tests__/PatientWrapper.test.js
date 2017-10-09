@@ -24,7 +24,7 @@ beforeAll(() => {
           duration: "PT4S",
           id: 4,
           timer: 30,
-          title: "Short funny video",
+          title: "Short",
           type: "video",
           url: "https://www.youtube.com/watch?v=B7bqAsxee4I",
           youtube_id: "B7bqAsxee4I"
@@ -39,6 +39,11 @@ beforeAll(() => {
           youtube_id: null
         }
       ]
+    })
+    .onGet(new RegExp(`${BASE_URL}/api/videofiles/(.)*`))
+    .reply(200, {
+      title: "Short",
+      url: "something"
     });
 });
 

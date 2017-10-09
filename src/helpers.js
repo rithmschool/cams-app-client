@@ -141,6 +141,9 @@ export const BrowserDetect = {
 };
 
 export const dateFormat = date => {
-  if (date) return date.slice(0, -6);
-  else return "";
+  return date ? date.toDateString() : "";
+};
+
+export const createDate = date => {
+  return date ? new Date(date) : 0;
 };

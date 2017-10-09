@@ -9,19 +9,25 @@
   box-sizing: border-box;
   padding: 2%;
   padding-top: 0px;
+  height: 25vw;
   width: 30vw;
   border: 0px solid;
   border-radius: 10px;
   background-color: #f1f1f1;
+  overflow: auto;
+  white-space: nowrap;
 }
 
-.searchedvideos {
-  overflow-y: scroll;
-  height: 35%;
-  width: 26vw;
-  background-color: #f8f8f8;
-  border-radius: 2%;
+a.video-title {
+  margin-bottom: 10px;
+  border-radius: 4px;
+  border: none;
+  background: #f8f8f8;
   color: black;
+  font-size: 13px;
+  padding: 0.7rem;
+  display: inline-block;
+  cursor: pointer;
 }
 
 .searchinput {
@@ -35,4 +41,28 @@
 
 .button-wrapper {
   margin-bottom: 20px;
+}
+
+.video-button {
+  background: white;
+  border: 3px solid white;
+  border-radius: 3px;
+  padding: 0.4rem;
+  box-shadow: 0px 1px 3px rgba(128, 128, 128, 0.13);
+  color: #00c5cc;
+  margin: 0.4rem;
+}
+
+.video-player-wrapper {
+  background: #f1f1f1;
+  border: 3px solid white;
+  border-radius: 10px;
+  position: relative;
+  left: 300px;
+  margin-top: 40px;
+  height: 400px;
+  width: 650px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

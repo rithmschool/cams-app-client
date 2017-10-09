@@ -51,7 +51,7 @@ class ScreenForm extends Component {
 
   handleVideoPlayer(e) {
     e.preventDefault();
-    let title = e.target.previousSibling.text;
+    let title = e.target.dataset.name;
     axios
       .get(`${BASE_URL}/api/videofiles/${title}`, config())
       .then(response => {
@@ -98,7 +98,11 @@ class ScreenForm extends Component {
           <a className="video-title" onClick={this.handleAddChange}>
             {val.title}
           </a>
-          <button className="video-button" onClick={this.handleVideoPlayer}>
+          <button
+            className="video-button"
+            data-name={val.title}
+            onClick={this.handleVideoPlayer}
+          >
             View Video
           </button>
         </div>

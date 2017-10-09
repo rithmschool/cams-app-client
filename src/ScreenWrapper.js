@@ -128,7 +128,10 @@ class ScreenWrapper extends Component {
     return (
       <div>
         <div className="sortablelist">
-          <h4>{this.props.playlistName}</h4>
+          <h3>{this.props.playlistName}</h3>
+          <p>
+            <small>Order of items can be changed via drag and drop</small>
+          </p>
           <SortableList
             screenData={this.state.screenData}
             onSortEnd={this.onSortEnd}
@@ -146,6 +149,7 @@ class ScreenWrapper extends Component {
 
 ScreenWrapper.propTypes = {
   playlistID: PropTypes.number.isRequired,
+  playlistName: PropTypes.string.isRequired,
   editPlaylist: PropTypes.bool.isRequired
 };
 

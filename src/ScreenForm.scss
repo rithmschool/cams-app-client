@@ -1,6 +1,6 @@
 @import "variables";
 
-.video-form-wrapper {
+.form-wrapper {
   display: flex;
   justify-content: space-around;
 }
@@ -31,4 +31,8 @@
   background: #f8f8f8;
   padding: 0.7rem;
   display: inline-block;
+}
+
+.button-wrapper {
+  margin-bottom: 20px;
 }

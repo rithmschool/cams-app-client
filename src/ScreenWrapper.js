@@ -127,7 +127,6 @@ class ScreenWrapper extends Component {
 
     return (
       <div>
-        <h3 className="">Add Videos and Questions</h3>
         <SortableList
           screenData={this.state.screenData}
           onSortEnd={this.onSortEnd}

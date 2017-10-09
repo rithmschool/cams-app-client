@@ -15,12 +15,12 @@ const Assessment = props => {
 
   var playVideo = recordingUrl ? (
     <button className="al-button" onClick={handleVideo}>
-      {String.fromCharCode(9658)}
+      <i className="fa fa-play" aria-hidden="true" />
     </button>
   ) : null;
 
   return (
-    <tr className={``}>
+    <tr>
       <td className="playlist-name-title">{patientEmail}</td>
       <td>{playlistName}</td>
       <td>{dateAdded}</td>
@@ -29,7 +29,7 @@ const Assessment = props => {
       <td>
         {playVideo}
         <button className="al-button" onClick={handleEvaluated}>
-          {String.fromCharCode(10004)}
+          <i className="fa fa-check" aria-hidden="true" />
         </button>
       </td>
     </tr>

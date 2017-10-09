@@ -3,6 +3,33 @@ table {
   border-radius: 10px;
   width: 100%;
 }
+
+th {
+  border: 3px solid #00aea7;
+  color: #00c5cc;
+}
+
+tr:first-child th:last-child {
+  border-top-right-radius: 7px;
+}
+
+tr:first-child th:first-child {
+  border-top-left-radius: 7px;
+}
+
+td {
+  border: 2px solid #61dafb;
+  padding: 5px;
+}
+
+tr:last-child td:first-child {
+  border-bottom-left-radius: 7px;
+}
+
+tr:last-child td:last-child {
+  border-bottom-right-radius: 7px;
+}
+
 .al-button {
   background-color: white;
   border: 3px solid white;
@@ -12,29 +39,11 @@ table {
   color: #00c5cc;
   margin: 0.5rem;
 }
-th {
-  border: 3px solid #00aea7;
-  color: #00c5cc;
-}
-tr:first-child th:last-child {
-  border-top-right-radius: 7px;
-}
-tr:first-child th:first-child {
-  border-top-left-radius: 7px;
-}
-td {
-  border: 2px solid #61dafb;
-  padding: 5px;
-}
-tr:last-child td:first-child {
-  border-bottom-left-radius: 7px;
-}
-tr:last-child td:last-child {
-  border-bottom-right-radius: 7px;
-}
+
 .ReactModal__Body--open {
   overflow: hidden;
 }
+
 .video {
   position: absolute;
   top: 50%;
@@ -54,9 +63,11 @@ tr:last-child td:last-child {
     display: block;
     color: red;
   }
+
   video {
     padding-bottom: 20px;
   }
+
   h2 {
     text-align: center;
   }

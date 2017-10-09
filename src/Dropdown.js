@@ -25,7 +25,13 @@ const Dropdown = ({ title, content, onChange }) => {
 
 Dropdown.propTypes = {
   title: PropTypes.string.isRequired,
-  content: PropTypes.array,
+  content: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      value: PropTypes.isRequired,
+      selected: PropTypes.bool.isRequired
+    })
+  ),
   onChange: PropTypes.func
 };
 

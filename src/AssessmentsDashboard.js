@@ -29,31 +29,30 @@ class AssessmentsDashboard extends Component {
       ]
     };
     this.closeModal = this.closeModal.bind(this);
+    this.sortAssessments = this.sortAssessments.bind(this);
+    this.handleSort = this.handleSort.bind(this);
+    this.changeSortOrder = this.changeSortOrder.bind(this);
+    this.handleFilter = this.handleFilter.bind(this);
   }
 
   componentWillMount() {
     axios
       .get(`${BASE_URL}/api/users/${userID()}/assessments`, config())
       .then(response => {
-        var res = response.data.map(v =>
-          Object.assign(
-            {},
-            {
-              id: v.id,
-              patientEmail: v.patient_email.email,
-              playlistName: v.playlist_name.name,
-              dateAdded: createDate(v.date_added),
-              dateAssessed: createDate(v.date_assessed),
-              dateEvaluated: createDate(v.date_evaluated),
-              dateChanged: Math.max(
-                createDate(v.date_added),
-                createDate(v.date_assessed),
-                createDate(v.date_evaluated)
-              ),
-              recordingUrl: v.recording_url
-            }
-          )
-        );
+        var res = response.data.map(v => ({
+          id: v.id,
+          patientEmail: v.patient_email.email,
+          playlistName: v.playlist_name.name,
+          dateAdded: createDate(v.date_added),
+          dateAssessed: createDate(v.date_assessed),
+          dateEvaluated: createDate(v.date_evaluated),
+          dateChanged: Math.max(
+            createDate(v.date_added),
+            createDate(v.date_assessed),
+            createDate(v.date_evaluated)
+          ),
+          recordingUrl: v.recording_url
+        }));
         this.setState({ doctorAssessments: res });
       });
   }
@@ -72,16 +71,18 @@ class AssessmentsDashboard extends Component {
   }
 
   handleSort(val) {
-    let sorts = this.state.sorts.map(v =>
-      Object.assign({}, v, { selected: v.value === val })
-    );
+    let sorts = this.state.sorts.map(v => ({
+      ...v,
+      selected: v.value === val
+    }));
     this.setState({ sorts });
   }
 
   handleFilter(val) {
-    let filters = this.state.filters.map(v =>
-      Object.assign({}, v, { selected: v.value === val })
-    );
+    let filters = this.state.filters.map(v => ({
+      ...v,
+      selected: v.value === val
+    }));
     this.setState({ filters });
   }
 
@@ -100,35 +101,37 @@ class AssessmentsDashboard extends Component {
         var newDoctorAssessments = this.state.doctorAssessments.map(
           v =>
             v.id === id
-              ? Object.assign({}, v, {
+              ? {
+                  ...v,
                   dateChanged: Math.max(
                     createDate(response.data.date_added),
                     createDate(response.data.date_assessed),
                     createDate(response.data.date_evaluated)
                   ),
                   dateEvaluated: createDate(response.data.date_evaluated)
-                })
+                }
               : v
         );
         this.setState({ doctorAssessments: newDoctorAssessments });
       });
   }
 
+  sortAssessments(a, b) {
+    let sortField = this.state.sorts.find(v => v.selected).value;
+    var res = 0;
+    if (a[sortField] > b[sortField]) res = 1;
+    else if (a[sortField] < b[sortField]) res = -1;
+    else {
+      if (a.id > b.id) res = 1;
+      else if (a.id < b.id) res = -1;
+    }
+    return res * this.state.sortOrder;
+  }
+
   render() {
-    let sortField = this.state.sorts.filter(v => v.selected)[0].value;
-    let filterField = this.state.filters.filter(v => v.selected)[0].value;
     let assessments = this.state.doctorAssessments
-      .filter(filterField)
-      .sort((a, b) => {
-        var res = 0;
-        if (a[sortField] > b[sortField]) res = 1;
-        else if (a[sortField] < b[sortField]) res = -1;
-        else {
-          if (a.id > b.id) res = 1;
-          else if (a.id < b.id) res = -1;
-        }
-        return res * this.state.sortOrder;
-      })
+      .filter(this.state.filters.find(v => v.selected).value)
+      .sort(this.sortAssessments)
       .map((assessment, i) => {
         return (
           <Assessment
@@ -152,33 +155,32 @@ class AssessmentsDashboard extends Component {
         </div>
         <div className="content">
           <div className="dash-nav" />
-          <table className="asssessmentL-list">
+          <table>
             <thead>
               <tr>
                 <th colSpan="3">
                   <label>Sort: </label>
                   <Dropdown
                     id="Sorts"
-                    title={this.state.sorts.filter(v => v.selected)[0].name}
+                    title={this.state.sorts.find(v => v.selected).name}
                     content={this.state.sorts}
-                    onChange={this.handleSort.bind(this)}
+                    onChange={this.handleSort}
                   />
-                  <button
-                    className="al-button"
-                    onClick={this.changeSortOrder.bind(this)}
-                  >
-                    {this.state.sortOrder === -1
-                      ? String.fromCharCode(8681)
-                      : String.fromCharCode(8679)}
+                  <button className="al-button" onClick={this.changeSortOrder}>
+                    {this.state.sortOrder === -1 ? (
+                      <i className="fa fa-arrow-down" aria-hidden="true" />
+                    ) : (
+                      <i className="fa fa-arrow-up" aria-hidden="true" />
+                    )}
                   </button>
                 </th>
                 <th colSpan="3">
                   <label>Filter: </label>
                   <Dropdown
                     id="Filter"
-                    title={this.state.filters.filter(v => v.selected)[0].name}
+                    title={this.state.filters.find(v => v.selected).name}
                     content={this.state.filters}
-                    onChange={this.handleFilter.bind(this)}
+                    onChange={this.handleFilter}
                   />
                 </th>
               </tr>

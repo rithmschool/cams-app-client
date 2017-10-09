@@ -12,12 +12,15 @@ class ScreenForm extends Component {
     this.state = {
       file: "",
       videos: [],
-      searchtext: ""
+      searchtext: "",
+      showVideoForm: false,
+      showQuestionForm: false
     };
     this.handleAddChange = this.handleAddChange.bind(this);
     this.handleSearchChange = this.handleSearchChange.bind(this);
     this.handleFileAdd = this.handleFileAdd.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.toggleForm = this.toggleForm.bind(this);
   }
 
   handleChange(e) {
@@ -49,6 +52,16 @@ class ScreenForm extends Component {
     });
   }
 
+  toggleForm(e) {
+    e.preventDefault();
+    if (e.target.id === "addVideo") {
+      this.setState({ showVideoForm: true, showQuestionForm: false });
+    }
+    if (e.target.id === "addQuestion") {
+      this.setState({ showVideoForm: false, showQuestionForm: true });
+    }
+  }
+
   componentWillMount() {
     this.getAllVideoFiles();
   }
@@ -67,26 +80,45 @@ class ScreenForm extends Component {
         </div>
       ) : null;
     });
+    let videoForm = this.state.showVideoForm ? (
+      <div className="form-wrapper">
+        <div className="videos-list">
+          <h4>Videos List</h4>
+          <input
+            className="searchinput"
+            type="text"
+            onChange={this.handleSearchChange}
+            name="searcher"
+            placeholder="Search for a video"
+            value={this.state.searchtext}
+          />
+          {showVideos}
+        </div>
+        <VideoUploadForm
+          addVideoFile={this.handleFileAdd}
+          fileName={this.state.searchtext}
+        />
+      </div>
+    ) : null;
+    let questionForm = this.state.showQuestionForm ? (
+      <div className="form-wrapper">
+        <QuestionForm addQuestion={this.props.addQuestion} />
+      </div>
+    ) : null;
 
     return (
       <div>
-        <div className="video-form-wrapper">
-          <div className="videos-list">
-            <input
-              className="searchinput"
-              type="text"
-              onChange={this.handleSearchChange}
-              name="searcher"
-              placeholder="Search for a video"
-              value={this.state.searchtext}
-            />
-            {showVideos}
-          </div>
-          <QuestionForm addQuestion={this.props.addQuestion} />
-          <VideoUploadForm
-            addVideoFile={this.handleFileAdd}
-            fileName={this.state.searchtext}
-          />
+        <div className="button-wrapper">
+          <button id="addVideo" className="button" onClick={this.toggleForm}>
+            Add Video
+          </button>
+          <button id="addQuestion" className="button" onClick={this.toggleForm}>
+            Add Question
+          </button>
+        </div>
+        <div>
+          {videoForm}
+          {questionForm}
         </div>
       </div>
     );

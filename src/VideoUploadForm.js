@@ -116,18 +116,21 @@ class VideoUploadForm extends Component {
     ) : null;
 
     return (
-      <div>
+      <div className="forms">
         <form onSubmit={this.handleFileSubmit}>
+          <h4>Upload New Video</h4>
           <input
             onChange={this.handleChange}
             type="file"
             id="file-input"
             ref={input => (this.fileInput = input)}
           />
-          <input type="submit" value="Add Video" />
+          <input type="submit" value="Upload Video" />
         </form>
-        {progressBar}
-        <div>{progressMsg}</div>
+        <div>
+          {progressBar}
+          <p>{progressMsg}</p>
+        </div>
       </div>
     );
   }

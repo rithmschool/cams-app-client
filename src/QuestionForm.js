@@ -29,9 +29,9 @@ class QuestionForm extends Component {
 
   render() {
     return (
-      <div className="questions-form">
-        <h4>Add Questions</h4>
+      <div className="forms">
         <form className="addQuestion" onSubmit={this.handleAdd}>
+          <h4>Add Question</h4>
           <input
             type="text"
             onChange={this.handleChange}

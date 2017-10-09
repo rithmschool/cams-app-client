@@ -88,7 +88,7 @@ class ScreenWrapper extends Component {
           config()
         )
         .then(response => {
-          this.setState({ screenData: response.data });
+          this.setState({ screenData: response.data.screens });
         });
     }
   }
@@ -127,11 +127,16 @@ class ScreenWrapper extends Component {
 
     return (
       <div>
-        <h3 className="">Add Videos and Questions</h3>
-        <SortableList
-          screenData={this.state.screenData}
-          onSortEnd={this.onSortEnd}
-        />
+        <div className="sortablelist">
+          <h3>{this.props.playlistName}</h3>
+          <p>
+            <small>Order of items can be changed via drag and drop</small>
+          </p>
+          <SortableList
+            screenData={this.state.screenData}
+            onSortEnd={this.onSortEnd}
+          />
+        </div>
         <ScreenForm
           addQuestion={this.addQuestion}
           addVideo={this.addVideo}
@@ -144,6 +149,7 @@ class ScreenWrapper extends Component {
 
 ScreenWrapper.propTypes = {
   playlistID: PropTypes.number.isRequired,
+  playlistName: PropTypes.string.isRequired,
   editPlaylist: PropTypes.bool.isRequired
 };
 

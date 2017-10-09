@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches snapshot of PlaylistForm 1`] = `
+<div>
+  <h3
+    className=""
+  >
+    Add Playlist
+  </h3>
+  <form
+    onSubmit={[Function]}
+  >
+    <input
+      name="name"
+      onChange={[Function]}
+      placeholder="Playlist Name"
+      required={true}
+      type="string"
+      value=""
+    />
+    <button
+      className="button button-hover"
+      type="submit"
+      value="Submit"
+    >
+      Submit
+    </button>
+  </form>
+</div>
+`;

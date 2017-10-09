@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DoctorRegisterForm snapshot 1`] = `
+<div>
+  <div
+    className="banner-text"
+  >
+    <h1
+      className="banner-bold"
+    >
+      Register
+    </h1>
+  </div>
+  <div
+    className="content"
+  >
+    <p />
+  </div>
+</div>
+`;

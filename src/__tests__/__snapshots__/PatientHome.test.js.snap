@@ -104,6 +104,52 @@ exports[`Renders question when there's a question 1`] = `
 </div>
 `;
 
+exports[`Renders timer after question 1`] = `
+<div
+  className="patient-home"
+>
+  <div>
+    <HorizontalTimeline
+      containerHeight={100}
+      containerWidth={800}
+      fillingMotion={
+        Object {
+          "damping": 25,
+          "stiffness": 150,
+        }
+      }
+      keyBoardEnabled={true}
+      linePadding={100}
+      maxEventPadding={120}
+      minEventPadding={20}
+      numScreens={6}
+      styles={
+        Object {
+          "background": "#dfdfdf",
+          "foreground": "#00c5cc",
+          "outline": "#dfdfdf",
+        }
+      }
+      time={0.5}
+    />
+  </div>
+  <div
+    className="screens"
+  >
+    <div>
+      <p>
+        test
+         
+      </p>
+      <TimerWrapper
+        timer={4}
+        toggle={[Function]}
+      />
+    </div>
+  </div>
+</div>
+`;
+
 exports[`Renders videoplayer when there's a video 1`] = `
 <div
   className="patient-home"
@@ -140,16 +186,19 @@ exports[`Renders videoplayer when there's a video 1`] = `
       className="lg"
     >
       <p>
-        Welcome! You will watch short videos and answer questions about yourself.
+        You will now watch several short video clips.
       </p>
       <p>
-        Please read the instructions carefully. You will have 30 seconds to respond to each question.
+        After each video, you will be asked questions about what happened in the video.
       </p>
       <p>
-        Your answers will be recorded so please speak OUT LOUD when responding.
+        You will have 30 seconds to answer each question.
       </p>
       <p>
-        Please press the spacebar when you are ready to go forward.
+        Please speak out loud and keep speaking until the time runs out.
+      </p>
+      <p>
+        When you are ready, please press the spacebar to continue.
       </p>
     </div>
   </div>

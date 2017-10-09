@@ -4,6 +4,7 @@ import ReactDOM from "react-dom";
 import { shallow } from "enzyme";
 import renderer from "react-test-renderer";
 import toJson from "enzyme-to-json";
+import ReactCountdownClock from "react-countdown-clock";
 
 test("matches snapshot of PatientHome", () => {
   const patientHome = shallow(
@@ -20,7 +21,7 @@ test("matches snapshot of PatientHome", () => {
   expect(toJson(patientHome)).toMatchSnapshot();
 });
 
-test("Renders question when there's a question", () => {
+test("Renders timer after question", () => {
   const patientHome = shallow(
     <PatientHome
       idx={2}
@@ -32,16 +33,19 @@ test("Renders question when there's a question", () => {
       screenCount={4}
     />
   );
+  patientHome.setState({
+    idx: 4,
+    src: null,
+    keyBoardEnabled: true,
+    stream: "something"
+  });
   expect(toJson(patientHome)).toMatchSnapshot();
 });
 
 test("Renders instructions", () => {
   const patientHome = shallow(
     <PatientHome
-      idx={1}
       src={"something"}
-      keyBoardEnabled={true}
-      stream={""}
       screens={[]}
       assessmentId={4}
       screenCount={4}
@@ -53,14 +57,16 @@ test("Renders instructions", () => {
 test("Renders videoplayer when there's a video", () => {
   const patientHome = shallow(
     <PatientHome
-      idx={2}
-      src={null}
-      keyBoardEnabled={true}
-      stream={""}
       screens={[{ id: 4, type: "video", timer: 4, title: "test" }]}
       assessmentId={4}
       screenCount={4}
     />
   );
+  patientHome.setState({
+    idx: 2,
+    src: null,
+    keyBoardEnabled: true,
+    stream: "something"
+  });
   expect(toJson(patientHome)).toMatchSnapshot();
 });

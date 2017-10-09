@@ -126,6 +126,14 @@ h1.banner-bold {
   padding-top: 5rem;
 }
 
+.content {
+  margin-top: 1rem;
+  text-align: center;
+  padding: 2rem;
+  background: white;
+  padding-bottom: 10rem;
+}
+
 .content-image {
   display: flex;
   text-align: left;
@@ -565,31 +573,4 @@ div.spacearound {
   display: flex;
   justify-content: space-around;
   align-items: center;
-}
-
-/*Timer
-********/
-
-.timer {
-  width: 100px;
-  height: 100px;
-  background: $main-blue;
-  border-radius: 50px;
-}
-
-.center {
-  padding-top: 38px;
-}
-
-#videoElement {
-  width: 500px;
-  background-color: #666;
-}
-
-.content {
-  margin-top: 1rem;
-  text-align: center;
-  padding: 2rem;
-  background: white;
-  padding-bottom: 10rem;
 }

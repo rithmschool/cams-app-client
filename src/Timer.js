@@ -1,7 +1,7 @@
 import React from "react";
 import ReactCountdownClock from "react-countdown-clock";
-import "./Timer.css";
 import PropTypes from "prop-types";
+import "./Timer.css";
 
 const Timer = ({ counter, onEnd }) => (
   <div>

@@ -3,6 +3,7 @@ import { BASE_URL, userID, config } from "./helpers.js";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import "./Dashboard.css";
+import Playlist from "./Playlist";
 
 const Close = ({ handleClose }) => (
   <div onClick={handleClose}>
@@ -115,60 +116,69 @@ class Dashboard extends Component {
       </div>
     ) : null;
     let playlists = this.state.userPlaylists.map((playlist, i) => {
-      let showForm =
-        this.state.playlistName === playlist.name ? (
-          <div>
-            <form className="email" onSubmit={this.handleSubmit}>
-              <h5>Send to:</h5>
-              <input
-                type="email"
-                name="email"
-                placeholder="email"
-                value={this.state.email}
-                required
-                onChange={this.handleChange}
-              />
-              <button
-                className="button button-hover"
-                type="submit"
-                value="Submit"
-              >
-                Submit
-              </button>
-            </form>
-            <div className="spacearound">
-              <Close handleClose={this.closeSelection} />
-              <Link to={`playlists/${playlist.id}/edit`}>
-                <i
-                  className="fa fa-pencil-square button-hover delete"
-                  aria-hidden="true"
-                />
-              </Link>
-            </div>
-          </div>
-        ) : null;
+      // let showForm =
+      //   this.state.playlistName === playlist.name ? (
+      //     <div>
+      //       <form className="email" onSubmit={this.handleSubmit}>
+      //         <h5>Send to:</h5>
+      //         <input
+      //           type="email"
+      //           name="email"
+      //           placeholder="email"
+      //           value={this.state.email}
+      //           required
+      //           onChange={this.handleChange}
+      //         />
+      //         <button
+      //           className="button button-hover"
+      //           type="submit"
+      //           value="Submit"
+      //         >
+      //           Submit
+      //         </button>
+      //       </form>
+      //       <div className="spacearound">
+      //         <Close handleClose={this.closeSelection} />
+      //         <Link to={`playlists/${playlist.id}/edit`}>
+      //           <i
+      //             className="fa fa-pencil-square button-hover delete"
+      //             aria-hidden="true"
+      //           />
+      //         </Link>
+      //       </div>
+      //     </div>
+      //   ) : null;
 
-      let className = this.state.playlistID === playlist.id ? "selected" : null;
+      //let className = this.state.playlistID === playlist.id ? "selected" : null;
 
+      // return (
+      //   <div
+      //     key={i}
+      //     tabIndex="0"
+      //     className={`${className} playlist-card button-hover playlist-card-contents`}
+      //     onClick={this.choosePlaylist.bind(this, playlist.id, playlist.name)}
+      //   >
+      //     <h5 className="playlist-name-title">{playlist.name}</h5>
+      //     {playlist.videos.map((video, idx) => {
+      //       return (
+      //         <p className="video-title" key={idx}>
+      //           {video.title}
+      //         </p>
+      //       );
+      //     })}
+      //     {showForm}
+      //   </div>
+      // );
       return (
-        <div
-          key={i}
-          tabIndex="0"
-          className={`${className} playlist-card button-hover playlist-card-contents`}
-          onClick={this.choosePlaylist.bind(this, playlist.id, playlist.name)}
-        >
-          <h5 className="playlist-name-title">{playlist.name}</h5>
-          {playlist.videos.map((video, idx) => {
-            return (
-              <p className="video-title" key={idx}>
-                {video.title}
-              </p>
-            );
-          })}
-          {showForm}
-        </div>
+        <Playlist
+          key={playlist.id}
+          id={playlist.id}
+          name={playlist.name}
+          videos={playlist.videos}
+        />
       );
     });
+
     return (
       <div>
         <div className="banner-text">
@@ -177,7 +187,15 @@ class Dashboard extends Component {
         <div className="content">
           {loadingMessage}
           {successMessage}
-          <div className="playlist-container">{playlists}</div>
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Invite</th>
+              </tr>
+            </thead>
+            {playlists}
+          </table>
         </div>
       </div>
     );

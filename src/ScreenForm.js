@@ -14,11 +14,14 @@ class ScreenForm extends Component {
       videos: [],
       searchtext: "",
       showVideoForm: false,
-      showQuestionForm: false
+      showQuestionForm: false,
+      showVideoPlayer: false,
+      videoUrl: ""
     };
     this.handleAddChange = this.handleAddChange.bind(this);
     this.handleSearchChange = this.handleSearchChange.bind(this);
     this.handleFileAdd = this.handleFileAdd.bind(this);
+    this.handleVideoPlayer = this.handleVideoPlayer.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.toggleForm = this.toggleForm.bind(this);
   }
@@ -46,6 +49,16 @@ class ScreenForm extends Component {
     this.props.addVideoFile(e.target.text);
   }
 
+  handleVideoPlayer(e) {
+    e.preventDefault();
+    let title = e.target.previousSibling.text;
+    axios
+      .get(`${BASE_URL}/api/videofiles/${title}`, config())
+      .then(response => {
+        this.setState({ showVideoPlayer: true, videoUrl: response.data.url });
+      });
+  }
+
   getAllVideoFiles() {
     axios.get(`${BASE_URL}/api/videofiles`, config()).then(response => {
       this.setState({ videos: response.data });
@@ -55,10 +68,18 @@ class ScreenForm extends Component {
   toggleForm(e) {
     e.preventDefault();
     if (e.target.id === "addVideo") {
-      this.setState({ showVideoForm: true, showQuestionForm: false });
+      this.setState({
+        showVideoForm: true,
+        showQuestionForm: false,
+        showVideoPlayer: false
+      });
     }
     if (e.target.id === "addQuestion") {
-      this.setState({ showVideoForm: false, showQuestionForm: true });
+      this.setState({
+        showVideoForm: false,
+        showQuestionForm: true,
+        showVideoPlayer: false
+      });
     }
   }
 
@@ -74,30 +95,47 @@ class ScreenForm extends Component {
         val.title.toLowerCase().includes(stext.toLowerCase());
       return showDiv ? (
         <div key={idx}>
-          <a className="searchinput" onClick={this.handleAddChange}>
+          <a className="video-title" onClick={this.handleAddChange}>
             {val.title}
           </a>
+          <button className="video-button" onClick={this.handleVideoPlayer}>
+            View Video
+          </button>
         </div>
       ) : null;
     });
-    let videoForm = this.state.showVideoForm ? (
-      <div className="form-wrapper">
-        <div className="videos-list">
-          <h4>Videos List</h4>
-          <input
-            className="searchinput"
-            type="text"
-            onChange={this.handleSearchChange}
-            name="searcher"
-            placeholder="Search for a video"
-            value={this.state.searchtext}
-          />
-          {showVideos}
-        </div>
-        <VideoUploadForm
-          addVideoFile={this.handleFileAdd}
-          fileName={this.state.searchtext}
+    let videoPlayer = this.state.showVideoPlayer ? (
+      <div className="video-player-wrapper">
+        <video
+          height="350px"
+          width="600px"
+          controls
+          preload="metadata"
+          src={this.state.videoUrl}
         />
+      </div>
+    ) : null;
+    let videoForm = this.state.showVideoForm ? (
+      <div>
+        <div className="form-wrapper">
+          <div className="videos-list">
+            <h4>Videos List</h4>
+            <input
+              className="searchinput"
+              type="text"
+              onChange={this.handleSearchChange}
+              name="searcher"
+              placeholder="Search for a video"
+              value={this.state.searchtext}
+            />
+            {showVideos}
+          </div>
+          <VideoUploadForm
+            addVideoFile={this.handleFileAdd}
+            fileName={this.state.searchtext}
+          />
+        </div>
+        {videoPlayer}
       </div>
     ) : null;
     let questionForm = this.state.showQuestionForm ? (

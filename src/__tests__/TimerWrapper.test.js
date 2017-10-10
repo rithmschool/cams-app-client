@@ -1,22 +1,17 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { shallow } from "enzyme";
-import renderer from "react-test-renderer";
 import TimerWrapper from "../TimerWrapper";
 import toJson from "enzyme-to-json";
 
 test("shapshot of TimerWrapper with timer prop", () => {
-  const timer = renderer
-    .create(<TimerWrapper timer={45} toggle={function() {}} />)
-    .toJSON();
-  expect(timer).toMatchSnapshot();
+  const timer = shallow(<TimerWrapper timer={45} toggle={function() {}} />);
+  expect(toJson(timer)).toMatchSnapshot();
 });
 
 test("shapshot of TimerWrapper without timer prop", () => {
-  const timer = renderer
-    .create(<TimerWrapper toggle={function() {}} />)
-    .toJSON();
-  expect(timer).toMatchSnapshot();
+  const timer = shallow(<TimerWrapper toggle={function() {}} />);
+  expect(toJson(timer)).toMatchSnapshot();
 });
 
 test("snapshot of TimerWrapper when counter is set to zero", () => {

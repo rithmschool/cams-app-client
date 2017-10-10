@@ -88,6 +88,10 @@ button {
   margin: 0.5rem;
 }
 
+.button:focus {
+  outline: 0;
+}
+
 .button:hover {
   text-decoration: none;
 }
@@ -120,6 +124,14 @@ h1.banner-bold {
 
 .screens {
   padding-top: 5rem;
+}
+
+.content {
+  margin-top: 1rem;
+  text-align: center;
+  padding: 2rem;
+  background: white;
+  padding-bottom: 10rem;
 }
 
 .content-image {
@@ -243,6 +255,25 @@ form * {
   padding: 0.7rem;
 }
 
+.forms {
+  box-sizing: border-box;
+  padding: 2%;
+  padding-top: 0px;
+  height: 25vw;
+  width: 30vw;
+  border: 0px solid;
+  border-radius: 10px;
+  background-color: #f1f1f1;
+}
+
+input[type="text"] {
+  width: 200px;
+}
+
+input[type="number"] {
+  width: 50px;
+}
+
 input::placeholder {
   color: $bold-grey;
 }
@@ -329,26 +360,19 @@ button.button.dropdown-content {
   justify-content: space-around;
 }
 
-.questions-form {
-  box-sizing: border-box;
-  padding: 2%;
-  padding-top: 0px;
-  height: 25vw;
-  width: 30vw;
-  border: 0px solid;
-  border-radius: 10px;
-  background-color: #f1f1f1;
-}
-
 .sortablelist {
   padding: 2%;
   padding-top: 0px;
-  min-height: 25vw;
+  height: 30vw;
   width: 30vw;
   box-sizing: border-box;
   border: 0px solid;
   border-radius: 10px;
   background-color: #f1f1f1;
+  line-height: 25px;
+  margin: 0 auto;
+  overflow: auto;
+  white-space: nowrap;
 }
 
 .grabbable {
@@ -492,31 +516,4 @@ div.spacearound {
   display: flex;
   justify-content: space-around;
   align-items: center;
-}
-
-/*Timer
-********/
-
-.timer {
-  width: 100px;
-  height: 100px;
-  background: $main-blue;
-  border-radius: 50px;
-}
-
-.center {
-  padding-top: 38px;
-}
-
-#videoElement {
-  width: 500px;
-  background-color: #666;
-}
-
-.content {
-  margin-top: 1rem;
-  text-align: center;
-  padding: 2rem;
-  background: white;
-  padding-bottom: 10rem;
 }

@@ -52,6 +52,7 @@ class PatientWrapper extends Component {
           .filter(s => s.type === "video")
           .map(s => {
             let title = decodeURIComponent(s.title);
+
             return axios.get(`${BASE_URL}/api/videofiles/${title}`, config());
           });
 

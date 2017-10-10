@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PlaylistForm from "./PlaylistForm";
 import ScreenWrapper from "./ScreenWrapper";
-import { BASE_URL, userID } from "./helpers.js";
+import { BASE_URL, userID, config } from "./helpers.js";
 import axios from "axios";
 import PropTypes from "prop-types";
 
@@ -10,6 +10,7 @@ class PlaylistWrapper extends Component {
     super(props);
     this.state = {
       playlistID: null,
+      playlistName: "",
       error: false,
       cleared: false
     };
@@ -29,8 +30,17 @@ class PlaylistWrapper extends Component {
   }
 
   componentWillMount() {
-    if (this.props.match.params.playlistID) {
-      this.setState({ playlistID: this.props.match.params.playlistID });
+    let playlistID = this.props.match.params.playlistID;
+    if (playlistID) {
+      axios
+        .get(
+          `${BASE_URL}/api/users/${userID()}/playlists/${+playlistID}`,
+          config()
+        )
+        .then(response => {
+          let playlistName = response.data.name;
+          this.setState({ playlistID, playlistName });
+        });
     }
   }
 
@@ -56,6 +66,7 @@ class PlaylistWrapper extends Component {
           <div>
             {this.state.playlistID ? (
               <ScreenWrapper
+                playlistName={this.state.playlistName}
                 playlistID={+this.state.playlistID}
                 editPlaylist={editPlaylist}
               />

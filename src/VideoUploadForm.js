@@ -36,6 +36,7 @@ class VideoUploadForm extends Component {
     if (!file) alert("No file selected!");
     else {
       this.setState({
+        width: 0,
         showProgressBar: true
       });
       this.getSignedRequest(file);
@@ -116,18 +117,21 @@ class VideoUploadForm extends Component {
     ) : null;
 
     return (
-      <div>
+      <div className="forms">
         <form onSubmit={this.handleFileSubmit}>
+          <h4>Upload New Video</h4>
           <input
             onChange={this.handleChange}
             type="file"
             id="file-input"
             ref={input => (this.fileInput = input)}
           />
-          <input type="submit" value="Add Video" />
+          <button type="submit">Upload Video</button>
         </form>
-        {progressBar}
-        <div>{progressMsg}</div>
+        <div>
+          {progressBar}
+          <p>{progressMsg}</p>
+        </div>
       </div>
     );
   }

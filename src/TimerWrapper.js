@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Timer from "./Timer";
 import PropTypes from "prop-types";
 
 class TimerWrapper extends Component {
@@ -6,32 +7,28 @@ class TimerWrapper extends Component {
     super(props);
     this.state = {
       counter: props.timer || 30,
-      timerId: null
+      timerEnded: false
     };
+    this.onEnd = this.onEnd.bind(this);
   }
 
   componentDidMount() {
     this.props.toggle();
-    let timerId = setInterval(() => this.tick(), 1000);
-    this.setState({ timerId });
   }
 
-  tick() {
-    if (this.state.counter > 0) {
-      this.setState({
-        counter: this.state.counter - 1
-      });
-    } else {
-      this.props.toggle();
-      clearTimeout(this.state.timerId);
-    }
+  onEnd() {
+    this.props.toggle();
+    this.setState({ timerEnded: true });
   }
+
   render() {
+    let nextScreenMsg = this.state.timerEnded ? (
+      <p className="lg">Press the space key to move on </p>
+    ) : null;
     return (
       <div>
-        <div className="timer">
-          <h2 className="center"> {this.state.counter} </h2>
-        </div>
+        <Timer counter={this.state.counter} onEnd={this.onEnd} />
+        {nextScreenMsg}
       </div>
     );
   }

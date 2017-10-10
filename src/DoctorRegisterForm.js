@@ -21,12 +21,12 @@ class DoctorRegisterForm extends Component {
       .post(`${BASE_URL}/api/users/register`, {
         token: token
       })
-      .then(response =>
+      .then(response => {
         this.setState({
           response: response.data.message,
           displayForm: true
-        })
-      )
+        });
+      })
       .catch(response => {
         this.props.history.push(`/`);
       });

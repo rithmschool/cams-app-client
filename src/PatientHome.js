@@ -151,7 +151,10 @@ class PatientHome extends Component {
                   </p>
                   <p>Please press the spacebar when you are ready to start.</p>
                 </div>,
-                <TimerWrapper toggle={this.toggle} />
+                <div>
+                  <p>Please describe what happened in the video</p>
+                  <TimerWrapper toggle={this.toggle} />
+                </div>
               ]
             : [
                 <p>{screenData.title}</p>,

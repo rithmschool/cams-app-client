@@ -12,13 +12,6 @@ test("matches snapshot of VideoPlayer", () => {
   expect(videoPlayer).toMatchSnapshot();
 });
 
-test("should render with text ", () => {
-  const videoPlayer = shallow(
-    <VideoPlayer toggle={function() {}} videoId={"something"} />
-  );
-  expect(videoPlayer.find(".lg")).toHaveLength(1);
-});
-
 test("component mounts ", () => {
   const spy = jest.spyOn(VideoPlayer.prototype, "componentDidMount");
   const wrapper = shallow(

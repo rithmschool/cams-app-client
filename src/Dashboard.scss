@@ -1,3 +1,5 @@
+@import "variables";
+
 .email-sent,
 .loading {
   margin-bottom: 30px;
@@ -10,12 +12,84 @@
     margin-left: 10px;
   }
 }
-.Videos {
+
+/*PLAYLIST
+*********/
+
+.playlist-container {
+  border: 3px solid #009eb8;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  background: $light-grey;
+  padding: 1rem;
 }
-.Playlist {
-  //background-color: black;
-  padding: 20px;
+#playlist-name {
+  width: 75%;
 }
-.PlayList td {
-  background-color: pink;
+input[type="checkbox"] + .toggle {
+  display: none;
+}
+input[type="checkbox"]:checked + .toggle {
+  display: block;
+  text-align: left;
+}
+/*.thead {
+  display: flex;
+  justify-content: row;
+}
+.thead span{
+  display: flex;
+  flex-grow: 1;
+  justify-content: center;
+  border: 3px solid #00aea7;
+  color: #00c5cc;
+}
+.thead span::first-child{
+  border-top-right-radius: 7px;
+}
+.thead span::first-child{
+  border-top-right-radius: 7px;
+}*/
+
+/*.playlist-card-contents {
+  background: white;
+  border-radius: 0.2rem;
+  margin: 0.4rem;
+  padding: 0.5rem;
+  box-shadow: $nav-shadow;
+}
+
+.playlist-card-contents:focus {
+  outline: 0px;
+}
+*/
+.email-form {
+  align-self: center;
+}
+
+.selected {
+  border: 0.2px solid $success;
+}
+
+.hidden {
+  display: none;
+}
+
+.video-title {
+  padding: 0.5rem;
+  color: $bold-grey;
+  text-align: left;
+  max-width: 15rem;
+  font-size: 12px;
+}
+
+.delete {
+  color: rgb(208, 208, 208);
+}
+
+.delete:hover {
+  color: $danger;
 }

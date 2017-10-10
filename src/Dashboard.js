@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { BASE_URL, userID, config } from "./helpers.js";
 import axios from "axios";
-import { Link } from "react-router-dom";
 import "./Dashboard.css";
 import Playlist from "./Playlist";
 
@@ -15,38 +14,35 @@ class Dashboard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: "",
-      playlistID: null,
-      playlistName: null,
       userPlaylists: [],
       successMessage: "",
       loading: false
     };
-    this.closeSelection = this.closeSelection.bind(this);
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  sendMail(config) {
+  sendMail(playlistID, e) {
+    e.preventDefault();
+    var email = e.target.email;
+
     this.setState({ loading: true });
     window.scrollTo(0, 0);
     axios
       .post(
         `${BASE_URL}/api/users`,
         {
-          email: this.state.email
+          email: email.value
         },
-        config
+        config()
       )
       .then(response =>
         axios.post(
           `${BASE_URL}/api/users/${userID()}/assessments`,
           {
             patient_id: response.data.id,
-            playlist_id: this.state.playlistID,
+            playlist_id: playlistID,
             doctor_id: userID()
           },
-          config
+          config()
         )
       )
       .then(response => {
@@ -56,42 +52,20 @@ class Dashboard extends Component {
             assessment_id: response.data.id,
             patient_id: response.data.patient_id
           },
-          config
+          config()
         );
       })
       .then(response => {
-        this.setState({
-          playlistID: null,
-          playlistName: null,
-          email: "",
-          successMessage: response.data.message,
-          loading: false
-        });
+        this.setState(
+          {
+            successMessage: response.data.message,
+            loading: false
+          },
+          () => {
+            email.value = "";
+          }
+        );
       });
-  }
-
-  handleChange(e) {
-    this.setState({
-      [e.target.name]: e.target.value
-    });
-  }
-
-  handleSubmit(e) {
-    e.preventDefault();
-    this.sendMail(config());
-  }
-
-  closeSelection() {
-    this.setState({ playlistID: null, playlistName: null, successMessage: "" });
-  }
-
-  choosePlaylist(playlist_id, playlistName) {
-    if (
-      this.state.playlistID === null ||
-      playlist_id !== this.state.playlistID
-    ) {
-      this.setState({ playlistID: playlist_id, playlistName: playlistName });
-    }
   }
 
   componentWillMount() {
@@ -101,6 +75,7 @@ class Dashboard extends Component {
         this.setState({ userPlaylists: response.data });
       });
   }
+
   render() {
     let loadingMessage = this.state.loading ? (
       <div className="loading">
@@ -175,6 +150,7 @@ class Dashboard extends Component {
           id={playlist.id}
           name={playlist.name}
           videos={playlist.videos}
+          sendMail={this.sendMail.bind(this, playlist.id)}
         />
       );
     });
@@ -190,11 +166,11 @@ class Dashboard extends Component {
           <table>
             <thead>
               <tr>
-                <th>Name</th>
+                <th id="playlist-name">Name</th>
                 <th>Invite</th>
               </tr>
             </thead>
-            {playlists}
+            <tbody>{playlists}</tbody>
           </table>
         </div>
       </div>

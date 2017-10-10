@@ -3,6 +3,7 @@ import RecordRTC from "recordrtc";
 import { BASE_URL } from "./helpers.js";
 import axios from "axios";
 import HorizontalTimeline from "./horizontal-timeline/HorizontalTimeline";
+import AudioPlayer from "./AudioPlayer";
 import VideoPlayer from "./VideoPlayer";
 import VideoViewer from "./VideoViewer";
 import TimerWrapper from "./TimerWrapper";
@@ -123,6 +124,7 @@ class PatientHome extends Component {
         <p>Please press the spacebar when you are ready to go forward.</p>
       </div>,
       <VideoViewer src={this.state.src} />,
+      <AudioPlayer />,
       <div className="lg">
         <p>You will now watch several short video clips.</p>
         <p>

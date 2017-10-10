@@ -10,7 +10,6 @@ class ScreenForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      file: "",
       videos: [],
       searchtext: "",
       showVideoForm: false,
@@ -22,14 +21,7 @@ class ScreenForm extends Component {
     this.handleSearchChange = this.handleSearchChange.bind(this);
     this.handleFileAdd = this.handleFileAdd.bind(this);
     this.handleVideoPlayer = this.handleVideoPlayer.bind(this);
-    this.handleChange = this.handleChange.bind(this);
     this.toggleForm = this.toggleForm.bind(this);
-  }
-
-  handleChange(e) {
-    this.setState({
-      [e.target.name]: e.target.value
-    });
   }
 
   handleSearchChange(e) {

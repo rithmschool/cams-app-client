@@ -1,8 +1,9 @@
-import React, { Component } from "react";
-import { BASE_URL, userID, config } from "./helpers.js";
-import axios from "axios";
-import "./Dashboard.css";
-import Playlist from "./Playlist";
+import React, { Component } from 'react';
+import { BASE_URL, userID, config } from './helpers.js';
+import axios from 'axios';
+import { Link } from 'react-router-dom';
+import './Dashboard.css';
+import Playlist from './Playlist';
 
 const Close = ({ handleClose }) => (
   <div onClick={handleClose}>
@@ -14,23 +15,23 @@ class Dashboard extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      email: '',
+      playlistID: null,
+      playlistName: null,
       userPlaylists: [],
-      successMessage: "",
+      successMessage: '',
       loading: false
     };
   }
 
-  sendMail(playlistID, e) {
-    e.preventDefault();
-    var email = e.target.email;
-
+  sendMail(playlistID, email) {
     this.setState({ loading: true });
     window.scrollTo(0, 0);
     axios
       .post(
         `${BASE_URL}/api/users`,
         {
-          email: email.value
+          email: email
         },
         config()
       )
@@ -56,15 +57,10 @@ class Dashboard extends Component {
         );
       })
       .then(response => {
-        this.setState(
-          {
-            successMessage: response.data.message,
-            loading: false
-          },
-          () => {
-            email.value = "";
-          }
-        );
+        this.setState({
+          successMessage: response.data.message,
+          loading: false
+        });
       });
   }
 
@@ -75,7 +71,6 @@ class Dashboard extends Component {
         this.setState({ userPlaylists: response.data });
       });
   }
-
   render() {
     let loadingMessage = this.state.loading ? (
       <div className="loading">

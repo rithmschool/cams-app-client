@@ -15,9 +15,6 @@ class Dashboard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: '',
-      playlistID: null,
-      playlistName: null,
       userPlaylists: [],
       successMessage: '',
       loading: false

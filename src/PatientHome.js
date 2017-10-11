@@ -9,6 +9,7 @@ import VideoViewer from "./VideoViewer";
 import TimerWrapper from "./TimerWrapper";
 import "./PatientHome.css";
 import PropTypes from "prop-types";
+import Error from "./Error";
 
 let recordRTC;
 
@@ -19,7 +20,8 @@ class PatientHome extends Component {
       idx: 0,
       src: null,
       keyBoardEnabled: true,
-      stream: ""
+      stream: "",
+      cameraEnabled: true
     };
     this.handleSpaceBar = this.handleSpaceBar.bind(this);
     this.startRecord = this.startRecord.bind(this);
@@ -30,7 +32,9 @@ class PatientHome extends Component {
   captureUserMedia(callback) {
     let params = { audio: true, video: true };
     navigator.getUserMedia(params, callback, error => {
-      alert(JSON.stringify(error));
+      this.setState({
+        cameraEnabled: false
+      });
     });
   }
 
@@ -173,7 +177,7 @@ class PatientHome extends Component {
         <p>Thank you for participating in CAMS!</p>
       </div>
     );
-    return (
+    return this.state.cameraEnabled ? (
       <div className="patient-home">
         <div>
           <HorizontalTimeline
@@ -187,6 +191,10 @@ class PatientHome extends Component {
           />
         </div>
         <div className="screens">{screens[this.state.idx]}</div>
+      </div>
+    ) : (
+      <div className="patient-home">
+        <Error msg="Whoops, seems like your camera isn't working!" />
       </div>
     );
   }

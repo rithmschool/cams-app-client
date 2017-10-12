@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 const VideoViewer = ({ src }) => (
   <div className="lg">
-    <video src={src} id="videoElement" autoPlay="true" />
+    <video src={src} id="videoElement" autoPlay="true" muted="true" />
     <p>
       Please take this time to look at the video viewer to make sure it is
       positioned on your face.

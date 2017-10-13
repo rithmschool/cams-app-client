@@ -1,3 +1,5 @@
+@import 'variables';
+
 .email-sent,
 .loading {
   margin-bottom: 30px;
@@ -9,4 +11,39 @@
   i {
     margin-left: 10px;
   }
+}
+
+/*PLAYLIST
+*********/
+
+#playlist-name {
+  width: 75%;
+}
+
+.email-form {
+  align-self: center;
+}
+
+.selected {
+  border: 0.2px solid $success;
+}
+
+.hidden {
+  display: none;
+}
+
+.video-title {
+  padding: 0.5rem;
+  color: $bold-grey;
+  text-align: left;
+  max-width: 15rem;
+  font-size: 12px;
+}
+
+.delete {
+  color: rgb(208, 208, 208);
+}
+
+.delete:hover {
+  color: $danger;
 }

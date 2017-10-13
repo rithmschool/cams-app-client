@@ -1,13 +1,13 @@
-import React, { Component } from "react";
-import RecordRTC from "recordrtc";
-import { BASE_URL } from "./helpers.js";
-import axios from "axios";
-import HorizontalTimeline from "./horizontal-timeline/HorizontalTimeline";
-import VideoPlayer from "./VideoPlayer";
-import VideoViewer from "./VideoViewer";
-import TimerWrapper from "./TimerWrapper";
-import "./PatientHome.css";
-import PropTypes from "prop-types";
+import React, { Component } from 'react';
+import RecordRTC from 'recordrtc';
+import { connect } from 'react-redux';
+import { stopRecordRequest } from './store/actions/actionCreators';
+import HorizontalTimeline from './horizontal-timeline/HorizontalTimeline';
+import VideoPlayer from './VideoPlayer';
+import VideoViewer from './VideoViewer';
+import TimerWrapper from './TimerWrapper';
+import './PatientHome.css';
+import PropTypes from 'prop-types';
 
 let recordRTC;
 
@@ -18,7 +18,7 @@ class PatientHome extends Component {
       idx: 0,
       src: null,
       keyBoardEnabled: true,
-      stream: ""
+      stream: ''
     };
     this.handleSpaceBar = this.handleSpaceBar.bind(this);
     this.startRecord = this.startRecord.bind(this);
@@ -45,7 +45,7 @@ class PatientHome extends Component {
         stream: mediaStream
       });
       var options = {
-        mimeType: "video/webm;codecs=H264",
+        mimeType: 'video/webm;codecs=H264',
         audioBitsPerSecond: 128000,
         videoBitsPerSecond: 512000
       };
@@ -60,15 +60,10 @@ class PatientHome extends Component {
     recordRTC.stopRecording(() => {
       let fd = new FormData();
       recordedBlob = recordRTC.getBlob();
-      fd.append("assessment_id", this.props.assessmentId);
-      fd.append("fname", "video_" + Date.now() + ".mp4");
-      fd.append("file", recordedBlob);
-      axios
-        .post(`${BASE_URL}/api/recording`, fd)
-        .then(r => {})
-        .catch(err => {
-          console.log(err);
-        });
+      fd.append('assessment_id', this.props.assessmentId);
+      fd.append('fname', 'video_' + Date.now() + '.mp4');
+      fd.append('file', recordedBlob);
+      this.props.stopRecord(fd);
     });
     this.stopMedia();
   }
@@ -101,7 +96,7 @@ class PatientHome extends Component {
 
   componentDidMount() {
     window.focus();
-    document.addEventListener("keydown", this.handleSpaceBar);
+    document.addEventListener('keydown', this.handleSpaceBar);
     this.requestUserMedia();
   }
 
@@ -134,10 +129,10 @@ class PatientHome extends Component {
         <p>When you are ready, please press the spacebar to continue.</p>
       </div>
     ];
-    screens = this.props.screens.reduce(
+    screens = this.props.assessment.screens.reduce(
       (prev, screenData) =>
         prev.concat(
-          screenData.type === "video"
+          screenData.type === 'video'
             ? [
                 <VideoPlayer toggle={this.toggle} url={screenData.url} />,
                 <div className="lg">
@@ -204,4 +199,18 @@ PatientHome.propTypes = {
   screenCount: PropTypes.number.isRequired
 };
 
-export default PatientHome;
+const mapStateToProps = function(state) {
+  return {
+    assessment: state.assessment,
+    url: state.url
+    //screenCount:
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    stopRecord: fd => dispatch(stopRecordRequest(fd))
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(PatientHome);

@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
-import PatientHome from './PatientHome';
-import { BASE_URL, BrowserDetect, config } from './helpers.js';
-import axios from 'axios';
-import URLSearchParams from 'url-search-params';
-import { connect } from 'react-redux';
-import { confirmUser, getScreensAndURLs } from './store/actions/actionCreators';
+import React, { Component } from "react";
+import PatientHome from "./PatientHome";
+import { BASE_URL, BrowserDetect, config } from "./helpers.js";
+import axios from "axios";
+import URLSearchParams from "url-search-params";
+import { connect } from "react-redux";
+import { confirmUser, getScreensAndURLs } from "./store/actions/actionCreators";
 
 class PatientWrapper extends Component {
   constructor(props) {
@@ -13,7 +13,7 @@ class PatientWrapper extends Component {
 
   componentWillReceiveProps(nextProps) {
     const query = new URLSearchParams(this.props.location.search);
-    const token = query.get('token');
+    const token = query.get("token");
     if (nextProps.assessment.screens.length === 0) {
       this.props.getScreensAndURLsAC(nextProps, token);
     }
@@ -21,21 +21,21 @@ class PatientWrapper extends Component {
 
   componentWillMount() {
     const query = new URLSearchParams(this.props.location.search);
-    const token = query.get('token');
+    const token = query.get("token");
     this.props.confirmUserAC(token);
   }
 
   render() {
     BrowserDetect.init();
     let display =
-      BrowserDetect.browser === 'Chrome' ? (
+      BrowserDetect.browser === "Chrome" ? (
         <PatientHome />
       ) : (
         <p>
-          Browser not supported. Please switch to{' '}
+          Browser not supported. Please switch to{" "}
           <a href="https://www.google.com/chrome/browser/desktop/index.html">
             Google Chrome
-          </a>{' '}
+          </a>{" "}
           to proceed.
         </p>
       );

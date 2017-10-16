@@ -3,10 +3,8 @@ import {
   STOP_RECORD_FAIL,
   CONFIRM_USER_SUCCESS,
   CONFIRM_USER_FAIL,
-  CONFIRM_SCREENS_SUCCESS,
-  CONFIRM_SCREENS_FAIL,
-  GET_URL_FROM_S3_SUCCESS,
-  GET_URL_FROM_S3_FAIL
+  CONFIRM_SCREENSANDURLS_SUCCESS,
+  CONFIRM_SCREENSANDURLS_FAIL
 } from './constants';
 
 import { config } from '../../helpers.js';
@@ -17,9 +15,6 @@ import {
   getForConfirmUser,
   getURLsFromS3API
 } from '../../services/api';
-
-//this is where the API calls are made and dispatches new actions (success/failure)
-//after api response is received
 
 //PatientHome
 export function stopRecordRequest(fd) {
@@ -65,52 +60,41 @@ export function confirmUserFail(err) {
   };
 }
 
-export function getScreens(prevProps, token) {
+export function getScreensAndURLs(prevProps, token) {
   return dispatch =>
     getScreensAPI(prevProps, token)
-      // .then(res =>
-      //   res.assesment.screens.reduce(
-      //     (prev, curScreen) => prev + (curScreen.type === 'video' ? 3 : 2),
-      //     3
-      //   )
-      // )
-      .then(res => dispatch(getScreensSuccess(res.data)))
-      .catch(err => dispatch(getScreensFail(err)));
+      .then(res => {
+        var videoTitles = res.data.screens
+          .filter(s => s.type === 'video')
+          .map(s => decodeURIComponent(s.title));
+        return Promise.all([getURLsFromS3API(videoTitles), res.data]);
+      })
+      .then(res => {
+        res[1].screens.forEach(screen => {
+          if (screen.type === 'video') {
+            res[0].data.forEach(v => {
+              if (screen.title === v.title) {
+                screen.url = v.url;
+              }
+            });
+          }
+        });
+        dispatch(getScreensAndURLsSuccess(res[1]));
+      })
+      .catch(err => dispatch(getScreensAndURLsFail(err)));
 }
 
-export function getScreensSuccess(response) {
+export function getScreensAndURLsSuccess(assessment) {
   return {
-    type: CONFIRM_SCREENS_SUCCESS,
-    assessment: response
+    type: CONFIRM_SCREENSANDURLS_SUCCESS,
+    assessment
   };
 }
 
-export function getScreensFail(err) {
+export function getScreensAndURLsFail(err) {
+  console.log(err);
   return {
-    type: CONFIRM_SCREENS_FAIL,
-    err
-  };
-}
-
-export function getURLsFromS3(videoTitles) {
-  return dispatch =>
-    getURLsFromS3API(videoTitles)
-      .then(res => dispatch(getURLsFromS3Success(res.data)))
-      .catch(err => dispatch(getURLsFromS3Fail(err)));
-}
-
-export function getURLsFromS3Success(response) {
-  console.log('inside AC get URL success');
-  return {
-    type: GET_URL_FROM_S3_SUCCESS,
-    url: response.url
-  };
-}
-
-export function getURLsFromS3Fail(err) {
-  debugger;
-  return {
-    type: GET_URL_FROM_S3_FAIL,
+    type: CONFIRM_SCREENSANDURLS_FAIL,
     err
   };
 }

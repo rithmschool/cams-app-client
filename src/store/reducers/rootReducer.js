@@ -1,19 +1,15 @@
 import {
   STOP_RECORD_SUCCESS,
   CONFIRM_USER_SUCCESS,
-  CONFIRM_SCREENS_SUCCESS,
-  GET_URL_FROM_S3_SUCCESS
+  CONFIRM_SCREENSANDURLS_SUCCESS
 } from '../actions/constants';
 
 const DEFAULT_STATE = {
   stopRecord: false,
-  confirmUser: {}, //assessment_id and doctor_id
+  confirmUser: {},
   assessment: { screens: [] },
   screenCount: null
 };
-
-//no side effects here!
-//must be pure
 
 const rootReducer = (state = DEFAULT_STATE, action = { type: null }) => {
   switch (action.type) {
@@ -27,16 +23,10 @@ const rootReducer = (state = DEFAULT_STATE, action = { type: null }) => {
         ...state,
         confirmUser: action.confirmUser
       };
-    case CONFIRM_SCREENS_SUCCESS:
+    case CONFIRM_SCREENSANDURLS_SUCCESS:
       return {
         ...state,
         assessment: action.assessment
-        //screenCount: action.assessment.screens
-      };
-    case GET_URL_FROM_S3_SUCCESS:
-      return {
-        ...state,
-        url: action.url //??
       };
     default:
       return state;

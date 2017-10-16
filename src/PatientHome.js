@@ -95,6 +95,7 @@ class PatientHome extends Component {
   }
 
   componentDidMount() {
+    debugger;
     window.focus();
     document.addEventListener('keydown', this.handleSpaceBar);
     this.requestUserMedia();
@@ -201,9 +202,8 @@ PatientHome.propTypes = {
 
 const mapStateToProps = function(state) {
   return {
-    assessment: state.assessment,
-    url: state.url
-    //screenCount:
+    assessment: state.assessment
+    //screenCount: state.screenCount
   };
 };
 

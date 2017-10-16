@@ -20,12 +20,11 @@ export function getScreensAPI(nextProps, token) {
 }
 
 export function getURLsFromS3API(videoTitles) {
-  axios
-    .get(`${BASE_URL}/api/videofiles/urls/`, {
-      params: {
-        titles: videoTitles
-      },
-      ...config()
-    })
-    .then(res => console.log(res));
+  return axios.post(
+    `${BASE_URL}/api/videofiles/urls`,
+    {
+      titles: videoTitles
+    },
+    config()
+  );
 }

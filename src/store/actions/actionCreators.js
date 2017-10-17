@@ -5,16 +5,14 @@ import {
   CONFIRM_USER_FAIL,
   CONFIRM_SCREENSANDURLS_SUCCESS,
   CONFIRM_SCREENSANDURLS_FAIL
-} from './constants';
-
-import { config } from '../../helpers.js';
+} from "./constants";
 
 import {
   getScreensAPI,
   postToStopRecord,
   getForConfirmUser,
   getURLsFromS3API
-} from '../../services/api';
+} from "../../services/api";
 
 //PatientHome
 export function stopRecordRequest(fd) {
@@ -65,13 +63,13 @@ export function getScreensAndURLs(prevProps, token) {
     getScreensAPI(prevProps, token)
       .then(res => {
         var videoTitles = res.data.screens
-          .filter(s => s.type === 'video')
+          .filter(s => s.type === "video")
           .map(s => decodeURIComponent(s.title));
         return Promise.all([getURLsFromS3API(videoTitles), res.data]);
       })
       .then(res => {
         res[1].screens.forEach(screen => {
-          if (screen.type === 'video') {
+          if (screen.type === "video") {
             res[0].data.forEach(v => {
               if (screen.title === v.title) {
                 screen.url = v.url;

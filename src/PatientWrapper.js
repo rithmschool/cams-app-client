@@ -1,16 +1,11 @@
 import React, { Component } from "react";
 import PatientHome from "./PatientHome";
-import { BASE_URL, BrowserDetect, config } from "./helpers.js";
-import axios from "axios";
+import { BrowserDetect } from "./helpers.js";
 import URLSearchParams from "url-search-params";
 import { connect } from "react-redux";
 import { confirmUser, getScreensAndURLs } from "./store/actions/actionCreators";
 
 class PatientWrapper extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   componentWillReceiveProps(nextProps) {
     const query = new URLSearchParams(this.props.location.search);
     const token = query.get("token");

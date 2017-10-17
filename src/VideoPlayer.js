@@ -27,6 +27,7 @@ class VideoPlayer extends Component {
     return (
       <div>
         <video
+          preload="auto"
           autoPlay="true"
           height="450px"
           width="750px"

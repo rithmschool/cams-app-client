@@ -1,14 +1,12 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import axios from 'axios';
-import { BASE_URL, userID, config } from './helpers.js';
-import PropTypes from 'prop-types';
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 
 class Playlist extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: '',
+      email: "",
       showList: false
     };
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -23,7 +21,7 @@ class Playlist extends Component {
   handleSubmit(e) {
     e.preventDefault();
     this.props.sendMail(this.state.email);
-    this.setState({ email: '' });
+    this.setState({ email: "" });
   }
 
   handleChange(e) {
@@ -51,7 +49,7 @@ class Playlist extends Component {
         <td>
           <h5 className="playlist-name-title">{name}</h5>
           <button onClick={this.onClick}>
-            {this.state.showList ? 'Hide' : 'Show'}
+            {this.state.showList ? "Hide" : "Show"}
           </button>
           <Link to={`playlists/${id}/edit`}>Edit</Link>
           <ol>{videoList}</ol>

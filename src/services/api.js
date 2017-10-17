@@ -1,5 +1,5 @@
-import axios from 'axios';
-import { BASE_URL, BrowserDetect, config } from '../helpers.js';
+import axios from "axios";
+import { BASE_URL, config } from "../helpers.js";
 
 //Patient Home
 export function postToStopRecord(fd) {

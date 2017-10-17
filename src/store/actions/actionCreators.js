@@ -14,7 +14,6 @@ import {
   getURLsFromS3API
 } from "../../services/api";
 
-//PatientHome
 export function stopRecordRequest(fd) {
   return dispatch =>
     postToStopRecord(fd)
@@ -36,7 +35,6 @@ export function stopRecordFail(err) {
   };
 }
 
-//Patient Wrapper
 export function confirmUser(token) {
   return dispatch =>
     getForConfirmUser(token)
@@ -90,7 +88,6 @@ export function getScreensAndURLsSuccess(assessment) {
 }
 
 export function getScreensAndURLsFail(err) {
-  console.log(err);
   return {
     type: CONFIRM_SCREENSANDURLS_FAIL,
     err

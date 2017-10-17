@@ -1,29 +1,29 @@
-import React, { Component } from 'react';
-import EditUserForm from './EditUserForm';
-import banner from './images/banner.png';
-import PlaylistWrapper from './PlaylistWrapper';
-import Dashboard from './Dashboard';
-import AssessmentsDashboard from './AssessmentsDashboard';
-import LoginForm from './LoginForm';
-import Home from './Home';
-import Nav from './Nav';
-import { ensureCorrectUser } from './helpers';
-import { Route, Switch, Redirect } from 'react-router-dom';
-import './index.css';
-import './App.css';
-import InviteDoctorForm from './InviteDoctorForm.js';
-import DoctorRegisterForm from './DoctorRegisterForm.js';
+import React, { Component } from "react";
+import EditUserForm from "./EditUserForm";
+import banner from "./images/banner.png";
+import PlaylistWrapper from "./PlaylistWrapper";
+import Dashboard from "./Dashboard";
+import AssessmentsDashboard from "./AssessmentsDashboard";
+import LoginForm from "./LoginForm";
+import Home from "./Home";
+import Nav from "./Nav";
+import { ensureCorrectUser } from "./helpers";
+import { Route, Switch, Redirect } from "react-router-dom";
+import "./index.css";
+import "./App.css";
+import InviteDoctorForm from "./InviteDoctorForm.js";
+import DoctorRegisterForm from "./DoctorRegisterForm.js";
 
 const PrivateRoute = ({ component, ...rest }) => (
   <Route
     {...rest}
     render={props =>
-      localStorage.getItem('token') ? (
+      localStorage.getItem("token") ? (
         React.createElement(component, Object.assign(props, rest))
       ) : (
         <Redirect
           to={{
-            pathname: '/login',
+            pathname: "/login",
             state: { from: props.location }
           }}
         />
@@ -40,7 +40,7 @@ const EnsureCorrectUserRoute = ({ component, ...rest }) => (
       ) : (
         <Redirect
           to={{
-            pathname: '/login',
+            pathname: "/login",
             state: { from: props.location }
           }}
         />
@@ -52,10 +52,10 @@ const EnsureLoggedOut = ({ component, ...rest }) => (
   <Route
     {...rest}
     render={props =>
-      localStorage.getItem('token') ? (
+      localStorage.getItem("token") ? (
         <Redirect
           to={{
-            pathname: '/dashboard',
+            pathname: "/dashboard",
             state: { from: props.location }
           }}
         />
@@ -68,12 +68,12 @@ const EnsureLoggedOut = ({ component, ...rest }) => (
 class Main extends Component {
   constructor(props) {
     super(props);
-    this.state = { token: localStorage.getItem('token') };
+    this.state = { token: localStorage.getItem("token") };
   }
 
   componentWillReceiveProps() {
     this.setState({
-      token: localStorage.getItem('token')
+      token: localStorage.getItem("token")
     });
   }
 

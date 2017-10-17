@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
-import { BASE_URL, userID, config, dateFormat, createDate } from './helpers.js';
-import axios from 'axios';
-import Assessment from './Assessment';
-import Dropdown from './Dropdown.js';
-import './AssessmentsDashboard.css';
-import Modal from 'react-modal';
+import React, { Component } from "react";
+import { BASE_URL, userID, config, dateFormat, createDate } from "./helpers.js";
+import axios from "axios";
+import Assessment from "./Assessment";
+import Dropdown from "./Dropdown.js";
+import "./AssessmentsDashboard.css";
+import Modal from "react-modal";
 
 class AssessmentsDashboard extends Component {
   constructor(props) {
@@ -14,18 +14,18 @@ class AssessmentsDashboard extends Component {
       selected: { id: null, url: null },
       modalIsOpen: false,
       sorts: [
-        { name: 'Patient Email', value: 'patientEmail', selected: false },
-        { name: 'Playlist', value: 'playlistName', selected: false },
-        { name: 'Date Added', value: 'dateAdded', selected: false },
-        { name: 'Date Assessed', value: 'dateAssessed', selected: false },
-        { name: 'Date Evaluated', value: 'dateEvaluated', selected: false },
-        { name: 'Recently Changed', value: 'dateChanged', selected: true }
+        { name: "Patient Email", value: "patientEmail", selected: false },
+        { name: "Playlist", value: "playlistName", selected: false },
+        { name: "Date Added", value: "dateAdded", selected: false },
+        { name: "Date Assessed", value: "dateAssessed", selected: false },
+        { name: "Date Evaluated", value: "dateEvaluated", selected: false },
+        { name: "Recently Changed", value: "dateChanged", selected: true }
       ],
       sortOrder: -1,
       filters: [
-        { name: 'All', value: () => true, selected: true },
-        { name: 'Not Assesed', value: v => !v.dateAssessed, selected: false },
-        { name: 'Not Evaluated', value: v => !v.dateEvaluated, selected: false }
+        { name: "All", value: () => true, selected: true },
+        { name: "Not Assesed", value: v => !v.dateAssessed, selected: false },
+        { name: "Not Evaluated", value: v => !v.dateEvaluated, selected: false }
       ]
     };
     this.closeModal = this.closeModal.bind(this);

@@ -1,6 +1,5 @@
 import rootReducer from "../../store/reducers/rootReducer";
 import * as types from "../../store/actions/constants";
-//import actionCreators?
 
 describe("root reducer", () => {
   it("should return the initial state", () => {
@@ -33,6 +32,7 @@ describe("root reducer", () => {
       screenCount: null
     });
   });
+
   it("should handle confirm user", () => {
     expect(
       rootReducer(
@@ -54,6 +54,7 @@ describe("root reducer", () => {
       screenCount: null
     });
   });
+
   it("should handle confirm screens and urls success", () => {
     expect(
       rootReducer(

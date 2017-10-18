@@ -7,6 +7,7 @@ exports[`matches snapshot of VideoPlayer 1`] = `
     height="450px"
     onContextMenu={[Function]}
     onEnded={[Function]}
+    preload="auto"
     src={undefined}
     width="750px"
   />

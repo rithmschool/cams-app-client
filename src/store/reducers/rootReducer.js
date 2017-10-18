@@ -2,7 +2,7 @@ import {
   STOP_RECORD_SUCCESS,
   CONFIRM_USER_SUCCESS,
   CONFIRM_SCREENSANDURLS_SUCCESS
-} from '../actions/constants';
+} from "../actions/constants";
 
 const DEFAULT_STATE = {
   stopRecord: false,

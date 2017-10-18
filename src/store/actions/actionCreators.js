@@ -17,14 +17,14 @@ import {
 export function stopRecordRequest(fd) {
   return dispatch =>
     postToStopRecord(fd)
-      .then(res => dispatch(stopRecordSuccess(res)))
+      .then(res => dispatch(stopRecordSuccess()))
       .catch(err => dispatch(stopRecordFail(err)));
 }
 
-export function stopRecordSuccess(response) {
+export function stopRecordSuccess() {
   return {
     type: STOP_RECORD_SUCCESS,
-    response
+    stopRecord: true
   };
 }
 
@@ -88,6 +88,7 @@ export function getScreensAndURLsSuccess(assessment) {
 }
 
 export function getScreensAndURLsFail(err) {
+  console.log(err);
   return {
     type: CONFIRM_SCREENSANDURLS_FAIL,
     err

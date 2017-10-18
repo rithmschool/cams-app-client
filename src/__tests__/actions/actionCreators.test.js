@@ -1,7 +1,6 @@
 import configureMockStore from "redux-mock-store";
 import thunk from "redux-thunk";
 import * as actions from "../../store/actions/actionCreators";
-//import * as types from "../../store/actions/constants";
 import * as api from "../../services/api";
 import MockAdapter from "axios-mock-adapter";
 import axios from "axios";
@@ -16,19 +15,8 @@ import {
 } from "../../store/actions/constants";
 
 const mock = new MockAdapter(axios);
-
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
-
-const mockResponse = (status, statusText, response) => {
-  return new window.Response(response, {
-    status: status,
-    statusText: statusText,
-    headers: {
-      "Content-type": "application/json"
-    }
-  });
-};
 
 describe("async actions/api calls", () => {
   afterAll(() => {

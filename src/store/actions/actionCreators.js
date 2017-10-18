@@ -88,7 +88,6 @@ export function getScreensAndURLsSuccess(assessment) {
 }
 
 export function getScreensAndURLsFail(err) {
-  console.log(err);
   return {
     type: CONFIRM_SCREENSANDURLS_FAIL,
     err

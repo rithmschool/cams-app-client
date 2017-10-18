@@ -7,6 +7,7 @@ exports[`snapshot of VideoViewer 1`] = `
   <video
     autoPlay="true"
     id="videoElement"
+    muted="true"
     src="something"
   />
   <p>

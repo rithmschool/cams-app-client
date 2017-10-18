@@ -107,7 +107,7 @@ class PatientHome extends Component {
     recordRTC.stopRecording(() => {
       let fd = new FormData();
       recordedBlob = recordRTC.getBlob();
-      fd.append("assessment_id", this.props.assessmentId);
+      fd.append("assessment_id", this.props.assessment.id);
       fd.append("fname", "video_" + Date.now() + ".mp4");
       fd.append("file", recordedBlob);
       this.props.stopRecord(fd);
@@ -127,8 +127,8 @@ class PatientHome extends Component {
         this.startRecord();
       }
 
-      this.setState({ idx: ++this.state.idx }, () => {
-        if (this.state.idx === this.props.screenCount) {
+      this.setState({ idx: this.state.idx + 1 }, () => {
+        if (this.state.idx === this.state.screens.length) {
           this.stopRecord();
         }
       });

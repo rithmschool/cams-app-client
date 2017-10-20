@@ -1,9 +1,8 @@
-import React, { Component } from 'react';
-import { BASE_URL, userID, config } from './helpers.js';
-import axios from 'axios';
-import { Link } from 'react-router-dom';
-import './Dashboard.css';
-import Playlist from './Playlist';
+import React, { Component } from "react";
+import { BASE_URL, userID, config } from "./helpers.js";
+import axios from "axios";
+import "./Dashboard.css";
+import Playlist from "./Playlist";
 
 const Close = ({ handleClose }) => (
   <div onClick={handleClose}>
@@ -16,7 +15,7 @@ class Dashboard extends Component {
     super(props);
     this.state = {
       userPlaylists: [],
-      successMessage: '',
+      successMessage: "",
       loading: false
     };
   }

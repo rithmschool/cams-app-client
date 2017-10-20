@@ -1,12 +1,16 @@
 import React, { Component } from "react";
 import RecordRTC from "recordrtc";
-import { BASE_URL } from "./helpers.js";
-import axios from "axios";
+import { connect } from "react-redux";
+import { stopRecordRequest } from "./store/actions/actionCreators";
 import HorizontalTimeline from "./horizontal-timeline/HorizontalTimeline";
 import AudioPlayer from "./AudioPlayer";
 import VideoPlayer from "./VideoPlayer";
 import VideoViewer from "./VideoViewer";
 import TimerWrapper from "./TimerWrapper";
+import PatientScreenWrapper from "./PatientScreenWrapper";
+import VideoInstructions from "./VideoInstructions";
+import WelcomeScreen from "./WelcomeScreen";
+import PlaylistInstructions from "./PlaylistInstructions";
 import "./PatientHome.css";
 import PropTypes from "prop-types";
 import Error from "./Error";
@@ -21,12 +25,50 @@ class PatientHome extends Component {
       src: null,
       keyBoardEnabled: true,
       stream: "",
-      cameraEnabled: true
+      cameraEnabled: true,
+      screens: []
     };
     this.handleSpaceBar = this.handleSpaceBar.bind(this);
     this.startRecord = this.startRecord.bind(this);
     this.stopRecord = this.stopRecord.bind(this);
     this.toggle = this.toggle.bind(this);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.state.screens.length === 0) {
+      let screens = [
+        <WelcomeScreen />,
+        <VideoViewer src={this.state.src} />,
+        <AudioPlayer />,
+        <PlaylistInstructions />
+      ];
+      screens = nextProps.assessment.screens.reduce(
+        (prev, screenData) =>
+          prev.concat(
+            screenData.type === "video"
+              ? [
+                  <VideoPlayer toggle={this.toggle} url={screenData.url} />,
+                  <VideoInstructions />,
+                  <TimerWrapper toggle={this.toggle} />
+                ]
+              : [
+                  <p>{screenData.title}</p>,
+                  <TimerWrapper
+                    title={screenData.title}
+                    toggle={this.toggle}
+                    timer={screenData.timer}
+                  />
+                ]
+          ),
+        screens
+      );
+      screens.push(
+        <div className="lg">
+          <p>Thank you for participating in CAMS!</p>
+        </div>
+      );
+      this.setState({ screens: screens });
+    }
   }
 
   captureUserMedia(callback) {
@@ -65,15 +107,10 @@ class PatientHome extends Component {
     recordRTC.stopRecording(() => {
       let fd = new FormData();
       recordedBlob = recordRTC.getBlob();
-      fd.append("assessment_id", this.props.assessmentId);
+      fd.append("assessment_id", this.props.assessment.id);
       fd.append("fname", "video_" + Date.now() + ".mp4");
       fd.append("file", recordedBlob);
-      axios
-        .post(`${BASE_URL}/api/recording`, fd)
-        .then(r => {})
-        .catch(err => {
-          console.log(err);
-        });
+      this.props.stopRecord(fd);
     });
     this.stopMedia();
   }
@@ -90,8 +127,8 @@ class PatientHome extends Component {
         this.startRecord();
       }
 
-      this.setState({ idx: ++this.state.idx }, () => {
-        if (this.state.idx === this.props.screenCount) {
+      this.setState({ idx: this.state.idx + 1 }, () => {
+        if (this.state.idx === this.state.screens.length) {
           this.stopRecord();
         }
       });
@@ -111,107 +148,71 @@ class PatientHome extends Component {
   }
 
   render() {
-    let screens = [
-      <div className="lg">
-        <p>
-          Welcome! You will watch short videos and answer questions about
-          yourself.
-        </p>
-        <p>
-          Please read the instructions carefully. You will have 30 seconds to
-          respond to each question.
-        </p>
-        <p>
-          Your answers will be recorded so please speak OUT LOUD when
-          responding.
-        </p>
-        <p>Please press the spacebar when you are ready to go forward.</p>
-      </div>,
-      <VideoViewer src={this.state.src} />,
-      <AudioPlayer />,
-      <div className="lg">
-        <p>You will now watch several short video clips.</p>
-        <p>
-          After each video, you will be asked questions about what happened in
-          the video.
-        </p>
-        <p>You will have 30 seconds to answer each question.</p>
-        <p>Please speak out loud and keep speaking until the time runs out.</p>
-        <p>When you are ready, please press the spacebar to continue.</p>
-      </div>
-    ];
-    screens = this.props.screens.reduce(
-      (prev, screenData) =>
-        prev.concat(
-          screenData.type === "video"
-            ? [
-                <VideoPlayer toggle={this.toggle} url={screenData.url} />,
-                <div className="lg">
-                  <p>Please describe what happened in the video.</p>
-                  <p>
-                    Use as much detail as possible when describing the video.
-                  </p>
-                  <p>
-                    You have 30 seconds. Please try to talk for the entire
-                    duration of the timer.
-                  </p>
-                  <p>Please press the spacebar when you are ready to start.</p>
-                </div>,
-                <div>
-                  <p>Please describe what happened in the video</p>
-                  <TimerWrapper toggle={this.toggle} />
-                </div>
-              ]
-            : [
-                <p>{screenData.title}</p>,
-                <div>
-                  <p>{screenData.title} </p>
-                  <TimerWrapper toggle={this.toggle} timer={screenData.timer} />
-                </div>
-              ]
-        ),
-      screens
-    );
-    screens.push(
-      <div className="lg">
-        <p>Thank you for participating in CAMS!</p>
-      </div>
-    );
-    return this.state.cameraEnabled ? (
-      <div className="patient-home">
-        <div>
-          <HorizontalTimeline
-            numScreens={screens.length}
-            keyBoardEnabled={this.state.keyBoardEnabled}
-            linePadding={100}
-            minEventPadding={20}
-            maxEventPadding={120}
-            containerWidth={800}
-            containerHeight={100}
-          />
+    const { cameraEnabled, screens, keyBoardEnabled, idx } = this.state;
+    let result = null;
+
+    if (!cameraEnabled) {
+      result = (
+        <div className="patient-home">
+          <Error msg="Whoops, seems like your camera isn't working!" />
         </div>
-        <div className="screens">{screens[this.state.idx]}</div>
-      </div>
-    ) : (
-      <div className="patient-home">
-        <Error msg="Whoops, seems like your camera isn't working!" />
-      </div>
-    );
+      );
+    } else if (screens.length > 0) {
+      result = (
+        <div className="patient-home">
+          <div>
+            <HorizontalTimeline
+              numScreens={screens.length}
+              keyBoardEnabled={keyBoardEnabled}
+              linePadding={100}
+              minEventPadding={20}
+              maxEventPadding={120}
+              containerWidth={800}
+              containerHeight={100}
+            />
+            <PatientScreenWrapper
+              className="screens"
+              screens={screens}
+              handleSpaceBar={this.handleSpaceBar}
+              idx={idx}
+            />
+          </div>
+        </div>
+      );
+    }
+    return result;
   }
 }
 
 PatientHome.propTypes = {
-  screens: PropTypes.arrayOf(
-    PropTypes.shape({
-      duration: PropTypes.string,
-      type: PropTypes.string.isRequired,
-      id: PropTypes.number.isRequired,
-      url: PropTypes.string,
-      title: PropTypes.string.isRequired
-    })
-  ).isRequired,
-  assessmentId: PropTypes.number.isRequired,
-  screenCount: PropTypes.number.isRequired
+  stopRecord: PropTypes.func.isRequired,
+  assessment: PropTypes.shape({
+    current_screen: PropTypes.number,
+    id: PropTypes.number,
+    playlist_id: PropTypes.number,
+    recording_url: PropTypes.string,
+    screens: PropTypes.arrayOf(
+      PropTypes.shape({
+        duration: PropTypes.string,
+        type: PropTypes.string.isRequired,
+        id: PropTypes.number.isRequired,
+        url: PropTypes.string,
+        title: PropTypes.string.isRequired
+      })
+    )
+  })
 };
 
-export default PatientHome;
+const mapStateToProps = function(state) {
+  return {
+    assessment: state.assessment
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    stopRecord: fd => dispatch(stopRecordRequest(fd))
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(PatientHome);

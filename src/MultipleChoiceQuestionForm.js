@@ -49,7 +49,7 @@ class MultipleChoiceQuestionForm extends Component {
 
   render() {
     let inputs = this.state.choices.map((e, i) => (
-      <span className="bob" key={"span" + i}>
+      <span className="choice" key={"span" + i}>
         <input
           type="text"
           name={i}
@@ -59,7 +59,7 @@ class MultipleChoiceQuestionForm extends Component {
           onChange={this.handleChoiceChange}
           required
         />
-        <button key={"butt-" + i} onClick={() => this.handleRemove(i)}>
+        <button className="remove button" key={"butt-" + i} onClick={() => this.handleRemove(i)}>
           X
         </button>
       </span>
@@ -69,6 +69,7 @@ class MultipleChoiceQuestionForm extends Component {
         <form className="addQuestion" onSubmit={this.handleAdd}>
           <h4>Add Question</h4>
           <input
+            className="quest"
             type="text"
             onChange={this.handleChange}
             name="title"
@@ -76,7 +77,7 @@ class MultipleChoiceQuestionForm extends Component {
             value={this.state.title}
             required
           />
-          <button className="button" type="button" onClick={this.handleClick}>
+          <button className="button ac" type="button" onClick={this.handleClick}>
             Add choice
           </button>
           {inputs}

@@ -22,22 +22,27 @@ class PlaylistWrapper extends Component {
       .post(`${BASE_URL}/api/users/${userID()}/playlists`, data, config)
       .then(response => {
         let playlistID = response.data.id;
-        this.setState({ error: false, playlistID: playlistID, cleared: true });
+         console.log("playlist ID in addPlaylist is: ", playlistID);
+        this.setState({ error: false, playlistID: playlistID, cleared: true }, this.getPlaylistName);
       })
       .catch(error => {
         this.setState({ error: true });
       });
   }
 
-  componentWillMount() {
-    let playlistID = this.props.match.params.playlistID;
+  getPlaylistName() {
+  // componentWillMount() {
+    // let playlistID = this.props.match.params.playlistID;
+    let playlistID = this.state.playlistID;
+    console.log("playlist ID is: ", playlistID);
     if (playlistID) {
       axios
         .get(
-          `${BASE_URL}/api/users/${userID()}/playlists/${+playlistID}`,
+          `${BASE_URL}/api/users/${userID()}/playlists/${playlistID}`,
           config()
         )
         .then(response => {
+          console.log("playlist API response: ", response);
           let playlistName = response.data.name;
           this.setState({ playlistID, playlistName });
         });

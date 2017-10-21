@@ -22,7 +22,6 @@ class PlaylistWrapper extends Component {
       .post(`${BASE_URL}/api/users/${userID()}/playlists`, data, config)
       .then(response => {
         let playlistID = response.data.id;
-         console.log("playlist ID in addPlaylist is: ", playlistID);
         this.setState({ error: false, playlistID: playlistID, cleared: true }, this.getPlaylistName);
       })
       .catch(error => {
@@ -31,10 +30,7 @@ class PlaylistWrapper extends Component {
   }
 
   getPlaylistName() {
-  // componentWillMount() {
-    // let playlistID = this.props.match.params.playlistID;
     let playlistID = this.state.playlistID;
-    console.log("playlist ID is: ", playlistID);
     if (playlistID) {
       axios
         .get(
@@ -42,7 +38,6 @@ class PlaylistWrapper extends Component {
           config()
         )
         .then(response => {
-          console.log("playlist API response: ", response);
           let playlistName = response.data.name;
           this.setState({ playlistID, playlistName });
         });

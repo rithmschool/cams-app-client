@@ -18,6 +18,7 @@ class ScreenWrapper extends Component {
     };
     this.addVideoFile = this.addVideoFile.bind(this);
     this.addQuestion = this.addQuestion.bind(this);
+    this.addMultipleChoiceQuestion = this.addMultipleChoiceQuestion.bind(this);
     this.onSortEnd = this.onSortEnd.bind(this);
   }
 
@@ -73,6 +74,42 @@ class ScreenWrapper extends Component {
     }
   }
 
+  addMultipleChoiceQuestion(question) {
+    if (question) {
+      return axios
+        .post(
+          `${BASE_URL}/api/mc_questions`,
+          {
+            title: question.title,
+            playlist_id: this.props.playlistID,
+            order: this.state.screenData.length + 1
+          },
+          config()
+        )
+        .then(response => {
+          return Promise.all(
+            question.choices.map(choice => {
+              return axios.post(
+                `${BASE_URL}/api/mc_questions/${response.data.id}/mc_answers`,
+                { title: choice },
+                config()
+              );
+            })
+          );
+        })
+        .then(response => {
+          this.setState({
+            screenData: this.state.screenData.concat([
+              {
+                title: question.title,
+                entity_id: response[0].data.mc_question_id,
+                type: "mc_question"
+              }
+            ])
+          });
+        });
+    }
+  }
   onSortEnd({ oldIndex, newIndex }) {
     this.setState({
       screenData: arrayMove(this.state.screenData, oldIndex, newIndex)
@@ -139,6 +176,7 @@ class ScreenWrapper extends Component {
         </div>
         <ScreenForm
           addQuestion={this.addQuestion}
+          addMultipleChoiceQuestion={this.addMultipleChoiceQuestion}
           addVideo={this.addVideo}
           addVideoFile={this.addVideoFile}
         />

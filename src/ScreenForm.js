@@ -3,6 +3,7 @@ import axios from "axios";
 import { BASE_URL, config } from "./helpers.js";
 import "./ScreenForm.css";
 import QuestionForm from "./QuestionForm";
+import MultipleChoiceQuestionForm from "./MultipleChoiceQuestionForm";
 import VideoUploadForm from "./VideoUploadForm";
 import PropTypes from "prop-types";
 
@@ -14,6 +15,7 @@ class ScreenForm extends Component {
       searchtext: "",
       showVideoForm: false,
       showQuestionForm: false,
+      showMultipleChoiceQuestionForm: false,
       showVideoPlayer: false,
       videoUrl: ""
     };
@@ -63,6 +65,7 @@ class ScreenForm extends Component {
       this.setState({
         showVideoForm: true,
         showQuestionForm: false,
+        showMultipleChoiceQuestionForm: false,
         showVideoPlayer: false
       });
     }
@@ -70,6 +73,15 @@ class ScreenForm extends Component {
       this.setState({
         showVideoForm: false,
         showQuestionForm: true,
+        showMultipleChoiceQuestionForm: false,
+        showVideoPlayer: false
+      });
+    }
+    if (e.target.id === "addMultipleChoiceQuestion") {
+      this.setState({
+        showVideoForm: false,
+        showQuestionForm: false,
+        showMultipleChoiceQuestionForm: true,
         showVideoPlayer: false
       });
     }
@@ -142,6 +154,14 @@ class ScreenForm extends Component {
         <QuestionForm addQuestion={this.props.addQuestion} />
       </div>
     ) : null;
+    let multipleChoiceQuestionForm = this.state
+      .showMultipleChoiceQuestionForm ? (
+      <div className="form-wrapper">
+        <MultipleChoiceQuestionForm
+          addQuestion={this.props.addMultipleChoiceQuestion}
+        />
+      </div>
+    ) : null;
 
     return (
       <div>
@@ -152,10 +172,18 @@ class ScreenForm extends Component {
           <button id="addQuestion" className="button" onClick={this.toggleForm}>
             Add Question
           </button>
+          <button
+            id="addMultipleChoiceQuestion"
+            className="button"
+            onClick={this.toggleForm}
+          >
+            Add Multiple Choice Question
+          </button>
         </div>
         <div>
           {videoForm}
           {questionForm}
+          {multipleChoiceQuestionForm}
         </div>
       </div>
     );

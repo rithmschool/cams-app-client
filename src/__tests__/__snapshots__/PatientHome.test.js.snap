@@ -1,8 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Renders instructions 1`] = `null`;
-
-exports[`Renders timer after question 1`] = `
+exports[`Renders PatientHome hierarchy 1`] = `
 <div
   className="patient-home"
 >
@@ -49,6 +47,12 @@ exports[`Renders timer after question 1`] = `
 </div>
 `;
 
-exports[`Renders videoplayer when there's a video 1`] = `null`;
-
-exports[`matches snapshot of PatientHome 1`] = `null`;
+exports[`shows error component if camera is disabled 1`] = `
+<div
+  className="patient-home"
+>
+  <Error
+    msg="Whoops, seems like your camera isn't working!"
+  />
+</div>
+`;

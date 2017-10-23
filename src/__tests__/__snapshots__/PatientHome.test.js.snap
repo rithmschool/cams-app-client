@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Renders instructions 1`] = `
+exports[`Renders PatientHome hierarchy 1`] = `
 <div
   className="patient-home"
 >
@@ -18,7 +18,7 @@ exports[`Renders instructions 1`] = `
       linePadding={100}
       maxEventPadding={120}
       minEventPadding={20}
-      numScreens={4}
+      numScreens={1}
       styles={
         Object {
           "background": "#dfdfdf",
@@ -28,179 +28,31 @@ exports[`Renders instructions 1`] = `
       }
       time={0.5}
     />
-  </div>
-  <div
-    className="screens"
-  >
-    <div
-      className="lg"
-    >
-      <p>
-        Welcome! You will watch short videos and answer questions about yourself.
-      </p>
-      <p>
-        Please read the instructions carefully. You will have 30 seconds to respond to each question.
-      </p>
-      <p>
-        Your answers will be recorded so please speak OUT LOUD when responding.
-      </p>
-      <p>
-        Please press the spacebar when you are ready to go forward.
-      </p>
-    </div>
+    <PatientScreenWrapper
+      className="screens"
+      handleSpaceBar={[Function]}
+      idx={0}
+      screens={
+        Array [
+          Object {
+            "id": 4,
+            "timer": 4,
+            "title": "test",
+            "type": "question",
+          },
+        ]
+      }
+    />
   </div>
 </div>
 `;
 
-exports[`Renders timer after question 1`] = `
+exports[`shows error component if camera is disabled 1`] = `
 <div
   className="patient-home"
 >
-  <div>
-    <HorizontalTimeline
-      containerHeight={100}
-      containerWidth={800}
-      fillingMotion={
-        Object {
-          "damping": 25,
-          "stiffness": 150,
-        }
-      }
-      keyBoardEnabled={true}
-      linePadding={100}
-      maxEventPadding={120}
-      minEventPadding={20}
-      numScreens={6}
-      styles={
-        Object {
-          "background": "#dfdfdf",
-          "foreground": "#00c5cc",
-          "outline": "#dfdfdf",
-        }
-      }
-      time={0.5}
-    />
-  </div>
-  <div
-    className="screens"
-  >
-    <div>
-      <p>
-        test
-         
-      </p>
-      <TimerWrapper
-        timer={4}
-        toggle={[Function]}
-      />
-    </div>
-  </div>
-</div>
-`;
-
-exports[`Renders videoplayer when there's a video 1`] = `
-<div
-  className="patient-home"
->
-  <div>
-    <HorizontalTimeline
-      containerHeight={100}
-      containerWidth={800}
-      fillingMotion={
-        Object {
-          "damping": 25,
-          "stiffness": 150,
-        }
-      }
-      keyBoardEnabled={true}
-      linePadding={100}
-      maxEventPadding={120}
-      minEventPadding={20}
-      numScreens={7}
-      styles={
-        Object {
-          "background": "#dfdfdf",
-          "foreground": "#00c5cc",
-          "outline": "#dfdfdf",
-        }
-      }
-      time={0.5}
-    />
-  </div>
-  <div
-    className="screens"
-  >
-    <div
-      className="lg"
-    >
-      <p>
-        You will now watch several short video clips.
-      </p>
-      <p>
-        After each video, you will be asked questions about what happened in the video.
-      </p>
-      <p>
-        You will have 30 seconds to answer each question.
-      </p>
-      <p>
-        Please speak out loud and keep speaking until the time runs out.
-      </p>
-      <p>
-        When you are ready, please press the spacebar to continue.
-      </p>
-    </div>
-  </div>
-</div>
-`;
-
-exports[`matches snapshot of PatientHome 1`] = `
-<div
-  className="patient-home"
->
-  <div>
-    <HorizontalTimeline
-      containerHeight={100}
-      containerWidth={800}
-      fillingMotion={
-        Object {
-          "damping": 25,
-          "stiffness": 150,
-        }
-      }
-      keyBoardEnabled={true}
-      linePadding={100}
-      maxEventPadding={120}
-      minEventPadding={20}
-      numScreens={4}
-      styles={
-        Object {
-          "background": "#dfdfdf",
-          "foreground": "#00c5cc",
-          "outline": "#dfdfdf",
-        }
-      }
-      time={0.5}
-    />
-  </div>
-  <div
-    className="screens"
-  >
-    <div
-      className="lg"
-    >
-      <p>
-        Welcome! You will watch short videos and answer questions about yourself.
-      </p>
-      <p>
-        Please read the instructions carefully. You will have 30 seconds to respond to each question.
-      </p>
-      <p>
-        Your answers will be recorded so please speak OUT LOUD when responding.
-      </p>
-      <p>
-        Please press the spacebar when you are ready to go forward.
-      </p>
-    </div>
-  </div>
+  <Error
+    msg="Whoops, seems like your camera isn't working!"
+  />
 </div>
 `;

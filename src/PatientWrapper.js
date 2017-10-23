@@ -42,7 +42,7 @@ const mapStateToProps = state => {
   return {
     assessment: state.assessment,
     confirmUser: state.confirmUser,
-    stopRecord: state.stopRecord
+    uploadRecord: state.uploadRecord
   };
 };
 
@@ -54,4 +54,5 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
+export { PatientWrapper };
 export default connect(mapStateToProps, mapDispatchToProps)(PatientWrapper);

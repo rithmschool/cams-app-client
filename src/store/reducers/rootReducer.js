@@ -1,11 +1,11 @@
 import {
-  STOP_RECORD_SUCCESS,
+  UPLOAD_RECORD_SUCCESS,
   CONFIRM_USER_SUCCESS,
   CONFIRM_SCREENSANDURLS_SUCCESS
 } from "../actions/constants";
 
 const DEFAULT_STATE = {
-  stopRecord: false,
+  uploadRecord: false,
   confirmUser: {},
   assessment: { screens: [] },
   screenCount: null
@@ -13,10 +13,10 @@ const DEFAULT_STATE = {
 
 const rootReducer = (state = DEFAULT_STATE, action = { type: null }) => {
   switch (action.type) {
-    case STOP_RECORD_SUCCESS:
+    case UPLOAD_RECORD_SUCCESS:
       return {
         ...state,
-        stopRecord: action.stopRecord
+        uploadRecord: action.uploadRecord
       };
     case CONFIRM_USER_SUCCESS:
       return {

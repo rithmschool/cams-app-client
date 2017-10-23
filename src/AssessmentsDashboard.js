@@ -58,12 +58,14 @@ class AssessmentsDashboard extends Component {
   }
 
   handleVideo(id) {
-    axios.get(`${BASE_URL}/api/recording/${id}`, config()).then(response => {
-      this.setState({
-        selected: { id, url: response.data.url },
-        modalIsOpen: true
+    axios
+      .get(`${BASE_URL}/api/s3/assessments/${id}`, config())
+      .then(response => {
+        this.setState({
+          selected: { id, url: response.data.url },
+          modalIsOpen: true
+        });
       });
-    });
   }
 
   closeModal() {
@@ -94,7 +96,9 @@ class AssessmentsDashboard extends Component {
     axios
       .patch(
         `${BASE_URL}/api/users/${userID()}/assessments/${id}`,
-        {},
+        {
+          date_evaluated: new Date()
+        },
         config()
       )
       .then(response => {

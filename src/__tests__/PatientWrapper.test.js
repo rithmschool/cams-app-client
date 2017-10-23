@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { shallow } from "enzyme";
-import PatientWrapper from "../PatientWrapper";
+import { PatientWrapper } from "../PatientWrapper";
 import toJson from "enzyme-to-json";
 import LocalStorageMock from "../setupTests/LocalStorageMock";
 import MockAdapter from "axios-mock-adapter";
@@ -49,15 +49,11 @@ beforeAll(() => {
 
 test("shapshot of an invalid browser", () => {
   const patientWrapper = shallow(
-    <PatientWrapper location={{ search: "?token=test" }} />
+    <PatientWrapper
+      location={{ search: "?token=test" }}
+      confirmUserAC={() => {}}
+    />
   );
-  patientWrapper.setState({
-    screens: [],
-    assessmentId: 0,
-    token: "",
-    src: null,
-    screenCount: 0
-  });
   expect(toJson(patientWrapper)).toMatchSnapshot();
 });
 

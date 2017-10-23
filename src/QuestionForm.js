@@ -38,6 +38,7 @@ class QuestionForm extends Component {
             name="title"
             placeholder="Add A Question"
             value={this.state.title}
+            required
           />
           <label htmlFor="timer">Timer (in secs)</label>
           <input

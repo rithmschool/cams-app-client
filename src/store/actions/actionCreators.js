@@ -29,14 +29,12 @@ export function uploadRecordRequest(recordedBlob) {
           fd.append(key, res.data.data.fields[key]);
         }
         let url = res.data.data.url;
-        console.log("first one", url);
         fd.append("file", recordedBlob);
         return postToS3(url, fd);
       })
       .then(res => {
         let state = getState();
         let recording_url = res.config.data.get("key");
-        console.log("second one", state, recording_url);
         return patchRecordAssessment(recording_url, state);
       })
       .then(res => dispatch(uploadRecordSuccess()))

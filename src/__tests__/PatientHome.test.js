@@ -1,4 +1,4 @@
-import PatientHome from "../PatientHome";
+import { PatientHome } from "../PatientHome";
 import React from "react";
 import ReactDOM from "react-dom";
 import { shallow } from "enzyme";
@@ -7,37 +7,19 @@ import toJson from "enzyme-to-json";
 import ReactCountdownClock from "react-countdown-clock";
 
 test("matches snapshot of PatientHome", () => {
-  const patientHome = shallow(
-    <PatientHome
-      idx={0}
-      src={null}
-      keyBoardEnabled={true}
-      stream={""}
-      screens={[]}
-      assessmentId={4}
-      screenCount={4}
-    />
-  );
+  const patientHome = shallow(<PatientHome />);
   expect(toJson(patientHome)).toMatchSnapshot();
 });
 
 test("Renders timer after question", () => {
-  const patientHome = shallow(
-    <PatientHome
-      idx={2}
-      src={null}
-      keyBoardEnabled={true}
-      stream={""}
-      screens={[{ id: 4, type: "question", timer: 4, title: "test" }]}
-      assessmentId={4}
-      screenCount={4}
-    />
-  );
+  const patientHome = shallow(<PatientHome />);
   patientHome.setState({
-    idx: 4,
+    idx: 0,
     src: null,
     keyBoardEnabled: true,
-    stream: "something"
+    stream: "something",
+    cameraEnabled: true,
+    screens: [{ id: 4, type: "question", timer: 4, title: "test" }]
   });
   expect(toJson(patientHome)).toMatchSnapshot();
 });

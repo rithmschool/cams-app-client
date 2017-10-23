@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import RecordRTC from "recordrtc";
 import { connect } from "react-redux";
-import { stopRecordRequest } from "./store/actions/actionCreators";
+import { uploadRecordRequest } from "./store/actions/actionCreators";
 import HorizontalTimeline from "./horizontal-timeline/HorizontalTimeline";
 import AudioPlayer from "./AudioPlayer";
 import VideoPlayer from "./VideoPlayer";
@@ -105,12 +105,8 @@ class PatientHome extends Component {
     let recordedBlob;
 
     recordRTC.stopRecording(() => {
-      let fd = new FormData();
       recordedBlob = recordRTC.getBlob();
-      fd.append("assessment_id", this.props.assessment.id);
-      fd.append("fname", "video_" + Date.now() + ".mp4");
-      fd.append("file", recordedBlob);
-      this.props.stopRecord(fd);
+      this.props.uploadRecord(recordedBlob);
     });
     this.stopMedia();
   }
@@ -185,7 +181,7 @@ class PatientHome extends Component {
 }
 
 PatientHome.propTypes = {
-  stopRecord: PropTypes.func.isRequired,
+  uploadRecord: PropTypes.func,
   assessment: PropTypes.shape({
     current_screen: PropTypes.number,
     id: PropTypes.number,
@@ -211,8 +207,9 @@ const mapStateToProps = function(state) {
 
 const mapDispatchToProps = dispatch => {
   return {
-    stopRecord: fd => dispatch(stopRecordRequest(fd))
+    uploadRecord: fd => dispatch(uploadRecordRequest(fd))
   };
 };
 
+export { PatientHome };
 export default connect(mapStateToProps, mapDispatchToProps)(PatientHome);

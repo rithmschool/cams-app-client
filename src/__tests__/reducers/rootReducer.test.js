@@ -4,29 +4,29 @@ import * as types from "../../store/actions/constants";
 describe("root reducer", () => {
   it("should return the initial state", () => {
     expect(rootReducer(undefined, {})).toEqual({
-      stopRecord: false,
+      uploadRecord: false,
       confirmUser: {},
       assessment: { screens: [] },
       screenCount: null
     });
   });
 
-  it("should handle stop record", () => {
+  it("should handle upload record", () => {
     expect(
       rootReducer(
         {
-          stopRecord: false,
+          uploadRecord: false,
           confirmUser: {},
           assessment: { screens: [] },
           screenCount: null
         },
         {
-          type: types.STOP_RECORD_SUCCESS,
-          stopRecord: true
+          type: types.UPLOAD_RECORD_SUCCESS,
+          uploadRecord: true
         }
       )
     ).toEqual({
-      stopRecord: true,
+      uploadRecord: true,
       confirmUser: {},
       assessment: { screens: [] },
       screenCount: null
@@ -37,7 +37,7 @@ describe("root reducer", () => {
     expect(
       rootReducer(
         {
-          stopRecord: false,
+          uploadRecord: false,
           confirmUser: {},
           assessment: { screens: [] },
           screenCount: null
@@ -48,7 +48,7 @@ describe("root reducer", () => {
         }
       )
     ).toEqual({
-      stopRecord: false,
+      uploadRecord: false,
       confirmUser: { 1: "Test" },
       assessment: { screens: [] },
       screenCount: null
@@ -59,7 +59,7 @@ describe("root reducer", () => {
     expect(
       rootReducer(
         {
-          stopRecord: false,
+          uploadRecord: false,
           confirmUser: {},
           assessment: { screens: [] },
           screenCount: null
@@ -70,7 +70,7 @@ describe("root reducer", () => {
         }
       )
     ).toEqual({
-      stopRecord: false,
+      uploadRecord: false,
       confirmUser: {},
       assessment: { screens: [{}, {}] },
       screenCount: null

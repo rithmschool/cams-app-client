@@ -45,8 +45,9 @@ class VideoUploadForm extends Component {
 
   getSignedRequest(file) {
     axios
-      .get(`${BASE_URL}/api/videofiles/sign-s3`, {
+      .get(`${BASE_URL}/api/s3/new`, {
         params: {
+          bucket_name: "PLAYLIST_VIDEO_BUCKET",
           file_name: file.name,
           file_type: file.type
         }
